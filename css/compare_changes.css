@@ -22,9 +22,9 @@ body {
 	margin-right: auto;
 	position: absolute;
 	z-index: 100;
-	-moz-box-shadow: 3px 3px 5px #3a7d75;
-	-webkit-box-shadow: 3px 3px 5px #3a7d75;
-	display: none;
+	-moz-box-shadow: 5px 5px 10px #3a7d75;
+	-webkit-box-shadow: 5px 5px 10px #3a7d75;
+	display:none;
 }
 
 .full {
@@ -39,4 +39,63 @@ body {
 .right_side {
 	float: right;
 	width: 25%;
+}
+
+.diff_changes {
+	width: 200px;
+	float: left;
+}
+
+.text_body {
+	margin: 10px;
+	padding: 5px;
+	width: 600px;
+	border: 1px #000 solid;
+	float: right;
+}
+
+.big_button {
+	background: #263033;
+	color: #fff;
+	font-size: 1.5em; 
+	text-shadow: 2px 2px 3px #000000; 
+	height: 1.75em;
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	border: 1px #000; 
+	-moz-box-shadow: 1px 1px 3px #000;
+	-webkit-border-radius: 5px;
+	margin: 5px;
+}
+
+.change_bubble {
+	-moz-border-radius: 5px;
+	width: 175px;
+	height: 30px;
+	overflow: hidden;
+	margin: 10px 0px 10px 0px;
+}
+
+.your_changes {
+	background: url(../images/fam_fam_icons/user_green.png) no-repeat #00ee11;
+	padding-left: 20px;
+}
+
+.their_changes {
+	background: url(../images/fam_fam_icons/user_red.png) no-repeat #ee0011;
+	padding-left: 20px;
+}
+
+.spacer100 {
+	width: 100px;
+	height: 1px;
+	float: left;
+}
+
+#save {
+	float: left;
+}
+
+#cancel {
+	float: left;
 }

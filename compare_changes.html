@@ -4,11 +4,8 @@
  <head>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
  <title>GitDocs - Where the world writes</title>
- <script type="text/javascript">
- //<![CDATA[
-
- //]]>
- </script>
+ <script type="text/javascript" src="js/jquery-1.4.js"></script>
+ <script type="text/javascript" src="js/compare_changes.js"></script>
  <!-- // vrindavan flower from kuler.adobe.com -->
  <link rel="stylesheet" type="text/css" href="css/main.css"/> 
 <link rel="stylesheet" type="text/css" href="css/compare_changes.css"/> 
@@ -21,19 +18,38 @@
 	<div class="page_title">Where the world writes</div>
  </div>
 <div class="help_dropdown" id="compare_help_dropdown">
+	<div class="float_right"></div>
 </div><!-- compare_help_dropdown-->
 <div class="container">
 <div id="actions" class="box">
 	<div class="box_title">Actions</div>
 	<div class="box_content">
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean congue imperdiet pharetra. Nunc sollicitudin quam vel risus fringilla eu consequat eros tincidunt. Aliquam erat volutpat. Phasellus nec velit libero, sed pretium dui. Vivamus eget augue sed lorem dapibus viverra et quis neque. Donec non ante tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum adipiscing mollis quam eget dignissim. Phasellus vestibulum tincidunt tortor, nec sagittis nisl interdum et. Sed diam lorem, sollicitudin at vehicula vel, semper in odio. Morbi diam augue, euismod non egestas sed, ornare at urna. 
+		<button class="big_button" id="accept_all">Accept All mlee's remaining (4)</button>
+		<button class="big_button" id="reject_all">Reject All mlee's remaining (4)</button>
+	<div class="float_right">
+		<button class="big_button" id="save">Save</button>
+		<div class="spacer100"></div>
+		<button class="big_button" id="cancel">Cancel</button>
+	</div>
 	</div>
 </div>
 
 <div class="box left_main">
-	<div class="box_title">Foo</div>
+	<div class="box_title">Comparing mlinsey/"forest2" with mlee/"new desc. of edward"</div>
 	<div class="box_content">
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean congue imperdiet pharetra. Nunc sollicitudin quam vel risus fringilla eu consequat eros tincidunt. Aliquam erat volutpat. Phasellus nec velit libero, sed pretium dui. Vivamus eget augue sed lorem dapibus viverra et quis neque. Donec non ante tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum adipiscing mollis quam eget dignissim. Phasellus vestibulum tincidunt tortor, nec sagittis nisl interdum et. Sed diam lorem, sollicitudin at vehicula vel, semper in odio. Morbi diam augue, euismod non egestas sed, ornare at urna. 
+		<div class="diff_changes">
+			<div class="change_bubble your_changes">foo</div>
+			<div class="change_bubble their_changes">bar</div>
+		</div>
+		<div class="text_body">
+		<p><span class="your_changes">Lorem ipsum dolor sit amet</span>, consectetur adipiscing elit. Aenean congue imperdiet pharetra. Nunc sollicitudin quam vel risus fringilla eu consequat eros tincidunt. Aliquam erat volutpat. Phasellus nec velit libero, sed pretium dui. Vivamus eget augue sed lorem dapibus viverra et quis neque. Donec non ante tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum <span class="their_changes">adipiscing mollis quam eget dignissim</span>. Phasellus vestibulum tincidunt tortor, nec sagittis nisl interdum et. Sed diam lorem, sollicitudin at vehicula vel, semper in odio. Morbi diam augue, euismod non egestas sed, ornare at urna.</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean congue imperdiet pharetra. Nunc sollicitudin quam vel risus fringilla eu consequat eros tincidunt. Aliquam erat volutpat. Phasellus nec velit libero, sed pretium dui. Vivamus eget augue sed lorem dapibus viverra et quis neque. Donec non ante tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum adipiscing mollis quam eget dignissim. Phasellus vestibulum tincidunt tortor, nec sagittis nisl interdum et. Sed diam lorem, sollicitudin at vehicula vel, semper in odio. Morbi diam augue, euismod non egestas sed, ornare at urna.</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean congue imperdiet pharetra. Nunc sollicitudin quam vel risus fringilla eu consequat eros tincidunt. Aliquam erat volutpat. Phasellus nec velit libero, sed pretium dui. Vivamus eget augue sed lorem dapibus viverra et quis neque. Donec non ante tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum adipiscing mollis quam eget dignissim. Phasellus vestibulum tincidunt tortor, nec sagittis nisl interdum et. Sed diam lorem, sollicitudin at vehicula vel, semper in odio. Morbi diam augue, euismod non egestas sed, ornare at urna.</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean congue imperdiet pharetra. Nunc sollicitudin quam vel risus fringilla eu consequat eros tincidunt. Aliquam erat volutpat. Phasellus nec velit libero, sed pretium dui. Vivamus eget augue sed lorem dapibus viverra et quis neque. Donec non ante tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum adipiscing mollis quam eget dignissim. Phasellus vestibulum tincidunt tortor, nec sagittis nisl interdum et. Sed diam lorem, sollicitudin at vehicula vel, semper in odio. Morbi diam augue, euismod non egestas sed, ornare at urna.</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean congue imperdiet pharetra. Nunc sollicitudin quam vel risus fringilla eu consequat eros tincidunt. Aliquam erat volutpat. Phasellus nec velit libero, sed pretium dui. Vivamus eget augue sed lorem dapibus viverra et quis neque. Donec non ante tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum adipiscing mollis quam eget dignissim. Phasellus vestibulum tincidunt tortor, nec sagittis nisl interdum et. Sed diam lorem, sollicitudin at vehicula vel, semper in odio. Morbi diam augue, euismod non egestas sed, ornare at urna.</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean congue imperdiet pharetra. Nunc sollicitudin quam vel risus fringilla eu consequat eros tincidunt. Aliquam erat volutpat. Phasellus nec velit libero, sed pretium dui. Vivamus eget augue sed lorem dapibus viverra et quis neque. Donec non ante tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum adipiscing mollis quam eget dignissim. Phasellus vestibulum tincidunt tortor, nec sagittis nisl interdum et. Sed diam lorem, sollicitudin at vehicula vel, semper in odio. Morbi diam augue, euismod non egestas sed, ornare at urna.</p>
+					
+		</div>
 	</div>
 </div><!-- end left-->
 

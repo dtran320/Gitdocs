@@ -4,11 +4,13 @@
 	font:15px arial,sans-serif;
 	color: #263033;
  }
+
  #header {
 	background: #263033;
 	color: white;
 	width:620px;
  }
+
  #outer {
 	
 	width:620px;
@@ -51,9 +53,17 @@
 	background: #C96C29;
 	font-weight: bold;
 	color: #fff;
-	padding: 5px;
+	padding: 5px 0px 5px 10px;
 }
 
 .box_content {
 	padding: 10px;
+}
+
+.float_right {
+	float: right;
+}
+
+.float_left {
+	float: left;
 }
