@@ -1,0 +1,16 @@
+#container {
+	height: 130px;
+	width: 221px;
+	margin: 20px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#import_button {
+	float: right;
+	padding-top:10px;
+}
+
+#form_file {
+	padding-top: 25px;
+}

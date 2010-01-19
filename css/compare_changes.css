@@ -1,0 +1,42 @@
+body {
+	margin: 0px;
+	padding: 0px;
+}
+.wide_header {
+	background: #263033;
+	color: white;
+	padding: 10px 0px 0px 10px;
+}
+.wide_gitdocs {
+	padding: 0px;
+	font-size:30px;
+
+}
+
+.help_dropdown {
+	border: #3a7d75 2px solid;
+	background: #fff;
+	height: 300px;
+	width: 600px;
+	margin-left: 300px;
+	margin-right: auto;
+	position: absolute;
+	z-index: 100;
+	-moz-box-shadow: 3px 3px 5px #3a7d75;
+	-webkit-box-shadow: 3px 3px 5px #3a7d75;
+	display: none;
+}
+
+.full {
+	clear: both;
+}
+
+.left_main {
+	float: left;
+	width: 70%;
+}
+
+.right_side {
+	float: right;
+	width: 25%;
+}
