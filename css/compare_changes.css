@@ -99,3 +99,8 @@ body {
 #cancel {
 	float: left;
 }
+
+.link:hover {
+	color: #C96C29;
+	cursor: pointer;
+}
