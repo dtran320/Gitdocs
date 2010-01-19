@@ -1,0 +1,68 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>GitDocs - Where the world writes</title>
+ <script type="text/javascript" src="js/jquery-1.4.js"></script>
+ <script type="text/javascript" src="js/compare_changes.js"></script>
+ <script type="text/javascript" src="js/editor.js"></script>
+ <!-- // vrindavan flower from kuler.adobe.com -->
+ <link rel="stylesheet" type="text/css" href="css/main.css"/> 
+<link rel="stylesheet" type="text/css" href="css/compare_changes.css"/> 
+<link rel="stylesheet" type="text/css" href="css/tabs.css"/>
+<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	<script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
+</head>
+<div class="wide_outer">
+ <div class="wide_header">
+        <div class="wide_gitdocs"><a href="index.html">GitDocs</a></div>
+        <div class="page_title">Where the world writes</div>
+ </div>
+<body>
+<div class="box left_main">
+        <div class="box_title">Editing "Twilight Fanfic:Edward and Jacob!! Version:forest2 (by mlinsey)</div>
+        <div class="box_content">
+	<form method="post">
+		<p>
+			<textarea name="editor1">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac nisi purus. Pellentesque pretium tortor eu dui vulputate vitae semper mi pharetra. Curabitur quis nunc enim, sit amet laoreet tellus. Aenean placerat placerat ullamcorper. Vivamus sed metus et tortor blandit faucibus. Quisque non libero ligula. Ut vestibulum, lacus vel luctus interdum, sapien enim dictum mi, vitae pretium nunc sapien ut purus. Maecenas et justo magna, et viverra diam. Morbi at libero eu tortor commodo pretium sit amet vel nisl. Vestibulum ullamcorper imperdiet nulla, a hendrerit metus porta non. Proin luctus dolor eget massa condimentum id vehicula velit mollis.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac nisi purus. Pellentesque pretium tortor eu dui vulputate vitae semper mi pharetra. Curabitur quis nunc enim, sit amet laoreet tellus. Aenean placerat placerat ullamcorper. Vivamus sed metus et tortor blandit faucibus. Quisque non libero ligula. Ut vestibulum, lacus vel luctus interdum, sapien enim dictum mi, vitae pretium nunc sapien ut purus. Maecenas et justo magna, et viverra diam. Morbi at libero eu tortor commodo pretium sit amet vel nisl. Vestibulum ullamcorper imperdiet nulla, a hendrerit metus porta non. Proin luctus dolor eget massa condimentum id vehicula velit mollis.
+ 
+Vivamus lobortis blandit semper. Praesent porta egestas lacus, et tincidunt sem tempor sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam erat volutpat. Fusce viverra lectus a velit ultrices dignissim. Cras facilisis elementum commodo. Phasellus metus nisl, posuere eget varius in, consequat ut diam. Cras sit amet erat elit, non fermentum lectus. Mauris consectetur tellus eu metus convallis eleifend vehicula tortor vestibulum. Nullam mattis mattis tempor. Maecenas quis ultricies tortor. Aliquam dignissim, odio iaculis placerat suscipit, velit ipsum 
+			</textarea>
+			<script type="text/javascript">
+				CKEDITOR.replace( 'editor1' );
+			</script>
+		</p>
+		<p>
+		<!--	<input type="submit" /> -->
+		</p>
+	</form>
+	</div> <!--box content-->
+</div> <!--box left_main-->
+<div class="box right_side">
+        <div class="box_title">
+	<ul class = "tabs primary" id ="myversions_selected">
+		<li class = "active" id="myversions_tab"><span onclick="DisplayMine()"><a class="active">My Versions</a></span></li>
+		<li><span onclick="DisplayOthers()">Others' Versions</span></li>
+	</ul>
+	<ul class="tabs primary" id="othersversions_selected" style="display:none;">
+	 <li id="myversions_tab"><span onclick="DisplayMine()">My Versions</span></li>
+  <li class="active"><span onclick="DisplayOthers()"><a class="active">Others' Versions</span></a></li>
+	</ul>
+
+	</div><!-- box_title-->
+        <div class="box_content" id="myversionspanel" style="display:block;">
+       <table class="table_document">
+<tr><td><div style="float: left;"><img src="images/mlinsey.jpg" /> </div>forest2<i> editing now</i><br />by mlinsey 5m ago</td></tr>
+<tr><td><div style="float: left;"><img src="images/dtran.jpg" /> </div>forest<br />saved by dtran 1d ago, branched 5m ago</td></tr>
+</table> 
+	</div>
+	<diff class="box_content" id="otherversionspanel" style="display:none;">
+	<table class="table_document">
+<tr><td><div style="float: left;"><img src="images/mlee.jpg" /> </div><a href="compare_changes.html">new desc. of Edward</a><br />by mlee 8h ago</td></tr>
+<tr><td><div style="float: left;"><img src="images/dtran.jpg" /> </div>forest<br />by dtran 1d ago</td></tr>
+	<tr><td><div style="float: left;"><img src="images/bella8.jpg" /> </div>forest<br />by bella8 2d ago</td></tr>
+
+	</div>
+</body>
+</html>
