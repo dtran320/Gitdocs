@@ -14,6 +14,7 @@
 
  <script type="text/javascript" src="js/jquery-1.4.js"></script>
  <script type="text/javascript" src="js/gitdocs.js"></script>
+ <script type="text/javascript" src="js/compare.js"></script>
  <script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
  <script type="text/javascript" src="./ckeditor/adapters/jquery.js"></script>
  <script type="text/javascript" src="js/editor.js"></script>

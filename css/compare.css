@@ -65,14 +65,27 @@ body {
 	opacity: 0.5;
 }
 
-.your_changes {
+.bubble_spacer {
+	width: 175px;
+	height: 30px;
+	
+}
+
+.your_changes_icon {
 	background: url(../images/fam_fam_icons/user_green.png) no-repeat #00ee11;
 	padding-left: 20px;
 }
 
-.their_changes {
+.your_changes {
+	background: #00ee11;
+}
+
+.their_changes_icon {
 	background: url(../images/fam_fam_icons/user_red.png) no-repeat #ee0011;
 	padding-left: 20px;
+}
+.their_changes {
+	background: #ee0011;
 }
 
 .spacer100 {

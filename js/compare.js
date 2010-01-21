@@ -22,6 +22,24 @@ function rejectChange(num) {
 	$(textName).hide();
 }
 
+function acceptAllChanges() {
+	for (var i=1; i<=4; i++) {
+		var bubbleName = "#change_bubble" + i;
+		if(!$(bubbleName).hasClass("bubble_resolved")) {
+			acceptChange(i);
+		}
+	}
+}
+
+function rejectAllChanges() {
+	for (var i=1; i<=4; i++) {
+		var bubbleName = "#change_bubble" + i;
+		if(!$(bubbleName).hasClass("bubble_resolved")) {
+			rejectChange(i);
+		}
+	}
+}
+
 function markBubbleDone(num) {
 	var mergeName = "#bubble_merge" + num;
 	$(mergeName).hide();
