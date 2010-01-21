@@ -6,8 +6,8 @@
 <div class="box">
 	<div class="box_title">Search Gitdocs</div>
 	<div class="box_content">
-	<form id="form_search" class="big_form" action="" method="get">
-	<input type="text" name="search" value="Find a document" />
+	<form id="form_search" class="big_form" action="search.php" method="get">
+	<input type="text" name="query" value="Find a document" />
 	<input type="submit" value="Search" />
 	</form>
 	</div>

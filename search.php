@@ -1,14 +1,19 @@
 <? include('header.php'); ?>
- <div id="container">
-<div id="left">
-<form id="form_search" action="" method="get">
-<input type="text" name="search" value="Find a document" />
+
+<?
+$query = isset($_GET["query"])? $_GET["query"] : "";
+$query = htmlspecialchars($query, ENT_QUOTES);
+
+?>
+ <div class="container">
+<form id="form_search" class="big_form" action="" method="get">
+<input type="text" name="query" value="<?= $query ?>" />
 <input type="submit" value="Search" />
 </form>
 
-<div style="padding-bottom:10px"></div>
+<div>
 <table class="table_tag">
-<tr><th>Found ## of your documents that matched termtermterm.</th></tr>
+<tr><th>Found ## of your documents that matched <?= $query ?></th></tr>
 <tr><td>asdfasdf</td></tr>
 <tr><td>jkljkljl</td></tr>
 <tr><td>eiwuorueoiw</td></tr>
@@ -16,10 +21,8 @@
 <tr><td>asdfasdf</td></tr>
 </table>
 </div>
-<div id="right">
-<div style="padding-bottom:44px"></div>
 <table class="table_tag">
-<tr><th>Found ## public documents that matched termtermterm.</th></tr>
+<tr><th>Found ## public documents that matched <?= $query ?></th></tr>
 <tr><td>asdfasdf -- need to show author/time/....</td></tr>
 <tr><td>jkljkljl</td></tr>
 <tr><td>eiwuorueoiw</td></tr>
@@ -28,7 +31,5 @@
 </table>
 </div>
 
-
-</div>
 </div>
 <? include('footer.php'); ?>

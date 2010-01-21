@@ -21,7 +21,7 @@
  <body>
  <div class="wide_header">
 	<div style="float:left;">
-	<div class="wide_gitdocs"><a href="index.html">GitDocs</a></div>
+	<div class="wide_gitdocs"><a href="index.php">GitDocs</a></div>
 	<div class="page_title">Where the world writes</div>
 	</div>
 	<div class="float_right logged_in_user"><img src="images/mlinsey.jpg">&nbsp;Mark L.</div>
