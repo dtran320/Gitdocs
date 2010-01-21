@@ -1,34 +1,31 @@
- 
- body {
+body {
  	background: #FFF1C3;
 	font:15px arial,sans-serif;
 	color: #263033;
+	body: 0px;
+	margin: 0px;
  }
 
- #header {
+.wide_header {
 	background: #263033;
 	color: white;
-	width:620px;
- }
-
- #outer {
-	
-	width:620px;
-	background: #C3E0BC;
-	margin-left:auto;
-	margin-right:auto;
- }
-  #gitdocs {
-	padding-top:10px;
-	padding-left: 10px;
+	padding: 10px 0px 0px 10px;
+	height: 80px;
+}
+.wide_gitdocs {
+	padding: 0px;
 	font-size:30px;
-
- }
+}
 
 .container {
 	margin: 20px;
 }
  
+.center_container {
+	width: 80%;
+	margin: auto auto;
+}
+
  .page_title {
 	padding-left: 10px;
 	padding-bottom:10px;
@@ -38,6 +35,10 @@
  a {
 	color: #3A7D75;
  }
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ * Floating Content Boxes 
+ ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
 .box {
 	background: #c3e0bc;
@@ -56,8 +57,35 @@
 	padding: 5px 0px 5px 10px;
 }
 
+.box_title_unrounded {
+	background: #C96C29;
+	font-weight: bold;
+	color: #fff;
+	padding: 5px 0px 5px 10px;
+}
+
 .box_content {
 	padding: 10px;
+}
+
+.left_main {
+	float: left;
+	width: 70%;
+}
+
+.left_side45 {
+	float: left;
+	width: 45%;
+}
+
+.right_side45 {
+	float: right;
+	width: 45%;
+}
+
+.right_side {
+	float: right;
+	width: 25%;
 }
 
 .float_right {
@@ -66,4 +94,34 @@
 
 .float_left {
 	float: left;
+}
+
+.logged_in_user {
+	margin-right: 20px;
+}
+
+#import_button {
+	float: right;
+	padding-top:10px;
+}
+
+#form_file {
+	padding-top: 25px;
+}
+
+.big_form input[type="text"] {
+	font-size: 1.5em;
+}
+
+.big_form input[type="submit"] {
+	background: #263033;
+	color: #fff;
+	font-size: 1.4em; 
+	text-shadow: 2px 2px 3px #000000; 
+	height: 1.5em;
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	border: 1px #000; 
+	-moz-box-shadow: 1px 1px 3px #000;
+	-webkit-border-radius: 5px;
 }
