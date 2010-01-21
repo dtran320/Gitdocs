@@ -1,17 +1,18 @@
 <? include('header.php'); ?>
  <div id="container">
 
- <div id="form_file">
+ <div class="box">
+ <div class="box_title">Import a file</div>
+ <div class="box_content">
  <form action="" method="get" enctype="multipart/form-data">
 	<div>
 		<input id="myfile" name="myfile" type="file">
 	</div>
-	<div id="import_button">
-		<input value="Import" type="submit">
-	</div>
-</div>
+		<input value="Import" type="submit" style="margin-left:125px">
 </form>
 </div>
+</div>
+
 </div>
 
 <? include('footer.php'); ?>

@@ -7,7 +7,7 @@ body {
 	border: #3a7d75 10px solid;
 	background: #fff;
 	height: 250px;
-	width: 600px;
+	width: 280px;
 	position: absolute;
 	margin-left: 300px;
 	margin-top: 100px;
@@ -72,20 +72,22 @@ body {
 }
 
 .your_changes_icon {
-	background: url(../images/fam_fam_icons/user_green.png) no-repeat #00ee11;
+	background: url(../images/fam_fam_icons/user_green.png) no-repeat #A3F0FA;
 	padding-left: 20px;
 }
 
 .your_changes {
-	background: #00ee11;
+	/*background: #00ee11;*/
+	background: #A3F0FA;
 }
 
 .their_changes_icon {
-	background: url(../images/fam_fam_icons/user_red.png) no-repeat #ee0011;
+	background: url(../images/fam_fam_icons/user_red.png) no-repeat #FEF38E;
 	padding-left: 20px;
 }
 .their_changes {
-	background: #ee0011;
+	/*background: #ee0011;*/
+	background: #FEF38E;
 }
 
 .spacer100 {
@@ -102,6 +104,9 @@ body {
 	float: left;
 }
 
+.link {
+	margin-top:200px;
+}
 .link:hover {
 	color: #C96C29;
 	cursor: pointer;

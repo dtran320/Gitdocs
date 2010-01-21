@@ -14,7 +14,7 @@
 		<button class="big_button" id="accept_all" onclick="acceptAllChanges()">Accept all remaining (4)</button>
 		<button class="big_button" id="reject_all" onclick="rejectAllChanges()">Reject all remaining (4)</button>
 	<div class="float_right">
-		<button class="big_button" id="save" onclick="window.location.href='editor.php'">Save</button>
+		<button class="big_button" id="save" onclick="window.location.href='compared.php'">Save</button>
 		<div class="spacer100"></div>
 		<button class="big_button" id="cancel" onclick="window.location.href='editor.php'">Cancel</button>
 	</div>
@@ -28,7 +28,7 @@
 			<div class="bubble_spacer"></div>
 			<div class="bubble_spacer"></div>
 			<div class="change_bubble your_changes_icon" id="change_bubble1">
-				mlinsey: Lorem...
+				mlinsey: who was...
 				<div class="float_right" id="bubble_merge1">
 					<img src="images/fam_fam_icons/accept.png" class="icon_button" onclick="acceptChange(1)">
 					<img src="images/fam_fam_icons/cancel.png" class="icon_button" onclick="rejectChange(1)">
@@ -36,14 +36,14 @@
 			</div>
 			
 			<div class="bubble_spacer"></div>
-			<div class="change_bubble their_changes_icon" id="change_bubble2">mlee: rolled...
+			<div class="change_bubble their_changes_icon" id="change_bubble2">mlee: rolled his...
 				<div class="float_right" id="bubble_merge2">
 					<img src="images/fam_fam_icons/accept.png" class="icon_button" onclick="acceptChange(2)">
 					<img src="images/fam_fam_icons/cancel.png" class="icon_button" onclick="rejectChange(2)">
 				</div>
 			</div>
 			<div class="bubble_spacer"></div>
-				<div class="change_bubble their_changes_icon" id="change_bubble3">mlee: - their...
+				<div class="change_bubble their_changes_icon" id="change_bubble3">mlee: - their fourth...
 				<div class="float_right" id="bubble_merge3">
 					<img src="images/fam_fam_icons/accept.png" class="icon_button" onclick="acceptChange(3)">
 					<img src="images/fam_fam_icons/cancel.png" class="icon_button" onclick="rejectChange(3)">
@@ -86,28 +86,15 @@
 <div class="box right_side">
         <div class="box_title">
 	
-	<ul class="tabs primary" id="othersversions_selected">
-	 <li id="myversions_tab"><span onclick="DisplayMine()">My Versions</span></li>
-  <li class="active"><span onclick="DisplayOthers()"><a class="active">Others' Versions</span></a></li>
-	</ul>
-	<ul class = "tabs primary" id ="myversions_selected"  style="display:none;">
-		<li class = "active" id="myversions_tab"><span onclick="DisplayMine()"><a class="active">My Versions</a></span></li>
-		<li><span onclick="DisplayOthers()">Others' Versions</span></li>
-	</ul>
-
+	Comparing Versions
 
 	</div><!-- box_title-->
-        <div class="box_content" id="myversionspanel" style="display:none;">
-       <table class="table_document">
-<tr><td><div style="float: left;" class="your_changes"><img src="images/mlinsey.jpg" /> </div>forest2<i> editing now</i><br />by mlinsey 5m ago</td></tr>
-<tr><td><div style="float: left;"><img src="images/dtran.jpg" /> </div>forest<br />saved by dtran 1d ago, branched 5m ago</td></tr>
-</table> 
-	</div>
-	<diff class="box_content" id="otherversionspanel" style="display:block;">
-	<table class="table_document">
+
+	<div class="box_content" id="otherversionspanel" style="display:block;">
+	<table>
 		<tr><td class="your_changes"><div style="float: left;"><img src="images/mlinsey.jpg" /> </div>forest2<i> editing now</i><br />by mlinsey 5m ago</td></tr>
 		<tr><td>Compared to</td></tr>
-<tr><td class="their_changes"><div style="float: left;"><img src="images/mlee.jpg" /> </div><a href="compare_changes.html">new desc. of Edward</a><br />by mlee 8h ago</td></tr>
+<tr><td class="their_changes"><div style="float: left;"><img src="images/mlee.jpg" /> </div>new desc. of Edward<br />by mlee 8h ago</td></tr>
 
 
 </div><!-- end container-->

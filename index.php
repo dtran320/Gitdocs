@@ -17,7 +17,7 @@
 			<div class="box_title">Create</div>
 			<div class="box_content">
 				<div id="doc_link_left">
-				<a href="editor.php">New Document</a>
+				<a href="index.php">New Document</a>
 				</div>
 				<div id="doc_link_right">
 				<a href="import.php">Upload document</a>
@@ -30,13 +30,13 @@
 <div class="box">
 	 <div class="box_title">My Recent Documents</div>
         <div class="box_content">
-			<table class="table_document">
+			<table>
 			<tr><td>PhD Personal Statement</td></tr>
 			<tr><td>CS147 Notes</td></tr>
 			<tr><td>History Paper</td></tr>
 			</table>
 			<div style="padding-top:10px;">
-			<a href="http://nytimes.com">See All My Documents</a>
+			<a href="index.php">See All My Documents</a>
 			</div>
 			
 		</div><!-- end box_content -->
@@ -48,7 +48,7 @@
 	 <div class="box_title">Popular topics</div>
        <div class="box_content">
 			<div style="padding-bottom:20px;">
-			<table class="table_tag">
+			<table>
 			<tr><td><span style="font-size:30px">lorem ipsum dolor </span></td></tr>
 			<tr><td><span style="font-size:25px">consectetur adipisicing</span></td></tr>
 			<tr><td><span style="font-size:20px">ed do eiusmod tempor </span></td></tr>
@@ -61,9 +61,9 @@
 <div class="box">
 	 <div class="box_title">Popular documents</div>
        <div class="box_content">
-			<table class="table_document">
+			<table>
 			<tr><td>How to Get Rich</td></tr>
-			<tr><td><a href="editor.php">Twilight Fanfic - Edward and Jacob!!</a></td></tr>
+			<tr><td><a href="viewer.php">Twilight Fanfic - Edward and Jacob!!</a></td></tr>
 			<tr><td>Quantum Field Theory for Idiots</td></tr>
 			</table>
 		</div>

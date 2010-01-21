@@ -25,5 +25,5 @@
 	<div class="wide_gitdocs"><a href="index.php">GitDocs</a></div>
 	<div class="page_title">Where the world writes</div>
 	</div>
-	<div class="float_right logged_in_user"><img src="images/mlinsey.jpg">&nbsp;Mark L.</div>
+	<div class="float_right logged_in_user"><img src="images/mlinsey.jpg">&nbsp;mlinsey</div>
  </div><!-- end wide_header -->

@@ -1,7 +1,7 @@
 <? include('header.php'); ?>
 
 <div class="box left_main">
-        <div class="box_title">Editing "Twilight Fanfic:Edward and Jacob!! Version:forest2 (by mlinsey)</div>
+        <div class="box_title">Editing: "Twilight Fanfic:Edward and Jacob!!" -- Version: forest2 -- Author: you</div>
         <div class="box_content">
 		<div id="loader"><img src="images/ajax-loader.gif"></div>
 		<div>
@@ -49,16 +49,16 @@
 
 	</div><!-- box_title-->
         <div class="box_content" id="myversionspanel" style="display:block;">
-       <table class="table_document">
-<tr><td><div style="float: left;"><img src="images/mlinsey.jpg" /> </div>forest2<i> editing now</i><br />by mlinsey 5m ago</td></tr>
-<tr><td><div style="float: left;"><img src="images/dtran.jpg" /> </div>forest<br />saved by dtran 1d ago, branched 5m ago</td></tr>
+       <table>
+<tr><td><div style="float: left; padding-right:6px;"><img src="images/mlinsey.jpg" /> </div>you are now editing <b>forest2</b>, which you saved 5m ago</td></tr>
+<tr><td><div style="float: right; padding-right:4px;"><img src="images/dtran.jpg" /> </div>you started from dtran's <b>forest</b> 5m ago<br /></td></tr>
 </table> 
 	</div>
-	<diff class="box_content" id="otherversionspanel" style="display:none;">
-	<table class="table_document">
-<tr><td><div style="float: left;"><img src="images/mlee.jpg" /> </div><a href="compare.php">new desc. of Edward</a><br />by mlee 8h ago</td></tr>
-<tr><td><div style="float: left;"><img src="images/dtran.jpg" /> </div>forest<br />by dtran 1d ago</td></tr>
-	<tr><td><div style="float: left;"><img src="images/bella8.jpg" /> </div>forest<br />by bella8 2d ago</td></tr>
+	<div class="box_content" id="otherversionspanel" style="display:none;">
+	<table>
+<tr><td><div style="float: left; padding-right:6px;"><img src="images/mlee.jpg" /> </div><a href="compare.php">new desc. of Edward</a><br />by mlee 8h ago</td></tr>
+<tr><td><div style="float: left; padding-right:6px;"><img src="images/dtran.jpg" /> </div><b>forest</b><br />by dtran 1d ago</td></tr>
+	<tr><td><div style="float: left; padding-right:6px;"><img src="images/bella8.jpg" /> </div><b>forest</b><br />by bella8 2d ago</td></tr>
 
 	</div>
 	
@@ -67,6 +67,20 @@
 		$(document).ready(function(){
 			$("#editor1").ckeditor(hideLoader("loader"));
 		});
+	
+		CKEDITOR.replace( 'editor1',
+		{
+			toolbar :
+			[
+				// for full toolbar: look at http://docs.cksource.com/CKEditor_3.x/Developers_Guide/Toolbar
+				['Cut','Copy','Paste', '-', 'Undo','Redo'],
+				['Bold','Italic','Underline'],
+				['Font','FontSize'],
+				['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+				['Maximize']
+			]
+		});
+
 	//]]>
 	</script>
 <? include('footer.php'); ?>

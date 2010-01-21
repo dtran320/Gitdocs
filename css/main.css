@@ -117,6 +117,7 @@ body {
 	background: #263033;
 	color: #fff;
 	font-size: 1.4em; 
+	font-weight:bold;
 	text-shadow: 2px 2px 3px #000000; 
 	height: 1.5em;
 	-moz-border-radius: 5px; 
