@@ -1,14 +1,9 @@
-<? include('header.php'); ?>
-
-<div class="box left_main">
-        <div class="box_title">Editing: "Twilight Fanfic:Edward and Jacob!!" -- Version: forest2 -- Author: you</div>
-        <div class="box_content">
-		<div id="loader"><img src="images/ajax-loader.gif"></div>
-		<div>
-	<form method="post">
-		<p>
-			<textarea name="editor1" id="editor1">
-				<p>“Coming out with us Masen?”</p>
+<?
+require('init_smarty.php');
+// temp..
+$smarty->assign('d_name', 'Twilight Fanfic:Edward and Jacob!!');
+$smarty->assign('v_name', 'forest2');
+$smarty->assign('v_text', '<p>“Coming out with us Masen?”</p>
 
 				<p>“No thanks,” Edward replied, barely taking a glimpse at Newton<span class="your_changes" id="text_change1">, who was standing way too close to him for his liking</span>.</p>
 
@@ -27,60 +22,18 @@
 				<p>“I heard you’re going out with Newton,” Jazz said, startling Edward as he put on his deodorant.</p>
 
 				<p>“No, I’m heading back. You?”</p>
-			</textarea>
-		</p>
-		<p>
-		<!--	<input type="submit" /> -->
-		</p>
-	</form>
-	</div>
-	</div> <!--box content-->
-</div> <!--box left_main-->
-<div class="box right_side">
-        <div class="box_title">
-	<ul class = "tabs primary" id ="myversions_selected">
-		<li class = "active" id="myversions_tab"><span onclick="DisplayMine()"><a class="active">My Versions</a></span></li>
-		<li><span onclick="DisplayOthers()">Others' Versions</span></li>
-	</ul>
-	<ul class="tabs primary" id="othersversions_selected" style="display:none;">
-	 <li id="myversions_tab"><span onclick="DisplayMine()">My Versions</span></li>
-  <li class="active"><span onclick="DisplayOthers()"><a class="active">Others' Versions</span></a></li>
-	</ul>
+	');
 
-	</div><!-- box_title-->
-        <div class="box_content" id="myversionspanel" style="display:block;">
-       <table>
-<tr><td><div style="float: left; padding-right:6px;"><img src="images/mlinsey.jpg" /> </div>you are now editing <b>forest2</b>, which you saved 5m ago</td></tr>
-<tr><td><div style="float: right; padding-right:4px;"><img src="images/dtran.jpg" /> </div>you started from dtran's <b>forest</b> 5m ago<br /></td></tr>
-</table> 
-	</div>
-	<div class="box_content" id="otherversionspanel" style="display:none;">
-	<table>
-<tr><td><div style="float: left; padding-right:6px;"><img src="images/mlee.jpg" /> </div><a href="compare.php">new desc. of Edward</a><br />by mlee 8h ago</td></tr>
-<tr><td><div style="float: left; padding-right:6px;"><img src="images/dtran.jpg" /> </div><b>forest</b><br />by dtran 1d ago</td></tr>
-	<tr><td><div style="float: left; padding-right:6px;"><img src="images/bella8.jpg" /> </div><b>forest</b><br />by bella8 2d ago</td></tr>
+// we should flesh out all the different phrases instead of doing this:
+$smarty->assign(history, array(
+	array("left", "images/mlinsey.jpg","you are now editing <b>forest2</b>, which you saved 5m ago"),
+	array("right", "images/dtran.jpg","you started from dtran's <b>forest</b> 5m ago"),
 
-	</div>
-	
-	<script type="text/javascript">
-	//<![CDATA[
-		$(document).ready(function(){
-			$("#editor1").ckeditor(hideLoader("loader"));
-		});
-	
-		CKEDITOR.replace( 'editor1',
-		{
-			toolbar :
-			[
-				// for full toolbar: look at http://docs.cksource.com/CKEditor_3.x/Developers_Guide/Toolbar
-				['Cut','Copy','Paste', '-', 'Undo','Redo'],
-				['Bold','Italic','Underline'],
-				['Font','FontSize'],
-				['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
-				['Maximize']
-			]
-		});
-
-	//]]>
-	</script>
-<? include('footer.php'); ?>
+	));
+$smarty->assign(others, array(
+	array('images/mlee.jpg', '<a href="compare.php">new desc. of Edward</a><br />by mlee 8h ago'),
+	array('images/dtran.jpg', 'forest<br />by dtran 1d ago'),
+	array('images/bella8.jpg', 'forest<br />by bella8 2d ago'),
+	));
+$smarty->display('editor.tpl');
+?>

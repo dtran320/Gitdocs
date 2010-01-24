@@ -1,16 +1,11 @@
-<? include('header.php'); ?>
+<?
+require('init_smarty.php');
 
-<div class="box left_main">
-        <div class="box_title">Viewing: "Twilight Fanfic:Edward and Jacob!!" -- Version: forest -- Author: dtran </div>
-        <div class="box_content">
-		<a style="font-weight:bold" href="editor.php">Start working off this version.</a>
-		
-		<div id="loader"><img src="images/ajax-loader.gif"></div>
-		<div>
-	<form method="post">
-		<p>
-			<textarea name="editor1" id="editor1">
-				<p>“Coming out with us Masen?”</p>
+// temp..
+$smarty->assign('d_name', 'Twilight Fanfic:Edward and Jacob!!');
+$smarty->assign('v_name', 'forest2');
+$smarty->assign('u_name', 'dtran');
+$smarty->assign('v_text', '<p>“Coming out with us Masen?”</p>
 
 				<p>“No thanks,” Edward replied, barely taking a glimpse at Newton<span class="your_changes" id="text_change1">, who was standing way too close to him for his liking</span>.</p>
 
@@ -29,50 +24,13 @@
 				<p>“I heard you’re going out with Newton,” Jazz said, startling Edward as he put on his deodorant.</p>
 
 				<p>“No, I’m heading back. You?”</p>
-			</textarea>
-		</p>
-		<p>
-		<!--	<input type="submit" /> -->
-		</p>
-	</form>
-	</div>
-	</div> <!--box content-->
-</div> <!--box left_main-->
-<div class="box right_side">
-        <div class="box_title">
-	<ul class="tabs primary" id="othersversions_selected" style="display:block;">
-  <li class="active"><span onclick="DisplayOthers()"><a class="active">Everyone's Versions</span></a></li>
-	</ul>
+	');
+$smarty->assign('others', array(
+	array('images/mlee.jpg', 'new desc. of Edward','by mlee 8h ago'), 
+	array('images/dtran.jpg', 'forest','by dtran 1d ago'),
+	array('images/bella8.jpg', 'forest', 'by bella8 2d ago')
+	));
 
-	</div><!-- box_title-->
-       	<div class="box_content" id="otherversionspanel" style="display:block;">
-	<table>
-<tr><td><div style="float: left; padding-right:4px;"><img src="images/mlee.jpg" /> </div><b>new desc. of Edward</b><br />by mlee 8h ago</td></tr>
-<tr><td><div style="float: left; padding-right:4px;"><img src="images/dtran.jpg" /> </div><a href="viewer.php">forest</a><br />by dtran 1d ago</td></tr>
-	<tr><td><div style="float: left; padding-right:4px;"><img src="images/bella8.jpg" /> </div><b>forest</b><br />by bella8 2d ago</td></tr>
 
-	</div>
-	
-	<script type="text/javascript">
-	//<![CDATA[
-		$(document).ready(function(){
-			$("#editor1").ckeditor(hideLoader("loader"));
-		});
-
-		CKEDITOR.replace( 'editor1',
-		{
-			toolbar :
-			[
-				// for full toolbar: look at http://docs.cksource.com/CKEditor_3.x/Developers_Guide/Toolbar
-	//			['Cut','Copy','Paste', '-', 'Undo','Redo'],
-	//			['Bold','Italic','Underline'],
-	//			['Font','FontSize'],
-	//			['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
-	//			['Maximize']
-			]
-		});
-		var oEditor = CKEDITOR.instances['editor1'];
-		oEditor.EditorDocument.body.disabled=true ;
-	//]]>
-	</script>
-<? include('footer.php'); ?>
+$smarty->display('viewer.tpl');
+?>

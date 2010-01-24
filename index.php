@@ -1,12 +1,5 @@
 <?
-require('smarty_lib/Smarty.class.php');
-$smarty = new Smarty();
-$smarty->template_dir = 'smarty/templates';
-$smarty->config_dir = 'smarty/configs';
-$smarty->compile_dir = 'smarty/templates_c';
-$smarty->cache_dir = 'smarty/cache';
-
-$smarty->assign('name', 'Ned');
+require('init_smarty.php');
 
 $my_recent_docs = array("doc1", "doc2", "doc3");
 $smarty->assign('my_recent_docs', $my_recent_docs);
