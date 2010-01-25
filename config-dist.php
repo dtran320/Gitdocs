@@ -2,7 +2,8 @@
 
 $DATABASE_SETTINGS = array(
 			"host" => "",
-			"name" => "",
+			"username" => ""
+			"dbname" => "",
 			"password" => ""
 			 );
 ?>
