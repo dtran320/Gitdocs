@@ -8,6 +8,13 @@ $smarty->assign('pop_tops', array("databases networks compilers os", "OOP closur
 
 $smarty->assign('pop_docs', array("<a href='http://nytimes.com'>asdfasdfasfd</a>", "<a href='http://nytimes.com'>jkljkljkljlk</a>", "<a href='viewer.php'>Twilight!!</a>", "<a href='http://nytimes.com'>iopiopiop</a>"));
 
+$logged_in_user = array(
+						"iconPtr" => "images/mlinsey.jpg",
+						"displayName" => "Mark Linsey"
+						);
+
+$smarty->assign('logged_in_user', $logged_in_user);
+
 $smarty->display('index.tpl');
 ?>
 

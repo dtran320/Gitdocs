@@ -56,7 +56,7 @@ class User {
 	}
 	
 	public function checkAndDoLogin($password) {
-
+		
 	}
 	
 	public function logout() {

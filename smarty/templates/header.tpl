@@ -25,5 +25,9 @@
 	<div class="wide_gitdocs"><a href="index.php">GitDocs</a></div>
 	<div class="page_title">Where the world writes</div>
 	</div>
-	<div class="float_right logged_in_user"><img src="images/mlinsey.jpg">&nbsp;mlinsey</div>
+	{if isset($logged_in_user) }
+		<div class="float_right logged_in_user">
+			<img src="{$logged_in_user.iconPtr}">&nbsp;{$logged_in_user.displayName}
+		</div>
+	{/if}
  </div><!-- end wide_header -->
