@@ -7,8 +7,10 @@ require_once(dirname(__FILE__) . "/../classes/user.php");
 
 include('testUser.php');
 
-echo "Running tests...";
+echo "Running tests...<br/>";
 
 testCreateUser();
+
+echo "Done!";
 
 ?>
