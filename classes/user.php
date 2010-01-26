@@ -21,7 +21,7 @@ class User {
 	public static function checkUserNameExists($username) {
 		$db = new DB();
 		$username = mysql_real_escape_string($username);
-		$selectQuery = "SELECT username FROM Users WHERE name='$username'";
+		$selectQuery = "SELECT username FROM Users WHERE username='$username'";
 		$db->execQuery($selectQuery);
 		if($row = $db->getNextRow()) {
 			var_dump($row);
@@ -31,10 +31,9 @@ class User {
 	}
 	
 	public static function createNewUser($username, $password, $passwordConfirm, $displayName = 0, $iconPtr = 0) {
-		if(!$username || $password || $passwordConfirm) return false;
+		if(!$username || !$password || !$passwordConfirm) return false;
 		if($password != $passwordConfirm) return false;
 		if(User::checkUserNameExists($username)) return false;
-		
 		$db = new DB();
 		$salt = substr(md5(rand()), 0, 4);
 	    $passwordHash= md5($password.$salt);

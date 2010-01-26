@@ -37,7 +37,7 @@ class DB {
         	die('Could not connect: ' . mysql_error($this->conn));
       		exit();
     	}
-    	$this->selectDB($name);
+    	$this->selectDB($dbname);
 	}
 	
 	function selectDB($name) {
