@@ -1,5 +1,6 @@
 body {
- 	background: #FFF1C3;
+ 	/* background: #FFF1C3; */
+	background: white;
 	font:15px arial,sans-serif;
 	color: #263033;
 	body: 0px;
@@ -7,13 +8,14 @@ body {
  }
 
 .wide_header {
-	background: #263033;
-	color: white;
-	padding: 10px 0px 0px 10px;
-	height: 80px;
+	/* background: #263033; */
+	background: #EEECEF;
+	color: black;
+	padding: 0px 0px 0px 0px;
+	height: 65px;
 }
 .wide_gitdocs {
-	padding: 0px;
+	padding: 15px 0px 0px 15px;
 	font-size:30px;
 }
 
@@ -27,37 +29,71 @@ body {
 }
 
  .page_title {
+/*
 	padding-left: 10px;
 	padding-bottom:10px;
-	font-size:18px;
+*/
+	font-size:14px;
  }
+
+
  
  a {
-	color: #3A7D75;
+	color: #263033;
+	text-decoration: none;
  }
+a:hover {
+	text-decoration: underline;
+}
+
+.no_line_height {
+	line-height:0;
+}
+
+.med_text {
+	font-size: 12px;r
+}
+
+.small_text {
+	font-size: 10px;
+}
+
+.v_name {
+	color: #4183C4;
+	font-weight: bold;
+}
+.u_name {
+	font-weight: normal;
+}
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------
  * Floating Content Boxes 
  ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
 .box {
-	background: #c3e0bc;
+	background: white;
+	/* background: #c3e0bc;
 	-moz-box-shadow: 3px 3px 5px #3a7d75;
 	-webkit-box-shadow: 3px 3px 5px #3a7d75;
 	-moz-border-radius: 10px;
+*/
 	padding: 0px;
 	margin: 10px 0px 0px 0px;
 }
 
 .box_title {
+/*
 	-moz-border-radius: 10px 10px 0px 0px;
 	background: #C96C29;
-	font-weight: bold;
 	color: #fff;
+*/
+	background: white:
+	color: black;
+	font-weight: bold;
 	padding: 5px 0px 5px 10px;
 }
 
-.box_title_unrounded {
+.box_title_unrounded {sea
 	background: #C96C29;
 	font-weight: bold;
 	color: #fff;
@@ -71,6 +107,8 @@ body {
 .left_main {
 	float: left;
 	width: 70%;
+	height: 100%;
+	
 }
 
 .left_side45 {
@@ -97,7 +135,7 @@ body {
 }
 
 .logged_in_user {
-	margin-right: 20px;
+	padding: 8px 10px 0px 0px;
 }
 
 #import_button {
@@ -110,13 +148,13 @@ body {
 }
 
 .big_form input[type="text"] {
-	font-size: 1.5em;
+/*	font-size: 1.5em; */
 }
 
 .big_form input[type="submit"] {
 	background: #263033;
 	color: #fff;
-	font-size: 1.4em; 
+/*	font-size: 1.4em; */
 	font-weight:bold;
 	text-shadow: 2px 2px 3px #000000; 
 	height: 1.5em;

@@ -1,8 +1,9 @@
 <?
 require('init_smarty.php');
 // temp..
-$smarty->assign('d_name', 'Twilight Fanfic:Edward and Jacob!!');
+$smarty->assign('d_name', 'CS294 Class Notes');
 $smarty->assign('v_name', 'forest2');
+$smarty->assign('u_name', 'mlinsey');
 $smarty->assign('v_text', '<p>“Coming out with us Masen?”</p>
 
 				<p>“No thanks,” Edward replied, barely taking a glimpse at Newton<span class="your_changes" id="text_change1">, who was standing way too close to him for his liking</span>.</p>
@@ -26,14 +27,14 @@ $smarty->assign('v_text', '<p>“Coming out with us Masen?”</p>
 
 // we should flesh out all the different phrases instead of doing this:
 $smarty->assign(history, array(
-	array("left", "images/mlinsey.jpg","you are now editing <b>forest2</b>, which you saved 5m ago"),
-	array("right", "images/dtran.jpg","you started from dtran's <b>forest</b> 5m ago"),
+	array("left", "images/mlinsey.jpg","you are now editing <span class='v_name'>forest2</span>, which you saved 5m ago"),
+	array("right", "images/dtran.jpg","you started from dtran's <span class='v_name'>forest</span> 5m ago"),
 
 	));
 $smarty->assign(others, array(
-	array('images/mlee.jpg', '<a href="compare.php">new desc. of Edward</a><br />by mlee 8h ago'),
-	array('images/dtran.jpg', 'forest<br />by dtran 1d ago'),
-	array('images/bella8.jpg', 'forest<br />by bella8 2d ago'),
+	array('images/mlee.jpg', '<a href="compare.php" class="v_name">new desc. of Edward</a><p class="med_text no_line_height">by mlee 8h ago</p>'),
+	array('images/dtran.jpg', '<span class="v_name">forest</span><br />by dtran 1d ago'),
+	array('images/bella8.jpg', '<span class="v_name">forest</span><br />by bella8 2d ago'),
 	));
 $smarty->display('editor.tpl');
 ?>

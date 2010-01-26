@@ -2,7 +2,7 @@
 require('init_smarty.php');
 
 // temp..
-$smarty->assign('d_name', 'Twilight Fanfic:Edward and Jacob!!');
+$smarty->assign('d_name', 'CS294 Class Notes');
 $smarty->assign('v_name', 'forest2');
 $smarty->assign('u_name', 'dtran');
 $smarty->assign('v_text', '<p>“Coming out with us Masen?”</p>

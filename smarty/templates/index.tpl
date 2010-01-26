@@ -29,7 +29,7 @@
         <div class="box_content">
 		<table>
 		{section name=i loop=$my_recent_docs}
-		<tr><td>{$my_recent_docs[i]}</td></tr>
+		<tr><td><p class="no_line_height">{$my_recent_docs[i]}</p><p class="small_text no_line_height">some time ago</p></td></tr>
 		{/section}
 		</table>
 		<div style="padding-top:10px;">
@@ -46,7 +46,8 @@
 		<div style="padding-bottom:20px;">
 			<table>
 			{section name=i loop=$pop_tops}
-			<tr><td><span style="font-size:{cycle values="30px, 25px, 20px, 15px"}">{$pop_tops[i]}</span></td></tr>
+			<tr><td><span style="color:{cycle values="#1E1E1F, #67666A, #807F83, #CBC9CF"}">{$pop_tops[i]}</span></td></tr>
+	<!-- el gray from kuler -->
 			{/section}
 			</table>
 			</div>

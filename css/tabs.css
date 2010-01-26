@@ -12,24 +12,22 @@ ul.primary {
 ul.primary li { display: inline; }
 
 ul.primary li a { 
-                          background-color: #ddd; 
-                          border-color: #bbb; 
-                          border-width: 1px; 
-                          border-style: solid solid none solid; 
-                          height: auto; 
-                          margin-right: 0.5em; 
-                          padding: 0 1em; 
-                          text-decoration: none; 
+	background-color: #fff; 
+	border-color: #bbb; 
+	border-width: 1px; 
+	border-style: none; 
+	height: auto; 
+	margin-right: 0.5em; 
+	padding: 0 1em; 
+  text-decoration: none; 
 }
 
 ul.primary li.active a { 
-                                     background-color: #fff; 
-                                     border: 1px solid #bbb; 
-                                     border-bottom: #fff 1px solid;
+ background-color: #EEECEF; 
+ border: 1px solid #bbb; 
+ border-bottom: #fff 1px solid;
 }
 
 ul.primary li a:hover { 
-                                      background-color: #eee; 
-                                     border-color: #ccc; 
-                                     border-bottom-color: #eee; 
+	background-color: #EEECEF; 
 }
