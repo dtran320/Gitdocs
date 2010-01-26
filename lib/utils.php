@@ -30,7 +30,7 @@ function getVar($fieldName) {
 }
 
 function getVarClean($fieldName) {
-	return htmlEscape(getVar($fieldName))
+	return htmlEscape(getVar($fieldName));
 }
 
 ?>
