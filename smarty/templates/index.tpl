@@ -12,7 +12,7 @@
 </div>
 
 <div class="box">
-	<div class="box_title">Create</div>
+	<div class="box_title"></div>
 	<div class="box_content">
 		<div id="doc_link_left">
 		<a href="index.php">New Document</a>

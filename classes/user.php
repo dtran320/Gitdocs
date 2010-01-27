@@ -41,27 +41,39 @@ class User {
 		return new User($username);
 	}
 	
+	public static function getLoggedInUser() {
+		return isset($_SESSION["username"])? new User($_SESSION["username"]) : false;
+	}
+	
 	public function __construct($username, $passwordHash=0, $displayName = 0, $iconPtr = 0) {
 		$this->username = $username;
 		$db = new DB();
 		$username = mysql_real_escape_string($username);
-		$userSelectQuery = "SELECT username, pwd_hash, display_name, icon_ptr " .
+		$userSelectQuery = "SELECT username, pwd_hash, display_name, icon_ptr, salt " .
 			"FROM Users WHERE username='{$username}'";
 		$db->execQuery($userSelectQuery);
 		if($row = $db->getNextRow()) {
 			$this->passwordHash = $row["pwd_hash"];
 			$this->displayName = $row["display_name"];
 			$this->iconPtr = $row["icon_ptr"];
+			$this->salt = $row["salt"];
 		}
 	}
 	
 	public function checkAndDoLogin($password) {
-		
+		$passwordHash = md5($password, $this->salt);
+		if($passwordHash == $password) {
+			$_SESSION["username"] = $this->username;
+			return true;
+		}
+		else return false;
 	}
 	
 	public function logout() {
-		
+		//faster & cleaner than calling unset?
+		$_SESSION = array();
 	}
+
 	
 }
 
