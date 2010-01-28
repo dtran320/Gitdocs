@@ -1,24 +1,15 @@
 {include file="header.tpl"}
 <div class="container center_container">
 <div class="left_side45">
-<div class="box">
-	<div class="box_title">Search Gitdocs</div>
-	<div class="box_content">
-	<form id="form_search" class="big_form" action="search.php" method="get">
-	<input type="text" name="query" value="Find a document" />
-	<input type="submit" value="Search" />
-	</form>
-	</div>
-</div>
 
 <div class="box">
 	<div class="box_title">Create</div>
 	<div class="box_content">
 		<div id="doc_link_left">
-		<a href="index.php">New Document</a>
+		<a href="index.php">New Notes</a>
 		</div>
 		<div id="doc_link_right">
-		<a href="import.php">Upload document</a>
+		<a href="import.php">Upload Notes</a>
 		</div>
 		<div class="clearfix"></div>
 	</div>

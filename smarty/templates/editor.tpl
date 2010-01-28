@@ -40,7 +40,10 @@
 					class="selectable {if $smarty.section.i.index == 0}selected{/if}"
 					onclick="change_selection({$smarty.section.i.index})">
 					<div style="float: left; padding-right:6px;"><img src="{$others[i][0]}" /> </div>
-					<div class="med_text"> {$others[i][1]}</div>
+					<div class="med_text"> 
+						<span style="float:left">{$others[i][1]}</span>
+						<a class="comparable" href="compare.php">compare</a>
+					</div>
 			</td></tr>
 			{/section}
 		</table>
@@ -51,23 +54,18 @@
 	<script type="text/javascript">
 	{literal}
 	//<![CDATA[
-		$(document).ready(function(){
-			$("#editor1").ckeditor(hideLoader("loader"));
-		});
-	
-		CKEDITOR.replace( 'editor1',
-		{
-			toolbar :
-			[
+		CKEDITOR.config.toolbar = [
 				// for full toolbar: look at http://docs.cksource.com/CKEditor_3.x/Developers_Guide/Toolbar
 				['Cut','Copy','Paste', '-', 'Undo','Redo'],
 				['Bold','Italic','Underline'],
 				['Font','FontSize'],
 				['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
 				['Maximize']
-			]
+		];
+		CKEDITOR.config.height = 	$(window).height() - 200;
+		$(document).ready(function(){
+			$("#editor1").ckeditor(hideLoader("loader"));			
 		});
-
 	//]]>
 	{/literal}
 	</script>

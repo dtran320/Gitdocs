@@ -25,8 +25,14 @@
 	<div class="wide_gitdocs"><a href="index.php">GitDocs</a> <span class="page_title">Where the world writes</span></div>
 	</div>
 	{if isset($logged_in_user) }
-		<div class="float_right logged_in_user">
-			<img src="{$logged_in_user.iconPtr}">&nbsp;{$logged_in_user.displayName}
+		<div class="float_right" style="margin:20px 10px 0px 0px;">
+		<div class="float_left logged_in_user">{$logged_in_user.displayName}</div>
+		<div class="float_right"> 
+			<form id="form_search" class="big_form" action="search.php" method="get">
+			<input type="text" name="query" value="Find a document" />
+			<input type="submit" value="Search" />
+			</form>
+		</div>
 		</div>
 	{/if}
  </div><!-- end wide_header -->

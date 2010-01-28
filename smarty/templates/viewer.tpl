@@ -9,7 +9,7 @@
 			<div id="loader"><img src="images/ajax-loader.gif"></div>
 			<div>
 			<form method="post">
-				<textarea name="editor1" id="editor1">
+				<textarea id="editor1">
 				{$v_text}
 				</textarea>
 			</form>
@@ -40,12 +40,12 @@
 	<script type="text/javascript">
 	{literal}
 	//<![CDATA[
+		CKEDITOR.config.toolbar = [];
+		CKEDITOR.config.height = 	$(window).height() - 200;
 		$(document).ready(function(){
-			$("#editor1").ckeditor(hideLoader("loader"));
+			$("#editor1").ckeditor(hideLoader("loader"));			
 		});
 
-		CKEDITOR.replace( 'editor1', {toolbar : [ ] });
-		var oEditor = CKEDITOR.instances['editor1'];
 	//]]>
 	{/literal}
 	</script>

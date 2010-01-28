@@ -16,7 +16,7 @@ $smarty->assign(history, array(
 
 	));
 $smarty->assign(others, array(
-	array('images/mlee.jpg', '<a href="compare.php" class="v_name">winter 2010</a><br/>by mlee 8h ago'),
+	array('images/mlee.jpg', '<a class="v_name">winter 2010</a><br/>by mlee 8h ago'),
 	array('images/dtran.jpg', '<a class="v_name">winter 2010</a><br />by dtran 1d ago'),
 	array('images/bella8.jpg', '<a class="v_name">fall 2008</a><br />by bella8 2y ago'),
 	));
@@ -43,7 +43,10 @@ the end of the world.
 Nothing in the rest of
 this paragraph needs to
 be changed. Things can
-be added after it.';
+be added after it.
+
+
+';
 
 $new = 'This is an important notice! It should
 therefore be located at the beginning of this
@@ -66,7 +69,7 @@ important
 new additions to this document.';
 
 
-    $diff = simpleDiff::diff_to_array(false, $old, $new, 1);
+    $diff = simpleDiff::diff_to_array(false, $old, $new, 10);
 
     $out = '';
     $prev = key($diff);

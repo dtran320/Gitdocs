@@ -9,7 +9,6 @@
 	<th></th><th>{$other_u_name}'s <span class="v_name">{$other_v_name}</span></th></tr>
 	{$diff}
 	</table>
-			<!-- diff goes here --> 
 	</div> <!--box content-->
 </div> <!--box left_main-->
 
@@ -39,7 +38,10 @@
 					class="selectable {if $smarty.section.i.index == 0}selected{/if}"
 					onclick="change_selection({$smarty.section.i.index})">
 					<div style="float: left; padding-right:6px;"><img src="{$others[i][0]}" /> </div>
-					<div class="med_text"> {$others[i][1]}</div>
+					<div class="med_text"> 
+						<span style="float:left">{$others[i][1]}</span>
+						<a class="comparable">compare</a>
+					</div>
 			</td></tr>
 			{/section}
 		</table>
