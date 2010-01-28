@@ -28,11 +28,19 @@
 		<div class="float_right" style="margin:20px 10px 0px 0px;">
 		<div class="float_left logged_in_user">{$logged_in_user.displayName}</div>
 		<div class="float_right"> 
-			<form id="form_search" class="big_form" action="search.php" method="get">
+			<form id="form_search" class="reg_form" action="search.php" method="get">
 			<input type="text" name="query" value="Find a document" />
 			<input type="submit" value="Search" />
 			</form>
 		</div>
+		</div>
+	{else}
+		<div class="float_right" style="margin:20px 10px 0px 0px;">
+			<form id="login" class="reg_form" action="login.php" method="post">
+				<input type="text" name="username" value="Username" />
+				<input type="text" name="password" value="Password" />
+				<input type="submit" name="submit" value="Login" />
+			</form>
 		</div>
 	{/if}
  </div><!-- end wide_header -->

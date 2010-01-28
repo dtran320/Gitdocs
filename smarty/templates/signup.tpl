@@ -1,60 +1,52 @@
 {include file="header.tpl"}
-<div class="">
 
-<div class="container center_container">
+<div class="box_full">
+	<div class="left_side45" style="margin-left: 20px;">
+		<div class="headline">Share notes with your classmates</div>
+		<p>Why study for tests in isolation? Want to share notes but not sure how or how to do so effectively? 
+		Gitdocs allows you to upload your class notes and manage sections of notes from your classmates,
+		choosing only those contributions you feel will be helpful to your version of your notes.</p>
+	</div>
+	<div class="right_side45" style="margin-left: 20px;">
+		<div class="headline">Sign up and start sharing:</div>
+		<form id="signup" class="big_form" action="sign.php" method="post">
+			<table>
+				<tr>
+					<td><label for="username">Username:</label></td>
+					<td><input type="text" name="username" value="" /></td>
+				</tr>
+				<tr>
+					<td><label for="password">Password:</label></td>
+					<td><input type="text" name="password" value="" /></td>
+				</tr>
+				<tr>
+					<td><label for="password_confirm">Confirm Password:</label></td>
+					<td><input type="text" name="password_confirm" value="" /></td>
+				</tr>
+				<tr><td></td><td><input type="submit" name="submit" value="Sign Up" /></td></tr>
+			</table>
+
+		</form>
+	</div>
+</div><!-- end box_full -->
+<div style="margin-left: 20px;">
+<div class="headline">Explore Gitdocs</div>
 <div class="left_side45">
-<div class="box">
-	<div class="box_title">Search Gitdocs</div>
-	<div class="box_content">
-	<form id="form_search" class="big_form" action="search.php" method="get">
-	<input type="text" name="query" value="Find a document" />
-	<input type="submit" value="Search" />
-	</form>
-	</div>
-</div>
-
-<div class="box">
-	<div class="box_title">Create</div>
-	<div class="box_content">
-		<div id="doc_link_left">
-		<a href="index.php">New Document</a>
-		</div>
-		<div id="doc_link_right">
-		<a href="import.php">Upload document</a>
-		</div>
-		<div class="clearfix"></div>
-	</div>
-</div>
-
-<div class="box">
-	<div class="box_title">My Recent Documents</div>
-        <div class="box_content">
-		<table>
-		{section name=i loop=$my_recent_docs}
-		<tr><td>{$my_recent_docs[i]}</td></tr>
-		{/section}
-		</table>
-		<div style="padding-top:10px;">
-		<a href="index.php">See All My Documents</a>
-		</div>	
-	</div><!-- end box_content -->
-</div><!-- end box -->
-</div><!-- end container col-->
-
-<div class="right_side45">
 <div class="box">
 	<div class="box_title">Popular topics</div>
        	<div class="box_content">
 		<div style="padding-bottom:20px;">
 			<table>
 			{section name=i loop=$pop_tops}
-			<tr><td><span style="font-size:{cycle values="30px, 25px, 20px, 15px"}">{$pop_tops[i]}</span></td></tr>
+			<tr><td><span style="color:{cycle values="#1E1E1F, #67666A, #807F83, #CBC9CF"}">{$pop_tops[i]}</span></td></tr>
+	<!-- el gray from kuler -->
 			{/section}
 			</table>
 			</div>
 		</div>
 </div>
-
+</div>
+<div class="right_side45">
 <div class="box">
 	 <div class="box_title">Popular documents</div>
        <div class="box_content">
@@ -67,6 +59,5 @@
 </div>
 </div>
 
-</div><!-- end container -->
-
+</div>
 {include file="footer.tpl"}
