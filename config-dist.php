@@ -8,4 +8,7 @@ $DATABASE_SETTINGS = array(
 			 );
 
 $DOCUMENTS_PATH = ""
+
+define("DEBUG", true);
+
 ?>
