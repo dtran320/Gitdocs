@@ -3,7 +3,7 @@ require('init_smarty.php');
 
 // temp..
 $smarty->assign('d_name', 'CS294 Class Notes');
-$smarty->assign('v_name', 'forest2');
+$smarty->assign('v_name', 'winter 2010');
 $smarty->assign('u_name', 'dtran');
 $smarty->assign('v_text', '<p>“Coming out with us Masen?”</p>
 
@@ -26,9 +26,9 @@ $smarty->assign('v_text', '<p>“Coming out with us Masen?”</p>
 				<p>“No, I’m heading back. You?”</p>
 	');
 $smarty->assign('others', array(
-	array('images/mlee.jpg', 'new desc. of Edward','by mlee 8h ago'), 
-	array('images/dtran.jpg', 'forest','by dtran 1d ago'),
-	array('images/bella8.jpg', 'forest', 'by bella8 2d ago')
+	array('images/mlee.jpg', 'winter 2010','by mlee 8h ago'), 
+	array('images/dtran.jpg', 'winter 2010','by dtran 1d ago'),
+	array('images/bella8.jpg', 'fall 2008', 'by bella8 2y ago')
 	));
 
 

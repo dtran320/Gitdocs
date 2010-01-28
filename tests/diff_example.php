@@ -1,31 +1,16 @@
-<?
-require('init_smarty.php');
-require('lib/simplediff.php');
+<?php
 
-// temp..
-$smarty->assign('d_name', 'CS294 Class Notes');
-$smarty->assign('v_name', 'winter 2010');
-$smarty->assign('u_name', 'mlinsey');
-$smarty->assign('other_u_name', 'mlee');
-$smarty->assign('other_v_name', 'winter 2010');
+//from http://svn.kd2.org/svn/misc/libs/diff/
+error_reporting(E_ALL);
 
-// we should flesh out all the different phrases instead of doing this:
-$smarty->assign(history, array(
-	array("left", "images/mlinsey.jpg","you are now editing <span class='v_name'>winter 2010</span>, which you saved 5m ago"),
-	array("right", "images/dtran.jpg","you started from dtran's <span class='v_name'>winter 2010</span> 5m ago"),
+require '../lib/simplediff.php';
 
-	));
-$smarty->assign(others, array(
-	array('images/mlee.jpg', '<a class="v_name">winter 2010</a><br/>by mlee 8h ago'),
-	array('images/dtran.jpg', '<a class="v_name">winter 2010</a><br />by dtran 1d ago'),
-	array('images/bella8.jpg', '<a class="v_name">fall 2008</a><br />by bella8 2y ago'),
-	));
-
-
-// copied from diff_example.php which is from http://svn.kd2.org/svn/misc/libs/diff/
-$old = 'This part of the document has stayed the
-same from version to version.  It shouldn\'t
-be shown if it doesn\'t change.  Otherwise, that
+$original = 'This part of the
+document has stayed the
+same from version to
+version.  It shouldn\'t
+be shown if it doesn\'t
+change.  Otherwise, that
 would not be helping to
 compress the size of the
 changes.
@@ -43,18 +28,22 @@ the end of the world.
 Nothing in the rest of
 this paragraph needs to
 be changed. Things can
-be added after it.
+be added after it.';
 
+$updated = 'This is an important
+notice! It should
+therefore be located at
+the beginning of this
+document!
 
-';
-
-$new = 'This is an important notice! It should
-therefore be located at the beginning of this
-document! 
-This part of the document has stayed the
-same from version to version.  It shouldn\'t
-be shown if it doesn\'t change.  Otherwise, that
-would not be helping to compress anything.
+This part of the
+document has stayed the
+same from version to
+version.  It shouldn\'t
+be shown if it doesn\'t
+change.  Otherwise, that
+would not be helping to
+compress anything.
 
 It is important to spell
 check this document. On
@@ -64,14 +53,30 @@ the end of the world.
 Nothing in the rest of
 this paragraph needs to
 be changed. Things can
-be added after it.  This paragraph contains 
-important 
-new additions to this document.';
+be added after it.
 
+This paragraph contains
+important new additions
+to this document.';
 
-    $diff = simpleDiff::diff_to_array(false, $old, $new, 10);
+echo '
+<style type="text/css">
+.ins { background: #cfc; }
+.del { background: #fcc; }
+ins { background: #9f9; }
+del { background: #f99; }
+hr { background: none; border: none; border-top: 2px dotted #000; color: #fff; }
+</style>
+<pre>
+';
 
-    $out = '';
+echo html_diff($original, $updated);
+
+function html_diff($old, $new)
+{
+    $diff = simpleDiff::diff_to_array(false, $old, $new, 1);
+
+    $out = '<table class="diff">';
     $prev = key($diff);
 
     foreach ($diff as $i=>$line)
@@ -129,9 +134,8 @@ new additions to this document.';
         $prev = $i;
     }
 
-    $out .= '';
+    $out .= '</table>';
+    return $out;
+}
 
-$smarty->assign('diff', $out);
-
-$smarty->display('compare.tpl');
 ?>

@@ -6,7 +6,11 @@ require('init_smarty.php');
 
 $smarty->assign('pop_tops', array("databases networks compilers os", "OOP closure languages", "datavis hci graphics siggraph", "anonymity identity audience cs294h"));
 
-$smarty->assign('pop_docs', array("<a href='http://nytimes.com'>asdfasdfasfd</a>", "<a href='http://nytimes.com'>jkljkljkljlk</a>", "<a href='viewer.php'>Twilight!!</a>", "<a href='http://nytimes.com'>iopiopiop</a>"));
+$smarty->assign('pop_docs', 
+	array("<a href='viewer.php'>CS205A Notes</a>",  
+"<a href='viewer.php'>CS145 Notes</a>",
+"<a href='viewer.php'>CS294 Class Notes</a>", 
+"<a href='viewer.php'>CS140 Notes</a>"));
 
 if($user = User::getLoggedInUser()) {
 	$my_recent_docs = array("doc1", "doc2", "doc3");
