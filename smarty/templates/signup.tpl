@@ -18,7 +18,7 @@
 				</tr>
 				<tr>
 					<td><label for="display_name">Display Name:</label></td>
-					<td><input type="text" name="dipslay_ame" value="" /></td>
+					<td><input type="text" name="dipslay_name" value="" /></td>
 				</tr>
 				<tr>
 					<td><label for="password">Password:</label></td>
