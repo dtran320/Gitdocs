@@ -6,4 +6,6 @@ $DATABASE_SETTINGS = array(
 			"dbname" => "",
 			"password" => ""
 			 );
+
+$DOCUMENTS_PATH = ""
 ?>
