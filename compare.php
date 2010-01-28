@@ -1,4 +1,5 @@
 <?
+session_start();
 require('init_smarty.php');
 require('lib/simplediff.php');
 
