@@ -18,6 +18,11 @@
  <script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
  <script type="text/javascript" src="./ckeditor/adapters/jquery.js"></script>
  <script type="text/javascript" src="js/editor.js"></script>
+ <script src="js/jquery.form.js" type="text/javascript" charset="utf-8"></script>
+ <script src="js/jquery.validate.min.js" type="text/javascript" charset="utf-8"></script>
+ <script src="js/additional-methods.js" type="text/javascript" charset="utf-8"></script>
+ <script src="js/jquery.metadata.js" type="text/javascript" charset="utf-8"></script>
+ <script src="js/users.js" type="text/javascript" charset="utf-8"></script>
  </head>
  <body>
  <div class="wide_header">
@@ -26,7 +31,7 @@
 	</div>
 	{if isset($logged_in_user) }
 		<div class="float_right" style="margin:20px 10px 0px 0px;">
-		<div class="float_left logged_in_user">{$logged_in_user.displayName}</div>
+		<div class="float_left logged_in_user">{$logged_in_user.displayName} | <a href="index.php?action=logout">Logout</a></div>
 		<div class="float_right"> 
 			<form id="form_search" class="reg_form" action="search.php" method="get">
 			<input type="text" name="query" value="Find a document" />
@@ -36,10 +41,11 @@
 		</div>
 	{else}
 		<div class="float_right" style="margin:20px 10px 0px 0px;">
-			<form id="login" class="reg_form" action="login.php" method="post">
+			<div class="login_error" id="login_error"></div>
+			<form id="login" class="reg_form" method="post">
 				<input type="text" name="username" value="Username" />
-				<input type="text" name="password" value="Password" />
-				<input type="submit" name="submit" value="Login" />
+				<input type="password" name="password" value="Password" />
+				<input type="submit" name="submit" onclick="signInUser(event);" value="Login" />
 			</form>
 		</div>
 	{/if}

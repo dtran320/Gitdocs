@@ -4,6 +4,9 @@ session_start();
 require('classes/user.php');
 require('init_smarty.php');
 
+$action = getVar("action");
+if($action == "logout") User::logout();
+
 $smarty->assign('pop_tops', array("databases networks compilers os", "OOP closure languages", "datavis hci graphics siggraph", "anonymity identity audience cs294h"));
 
 $smarty->assign('pop_docs', 
@@ -18,7 +21,7 @@ if($user = User::getLoggedInUser()) {
 	
 	$logged_in_user = array(
 							"iconPtr" => "images/mlinsey.jpg",
-							"displayName" => "Mark Linsey"
+							"displayName" => $user->displayName
 							);
 
 	$smarty->assign('logged_in_user', $logged_in_user);

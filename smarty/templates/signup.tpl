@@ -9,6 +9,7 @@
 	</div>
 	<div class="right_side45" style="margin-left: 20px;">
 		<div class="headline">Sign up and start sharing:</div>
+		<div class="signup_error" id="signup_error"></div>
 		<form id="signup" class="big_form" action="sign.php" method="post">
 			<table>
 				<tr>
@@ -16,14 +17,18 @@
 					<td><input type="text" name="username" value="" /></td>
 				</tr>
 				<tr>
+					<td><label for="display_name">Display Name:</label></td>
+					<td><input type="text" name="dipslay_ame" value="" /></td>
+				</tr>
+				<tr>
 					<td><label for="password">Password:</label></td>
-					<td><input type="text" name="password" value="" /></td>
+					<td><input type="password" name="password" value="" /></td>
 				</tr>
 				<tr>
 					<td><label for="password_confirm">Confirm Password:</label></td>
-					<td><input type="text" name="password_confirm" value="" /></td>
+					<td><input type="password" name="password_confirm" value="" /></td>
 				</tr>
-				<tr><td></td><td><input type="submit" name="submit" value="Sign Up" /></td></tr>
+				<tr><td></td><td><input type="submit" name="submit" value="Sign Up" onclick="signUpUser(event);"/></td></tr>
 			</table>
 
 		</form>
@@ -31,7 +36,7 @@
 </div><!-- end box_full -->
 <div style="margin-left: 20px;">
 <div class="headline">Explore Gitdocs</div>
-<div class="left_side45">
+	<div class="left_side45">
 <div class="box">
 	<div class="box_title">Popular topics</div>
        	<div class="box_content">

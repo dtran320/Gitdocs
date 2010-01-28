@@ -38,6 +38,8 @@ class User {
 			"VALUES('{$arr["username"]}', '{$passwordHash}', '{$salt}', '{$arr["displayName"]}', '{$arr["iconPtr"]}')";
 		
 		$db->execQuery($createUserQuery);
+		$user = new User($username);
+		$user->login();
 		return new User($username);
 	}
 	
@@ -58,18 +60,24 @@ class User {
 			$this->iconPtr = $row["icon_ptr"];
 			$this->salt = $row["salt"];
 		}
+		else return false;
+	}
+	
+	public function login() {
+		$_SESSION["username"] = $this->username;
 	}
 	
 	public function checkAndDoLogin($password) {
-		$passwordHash = md5($password, $this->salt);
-		if($passwordHash == $password) {
-			$_SESSION["username"] = $this->username;
+		$passwordHash = md5($password.$this->salt);
+		if($passwordHash == $this->passwordHash) {
+			$this->login();
 			return true;
 		}
 		else return false;
 	}
 	
-	public function logout() {
+	//should this be static? Probably not...
+	public static function logout() {
 		//faster & cleaner than calling unset?
 		$_SESSION = array();
 	}

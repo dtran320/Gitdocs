@@ -197,12 +197,12 @@ a:hover {
 	padding-top: 25px;
 }
 
-.reg_form input[type="text"] {
+.reg_form input[type="text"], .reg_form input[type="password"] {
 /*	font-size: 1.5em; */
 	width: 150px;
 }
 
-.big_form input[type="text"] {
+.big_form input[type="text"], .big_form input[type="password"] {
 	font-size: 1.2em;
 	margin: 5px;
 }

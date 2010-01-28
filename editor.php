@@ -1,4 +1,5 @@
 <?
+session_start();
 require('init_smarty.php');
 // temp..
 $smarty->assign('d_name', 'CS294 Class Notes');

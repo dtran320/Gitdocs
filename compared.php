@@ -1,4 +1,5 @@
 <?
+session_start();
 require('init_smarty.php');
 
 $smarty->assign('d_name', 'Twilight Fanfic:Edward and Jacob!!');
