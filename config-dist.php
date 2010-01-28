@@ -7,7 +7,7 @@ $DATABASE_SETTINGS = array(
 			"password" => ""
 			 );
 
-$DOCUMENTS_PATH = ""
+$DOCUMENTS_PATH = "";
 
 define("DEBUG", true);
 
