@@ -13,3 +13,8 @@ function DisplayMine() {
 	 $("#myversions_selected").show();
          $("#othersversions_selected").hide();
 }
+
+function change_selection(n) {
+	$(".selected").removeClass("selected");
+	$("#td_" + n).addClass("selected");
+}

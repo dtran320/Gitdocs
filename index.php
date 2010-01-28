@@ -6,7 +6,11 @@ $smarty->assign('my_recent_docs', $my_recent_docs);
 
 $smarty->assign('pop_tops', array("databases networks compilers os", "OOP closure languages", "datavis hci graphics siggraph", "anonymity identity audience cs294h"));
 
-$smarty->assign('pop_docs', array("<a href='http://nytimes.com'>asdfasdfasfd</a>", "<a href='http://nytimes.com'>jkljkljkljlk</a>", "<a href='viewer.php'>Twilight!!</a>", "<a href='http://nytimes.com'>iopiopiop</a>"));
+$smarty->assign('pop_docs', 
+	array("<a href='viewer.php'>CS205A Notes</a>",  
+"<a href='viewer.php'>CS145 Notes</a>",
+"<a href='viewer.php'>CS294 Class Notes</a>", 
+"<a href='viewer.php'>CS140 Notes</a>"));
 
 $logged_in_user = array(
 						"iconPtr" => "images/mlinsey.jpg",

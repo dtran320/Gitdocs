@@ -20,18 +20,23 @@
 <div class="box right_side">
   <div class="box_title">
 	<ul class="tabs primary" id="othersversions_selected" style="display:block;">
-  <li class="active"><span onclick="DisplayOthers()"><a class="active">Fellows</span></a></li>
+  <li class="active"><span onclick="DisplayOthers()"><a class="active">Classmates</span></a></li>
 	</ul>
 	</div><!-- box_title-->
 
  	<div class="box_content" id="otherversionspanel" style="display:block;">
-		<table>
+		<table style="width:100%">
 			{section name=i loop=$others}
-	<tr><td><div style="float: left; padding-right:4px;"><img src="{$others[i][0]}" /> </div><span class="med_text"><span class="v_name">{$others[i][1]}</span><br /s>{$others[i][2]}</span></td></tr>
+			<tr><td id="td_{$smarty.section.i.index}" 
+					class="selectable {if $smarty.section.i.index == 0}selected{/if}" 
+					onclick="change_selection({$smarty.section.i.index})">
+					<div style="float: left; padding-right:4px;"><img src="{$others[i][0]}" /></div>
+					<span class="med_text"><a class="v_name">{$others[i][1]}</a><br /s>{$others[i][2]}</span>
+			</td></tr>
 			{/section}
 		</table>
 	</div>
-	
+	<p>clicking the above should replace the text to the left to the left in a box to the left</p>	
 	<script type="text/javascript">
 	{literal}
 	//<![CDATA[
@@ -41,7 +46,6 @@
 
 		CKEDITOR.replace( 'editor1', {toolbar : [ ] });
 		var oEditor = CKEDITOR.instances['editor1'];
-		oEditor.EditorDocument.body.disabled=true ;
 	//]]>
 	{/literal}
 	</script>

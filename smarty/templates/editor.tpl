@@ -1,7 +1,7 @@
 {include file="header.tpl"}
 
 <div class="box left_main">
-	<div class="box_title">{$d_name} -- <span class="v_name">{$v_name}</span> -- <span class="u_name">{$u_name}</span> </div>
+	<div class="box_title">Editing -- {$d_name} -- <span class="v_name">{$v_name}</span> -- <span class="u_name">{$u_name}</span> </div>
 	<div class="box_content">
 			<div id="loader"><img src="images/ajax-loader.gif"></div>
 			<div>
@@ -18,28 +18,36 @@
   <div class="box_title">
 	<ul class = "tabs primary" id ="myversions_selected">
 		<li class = "active" id="myversions_tab"><span onclick="DisplayMine()"><a class="active">History</a></span></li>
-		<li><span onclick="DisplayOthers()"><a>Fellows</a></span></li>
+		<li><span onclick="DisplayOthers()"><a>Classmates</a></span></li>
 	</ul>
 	<ul class="tabs primary" id="othersversions_selected" style="display:none;">
 	 <li id="myversions_tab"><span onclick="DisplayMine()"><a>History</span></a></li>
-	 <li class="active"><span onclick="DisplayOthers()"><a class="active">Fellows</span></a></li>
+	 <li class="active"><span onclick="DisplayOthers()"><a class="active">Classmates</span></a></li>
 	</ul>
 	</div><!-- box_title-->
   <div class="box_content" id="myversionspanel" style="display:block;">
   	<table>
 			{section name=i loop=$history}	
-				<tr><td><div style="float: {$history[i][0]}; padding-right:6px;"><img src="{$history[i][1]}" /> </div><span class="med_text">{$history[i][2]}</span></td></tr>
+				<tr><td><div style="float: {$history[i][0]}; padding-left: 6px; padding-right:6px;"><img src="{$history[i][1]}" /> </div><div class="med_text align_{$history[i][0]}">{$history[i][2]}</div></td></tr>
 			{/section}
 		</table> 
 	</div>
 	
 	<div class="box_content" id="otherversionspanel" style="display:none;">
-		<table>
+		<table style="width:100%">
 			{section name=i loop=$others}	
-			<tr><td><div style="float: left; padding-right:6px;"><img src="{$others[i][0]}" /> </div><span class="med_text">{$others[i][1]}</span></td></tr>
+			<tr><td id="td_{$smarty.section.i.index}"
+					class="selectable {if $smarty.section.i.index == 0}selected{/if}"
+					onclick="change_selection({$smarty.section.i.index})">
+					<div style="float: left; padding-right:6px;"><img src="{$others[i][0]}" /> </div>
+					<div class="med_text"> {$others[i][1]}</div>
+			</td></tr>
 			{/section}
+		</table>
+	<p>what abt this interaction: clicking on these just shows their text (like in viewer.php), and then there is *another* click to do the diff view?</p>	
 	</div>
-	
+</div>
+
 	<script type="text/javascript">
 	{literal}
 	//<![CDATA[

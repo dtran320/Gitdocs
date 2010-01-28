@@ -1,0 +1,12 @@
+apple
+bat
+cantaloupe
+drumstick
+enchilada
+fig
+peach
+pear
+
+
+
+zebra
