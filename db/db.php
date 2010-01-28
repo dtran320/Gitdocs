@@ -62,6 +62,12 @@ class DB {
 		}
 		else return false;
 	}	
+	
+	function getInsertedID() {
+		if($this->last_result) {
+			return mysql_insert_id($this->conn);
+		}	
+	}
 }
 
 ?>

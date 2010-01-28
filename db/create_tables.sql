@@ -1,5 +1,5 @@
---Creates the Users, Documents, and Versions table
---use Gitdocs
+/*--Creates the Users, Documents, and Versions table*/
+/*--use Gitdocs*/
 
 CREATE TABLE IF NOT EXISTS `Users`(
 	`u_id` INTEGER AUTO_INCREMENT,
@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS `Users`(
 	`username` VARCHAR(40) UNIQUE,
 	
 	`pwd_hash` varchar(40) NOT NULL, 
+	`salt` VARCHAR(40),
 	`display_name` VARCHAR(40), 
 	`icon_ptr` VARCHAR(40)
 ) ENGINE=INNODB DEFAULT CHARSET=latin1;
