@@ -15,6 +15,7 @@ function processSignIn(data) {
 	}
 	else {
 		$("#login_error").html("Incorrect email/password combination.");
+		$("#login_error").addClass("error");
 	}		
 }
 
@@ -32,5 +33,6 @@ function processSignUp(data) {
 	}
 	else { //should eventually capture errors
 		$("#signup_error").html("Error with your signup");
+		$("#signup_error").addClass("error");
 	}
 }

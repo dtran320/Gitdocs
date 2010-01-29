@@ -1,9 +1,7 @@
 //we don't want to use this global -- probably move to a class
 
 var pendingChanges = 4;
-$(document).ready(function() {
-	$("#compare_help_dropdown").show();
-});
+
 
 function closeDropdown() {
 	$("#compare_help_dropdown").hide();

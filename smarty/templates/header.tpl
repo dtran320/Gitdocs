@@ -23,6 +23,8 @@
  <script src="js/additional-methods.js" type="text/javascript" charset="utf-8"></script>
  <script src="js/jquery.metadata.js" type="text/javascript" charset="utf-8"></script>
  <script src="js/users.js" type="text/javascript" charset="utf-8"></script>
+ <script src="js/jquery.placeholder.js" type="text/javascript" charset="utf-8"></script>
+
  </head>
  <body>
  <div class="wide_header">
@@ -43,10 +45,20 @@
 		<div class="float_right" style="margin:20px 10px 0px 0px;">
 			<div class="login_error" id="login_error"></div>
 			<form id="login" class="reg_form" method="post">
-				<input type="text" name="username" value="Username" />
-				<input type="password" name="password" value="Password" />
+				<input type="text" id="login_username" name="username" value="" placeholder="Username"/>
+				<input type="password" id="login_password" name="password" value="" placeholder="Password"/>
 				<input type="submit" name="submit" onclick="signInUser(event);" value="Login" />
 			</form>
 		</div>
+		 <script type="text/javascript">
+			{literal}
+			//<![CDATA[
+				 $(document).ready(function() {
+					$("#login_username").placeholder();
+					$("#login_password").placeholder();
+				});
+			//]]>
+			{/literal}
+		</script>
 	{/if}
  </div><!-- end wide_header -->

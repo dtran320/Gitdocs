@@ -33,7 +33,7 @@ class User {
 	    $passwordHash= md5($password.$salt);
 		$arr = array("username" => $username, "displayName" => $displayName, "iconPtr" => $iconPtr);
 		$arr = mysqlEscapeArray($arr);
-	
+		var_dump($arr);
 		$createUserQuery = "INSERT INTO Users(username, pwd_hash, salt, display_name, icon_ptr) " .
 			"VALUES('{$arr["username"]}', '{$passwordHash}', '{$salt}', '{$arr["displayName"]}', '{$arr["iconPtr"]}')";
 		

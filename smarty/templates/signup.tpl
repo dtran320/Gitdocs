@@ -14,19 +14,19 @@
 			<table>
 				<tr>
 					<td><label for="username">Username:</label></td>
-					<td><input type="text" name="username" value="" /></td>
+					<td><input type="text" id="signup_username" name="username" value="" placeholder="Your login name"/></td>
 				</tr>
 				<tr>
 					<td><label for="display_name">Display Name:</label></td>
-					<td><input type="text" name="dipslay_name" value="" /></td>
+					<td><input type="text" id="signup_display_name" name="display_name" value="" placeholder="Your name as others see it"/></td>
 				</tr>
 				<tr>
 					<td><label for="password">Password:</label></td>
-					<td><input type="password" name="password" value="" /></td>
+					<td><input type="password" id="signup_password" name="password" value="" placeholder="password"/></td>
 				</tr>
 				<tr>
 					<td><label for="password_confirm">Confirm Password:</label></td>
-					<td><input type="password" name="password_confirm" value="" /></td>
+					<td><input type="password" id="signup_confirm_password" name="password_confirm" value="" placeholder="password"/></td>
 				</tr>
 				<tr><td></td><td><input type="submit" name="submit" value="Sign Up" onclick="signUpUser(event);"/></td></tr>
 			</table>
@@ -35,7 +35,7 @@
 	</div>
 </div><!-- end box_full -->
 <div style="margin-left: 20px;">
-<div class="headline">Explore Gitdocs</div>
+<div class="headline_blue">Explore Gitdocs</div>
 	<div class="left_side45">
 <div class="box">
 	<div class="box_title">Popular topics</div>
@@ -65,4 +65,14 @@
 </div>
 
 </div>
+<script type="text/javascript">
+	{literal}
+	//<![CDATA[
+		$("#signup_username").placeholder();
+		$("#signup_display_name").placeholder();
+		$("#signup_confirm_password").placeholder();
+		$("#signup_password").placeholder();
+	//]]>
+	{/literal}
+</script>
 {include file="footer.tpl"}
