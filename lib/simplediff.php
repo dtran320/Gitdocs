@@ -166,9 +166,9 @@ class simpleDiff
         }
         $out[] = '';
 
-        if ($return_as_array)
+        if ($return_as_array) 
             return $out;
-        else
+        else 
             return implode("\n",$out);
     }
 

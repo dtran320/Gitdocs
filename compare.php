@@ -86,6 +86,7 @@ new additions to this document.';
 
         $class1 = $class2 = '';
         $t1 = $t2 = '';
+				$likeable = 'likeable';
 
         if ($type == simpleDiff::INS)
         {
@@ -117,14 +118,20 @@ new additions to this document.';
             $new = str_replace('  ', ' ', $new);
             $new = str_replace('+} {+', ' ', $new);
             $new = preg_replace('!\{\+(.*)\+\}!U', '<ins>\\1</ins>', $new);
-        }
+        } else {
+						$likeable = 'notlikeable';
+				}
+	
 
-        $out .= '<tr>';
+        $out .= '<tr class="' . $likeable . '" id="line'. ($i+1).'">';
         $out .= '<td class="line">'.($i+1).'</td>';
         $out .= '<td class="leftChange">'.$t1.'</td>';
-        $out .= '<td class="leftText '.$class1.'">'.$old.'</td>';
+        $out .= '<td class="leftText '.$class1.'"><span class="visibleText">'.$old.'</span><span style="display: none" id="origLeft' .($i+1) .'">' . $old . '</span></td>';
         $out .= '<td class="rightChange">'.$t2.'</td>';
-        $out .= '<td class="rightText '.$class2.'">'.$new.'</td>';
+        $out .= '<td class="rightText '.$class2.'"><span class="visibleText">'.$new.'</span><span style="display: none" id="origRight' . ($i+1) .'">' . $new . '</span></td>';
+		// prototyping shtuff
+				$out .= '<td class="likedislike"><span class="like" onclick="like('. ($i+1).');">like</span> | <span class="dislike" onclick="dislike('. ($i+1).');">dislike</span></td>';
+		// gotta do some studies on this..
         $out .= '</tr>';
 
         $prev = $i;

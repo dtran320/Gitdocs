@@ -1,5 +1,100 @@
 //we don't want to use this global -- probably move to a class
 
+function like(num) {
+	var origRightSelector = "#origRight"+num;
+	var rightSelector = '#line' + num + ' td.rightText .visibleText';
+	var leftSelector = "#line" + num + ' td.leftText .visibleText';
+
+	var rightText = $(origRightSelector).html();
+
+	rightText = rightText.replace("<ins>", "");
+	rightText = rightText.replace("</ins>", "");
+	$(rightSelector).html(rightText);
+	$(leftSelector).html(rightText);
+
+	$('#line'+num + ' td.leftText').addClass('faded');
+	$('#line'+num + ' td.rightText').addClass('faded');
+
+	$("#line"+num + " td.likedislike").html('<span class="undo" onclick="undo('+ num +');">undo</span>');
+}
+
+function undo(num) {
+	var origRightSelector = "#origRight"+num;
+	var origLeftSelector = "#origLeft" + num;
+
+	var rightSelector = "#line"+num + " td.rightText .visibleText";
+	var leftSelector = "#line"+num + " td.leftText .visibleText";
+
+	$(leftSelector).html($(origLeftSelector).html());
+	$(rightSelector).html($(origRightSelector).html());
+
+	$('#line'+num + ' td.leftText').removeClass('faded');
+	$('#line'+num + ' td.rightText').removeClass('faded');
+
+	$("#line"+num + " td.likedislike").html('<span class="like" onclick="like('+ num + ');">like</span> | <span class="dislike" onclick="dislike('+ num +');">dislike</span>');
+}
+
+function dislike(num) {
+	var leftSelector = "#line" + num + ' td.leftText .visibleText';
+	var rightSelector = "#line" + num + ' td.rightText .visibleText';
+	
+	var leftText = $(leftSelector).html();
+	leftText = leftText.replace("<del>", "");
+	leftText = leftText.replace("</del>", "");
+	$(leftSelector).html(leftText);
+
+	var rightText = $(rightSelector).html();
+	rightText = rightText.replace("<ins>", "");
+	rightText = rightText.replace("</ins>", "");
+	$(rightSelector).html(rightText);
+
+	$('#line'+num + ' td.leftText').addClass('faded');
+	$('#line'+num + ' td.rightText').addClass('faded');
+
+	$("#line"+num + " td.likedislike").html('<span class="undo" onclick="undo('+ num +');">undo</span>');
+}
+
+function likeAll() {
+  $('table.diff tr.likeable').each(function(index) {
+			var html = $(this).find('.likedislike').html();
+			var canLike = html.indexOf("like(");
+			if (canLike != -1) {
+				var end = html.indexOf(";", canLike);
+				var cmd = html.substring(canLike, end);
+				eval(cmd);
+			}
+  });
+
+	$('table.diff th span.likedislike').html('<span class="undo" onclick="undoAll();">undo</span>');
+	
+}
+
+function dislikeAll() {
+  $('table.diff tr.likeable').each(function(index) {
+			var html = $(this).find('.likedislike').html();
+			var canLike = html.indexOf("dislike(");
+			if (canLike != -1) {
+				var end = html.indexOf(";", canLike);
+				var cmd = html.substring(canLike, end);
+				eval(cmd);
+			}
+  });
+
+	$('table.diff th span.likedislike').html('<span class="undo" onclick="undoAll();">undo</span>');
+}
+
+function undoAll() {
+  $('table.diff tr.likeable').each(function(index) {
+			var html = $(this).find('.likedislike').html();
+			var canLike = html.indexOf("undo(");
+			if (canLike != -1) {
+				var end = html.indexOf(";", canLike);
+				var cmd = html.substring(canLike, end);
+				eval(cmd);
+			}
+  });
+}
+
 var pendingChanges = 4;
 
 

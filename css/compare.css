@@ -22,8 +22,6 @@ body {
 	clear: both;
 }
 
-
-
 .diff_changes {
 	width: 200px;
 	float: left;
@@ -117,9 +115,42 @@ table.diff {
 	padding-left: 10px;
 }
 
+tr.notlikeable .likedislike{
+	display: none;
+}
+
+.likedislike {
+	width: 100px;
+}
+
+.like {
+	margin-left: 5px;
+}
+.like:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.undo {
+	margin-left: 5px;
+}
+
+.undo:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.dislike:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
 .ins { background: #cfc; }
 .del { background: #fcc; }
 ins { background: #9f9; }
 del { background: #f99; }
 hr { background: none; border: none; border-top: 2px dotted #000; color: #fff; }
+
+.faded {
+	background: #EEECEF;
+}
 
