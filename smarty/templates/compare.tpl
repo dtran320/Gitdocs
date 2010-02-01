@@ -6,7 +6,7 @@
 	<table class="diff">
 	<tr><th></th><th></th><th>your <span class="v_name">{$v_name}</span></th>
 	<th></th><th>{$other_u_name}'s <span class="v_name">{$other_v_name}</span></th>
-	<th><span class="likedislike"><span class="like" onclick="likeAll();">like</span> | <span class="dislike" onclick="dislikeAll();">dislike</span></span></th>
+	<th><span class="likedislike"><span class="like" onclick="likeAll();">L</span> | <span class="dislike" onclick="dislikeAll();">D</span> |<span class="undo" onclick="undoAll();">U</span></span></th>
 	</tr>
 	{$diff}
 	</table>

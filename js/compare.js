@@ -64,9 +64,6 @@ function likeAll() {
 				eval(cmd);
 			}
   });
-
-	$('table.diff th span.likedislike').html('<span class="undo" onclick="undoAll();">undo</span>');
-	
 }
 
 function dislikeAll() {
@@ -79,8 +76,6 @@ function dislikeAll() {
 				eval(cmd);
 			}
   });
-
-	$('table.diff th span.likedislike').html('<span class="undo" onclick="undoAll();">undo</span>');
 }
 
 function undoAll() {
