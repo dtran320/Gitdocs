@@ -3,10 +3,11 @@
 <div class="box left_main">
 	<div class="box_title">Comparing -- {$d_name}</div>
 	<div class="box_content">
-	<p>imagine save and cancel buttons and accept/reject affordances :) </p>
 	<table class="diff">
 	<tr><th></th><th></th><th>your <span class="v_name">{$v_name}</span></th>
-	<th></th><th>{$other_u_name}'s <span class="v_name">{$other_v_name}</span></th></tr>
+	<th></th><th>{$other_u_name}'s <span class="v_name">{$other_v_name}</span></th>
+	<th><span class="likedislike"><span class="like" onclick="likeAll();">L</span> | <span class="dislike" onclick="dislikeAll();">D</span> |<span class="undo" onclick="undoAll();">U</span></span></th>
+	</tr>
 	{$diff}
 	</table>
 	</div> <!--box content-->
