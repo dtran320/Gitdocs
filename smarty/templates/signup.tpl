@@ -3,7 +3,7 @@
 <div class="box_full">
 	<div class="left_side45" style="margin-left: 20px;">
 		<div class="headline">Share notes with your classmates</div>
-		<p>Why study for tests in isolation? Want to share notes but not sure how or how to do so effectively? 
+		<p>Why study for tests in isolation? Want to share notes but not sure how to do so effectively? 
 		Gitdocs allows you to upload your class notes and manage sections of notes from your classmates,
 		choosing only those contributions you feel will be helpful to your version of your notes.</p>
 	</div>
