@@ -1,0 +1,33 @@
+0a1,3
+> This is an important notice! It should
+> therefore be located at the beginning of this
+> document! 
+3,12c6,8
+< be shown if it doesn\'t change.  Otherwise, that
+< would not be helping to
+< compress the size of the
+< changes.
+< 
+< This paragraph contains
+< text that is outdated.
+< It will be deleted in the
+< near future.
+< 
+---
+> be shown if it doesn\'t change.  Otherwise, that
+> would not be helping to compress anything.
+> 
+14c10
+< check this dokument. On
+---
+> check this document. On
+21,24c17,19
+< be added after it.
+< 
+< 
+< 
+---
+> be added after it.  This paragraph contains 
+> important 
+> new additions to this document.
+
