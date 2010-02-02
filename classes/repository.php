@@ -36,9 +36,8 @@ class Repository {
 	}
 	
 	public function commit() {
-		$command = "$location//git commit -a";
+		$command = "$location//git commit -a -m mycommit";
 		exec($command);
-		//TODO: label unsurfanced commits differently, bypass commit message
 	}
 	
 	public function getFile() {
