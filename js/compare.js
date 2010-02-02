@@ -1,5 +1,105 @@
 //we don't want to use this global -- probably move to a class
 
+// this is for the inline one wahhh this is rly ugly. will refactor soon :P
+function addLikeDislikeLinks() {
+	$('.likedislike').offset({left: 600});
+ $('.inline_change').each(function(index) {
+	$(this).addClass('inline_change'+index);
+	$(this).removeClass('inline_change');
+	var left_val = 600;
+	var top_val = $(this).offset().top;
+	var elem = $('.inline_ld').slice(index, index+1);
+	elem.offset({left: left_val, top: top_val});
+	elem.html("<span style='display:inline-block;' class='like' onclick='like_inline(" + index +  ");'>like | </span> <span style='display:inline-block;' class='dislike' onclick='dislike_inline(" + index + ");'>dislike</span><span class='orig' style='display: none;'>" + $(this).html() + "</span><span class='undo' onclick='undo_inline(" + index + ");' style='display:none;'>undo</span>");
+	});
+}
+
+function like_inline(num) {
+	var selector = ".inline_change" + num;
+	var txt =	$(selector).html();
+	if (txt != null) {
+		txt = txt.replace("<ins>", "<span class='grayed'>");
+		txt = txt.replace("</ins>", "</span>");
+	}
+	$(selector).html(txt);
+	$(selector + ' del').addClass('faded');
+	var elem = $('.inline_ld').slice(num, num+1);
+	elem.find('.like').css('display', 'none');
+	elem.find('.dislike').css('display', 'none');
+	elem.find('.undo').css('display', 'inline-block'); 
+	// i had no idea inline-block existed!
+	// do i like changing the display or replacing the entire thingie... HUM
+	// should prob do it the way i do for 2 column where the orig text is in the other div.
+	// does removing instead of changing display since make finding remaining 'likes' easier? or maybe it doesn't matter..
+}
+
+function dislike_inline(num) {
+	var selector = ".inline_change" + num;
+	var txt =	$(selector).html();
+	if (txt != null) {
+		txt = txt.replace("<del>", "<span class='grayed'>");
+		txt = txt.replace("</del>", "</span>");
+	}
+	$(selector).html(txt);
+	$(selector + ' ins').addClass('faded');
+	var elem = $('.inline_ld').slice(num, num+1);
+	elem.find('.like').css('display', 'none');
+	elem.find('.dislike').css('display', 'none');
+	elem.find('.undo').css('display', 'inline-block');
+}
+
+function undo_inline(num) {
+	var selector = ".inline_change" + num;
+	var elem = $('.inline_ld').slice(num, num+1);
+	var txt = elem.find('.orig').html();	
+	$(selector).html(txt);
+	elem.find('.like').css('display', 'inline-block');
+	elem.find('.dislike').css('display', 'inline-block');
+	elem.find('.undo').css('display', 'none');
+}
+
+function likeAll_inline() {
+	var arr = new Array();
+	var i = 0;
+	$('.like').each(function(index) {
+			if($(this).css('display') != 'none') {
+				arr[i] = index;
+				i++;
+		}
+	}); 
+	for (var j = 0; j < i; j++) {
+		like_inline(arr[j]);
+	}
+}
+
+function dislikeAll_inline() {
+	var arr = new Array();
+	var i = 0;
+	$('.dislike').each(function(index) {
+			if($(this).css('display') != 'none') {
+				arr[i] = index;
+				i++;
+		}
+	}); 
+	for (var j = 0; j < i; j++) {
+		dislike_inline(arr[j]);
+	}
+}
+
+function undoAll_inline() {
+	var arr = new Array();
+	var i = 0;
+	$('.undo').each(function(index) {
+			if($(this).css('display') != 'none') {
+				arr[i] = index;
+				i++;
+		}
+	}); 
+	for (var j = 0; j < i; j++) {
+		undo_inline(arr[j]);
+	}
+}
+
 function like(num) {
 	var origRightSelector = "#origRight"+num;
 	var rightSelector = '#line' + num + ' td.rightText .visibleText';
@@ -12,8 +112,8 @@ function like(num) {
 	$(rightSelector).html(rightText);
 	$(leftSelector).html(rightText);
 
-	$('#line'+num + ' td.leftText').addClass('faded');
-	$('#line'+num + ' td.rightText').addClass('faded');
+	$('#line'+num + ' td.leftText').addClass('grayed');
+	$('#line'+num + ' td.rightText').addClass('grayed');
 
 	$("#line"+num + " td.likedislike").html('<span class="undo" onclick="undo('+ num +');">undo</span>');
 }
@@ -28,8 +128,8 @@ function undo(num) {
 	$(leftSelector).html($(origLeftSelector).html());
 	$(rightSelector).html($(origRightSelector).html());
 
-	$('#line'+num + ' td.leftText').removeClass('faded');
-	$('#line'+num + ' td.rightText').removeClass('faded');
+	$('#line'+num + ' td.leftText').removeClass('grayed');
+	$('#line'+num + ' td.rightText').removeClass('grayed');
 
 	$("#line"+num + " td.likedislike").html('<span class="like" onclick="like('+ num + ');">like</span> | <span class="dislike" onclick="dislike('+ num +');">dislike</span>');
 }
@@ -48,8 +148,8 @@ function dislike(num) {
 	rightText = rightText.replace("</ins>", "");
 	$(rightSelector).html(rightText);
 
-	$('#line'+num + ' td.leftText').addClass('faded');
-	$('#line'+num + ' td.rightText').addClass('faded');
+	$('#line'+num + ' td.leftText').addClass('grayed');
+	$('#line'+num + ' td.rightText').addClass('grayed');
 
 	$("#line"+num + " td.likedislike").html('<span class="undo" onclick="undo('+ num +');">undo</span>');
 }

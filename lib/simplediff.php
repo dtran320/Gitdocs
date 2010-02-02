@@ -166,8 +166,9 @@ class simpleDiff
         }
         $out[] = '';
 
-        if ($return_as_array) 
+        if ($return_as_array) {			
             return $out;
+				}
         else 
             return implode("\n",$out);
     }
@@ -238,11 +239,11 @@ class simpleDiff
 
         if ($diff === false)
         {
-            $diff = self::diff($old, $new, true);
+           $diff = self::diff($old, $new, true);
         }
 
         if (!is_array($diff))
-            $old = explode("\n", $diff);
+            $diff = explode("\n", $diff); // before this was $old = ...
 
         if (!is_array($old))
             $old = explode("\n", $old);

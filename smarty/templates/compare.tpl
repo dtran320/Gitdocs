@@ -1,7 +1,7 @@
 {include file="header.tpl"}
 
 <div class="box left_main">
-	<div class="box_title">Comparing -- {$d_name}</div>
+	<div class="box_title">Comparing -- {$d_name} <a href="compare_inline.php" style="color:red;">==AB TESTING CLICK HERE==</a></div>
 	<div class="box_content">
 	<table class="diff">
 	<tr><th></th><th></th><th>your <span class="v_name">{$v_name}</span></th>
@@ -46,7 +46,7 @@
 			</td></tr>
 			{/section}
 		</table>
-	<p>what abt this interaction: clicking on these just shows their text (like in viewer.php), and then there is *another* click to do the diff view?</p>	
+	<p>get rid of line#'s later, but how will we segment the diff? per paragraph too course grain(?), per word too fine grain. per sentence?</p>	
 	</div>
 </div>
 

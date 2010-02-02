@@ -146,11 +146,21 @@ tr.notlikeable .likedislike{
 }
 .ins { background: #cfc; }
 .del { background: #fcc; }
+/*
 ins { background: #9f9; }
 del { background: #f99; }
+*/
+ins { background: #cfc; }
+del { background: #fcc; }
 hr { background: none; border: none; border-top: 2px dotted #000; color: #fff; }
+
+.grayed {
+	background: #EEECEF;
+}
 
 .faded {
 	background: #EEECEF;
+	opacity: 0.4;
 }
+
 

@@ -24,120 +24,76 @@ $smarty->assign(others, array(
 
 
 // copied from diff_example.php which is from http://svn.kd2.org/svn/misc/libs/diff/
-$old = 'This part of the document has stayed the
-same from version to version.  It shouldn\'t
-be shown if it doesn\'t change.  Otherwise, that
-would not be helping to
-compress the size of the
-changes.
+$old = file_get_contents('tests/data1.txt');
+$diff_from_file = file_get_contents('tests/example_alligator.txt');
+$diff = simpleDiff::diff_to_array($diff_from_file, $old, false, 100);
 
-This paragraph contains
-text that is outdated.
-It will be deleted in the
-near future.
+$out = '';
+$prev = key($diff);
 
-It is important to spell
-check this dokument. On
-the other hand, a
-misspelled word isn\'t
-the end of the world.
-Nothing in the rest of
-this paragraph needs to
-be changed. Things can
-be added after it.
-
-
-';
-
-$new = 'This is an important notice! It should
-therefore be located at the beginning of this
-document! 
-This part of the document has stayed the
-same from version to version.  It shouldn\'t
-be shown if it doesn\'t change.  Otherwise, that
-would not be helping to compress anything.
-
-It is important to spell
-check this document. On
-the other hand, a
-misspelled word isn\'t
-the end of the world.
-Nothing in the rest of
-this paragraph needs to
-be changed. Things can
-be added after it.  This paragraph contains 
-important 
-new additions to this document.';
-
-
-    $diff = simpleDiff::diff_to_array(false, $old, $new, 10);
-
-    $out = '';
-    $prev = key($diff);
-
-    foreach ($diff as $i=>$line)
+foreach ($diff as $i=>$line)
+{
+    if ($i > $prev + 1)
     {
-        if ($i > $prev + 1)
-        {
-            $out .= '<tr><td colspan="5" class="separator"><hr /></td></tr>';
-        }
-
-        list($type, $old, $new) = $line;
-
-        $class1 = $class2 = '';
-        $t1 = $t2 = '';
-				$likeable = 'likeable';
-
-        if ($type == simpleDiff::INS)
-        {
-            $class2 = 'ins';
-            $t2 = '+';
-        }
-        elseif ($type == simpleDiff::DEL)
-        {
-            $class1 = 'del';
-            $t1 = '-';
-        }
-        elseif ($type == simpleDiff::CHANGED)
-        {
-            $class1 = 'del';
-            $class2 = 'ins';
-            $t1 = '-';
-            $t2 = '+';
-
-            $lineDiff = simpleDiff::wdiff($old, $new);
-
-            // Don't show new things in deleted line
-            $old = preg_replace('!\{\+(?:.*)\+\}!U', '', $lineDiff);
-            $old = str_replace('  ', ' ', $old);
-            $old = str_replace('-] [-', ' ', $old);
-            $old = preg_replace('!\[-(.*)-\]!U', '<del>\\1</del>', $old);
-
-            // Don't show old things in added line
-            $new = preg_replace('!\[-(?:.*)-\]!U', '', $lineDiff);
-            $new = str_replace('  ', ' ', $new);
-            $new = str_replace('+} {+', ' ', $new);
-            $new = preg_replace('!\{\+(.*)\+\}!U', '<ins>\\1</ins>', $new);
-        } else {
-						$likeable = 'notlikeable';
-				}
-	
-
-        $out .= '<tr class="' . $likeable . '" id="line'. ($i+1).'">';
-        $out .= '<td class="line">'.($i+1).'</td>';
-        $out .= '<td class="leftChange">'.$t1.'</td>';
-        $out .= '<td class="leftText '.$class1.'"><span class="visibleText">'.$old.'</span><span style="display: none" id="origLeft' .($i+1) .'">' . $old . '</span></td>';
-        $out .= '<td class="rightChange">'.$t2.'</td>';
-        $out .= '<td class="rightText '.$class2.'"><span class="visibleText">'.$new.'</span><span style="display: none" id="origRight' . ($i+1) .'">' . $new . '</span></td>';
-		// prototyping shtuff
-				$out .= '<td class="likedislike"><span class="like" onclick="like('. ($i+1).');">like</span> | <span class="dislike" onclick="dislike('. ($i+1).');">dislike</span></td>';
-		// gotta do some studies on this..
-        $out .= '</tr>';
-
-        $prev = $i;
+        $out .= '<tr><td colspan="5" class="separator"><hr /></td></tr>';
     }
 
-    $out .= '';
+    list($type, $old, $new) = $line;
+
+    $class1 = $class2 = '';
+    $t1 = $t2 = '';
+		$likeable = 'likeable';
+
+    if ($type == simpleDiff::INS)
+    {
+        $class2 = 'ins';
+        $t2 = '+';
+    }
+    elseif ($type == simpleDiff::DEL)
+    {
+        $class1 = 'del';
+        $t1 = '-';
+    }
+    elseif ($type == simpleDiff::CHANGED)
+    {
+        $class1 = 'del';
+        $class2 = 'ins';
+        $t1 = '-';
+        $t2 = '+';
+
+        $lineDiff = simpleDiff::wdiff($old, $new);
+
+        // Don't show new things in deleted line
+        $old = preg_replace('!\{\+(?:.*)\+\}!U', '', $lineDiff);
+        $old = str_replace('  ', ' ', $old);
+        $old = str_replace('-] [-', ' ', $old);
+        $old = preg_replace('!\[-(.*)-\]!U', '<del>\\1</del>', $old);
+
+        // Don't show old things in added line
+        $new = preg_replace('!\[-(?:.*)-\]!U', '', $lineDiff);
+        $new = str_replace('  ', ' ', $new);
+        $new = str_replace('+} {+', ' ', $new);
+        $new = preg_replace('!\{\+(.*)\+\}!U', '<ins>\\1</ins>', $new);
+    } else {
+				$likeable = 'notlikeable';
+		}
+
+
+    $out .= '<tr class="' . $likeable . '" id="line'. ($i+1).'">';
+    $out .= '<td class="line">'.($i+1).'</td>';
+    $out .= '<td class="leftChange">'.$t1.'</td>';
+    $out .= '<td class="leftText '.$class1.'"><span class="visibleText">'.$old.'</span><span style="display: none" id="origLeft' .($i+1) .'">' . $old . '</span></td>';
+    $out .= '<td class="rightChange">'.$t2.'</td>';
+    $out .= '<td class="rightText '.$class2.'"><span class="visibleText">'.$new.'</span><span style="display: none" id="origRight' . ($i+1) .'">' . $new . '</span></td>';
+// prototyping shtuff
+		$out .= '<td class="likedislike"><span class="like" onclick="like('. ($i+1).');">like</span> | <span class="dislike" onclick="dislike('. ($i+1).');">dislike</span></td>';
+// gotta do some studies on this..
+    $out .= '</tr>';
+
+    $prev = $i;
+}
+
+$out .= '';
 
 $smarty->assign('diff', $out);
 
