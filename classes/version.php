@@ -16,10 +16,14 @@ class Version {
 	private $commitId; //sha-1 hash
 	private $fileHandler;
 	
-	public function __construct() {
-		
+	public function __construct($docId, $userId, $description = 0) {
+		$this->docId = $docId;	
+		$this->userId = $userId;
+		$this->description = $description;
 	}
+	public static function CreateNewVersion($creator, $docId, $versionToClone, $description = 0) {
 	
+	}
 	//returns array of Versions
 	public function getVersionHistory() {
 		

@@ -7,11 +7,13 @@ require_once(dirname(__FILE__) . "/../classes/user.php");
 
 include('testUser.php');
 include('testDocument.php');
+include('testVersion.php');
 
 echo "Running tests...<br/>";
 
 testCreateUser();
 testCreateDocument();
+testCreateVersion();
 echo "Done!";
 
 ?>
