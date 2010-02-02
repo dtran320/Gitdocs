@@ -49,7 +49,7 @@ class Version {
 	
 	//just saves, update lastSavedTime
 	public function save() {
-		fclose($fileHandler);
+		//fclose($fileHandler);
 		//TODO: flesh out, merge with ckeditor	
 	}
 	
