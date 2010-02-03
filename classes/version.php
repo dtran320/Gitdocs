@@ -37,7 +37,6 @@ class Version {
 		mysqlEscapeArray($params);
 		$newVersionQuery = "INSERT INTO Versions(doc_fk, u_fk, repo_ptr) " .
                         "VALUES('{$params["docId"]}', '{$params["userId"]}', '{$params["repoPtr"]}')";
-
 		$db->execQuery($newVersionQuery);
 		return new Version($docId, $userId, $repo,$description);	
 	}

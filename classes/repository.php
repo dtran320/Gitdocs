@@ -19,31 +19,32 @@ class Repository {
 		$location = "$DOCUMENTS_PATH$docId/$userId";
 		echo "new repo location:$location\n";
 		if(!mkdir("$location", 0700)) return false;				  
-		if(!$versionToClone) {
+		if($versionToClone) {
 			$otherRepoLocation = $versionToClone->getRepoLocation();
-			$command = "$location/git clone $otherRepoLocation";
+			$command = "cd $location; git clone $otherRepoLocation";
 			//TODO: Escape this? necessary?
 			exec($command);
 		} else {
-			//TODO: create starter document file here
-			if(!mkdir("$location/.git", 0700)) return false;
-			$command = "$location/.git/git --bare init";
+			$fh = fopen("$location/document.html",'x');
+			//TODO:setup html boilerplate here
+			fclose($fh);	
+			$command = "cd $location ; git init";
 			exec($command);
 		}
 		return new Repository($location);
 	}
 
 	public function GetLocation() {
-		return $location;
+		return $this->location;
 	}
 	
 	public function commit() {
-		$command = "$location//git commit -a -m mycommit";
+		$command = "cd $location; git commit -a -m placeholdercommitmsg";
 		exec($command);
 	}
 	
 	public function getFile() {
-		$fh = fopen("$location//document.html",'w+');
+		$fh = fopen("$this->location/document.html",'w+');
 		return $fh;
 	}
 	
