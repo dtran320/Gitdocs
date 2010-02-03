@@ -79,14 +79,20 @@ foreach ($diff as $i=>$line)
 		}
 
 
-    $out .= '<tr class="' . $likeable . '" id="line'. ($i+1).'">';
+//    $out .= '<tr class="' . $likeable . '" id="line'. ($i+1).'">';
+    $out .= '<tr class="' . $likeable . '">';
     $out .= '<td class="line">'.($i+1).'</td>';
     $out .= '<td class="leftChange">'.$t1.'</td>';
-    $out .= '<td class="leftText '.$class1.'"><span class="visibleText">'.$old.'</span><span style="display: none" id="origLeft' .($i+1) .'">' . $old . '</span></td>';
+//    $out .= '<td class="leftText '.$class1.'"><span class="visibleText">'.$old.'</span><span style="display: none" id="origLeft' .($i+1) .'">' . $old . '</span></td>';
+    $out .= '<td class="leftText '.$class1.'"><span class="visibleText">'.$old.'</span><span style="display: none" id="origLeft">' . $old . '</span></td>';
+
     $out .= '<td class="rightChange">'.$t2.'</td>';
-    $out .= '<td class="rightText '.$class2.'"><span class="visibleText">'.$new.'</span><span style="display: none" id="origRight' . ($i+1) .'">' . $new . '</span></td>';
-// prototyping shtuff
-		$out .= '<td class="likedislike"><span class="like" onclick="like('. ($i+1).');">like</span> | <span class="dislike" onclick="dislike('. ($i+1).');">dislike</span></td>';
+ //   $out .= '<td class="rightText '.$class2.'"><span class="visibleText">'.$new.'</span><span style="display: none" id="origRight' . ($i+1) .'">' . $new . '</span></td>';
+ 		$out .= '<td class="rightText '.$class2.'"><span class="visibleText">'.$new.'</span><span style="display: none" id="origRight">' . $new . '</span></td>';
+
+	//	$out .= '<td class="likedislike"><span class="like" onclick="like('. ($i+1).');">like</span> | <span class="dislike" onclick="dislike('. ($i+1).');">dislike</span></td>';
+		$out .= '<td class="likedislike"><span class="like">like</span> | <span class="dislike">dislike</span></td>';
+	
 // gotta do some studies on this..
     $out .= '</tr>';
 

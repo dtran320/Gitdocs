@@ -2,7 +2,7 @@
 
 <div class="left_main">
 	<div class="box" style="width: 600px;">
-	<div class="box_title">Comparing -- {$d_name} <a href="compare.php" style="color: red;">==AB TESTING CLICK HERE==</a></div>
+	<div class="box_title">Comparing -- {$d_name} <a href="compare.php" style="color: red;">==AB TESTING CLICK HERE==</a> <form id="compare_form" action="compare_post.php" method="post"><input type="submit" value="Save"></form></div>
 	<div class="box_content" style="font-size: 13px;">
 	{$diff}
 	</div> <!--box content-->
