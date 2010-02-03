@@ -49,5 +49,13 @@
 	<p>get rid of line#'s later, but how will we segment the diff? per paragraph too course grain(?), per word too fine grain. per sentence?</p>	
 	</div>
 </div>
-
+	<script type="text/javascript">
+	{literal}
+	//<![CDATA[
+		$(document).ready(function(){
+			addFormData();	
+		});
+	//]]>
+	{/literal}
+	</script>
 {include file="footer.tpl"}

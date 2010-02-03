@@ -6,6 +6,9 @@ $i = 0;
 $reported_i = 0;
 $diffs = array();
 
+if (!isset($_POST['hidden0'])) {
+	$i = $i + 1;
+}
 while (isset($_POST['hidden' . $i])) {
 	if ($_POST['hidden' . $i] == "like") 
 		$user_action = UserDiffAction::accepted;
@@ -33,10 +36,10 @@ while (isset($_POST['hidden' . $i])) {
 }
 
 // so at this point i have an array of Diff objects, here you go marky mark.
-/*
+
 foreach ($diffs as $diff) {
 	echo $diff->userAction . ' ' . $diff->type . ' ' . $diff->index . '<br/>';
 }
-*/
+
 
 ?>
