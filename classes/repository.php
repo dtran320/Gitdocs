@@ -9,7 +9,7 @@
 class Repository {
 
 	private $location;
-	private $currentBranch;
+
 	public function __construct($location) {
 		$this->location = $location;
 	}	
@@ -48,7 +48,14 @@ class Repository {
 		return $fh;
 	}
 	
-	public function diff($otherVersion) {
+	public function diff($myVersion, $otherVersion) {
+		$myVersion->commit();
+		$otherLocation = $otherVersion->getRepoLocation();
+		$command = "cd $otherLocation; 
+				git stash; 
+				git branch $myVersion->getUserId(); 
+				git checkout $myversion->getUserId(); 
+			    	git merge master;"
 	}
 	
 	public function merge($otherVersion) {

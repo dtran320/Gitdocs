@@ -65,7 +65,7 @@ class Version {
 	}	
 	
 	public function diff($otherVersion) {
-		return $repo->diff($otherVersion);
+		return $repo->diff($this, $otherVersion);
 	}
 	
 	public function merge($otherVersion, $diffs) {
@@ -78,6 +78,13 @@ class Version {
 
 	public function getRepoLocation(){
 		return $repo->getLocation();
+	}
+	
+	public function getUserId(){
+		return $this->userId;
+	}
+	public function getDocId(){
+		return $this->docId;
 	}
 }
 
