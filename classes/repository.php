@@ -16,16 +16,18 @@ class Repository {
 	
 	public static function CreateNewRepository($docId, $userId,$versionToClone = 0) {
 		global $DOCUMENTS_PATH;
-		$location = "$DOCUMENTS_PATH//$docId//$userId";
-		if(!mkdir("$location", 0600)) return false;				  if(!versionToClone) {
+		$location = "$DOCUMENTS_PATH$docId/$userId";
+		echo "new repo location:$location\n";
+		if(!mkdir("$location", 0700)) return false;				  
+		if(!$versionToClone) {
 			$otherRepoLocation = $versionToClone->getRepoLocation();
-			$command = "$location//git clone $otherRepoLocation";
+			$command = "$location/git clone $otherRepoLocation";
 			//TODO: Escape this? necessary?
 			exec($command);
 		} else {
 			//TODO: create starter document file here
-			if(!mkdir("$location//.git", 0600)) return false;
-			$command = "$location//.git//git --bare init";
+			if(!mkdir("$location/.git", 0700)) return false;
+			$command = "$location/.git/git --bare init";
 			exec($command);
 		}
 		return new Repository($location);

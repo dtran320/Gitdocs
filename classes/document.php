@@ -24,8 +24,7 @@ class Document {
 		$db->execQuery($newDocQuery);	
 		$newDocID = $db->getInsertedID();
 		if(!$newDocID) return false;
-		echo "doc path is $DOCUMENTS_PATH$newDocID\n";
-		if(!mkdir("$DOCUMENTS_PATH$newDocID", 0600)) return false;
+		if(!mkdir("$DOCUMENTS_PATH$newDocID", 0700)) return false;
 		
 		$document = new Document($newDocID, $name);
 		return $document;

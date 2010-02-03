@@ -36,10 +36,10 @@ class Version {
 		$params = array("docId" => $docId, "userId" => $userId, "repoPtr" => $repo->getLocation());
 		mysqlEscapeArray($params);
 		$newVersionQuery = "INSERT INTO Versions(doc_fk, u_fk, repo_ptr) " .
-                        "VALUES('{$params["docId"]}', '{$params["userId"]}', '{$arr["repoPtr"]}')";
+                        "VALUES('{$params["docId"]}', '{$params["userId"]}', '{$params["repoPtr"]}')";
 
 		$db->execQuery($newVersionQuery);
-		return new Version($docId, $creator, $repo,$description);	
+		return new Version($docId, $userId, $repo,$description);	
 	}
 
 	//returns array of Versions
