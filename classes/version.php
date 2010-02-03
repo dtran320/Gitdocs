@@ -29,8 +29,8 @@ class Version {
 		else 
 			$this->repo = new Repository($docId, $userId);
 	}
-	public static function CreateNewVersion($creator, $docId, $versionToClone = 0, $description = 0) {
-		$repo = CreateNewRepository($docId, $userId, $versionToClone);
+	public static function CreateNewVersion($userId, $docId, $versionToClone = 0, $description = 0) {
+		$repo = Repository::CreateNewRepository($docId, $userId, $versionToClone);
 		if(!$repo) return false;
 		$db = new DB();
 		$params = array("docId" => $docId, "userId" => $userId, "repoPtr" => $repo->getLocation());
