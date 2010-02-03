@@ -1,16 +1,26 @@
 //we don't want to use this global -- probably move to a class
 
-// this is for the inline one wahhh this is rly ugly. will refactor soon :P
+// THIS IS SO UGLY I AM SORRY I WILL FIX THIS :P
 function addLikeDislikeLinks() {
-	$('.likedislike').offset({left: 600});
+ $('.likedislike').offset({left: 600});
  $('.inline_change').each(function(index) {
 	$(this).addClass('inline_change'+index);
 	$(this).removeClass('inline_change');
 	var left_val = 600;
 	var top_val = $(this).offset().top;
+	var orig_txt = $(this).html();
 	var elem = $('.inline_ld').slice(index, index+1);
 	elem.offset({left: left_val, top: top_val});
-	elem.html("<span style='display:inline-block;' class='like' onclick='like_inline(" + index +  ");'>like | </span> <span style='display:inline-block;' class='dislike' onclick='dislike_inline(" + index + ");'>dislike</span><span class='orig' style='display: none;'>" + $(this).html() + "</span><span class='undo' onclick='undo_inline(" + index + ");' style='display:none;'>undo</span>");
+	elem.html("<span style='display:inline-block;' class='like' onclick='like_inline(" + index +  ");'>like | </span> <span style='display:inline-block;' class='dislike' onclick='dislike_inline(" + index + ");'>dislike</span><span class='orig' style='display: none;'>" + orig_txt + "</span><span class='undo' onclick='undo_inline(" + index + ");' style='display:none;'>undo</span>");
+	var form_txt = $('#compare_form').html();
+
+	var type = (orig_txt.indexOf("<del>") != -1) ? "del" : "ins";
+	if (type == "del") {
+		type = (orig_txt.indexOf("<ins>") != -1) ? "change" : "ins";
+	}
+	
+	$('#compare_form').html(form_txt + ' <input type="hidden" id="hidden' + index + '" name="hidden' + index + '" value="boo">'
+	 + ' <input type="hidden" id="type' + index + '" name="type' + index + '" value="'+ type + '">');
 	});
 }
 
@@ -27,6 +37,8 @@ function like_inline(num) {
 	elem.find('.like').css('display', 'none');
 	elem.find('.dislike').css('display', 'none');
 	elem.find('.undo').css('display', 'inline-block'); 
+
+	$('#hidden' + num).attr('value', 'like');
 	// i had no idea inline-block existed!
 	// do i like changing the display or replacing the entire thingie... HUM
 	// should prob do it the way i do for 2 column where the orig text is in the other div.
@@ -46,6 +58,8 @@ function dislike_inline(num) {
 	elem.find('.like').css('display', 'none');
 	elem.find('.dislike').css('display', 'none');
 	elem.find('.undo').css('display', 'inline-block');
+
+	$('#hidden' + num).attr('value', 'dislike');
 }
 
 function undo_inline(num) {
@@ -56,6 +70,7 @@ function undo_inline(num) {
 	elem.find('.like').css('display', 'inline-block');
 	elem.find('.dislike').css('display', 'inline-block');
 	elem.find('.undo').css('display', 'none');
+	$('#hidden' + num).attr('value', 'undo');
 }
 
 function likeAll_inline() {

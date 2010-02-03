@@ -36,16 +36,7 @@ $out = str_replace("<ins>", "<div class='inline_change'><ins>", $out);
 $out = str_replace("</ins>", "</ins></div><div class='inline_ld'></div>", $out);
 $out = str_replace("<del>", "<div class='inline_change'><del>", $out);
 $out = str_replace("</del>", "</del></div><div class='inline_ld'></div>", $out);
-$out = str_replace("</del></div><div class='inline_ld'>like | dislike</div><div class='inline_change'><ins>", "</del><ins>", $out);
-
-
-/*
-$out = str_replace("<ins>", "<br/><ins>", $out);
-$out = str_replace("</ins>", "</ins><br/>", $out);
-$out = str_replace("<del>", "<br/><del>", $out);
-$out = str_replace("</del>", "</del><br/>", $out);
-$out = str_replace("<br/><br/>", "", $out);
-*/
+$out = str_replace("</del></div><div class='inline_ld'></div><div class='inline_change'><ins>", "</del><ins>", $out);
 
 $smarty->assign('diff', $out);
 
