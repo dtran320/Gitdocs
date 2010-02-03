@@ -55,7 +55,13 @@ class Repository {
 				git stash; 
 				git branch $myVersion->getUserId(); 
 				git checkout $myversion->getUserId(); 
-			    	git merge master;"
+				echo document.html merge=discardMine > $otherLocation/.gitattributes;
+				git config merge.discardMine.name \"discard my changes if conflicts\";
+				git config merge.keepMine.driver \"".dirname(__FILE__). "/../scripts/discardMine.sh %0 %A %B\";
+				git commit -a -m 'prepared branch merge strategy';
+			    	git merge master;";
+		exec($command);
+	
 	}
 	
 	public function merge($otherVersion) {
