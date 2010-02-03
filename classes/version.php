@@ -35,8 +35,8 @@ class Version {
 		$db = new DB();
 		$params = array("docId" => $docId, "userId" => $userId, "repoPtr" => $repo->getLocation());
 		mysqlEscapeArray($params);
-		$newVersionQuery = " $createUserQuery = "INSERT INTO Versions(doc_fk, u_fk, repo_ptr) " .
-                        "VALUES('{$params["docId"]}', '{$params["userId"]}', '{$arr["repoPtr"]}')";";
+		$newVersionQuery = "INSERT INTO Versions(doc_fk, u_fk, repo_ptr) " .
+                        "VALUES('{$params["docId"]}', '{$params["userId"]}', '{$arr["repoPtr"]}')";
 
 		$db->execQuery($newVersionQuery);
 		return new Version($docId, $creator, $repo,$description);	
@@ -49,7 +49,7 @@ class Version {
 	
 	//just saves, update lastSavedTime
 	public function save() {
-		fclose($fileHandler);
+		//fclose($fileHandler);
 		//TODO: flesh out, merge with ckeditor	
 	}
 	

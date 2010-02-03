@@ -24,7 +24,7 @@ class Repository {
 			exec($command);
 		} else {
 			//TODO: create starter document file here
-			if(!mkdir("$location//.git", 0600) return false);
+			if(!mkdir("$location//.git", 0600)) return false;
 			$command = "$location//.git//git --bare init";
 			exec($command);
 		}
