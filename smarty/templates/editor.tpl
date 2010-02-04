@@ -3,13 +3,23 @@
 <div class="box left_main">
 	<div class="box_title"><div style="float: left;">Editing -- {$d_name} -- <span class="v_name">{$v_name}</span> -- <span class="u_name">{$u_name}</span> </div>
 
-		<form id="save_form" class="big_form" method="post" style="float:right;">
+	<form id="publish_form" class="big_form" action="actions/version.php" method="post" style="float:right;">
+		<input type="hidden" name="action" value="save" />
+		<input type="hidden" name="d_id" value="{$d_id}" />
+		<input type="hidden" name="u_id" value="{$u_id}" />
+		<input type="hidden" name="doc_text" id="doc_text" value="asdf" />
+		<input type="submit" name="submit" value="Publish" onclick='$("#doc_text").val(CKEDITOR.instances.editor1.getData());'/>
+	</form>
+
+		<form id="save_form" class="big_form" action="actions/version.php" method="post" style="float:right;">
 			<input type="hidden" name="action" value="save" />
 			<input type="hidden" name="d_id" value="{$d_id}" />
 			<input type="hidden" name="u_id" value="{$u_id}" />
 			<input type="hidden" name="doc_text" id="doc_text" value="" />
-			<input type="submit" name="submit" value="Save" onclick="saveVersion(event)"/>
+			<input type="submit" name="submit" value="Save"/>
 		</form>
+		
+
 		<div id="save_status" class="status"></div>
 	</div>
 	<div class="clear_fix"></div>

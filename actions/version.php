@@ -11,6 +11,6 @@ $u_id = postVarClean("u_id");
 $doc_text = postVarClean("doc_text");
 
 $version = new Version($d_id, $u_id);
-$version->save();
+$version->save($doc_text);
 
 ?>

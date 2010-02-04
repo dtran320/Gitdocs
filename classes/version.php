@@ -20,7 +20,12 @@ class Version {
 	private $commitId; //sha-1 hash
 	private $repo;
 	
+	public $textCache;
+	public $fileHandler;
+	
 	public function __construct($docId, $userId, $repo = 0,$description = 0) {
+		global $DOCUMENTS_PATH;
+		$location = "$DOCUMENTS_PATH$docId/$userId";
 		$this->docId = $docId;	
 		$this->userId = $userId;
 		$this->description = $description;
@@ -28,6 +33,12 @@ class Version {
 			$this->repo = $repo;
 		else 
 			$this->repo = new Repository($docId, $userId);
+		$this->textCache = "";
+		$this->fileHandler = fopen("$location/document.html",'x');
+	}
+	
+	public function __destruct() {
+		fclose($this->fileHandler);
 	}
 	public static function CreateNewVersion($userId, $docId, $versionToClone = 0, $description = 0) {
 		$repo = Repository::CreateNewRepository($docId, $userId, $versionToClone);
@@ -48,6 +59,8 @@ class Version {
 	
 	//just saves, update lastSavedTime
 	public function save($text) {
+		$this->textCache = $text;
+		fwrite($this->fileHandler, $text);
 		//fclose($fileHandler);
 		//TODO: flesh out, merge with ckeditor	
 		
@@ -55,7 +68,7 @@ class Version {
 	
 	//saves, does git commit, returns new Version object
 	public function commit() {
-		save();	
+		$this->save();	
 		$repo->commit();
 		return this;
 	}
