@@ -55,34 +55,34 @@ class Version {
 	
 	//saves, does git commit, returns new Version object
 	public function commit() {
-		save();	
-		$repo->commit();
-		return this;
+		$this->save();	
+		$this->repo->commit();
+		return $this;
 	}
 
 	public function openVersionFile($branch = 0) {
-		$fileHandler = $repo->getFile($this, $branch);
+		$fileHandler = $this->repo->getFile($branch);
 		return $fileHandler;
 	}	
 	
 	public function readFileToArray($branch = 0) {
-		return $repo->readFileToArray($branch);
+		return $this->repo->readFileToArray($branch);
 	}
 	
 	public function diff($otherVersion) {
-		return $repo->diff($this, $otherVersion);
+		return $this->repo->diff($this, $otherVersion);
 	}
 	
 	public function merge($otherVersion, &$diffs) {
-		//TODO:parse diffs, open other version, undo changes
 		
 		$repo->merge($this, $otherVersion, $diffs);
-		commit();
+		$this->commit();
 		return true;
 	}
 
 	public function getRepoLocation(){
-		return $repo->getLocation();
+	
+		return $this->repo->getLocation();
 	}
 	
 	public function getUserId(){

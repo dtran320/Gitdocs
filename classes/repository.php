@@ -27,9 +27,8 @@ class Repository {
 			exec($command);
 		} else {
 			$fh = fopen("$location/document.html",'x');
-			//TODO:setup html boilerplate here
 			fclose($fh);	
-			$command = "cd $location ; git init";
+			$command = "cd $location ; git init; git add document.html; git commit -a -m first-commit";
 			exec($command);
 		}
 		return new Repository($location);
@@ -40,20 +39,20 @@ class Repository {
 	}
 	
 	public function commit() {
-		$command = "cd $location; git commit -a -m placeholdercommitmsg";
+		$command = "cd $this->location; git commit -a -m placeholdercommitmsg";
 		exec($command);
 	}
 	
 	public function getFile($branch = 0) {
 		if(!$branch) $branch = "master";
-		checkout($branch);
+		$this->checkout($branch);
 		$fh = fopen("$this->location/document.html",'w+');
 		return $fh;
 	}
 
 	public function readFileToArray($branch = 0) {
-		if(!branch) $branch = "master";
-		checkout($branch);
+		if(!$branch) $branch = "master";
+		$this->checkout($branch);
 		return file("$this->location/document.html");
 	}
 	
@@ -67,16 +66,16 @@ class Repository {
 		$otherLocation = $otherVersion->getRepoLocation();
 		$command = "cd $otherLocation; 
 				git stash; 
-				git branch $myVersion->getUserId(); 
-				git checkout $myversion->getUserId(); 
+				git branch ". $myVersion->getUserId() ."; 
+				git checkout ". $myVersion->getUserId(). "; 
 				echo document.html merge=discardMine > $otherLocation/.gitattributes;
 				git config merge.discardMine.name \"discard my changes if conflicts\";
 				git config merge.discardMine.driver \"".dirname(__FILE__). "/../scripts/discardMine.sh %0 %A %B\";
 				git commit -a -m 'prepared branch merge strategy';
 			    	git merge master;";
 		exec($command);
-		$command = "cd $location; 
-			 	git remote add -t $myVersion->getUserId -f $otherVersion->getUserId() $otherLocation;)";
+		$command = "cd $this->location; 
+			 	git remote add -t". $myVersion->getUserId() ." -f". $otherVersion->getUserId() ."$otherLocation;)";
 		exec($command);
 		$command = "git diff $otherVersion->getUserId()/$myVersion->getUserId";
 		
