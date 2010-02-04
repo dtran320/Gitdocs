@@ -8,6 +8,7 @@
 require_once(dirname(__FILE__) . "/../config.php");
 require_once(dirname(__FILE__) . "/../db/db.php");
 require_once(dirname(__FILE__) . "/repository.php");
+require_once('document.php');
 
 class Version {
 	
@@ -46,7 +47,7 @@ class Version {
 	}
 	
 	//just saves, update lastSavedTime
-	public function save() {
+	public function save($text) {
 		//fclose($fileHandler);
 		//TODO: flesh out, merge with ckeditor	
 		
@@ -89,6 +90,14 @@ class Version {
 	}
 	public function getDocId(){
 		return $this->docId;
+	}
+	
+	public function getDocument() {
+		$getDocQuery = "SELECT doc_id, name FROM Documents WHERE doc_id='{$this->docId}'";
+		$db->execQuery($getDocQuery);
+		$row = $db->getNextRow();
+		if($row) return new Document($row['doc_id'], $row['name']);
+		else return false;
 	}
 }
 

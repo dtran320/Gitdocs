@@ -21,18 +21,13 @@ function change_selection(n) {
 
 function saveVersion(evt) {
 	evt.preventDefault();
-	$("input[name='doc_text']").val(CKEDITOR.instances.editor1.getData());
+	$("#doc_text").val(CKEDITOR.instances.editor1.getData());
 	$("#save_form").ajaxSubmit({
-		url: "actions/version_actions.php",
-		success: processSaveVersion
+		url: "actions/version.php",
+		success: save
 	});
 }
 
-function processSaveVersion(data) {
-	if(data=="SUCCESS") {
-		$("#save_status").html("Saved successfully.");
-	}
-	else {
-		$("#save_status").html("Error with save.");
-	}
+function save(data) {
+	$("#save_status").html("Document saved.");
 }

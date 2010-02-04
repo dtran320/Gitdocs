@@ -10,6 +10,7 @@ $d_id = postVarClean("d_id");
 $u_id = postVarClean("u_id");
 $doc_text = postVarClean("doc_text");
 
-var_dump($doc_text . "sdfsf");
+$version = new Version($d_id, $u_id);
+$version->save();
 
 ?>

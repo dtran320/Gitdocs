@@ -1,8 +1,5 @@
 <?
-if(DEBUG) {
-  ini_set('display_errors', 1);
-  error_reporting(E_ALL);
-}
+
 session_start();
 require_once('classes/user.php');
 require_once('lib/utils.php');
@@ -19,13 +16,11 @@ if($user = User::getLoggedInUser()) {
 	if ($action=="clone") {
 	$documentId = postVarClean("document_id");
 	$ownerId = postVarClean("owner_id");
+	
+	$version = Version::CreateNewVersion($user->userId, $documentId, new Version($documentId, $ownerId));
 		// temp..
-		$smarty->assign('d_name', $document->name);
-		$smarty->assign('v_name', 'Untitled');
-		$smarty->assign('u_name', $user->username);
-		$smarty->assign('v_text', '');
-
-	// we should flesh out all the different phrases instead of doing this:
+	$document = $version->getDocument();
+	
 	$smarty->assign('history', array(
 		array("left", "images/mlinsey.jpg","you are now editing <span class='v_name'>winter 2010</span>, which you saved 5m ago"),
 		array("right", "images/dtran.jpg","you started from dtran's <span class='v_name'>winter 2010</span> 5m ago"),
@@ -76,11 +71,10 @@ $smarty->assign('history', array(
 	array("left", "images/mlinsey.jpg","you are now editing <span class='v_name'>{$v_name}</span>, which has not been saved."),
 	));
 $smarty->assign('others', array(
-
 	));
 $smarty->display('editor.tpl');
 
-}
+} // end if user logged in
 else {
 	$smarty->assign('signin_error', "You must sign up or login to create a version.");
 	$smarty->display('signup.tpl');
