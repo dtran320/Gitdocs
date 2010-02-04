@@ -28,6 +28,6 @@ function saveVersion(evt) {
 	});
 }
 
-function save(data) {
+function save() {
 	$("#save_status").html("Document saved.");
 }
