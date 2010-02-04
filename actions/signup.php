@@ -8,8 +8,6 @@ $password = postVar("password");
 $passwordConfirm = postVar("password_confirm");
 $displayName = postVar("display_name");
 
-echo $displayName;
-
 if($user = User::createNewUser($username, $password, $passwordConfirm, $displayName)) {
 	$user->login();
 	echo "SUCCESS";

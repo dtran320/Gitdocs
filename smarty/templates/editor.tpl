@@ -1,7 +1,11 @@
 {include file="header.tpl"}
 
 <div class="box left_main">
-	<div class="box_title">Editing -- {$d_name} -- <span class="v_name">{$v_name}</span> -- <span class="u_name">{$u_name}</span> </div>
+	<form class="reg_form">
+	<div class="box_title">Editing -- {$d_name} -- <span class="v_name">{$v_name}</span> -- <span class="u_name">{$u_name}</span> 
+		<span class="float_right"><input type="submit" value="Save" /></span>
+	</div>
+	</form>
 	<div class="box_content">
 			<div id="loader"><img src="images/ajax-loader.gif"></div>
 			<div>
@@ -35,6 +39,9 @@
 	
 	<div class="box_content" id="otherversionspanel" style="display:none;">
 		<table style="width:100%">
+			{if $others|@count == 0}
+			None of your classmates have a version of this yet!
+			{/if}
 			{section name=i loop=$others}	
 			<tr><td id="td_{$smarty.section.i.index}"
 					class="selectable {if $smarty.section.i.index == 0}selected{/if}"

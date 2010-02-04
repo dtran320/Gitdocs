@@ -2,6 +2,10 @@
 
 <div class="box_full">
 	<div class="left_side45" style="margin-left: 20px;">
+		{if isset($signin_error) }
+			<div class="error">{$signin_error}</div>
+		{/if}
+
 		<div class="headline">Share notes with your classmates</div>
 		<p>Why study for tests in isolation? Want to share notes but not sure how to do so effectively? 
 		Gitdocs allows you to upload your class notes and manage sections of notes from your classmates,
@@ -10,7 +14,7 @@
 	<div class="right_side45" style="margin-left: 20px;">
 		<div class="headline">Sign up and start sharing:</div>
 		<div class="signup_error" id="signup_error"></div>
-		<form id="signup" class="big_form" action="sign.php" method="post">
+		<form id="signup" class="big_form" method="post">
 			<table>
 				<tr>
 					<td><label for="username">Username:</label></td>
@@ -18,7 +22,7 @@
 				</tr>
 				<tr>
 					<td><label for="display_name">Display Name:</label></td>
-					<td><input type="text" id="signup_display_name" name="display_name" value="" placeholder="Your name as others see it"/></td>
+					<td><input type="text" id="signup_display_name" name="display_name" value="" placeholder="Your display name"/></td>
 				</tr>
 				<tr>
 					<td><label for="password">Password:</label></td>

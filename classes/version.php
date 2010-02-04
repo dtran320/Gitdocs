@@ -18,7 +18,6 @@ class Version {
 	
 	private $commitId; //sha-1 hash
 	private $repo;
-	private $fileHandler;
 	
 	public function __construct($docId, $userId, $repo = 0,$description = 0) {
 		$this->docId = $docId;	
@@ -50,6 +49,7 @@ class Version {
 	public function save() {
 		//fclose($fileHandler);
 		//TODO: flesh out, merge with ckeditor	
+		
 	}
 	
 	//saves, does git commit, returns new Version object

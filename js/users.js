@@ -29,7 +29,7 @@ function signUpUser(evt) {
 
 function processSignUp(data) {
 	if(data=="SUCCESS") {
-		window.location="index.php"
+		window.location="index.php";
 	}
 	else { //should eventually capture errors
 		$("#signup_error").html("Error with your signup");

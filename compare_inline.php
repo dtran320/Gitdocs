@@ -5,7 +5,11 @@ require('lib/simplediff.php');
 include_once "lib/Diff/Diff.php";
 include_once "lib/Diff/Diff/Renderer.php";
 include_once "lib/Diff/Diff/Renderer/inline.php";
+require('classes/user.php');
 
+if($user = User::getLoggedInUser()) {
+
+	$smarty->assign('logged_in_user', $user->getUserInfo());
 // temp..
 $smarty->assign('d_name', 'CS294 Class Notes');
 $smarty->assign('v_name', 'winter 2010');
@@ -41,4 +45,9 @@ $out = str_replace("</del></div><div class='inline_ld'></div><div class='inline_
 $smarty->assign('diff', $out);
 
 $smarty->display('compare_inline.tpl');
+}
+else {
+	$smarty->assign('signin_error', "You must sign up or login to do that.");
+	$smarty->display('signup.tpl');
+}
 ?>
