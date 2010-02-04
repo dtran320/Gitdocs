@@ -19,7 +19,6 @@ if($user = User::getLoggedInUser()) {
 	
 	$version = Version::CreateNewVersion($user->userId, $documentId, new Version($documentId, $ownerId));
 
-	var_dump($version);
 		// temp..
 	//$document = $version->getDocument();
 	
