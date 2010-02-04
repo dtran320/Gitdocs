@@ -3,7 +3,14 @@
 <div class="box left_main">
 	<form class="reg_form">
 	<div class="box_title">Editing -- {$d_name} -- <span class="v_name">{$v_name}</span> -- <span class="u_name">{$u_name}</span> 
-		<span class="float_right"><input type="submit" value="Save" /></span>
+		<span id="save_status" style="float:right;"></span>
+		<form id="save_form" name="save_form" method="post" style="float:right;">
+			<input type="hidden" name="action" value="save">
+			<input type="hidden" name="d_id" value="{$d_id}" />
+			<input type="hidden" name="u_id" value="{$u_id}" />
+			<input type="hidden" name="doc_text" value="" />
+			<input type="submit" style-"float:right;" name="submit" value="Save" onclick="saveVersion(event)"/>
+		</form>
 	</div>
 	</form>
 	<div class="box_content">

@@ -64,8 +64,8 @@ else { //action is new
 	$version = Version::CreateNewVersion($user->userId, $document->docId);
 	
 }
-
-	// temp..
+	$smarty->assign('d_id', $document->docId);
+	$smarty->assign('u_id', $user->userId);
 	$smarty->assign('d_name', $document->name);
 	$smarty->assign('v_name', 'Untitled');
 	$smarty->assign('u_name', $user->username);
