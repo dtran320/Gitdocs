@@ -18,8 +18,10 @@ if($user = User::getLoggedInUser()) {
 	$ownerId = postVarClean("owner_id");
 	
 	$version = Version::CreateNewVersion($user->userId, $documentId, new Version($documentId, $ownerId));
+
+	var_dump($version);
 		// temp..
-	$document = $version->getDocument();
+	//$document = $version->getDocument();
 	
 	$smarty->assign('history', array(
 		array("left", "images/mlinsey.jpg","you are now editing <span class='v_name'>winter 2010</span>, which you saved 5m ago"),
@@ -31,6 +33,11 @@ if($user = User::getLoggedInUser()) {
 		array('images/dtran.jpg', '<a class="v_name">winter 2010</a><br />by dtran 1d ago'),
 		array('images/bella8.jpg', '<a class="v_name">fall 2008</a><br />by bella8 2y ago'),
 		));
+		
+		$smarty->assign('u_id', $user->userId);
+		$smarty->assign('d_name', "CS294H Notes");
+		$smarty->assign('v_name', "key points");
+		$smarty->assign('u_name', $user->username);
 	$smarty->assign('v_text', '<p>“Coming out with us Masen?”</p>
 
 					<p>“No thanks,” Edward replied, barely taking a glimpse at Newton<span class="your_changes" id="text_change1">, who was standing way too close to him for his liking</span>.</p>
@@ -51,14 +58,24 @@ if($user = User::getLoggedInUser()) {
 
 					<p>“No, I’m heading back. You?”</p>
 		');
+		
+		// we should flesh out all the different phrases instead of doing this:
+		$smarty->assign('history', array(
+			array("left", "images/mlinsey.jpg","you are now editing <span class='v_name'>{$v_name}</span>, which has not been saved."),
+			array("right", "images/dtran.jpg","you started from dtran's <span class='v_name'>forest</span> 5m ago")
+			));
+		$smarty->assign('others', array(
+			array('images/mlee.jpg', '<a href="compare.php" class="v_name">new desc. of Edward</a><p class="med_text no_line_height">by mlee 8h ago</p>'),
+			array('images/dtran.jpg', '<a class="v_name">forest</a><br />by dtran 1d ago'),
+			array('images/bella8.jpg', '<a class="v_name">forest</a><br />by bella8 2d ago')
+			));
+		$smarty->display('editor.tpl');
 
 }//end if action is clone
 else { //action is new
 	$document = Document::CreateNewDocument();
 	$v_name = 'Untitled';
 	$version = Version::CreateNewVersion($user->userId, $document->docId);
-	
-}
 	$smarty->assign('d_id', $document->docId);
 	$smarty->assign('u_id', $user->userId);
 	$smarty->assign('d_name', $document->name);
@@ -66,13 +83,17 @@ else { //action is new
 	$smarty->assign('u_name', $user->username);
 	$smarty->assign('v_text', '');
 	
-// we should flesh out all the different phrases instead of doing this:
-$smarty->assign('history', array(
-	array("left", "images/mlinsey.jpg","you are now editing <span class='v_name'>{$v_name}</span>, which has not been saved."),
-	));
-$smarty->assign('others', array(
-	));
-$smarty->display('editor.tpl');
+	// we should flesh out all the different phrases instead of doing this:
+	$smarty->assign('history', array(
+		array("left", "images/mlinsey.jpg","you are now editing <span class='v_name'>{$v_name}</span>, which has not been saved."),
+		));
+	$smarty->assign('others', array());
+	$smarty->display('editor.tpl');
+	
+}
+
+	
+
 
 } // end if user logged in
 else {
