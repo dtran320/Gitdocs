@@ -59,19 +59,23 @@ class Version {
 		return this;
 	}
 
-	public function openVersionFile() {
-		$fileHandler = $repo->getFile();
+	public function openVersionFile($branch = 0) {
+		$fileHandler = $repo->getFile($this, $branch);
 		return $fileHandler;
 	}	
+	
+	public function readFileToArray($branch = 0) {
+		return $repo->readFileToArray($branch);
+	}
 	
 	public function diff($otherVersion) {
 		return $repo->diff($this, $otherVersion);
 	}
 	
-	public function merge($otherVersion, $diffs) {
+	public function merge($otherVersion, &$diffs) {
 		//TODO:parse diffs, open other version, undo changes
 		
-		$repo->merge($otherVersion);
+		$repo->merge($this, $otherVersion, $diffs);
 		commit();
 		return true;
 	}
