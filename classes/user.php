@@ -12,8 +12,8 @@ require_once(dirname(__FILE__) . "/../db/db.php");
 require_once(dirname(__FILE__) . "/../lib/utils.php");
 class User {
 	
-	private $userId, $salt;
-	public $username, $passwordHash, $displayName, $iconPtr;
+	private $salt;
+	public $userId, $username, $passwordHash, $displayName, $iconPtr;
 	
 	public static function checkUserNameExists($username) {
 		$db = new DB();
@@ -33,7 +33,7 @@ class User {
 	    $passwordHash= md5($password.$salt);
 		$arr = array("username" => $username, "displayName" => $displayName, "iconPtr" => $iconPtr);
 		$arr = mysqlEscapeArray($arr);
-		var_dump($arr);
+
 		$createUserQuery = "INSERT INTO Users(username, pwd_hash, salt, display_name, icon_ptr) " .
 			"VALUES('{$arr["username"]}', '{$passwordHash}', '{$salt}', '{$arr["displayName"]}', '{$arr["iconPtr"]}')";
 		
@@ -51,7 +51,7 @@ class User {
 		$this->username = $username;
 		$db = new DB();
 		$username = mysql_real_escape_string($username);
-		$userSelectQuery = "SELECT username, pwd_hash, display_name, icon_ptr, salt " .
+		$userSelectQuery = "SELECT u_id, username, pwd_hash, display_name, icon_ptr, salt " .
 			"FROM Users WHERE username='{$username}'";
 		$db->execQuery($userSelectQuery);
 		if($row = $db->getNextRow()) {
@@ -59,6 +59,7 @@ class User {
 			$this->displayName = $row["display_name"];
 			$this->iconPtr = $row["icon_ptr"];
 			$this->salt = $row["salt"];
+			$this->userId = $row["u_id"];
 		}
 		else return false;
 	}
@@ -74,6 +75,15 @@ class User {
 			return true;
 		}
 		else return false;
+	}
+	
+	//Used for templating
+	public function getUserInfo() {
+		return array(
+					"username" => $this->username,
+					"iconPtr" => $this->iconPtr,
+					"displayName" => $this->displayName
+					);
 	}
 	
 	//should this be static? Probably not...

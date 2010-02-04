@@ -11,11 +11,10 @@ require_once(dirname(__FILE__) . "/../db/db.php");
 class Document {
 	
 	//attributes
-	private $name;
-	private $docId;
+	public $name, $docId;
 	
 	//Creates a new document, creates file structure on disk, create in DB
-	public static function CreateNewDocument($creator, $name = "New Document") {
+	public static function CreateNewDocument($name = "New Document") {
 		global $DOCUMENTS_PATH;
 		//insert into database
 		$db = new DB();
@@ -33,14 +32,6 @@ class Document {
 	public function __construct($docId, $name = 0 ){
 		$this->docId = $docId;
 		$this->name = $name;
-	}
-	
-	public function name() {
-		return $this->name;
-	}
-	
-	public function setName($newName) {
-		$this->name = $newName;
 	}
 	
 }

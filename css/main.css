@@ -3,7 +3,6 @@ body {
 	background: white;
 	font:15px arial,sans-serif;
 	color: #263033;
-	body: 0px;
 	margin: 0px;
 	height: 100%;
  }
@@ -223,7 +222,7 @@ a:hover {
 	text-align: right;
 }
 
-.big_form input[type="submit"] {
+.big_form input[type="submit"], button.big {
 	margin: 5px;
 	background: #2fb81b;
 	color: #fff;
@@ -252,4 +251,8 @@ a:hover {
 	-webkit-border-radius: 5px;
 */
 	border: 1px #000; 
+}
+
+.clear_fix {
+	clear: both;
 }

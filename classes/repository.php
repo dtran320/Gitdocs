@@ -5,6 +5,7 @@
  * 
  * Gitdocs Jan 2010
  * ---------------------------------------------------------------------------- */
+require_once(dirname(__FILE__) . "/../config.php");
 
 class Repository {
 
@@ -17,7 +18,7 @@ class Repository {
 	public static function CreateNewRepository($docId, $userId,$versionToClone = 0) {
 		global $DOCUMENTS_PATH;
 		$location = "$DOCUMENTS_PATH$docId/$userId";
-		echo "new repo location:$location\n";
+		if(DEBUG) echo "new repo location:$location\n";
 		if(!mkdir("$location", 0700)) return false;				  
 		if($versionToClone) {
 			$otherRepoLocation = $versionToClone->getRepoLocation();
@@ -61,7 +62,6 @@ class Repository {
 				git commit -a -m 'prepared branch merge strategy';
 			    	git merge master;";
 		exec($command);
-	
 	}
 	
 	public function merge($otherVersion) {

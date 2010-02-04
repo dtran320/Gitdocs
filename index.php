@@ -19,18 +19,11 @@ if($user = User::getLoggedInUser()) {
 	$my_recent_docs = array("doc1", "doc2", "doc3");
 	$smarty->assign('my_recent_docs', $my_recent_docs);
 	
-	$logged_in_user = array(
-							"iconPtr" => "images/mlinsey.jpg",
-							"displayName" => $user->displayName
-							);
-
-	$smarty->assign('logged_in_user', $logged_in_user);
+	$smarty->assign('logged_in_user', $user->getUserInfo());
 
 	$smarty->display('index.tpl');
 }
 else {
-	$smarty->assign('headline', "Tell your version of the story.");
-	$smarty->assign('description', "Gitdocs");
 	$smarty->display('signup.tpl');
 }
 ?>

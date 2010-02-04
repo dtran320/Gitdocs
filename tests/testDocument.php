@@ -6,7 +6,7 @@ require_once(dirname(__FILE__) . "/../classes/document.php");
 
 function testCreateDocument() {
 	echo "Creating Document testdoc";
-	$document = Document::createNewDocument("dtran320", "testdoc");
+	$document = Document::createNewDocument("testdoc");
 		if($document)
 			echo "Created new document testdoc <br>";
 		else {

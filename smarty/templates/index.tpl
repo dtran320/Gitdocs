@@ -6,7 +6,8 @@
 	<div class="box_title"></div>
 	<div class="box_content">
 		<div id="doc_link_left">
-		<a href="index.php">New Notes</a>
+		<a href="editor.php">New Notes</a>
+		
 		</div>
 		<div id="doc_link_right">
 		<a href="import.php">Upload Notes</a>
