@@ -24,7 +24,7 @@ function saveVersion(evt) {
 	$("#doc_text").val(CKEDITOR.instances.editor1.getData());
 	$("#save_form").ajaxSubmit({
 		url: "actions/version.php",
-		success: save
+		success: save()
 	});
 }
 
