@@ -10,7 +10,7 @@ include('testDocument.php');
 include('testVersion.php');
 
 echo "Running tests...<br/>";
-
+define("DEBUG", true);
 testCreateUser();
 testCreateDocument();
 testCreateVersion();
