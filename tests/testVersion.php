@@ -14,6 +14,7 @@ function testCreateVersion() {
 			echo "Failed.<br/>";
 			return false;
 		}
+/*	
 	$unused = $version->openVersionFile();
  	fclose($unused);		
 	$version->commit();
@@ -24,8 +25,9 @@ function testCreateVersion() {
 	$v2arr = $version2->readFileToArray();
 	//$v2arr[0]
 	$diffResult = $version->diff($version2);
-	echo "diff result: \n$diffResult\n";
-	
+	echo "diff result:\n";
+	Print_r($diffResult);
+*/	
 
 }
 

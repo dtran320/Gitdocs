@@ -73,12 +73,16 @@ class Repository {
 				git config merge.discardMine.driver \"".dirname(__FILE__). "/../scripts/discardMine.sh %0 %A %B\";
 				git commit -a -m 'prepared branch merge strategy';
 			    	git merge master;";
+		echo "command: $command \n";
 		exec($command);
 		$command = "cd $this->location; 
-			 	git remote add -t". $myVersion->getUserId() ." -f". $otherVersion->getUserId() ."$otherLocation;)";
-		exec($command);
-		$command = "git diff $otherVersion->getUserId()/$myVersion->getUserId";
+			 	git remote add -t ". $myVersion->getUserId() ." -f ". $otherVersion->getUserId() ." $otherLocation;";
 		
+		echo "command: $command \n";
+		exec($command);
+		$command = "git diff ". $otherVersion->getUserId() ."/". $myVersion->getUserId();
+		
+		echo "command: $command \n";
 		exec($command, $result);
 		return $result;
 						
