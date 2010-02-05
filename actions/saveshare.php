@@ -8,7 +8,7 @@ require_once(dirname(__FILE__) . '/../lib/utils.php');
 $action = postVarClean("action");
 $d_id = postVarClean("d_id");
 $u_id = postVarClean("u_id");
-$doc_text = postVarClean("doc_text");
+$doc_text = postVar("doc_text");
 
 $version = new Version($d_id, $u_id);
 $version->save($doc_text);

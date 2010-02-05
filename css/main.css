@@ -262,3 +262,8 @@ a:hover {
 	margin-right: 10px;
 	color: #999999;
 }
+
+.doc_title input[type="text"] {
+	border: 0px;
+	
+}
