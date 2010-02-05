@@ -32,30 +32,7 @@ $smarty->assign(others, array(
 	array('images/dtran.jpg', '<a class="v_name">winter 2010</a><br />by dtran 1d ago'),
 	array('images/bella8.jpg', '<a class="v_name">fall 2008</a><br />by bella8 2y ago'),
 	));
-
-$patch = file_get_contents('tests/example.patch');
-$diff = new Text_Diff('string', array($patch));
-$renderer = new Text_Diff_Renderer_inline();
-$out = $renderer->render($diff);
-
-$out = str_replace("<ins>", "<div style='float: right; width: 300px; clear: both;' class='inline_change'><ins>", $out);
-$out = str_replace("</ins>", "</ins></div><div class='inline_ld'></div>", $out);
-$out = str_replace("<del>", "<div style='float: left; width: 300px; clear: left;' class='inline_change'><del>", $out);
-$out = str_replace("</del>", "</del></div><div class='inline_ld'></div>", $out);
-$out = str_replace("<same>", "<div style='float: left; width: 300px; clear: both;'><same>", $out);
-$out = str_replace("</same>", "</same></div>", $out);
-
-$out = str_replace("</del></div><div class='inline_ld'></div>\n<div style='float: right; width: 300px; clear: both;' class='inline_change'><ins>", 
-	"</del></div>\n<div style='float: right; width: 300px;' class='mod'><ins>", $out);	
-
-// this is copied from http://svn.kd2.org/svn/misc/libs/diff/
-// breaks down the separation between logic and view but that's okay for now
-
-$smarty->assign('diff', $out);
-$smarty->display('compare.tpl');
-
-}
-else {
+} else {
 	$smarty->assign('signin_error', "You must sign up or login to do that.");
 	$smarty->display('signup.tpl');
 }
