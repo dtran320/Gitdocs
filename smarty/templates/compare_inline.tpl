@@ -50,7 +50,7 @@
 	{literal}
 	//<![CDATA[
 		$(document).ready(function(){
-			addcoLikeDislikeLinks('_inline');	
+			addLikeDislikeLinks('_inline');	
 		});
 	//]]>
 	{/literal}
