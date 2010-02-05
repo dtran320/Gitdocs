@@ -1,7 +1,12 @@
 <?
 session_start();
-require('init_smarty.php');
 
+require('init_smarty.php');
+require('classes/user.php');
+
+if($user = User::getLoggedInUser())
+	$smarty->assign('logged_in_user', $user->getUserInfo());
+	
 // temp..
 $smarty->assign('d_name', 'CS294 Class Notes');
 $smarty->assign('v_name', 'winter 2010');

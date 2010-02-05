@@ -1,6 +1,6 @@
- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
- "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
  <head>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
  <title>GitDocs - Where the world writes</title>
@@ -12,18 +12,19 @@
  <link rel="stylesheet" type="text/css" href="css/import.css"/>
  <link rel="stylesheet" type="text/css" href="css/tabs.css"/>
 
- <script type="text/javascript" src="js/jquery-1.4.js"></script>
+ <script type="text/javascript" src="js/lib/jquery-1.4.js"></script>
  <script type="text/javascript" src="js/gitdocs.js"></script>
  <script type="text/javascript" src="js/compare.js"></script>
  <script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
  <script type="text/javascript" src="./ckeditor/adapters/jquery.js"></script>
  <script type="text/javascript" src="js/editor.js"></script>
- <script src="js/jquery.form.js" type="text/javascript" charset="utf-8"></script>
- <script src="js/jquery.validate.min.js" type="text/javascript" charset="utf-8"></script>
- <script src="js/additional-methods.js" type="text/javascript" charset="utf-8"></script>
- <script src="js/jquery.metadata.js" type="text/javascript" charset="utf-8"></script>
+
+ <script src="js/lib/jquery.form.js" type="text/javascript" charset="utf-8"></script>
+ <script src="js/lib/jquery.validate.min.js" type="text/javascript" charset="utf-8"></script>
+ <script src="js/lib/additional-methods.js" type="text/javascript" charset="utf-8"></script>
+ <script src="js/lib/jquery.metadata.js" type="text/javascript" charset="utf-8"></script>
  <script src="js/users.js" type="text/javascript" charset="utf-8"></script>
- <script src="js/jquery.placeholder.js" type="text/javascript" charset="utf-8"></script>
+ <script src="js/lib/jquery.placeholder.js" type="text/javascript" charset="utf-8"></script>
 
  </head>
  <body>

@@ -2,9 +2,14 @@
 
 <div class="box left_main">
 	<div class="box_title">{$d_name} -- <span class="v_name">{$v_name}</span> -- <span class="u_name">{$u_name}</span> 
-<a style="font-weight:bold; float: right;" href="editor.php">Start working off this version.</a>
-
-</div>
+			<form id="editor_form" class="big_form" method="post" action="editor.php" style="float:right;">
+				<input type="hidden" name="action" value="clone" />
+				<input type="hidden" name="document_id" value="1" />
+				<input type="hidden" name="owner_id" value="1" />
+				<input type="submit" name="submit" value="Start Working off this version"/>
+			</form>
+		</div>
+		<div class="clear_fix"></div>
 	<div class="box_content">
 			<div id="loader"><img src="images/ajax-loader.gif"></div>
 			<div>
