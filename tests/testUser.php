@@ -14,6 +14,7 @@ function testCreateUser() {
 	else {
 		"Trying to create new user dtran320...";
 		$user = User::createNewUser("dtran320", "pass123", "pass123", "David");
+		User::createNewUser("mlinsey", "asdf", "asdf", "Mark");
 		if($user)
 			echo "Created new user dtran320 successfully!<br/>";
 		else {

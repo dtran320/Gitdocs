@@ -9,6 +9,7 @@
 class DiffType {
   const del = "del";
   const ins = "ins";
+	const mod = "change";
 }
 
 class UserDiffAction {

@@ -1,12 +1,14 @@
 --- data1.txt	2010-01-31 20:14:02.028282180 -0800
 +++ data2.txt	2010-01-31 20:14:28.097274609 -0800
 @@ -1,24 +1,19 @@
++I commented out html encoding in renderer to check something out
++that is probably not good for gitdocs' security.
 +This is an important notice! It should
 +therefore be located at the beginning of this
 +document! 
- This part of the document has stayed the
+ <same>This part of the document has stayed the
  same from version to version.  It shouldn't
- be shown if it doesn't change.  Otherwise, that
+ be shown if it doesn't change.  Otherwise, that</same>
 -would not be helping to
 -compress the size of the
 -changes.
@@ -17,16 +19,16 @@
 -near future.
 +would not be helping to compress anything.
  
- It is important to spell
+ <same>It is important to spell</same>
 -check this dokument. On
 +check this document. On
  
- the other hand, a
+ <same>the other hand, a
  misspelled word isn't
  the end of the world.
  Nothing in the rest of
  this paragraph needs to
- be changed. Things can
+ be changed. Things can</same>
 -be added after it.
 -
 -

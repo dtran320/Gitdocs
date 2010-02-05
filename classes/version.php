@@ -32,9 +32,9 @@ class Version {
 		if($repo)
 			$this->repo = $repo;
 		else 
-			$this->repo = new Repository($docId, $userId);
+			$this->repo = new Repository($location);
 		$this->textCache = "";
-		$this->fileHandler = fopen("$location/document.html",'w');
+		$this->fileHandler = fopen("$location/document.html",'r+');
 	}
 	
 	public function __destruct() {
@@ -68,22 +68,22 @@ class Version {
 	
 	//saves, does git commit, returns new Version object
 	public function commit() {
-		$this->save();	
-		$repo->commit();
-		return this;
+	//	$this->save();	
+		$this->repo->commit();
+		return $this;
 	}
 
 	public function openVersionFile($branch = 0) {
-		$fileHandler = $repo->getFile($this, $branch);
+		$fileHandler = $this->repo->getFile($branch);
 		return $fileHandler;
 	}	
 	
 	public function readFileToArray($branch = 0) {
-		return $repo->readFileToArray($branch);
+		return $this->repo->readFileToArray($branch);
 	}
 	
 	public function diff($otherVersion) {
-		return $repo->diff($this, $otherVersion);
+		return $this->repo->diff($this, $otherVersion);
 	}
 	
 	public function merge($otherVersion, &$diffs) {
@@ -95,7 +95,7 @@ class Version {
 	}
 
 	public function getRepoLocation(){
-		return $repo->getLocation();
+		return $this->repo->getLocation();
 	}
 	
 	public function getUserId(){

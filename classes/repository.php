@@ -14,7 +14,6 @@ class Repository {
 	public function __construct($location) {
 		$this->location = $location;
 	}	
-	
 	public static function CreateNewRepository($docId, $userId,$versionToClone = 0) {
 		global $DOCUMENTS_PATH;
 		$location = "$DOCUMENTS_PATH$docId/$userId";
@@ -22,7 +21,7 @@ class Repository {
 		if(!mkdir("$location", 0700)) return false;				  
 		if($versionToClone) {
 			$otherRepoLocation = $versionToClone->getRepoLocation();
-			$command = "cd $location; git clone $otherRepoLocation";
+			$command = "cd $location/..; git clone $otherRepoLocation $location";
 			//TODO: Escape this? necessary?
 			exec($command);
 		} else {
@@ -73,12 +72,16 @@ class Repository {
 				git config merge.discardMine.driver \"".dirname(__FILE__). "/../scripts/discardMine.sh %0 %A %B\";
 				git commit -a -m 'prepared branch merge strategy';
 			    	git merge master;";
+		echo "command: $command \n";
 		exec($command);
 		$command = "cd $this->location; 
-			 	git remote add -t". $myVersion->getUserId() ." -f". $otherVersion->getUserId() ."$otherLocation;)";
-		exec($command);
-		$command = "git diff $otherVersion->getUserId()/$myVersion->getUserId";
+			 	git remote add -t ". $myVersion->getUserId() ." -f ". $otherVersion->getUserId() ." $otherLocation;";
 		
+		echo "command: $command \n";
+		exec($command);
+		$command = "cd $this->location; git diff -U10000 ". $otherVersion->getUserId() ."/". $myVersion->getUserId();
+		
+		echo "command: $command \n";
 		exec($command, $result);
 		return $result;
 						
