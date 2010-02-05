@@ -66,7 +66,7 @@
 					<div style="float: left; padding-right:6px;"><img src="{$others[i][0]}" /> </div>
 					<div class="med_text"> 
 						<span style="float:left">{$others[i][1]}</span>
-						<a class="comparable" href="compare.php">compare</a>
+						<a class="comparable" href="compare_2col.php">compare</a>
 					</div>
 			</td></tr>
 			{/section}
