@@ -32,13 +32,13 @@ class Version {
 		if($repo)
 			$this->repo = $repo;
 		else 
-			$this->repo = new Repository($docId, $userId);
+			$this->repo = new Repository($location);
 		$this->textCache = "";
-		$this->fileHandler = fopen("$location/document.html",'w');
+		//$this->fileHandler = fopen("$location/document.html",'w');
 	}
 	
 	public function __destruct() {
-		fclose($this->fileHandler);
+		//fclose($this->fileHandler);
 	}
 	public static function CreateNewVersion($userId, $docId, $versionToClone = 0, $description = 0) {
 		$repo = Repository::CreateNewRepository($docId, $userId, $versionToClone);
@@ -79,11 +79,11 @@ class Version {
 	}	
 	
 	public function readFileToArray($branch = 0) {
-		return $repo->readFileToArray($branch);
+		return $this->repo->readFileToArray($branch);
 	}
 	
 	public function diff($otherVersion) {
-		return $repo->diff($this, $otherVersion);
+		return $this->repo->diff($this, $otherVersion);
 	}
 	
 	public function merge($otherVersion, &$diffs) {

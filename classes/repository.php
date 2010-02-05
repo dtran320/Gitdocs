@@ -14,7 +14,6 @@ class Repository {
 	public function __construct($location) {
 		$this->location = $location;
 	}	
-	
 	public static function CreateNewRepository($docId, $userId,$versionToClone = 0) {
 		global $DOCUMENTS_PATH;
 		$location = "$DOCUMENTS_PATH$docId/$userId";
@@ -80,7 +79,7 @@ class Repository {
 		
 		echo "command: $command \n";
 		exec($command);
-		$command = "git diff ". $otherVersion->getUserId() ."/". $myVersion->getUserId();
+		$command = "cd $this->location; git diff -U10000 ". $otherVersion->getUserId() ."/". $myVersion->getUserId();
 		
 		echo "command: $command \n";
 		exec($command, $result);
