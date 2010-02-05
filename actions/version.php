@@ -13,4 +13,5 @@ $doc_text = postVarClean("doc_text");
 $version = new Version($d_id, $u_id);
 $version->save($doc_text);
 
+echo "File saved.";
 ?>
