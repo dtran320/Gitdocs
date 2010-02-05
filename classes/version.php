@@ -68,9 +68,9 @@ class Version {
 	
 	//saves, does git commit, returns new Version object
 	public function commit() {
-		$this->save();	
-		$repo->commit();
-		return this;
+	//	$this->save();	
+		$this->repo->commit();
+		return $this;
 	}
 
 	public function openVersionFile($branch = 0) {
@@ -95,7 +95,7 @@ class Version {
 	}
 
 	public function getRepoLocation(){
-		return $repo->getLocation();
+		return $this->repo->getLocation();
 	}
 	
 	public function getUserId(){

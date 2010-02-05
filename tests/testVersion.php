@@ -16,10 +16,10 @@ function testCreateVersion() {
 		}
 	
 	$unused = $version->openVersionFile();
- /*	fclose($unused);		
+ 	fclose($unused);		
 	$version->commit();
 	$version2 = Version::createNewVersion("2","1",$version);	
-	$unused = $version2->openVersionFile();
+/*	$unused = $version2->openVersionFile();
 	fclose($unused);
 	$version->commit();
 	$v2arr = $version2->readFileToArray();
