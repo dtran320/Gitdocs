@@ -1,8 +1,5 @@
 <?
-if(DEBUG) {
-  ini_set('display_errors', 1);
-  error_reporting(E_ALL);
-}
+
 session_start();
 require_once('classes/user.php');
 require_once('lib/utils.php');
@@ -19,13 +16,12 @@ if($user = User::getLoggedInUser()) {
 	if ($action=="clone") {
 	$documentId = postVarClean("document_id");
 	$ownerId = postVarClean("owner_id");
-		// temp..
-		$smarty->assign('d_name', $document->name);
-		$smarty->assign('v_name', 'Untitled');
-		$smarty->assign('u_name', $user->username);
-		$smarty->assign('v_text', '');
+	
+	$version = Version::CreateNewVersion($user->userId, $documentId, new Version($documentId, $ownerId));
 
-	// we should flesh out all the different phrases instead of doing this:
+		// temp..
+	//$document = $version->getDocument();
+	
 	$smarty->assign('history', array(
 		array("left", "images/mlinsey.jpg","you are now editing <span class='v_name'>winter 2010</span>, which you saved 5m ago"),
 		array("right", "images/dtran.jpg","you started from dtran's <span class='v_name'>winter 2010</span> 5m ago"),
@@ -36,6 +32,11 @@ if($user = User::getLoggedInUser()) {
 		array('images/dtran.jpg', '<a class="v_name">winter 2010</a><br />by dtran 1d ago'),
 		array('images/bella8.jpg', '<a class="v_name">fall 2008</a><br />by bella8 2y ago'),
 		));
+		
+		$smarty->assign('u_id', $user->userId);
+		$smarty->assign('d_name', "CS294H Notes");
+		$smarty->assign('v_name', "key points");
+		$smarty->assign('u_name', $user->username);
 	$smarty->assign('v_text', '<p>“Coming out with us Masen?”</p>
 
 					<p>“No thanks,” Edward replied, barely taking a glimpse at Newton<span class="your_changes" id="text_change1">, who was standing way too close to him for his liking</span>.</p>
@@ -56,31 +57,44 @@ if($user = User::getLoggedInUser()) {
 
 					<p>“No, I’m heading back. You?”</p>
 		');
+		
+		// we should flesh out all the different phrases instead of doing this:
+		$smarty->assign('history', array(
+			array("left", "images/mlinsey.jpg","you are now editing <span class='v_name'>{$v_name}</span>, which has not been saved."),
+			array("right", "images/dtran.jpg","you started from dtran's <span class='v_name'>forest</span> 5m ago")
+			));
+		$smarty->assign('others', array(
+			array('images/mlee.jpg', '<a href="compare.php" class="v_name">new desc. of Edward</a><p class="med_text no_line_height">by mlee 8h ago</p>'),
+			array('images/dtran.jpg', '<a class="v_name">forest</a><br />by dtran 1d ago'),
+			array('images/bella8.jpg', '<a class="v_name">forest</a><br />by bella8 2d ago')
+			));
+		$smarty->display('editor.tpl');
 
 }//end if action is clone
 else { //action is new
 	$document = Document::CreateNewDocument();
 	$v_name = 'Untitled';
 	$version = Version::CreateNewVersion($user->userId, $document->docId);
-	
-}
-
-	// temp..
+	$smarty->assign('d_id', $document->docId);
+	$smarty->assign('u_id', $user->userId);
 	$smarty->assign('d_name', $document->name);
 	$smarty->assign('v_name', 'Untitled');
 	$smarty->assign('u_name', $user->username);
 	$smarty->assign('v_text', '');
 	
-// we should flesh out all the different phrases instead of doing this:
-$smarty->assign('history', array(
-	array("left", "images/mlinsey.jpg","you are now editing <span class='v_name'>{$v_name}</span>, which has not been saved."),
-	));
-$smarty->assign('others', array(
-
-	));
-$smarty->display('editor.tpl');
-
+	// we should flesh out all the different phrases instead of doing this:
+	$smarty->assign('history', array(
+		array("left", "images/mlinsey.jpg","you are now editing <span class='v_name'>{$v_name}</span>, which has not been saved."),
+		));
+	$smarty->assign('others', array());
+	$smarty->display('editor.tpl');
+	
 }
+
+	
+
+
+} // end if user logged in
 else {
 	$smarty->assign('signin_error', "You must sign up or login to create a version.");
 	$smarty->display('signup.tpl');

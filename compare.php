@@ -3,6 +3,12 @@ session_start();
 require('init_smarty.php');
 require('lib/simplediff.php');
 require('classes/user.php');
+require('classes/diff.php');
+include_once "lib/Diff/Diff.php";
+include_once "lib/Diff/Diff/Renderer.php";
+include_once "lib/Diff/Diff/Renderer/inline.php";
+
+
 
 if($user = User::getLoggedInUser()) {
 
@@ -27,87 +33,25 @@ $smarty->assign(others, array(
 	array('images/bella8.jpg', '<a class="v_name">fall 2008</a><br />by bella8 2y ago'),
 	));
 
+$patch = file_get_contents('tests/example.patch');
+$diff = new Text_Diff('string', array($patch));
+$renderer = new Text_Diff_Renderer_inline();
+$out = $renderer->render($diff);
 
-// copied from diff_example.php which is from http://svn.kd2.org/svn/misc/libs/diff/
-$old = file_get_contents('tests/data1.txt');
-$diff_from_file = file_get_contents('tests/example_alligator.txt');
-$diff = simpleDiff::diff_to_array($diff_from_file, $old, false, 100);
+$out = str_replace("<ins>", "<div style='float: right; width: 300px; clear: both;' class='inline_change'><ins>", $out);
+$out = str_replace("</ins>", "</ins></div><div class='inline_ld'></div>", $out);
+$out = str_replace("<del>", "<div style='float: left; width: 300px; clear: left;' class='inline_change'><del>", $out);
+$out = str_replace("</del>", "</del></div><div class='inline_ld'></div>", $out);
+$out = str_replace("<same>", "<div style='float: left; width: 300px; clear: both;'><same>", $out);
+$out = str_replace("</same>", "</same></div>", $out);
 
-$out = '';
-$prev = key($diff);
+$out = str_replace("</del></div><div class='inline_ld'></div>\n<div style='float: right; width: 300px; clear: both;' class='inline_change'><ins>", 
+	"</del></div>\n<div style='float: right; width: 300px;' class='mod'><ins>", $out);	
 
-foreach ($diff as $i=>$line)
-{
-    if ($i > $prev + 1)
-    {
-        $out .= '<tr><td colspan="5" class="separator"><hr /></td></tr>';
-    }
-
-    list($type, $old, $new) = $line;
-
-    $class1 = $class2 = '';
-    $t1 = $t2 = '';
-		$likeable = 'likeable';
-
-    if ($type == simpleDiff::INS)
-    {
-        $class2 = 'ins';
-        $t2 = '+';
-    }
-    elseif ($type == simpleDiff::DEL)
-    {
-        $class1 = 'del';
-        $t1 = '-';
-    }
-    elseif ($type == simpleDiff::CHANGED)
-    {
-        $class1 = 'del';
-        $class2 = 'ins';
-        $t1 = '-';
-        $t2 = '+';
-
-        $lineDiff = simpleDiff::wdiff($old, $new);
-
-        // Don't show new things in deleted line
-        $old = preg_replace('!\{\+(?:.*)\+\}!U', '', $lineDiff);
-        $old = str_replace('  ', ' ', $old);
-        $old = str_replace('-] [-', ' ', $old);
-        $old = preg_replace('!\[-(.*)-\]!U', '<del>\\1</del>', $old);
-
-        // Don't show old things in added line
-        $new = preg_replace('!\[-(?:.*)-\]!U', '', $lineDiff);
-        $new = str_replace('  ', ' ', $new);
-        $new = str_replace('+} {+', ' ', $new);
-        $new = preg_replace('!\{\+(.*)\+\}!U', '<ins>\\1</ins>', $new);
-    } else {
-				$likeable = 'notlikeable';
-		}
-
-
-//    $out .= '<tr class="' . $likeable . '" id="line'. ($i+1).'">';
-    $out .= '<tr class="' . $likeable . '">';
-    $out .= '<td class="line">'.($i+1).'</td>';
-    $out .= '<td class="leftChange">'.$t1.'</td>';
-//    $out .= '<td class="leftText '.$class1.'"><span class="visibleText">'.$old.'</span><span style="display: none" id="origLeft' .($i+1) .'">' . $old . '</span></td>';
-    $out .= '<td class="leftText '.$class1.'"><span class="visibleText">'.$old.'</span><span style="display: none" id="origLeft">' . $old . '</span></td>';
-
-    $out .= '<td class="rightChange">'.$t2.'</td>';
- //   $out .= '<td class="rightText '.$class2.'"><span class="visibleText">'.$new.'</span><span style="display: none" id="origRight' . ($i+1) .'">' . $new . '</span></td>';
- 		$out .= '<td class="rightText '.$class2.'"><span class="visibleText">'.$new.'</span><span style="display: none" id="origRight">' . $new . '</span></td>';
-
-	//	$out .= '<td class="likedislike"><span class="like" onclick="like('. ($i+1).');">like</span> | <span class="dislike" onclick="dislike('. ($i+1).');">dislike</span></td>';
-		$out .= '<td class="likedislike"><span class="like">like</span> | <span class="dislike">dislike</span></td>';
-	
-// gotta do some studies on this..
-    $out .= '</tr>';
-
-    $prev = $i;
-}
-
-$out .= '';
+// this is copied from http://svn.kd2.org/svn/misc/libs/diff/
+// breaks down the separation between logic and view but that's okay for now
 
 $smarty->assign('diff', $out);
-
 $smarty->display('compare.tpl');
 
 }

@@ -121,28 +121,33 @@ tr.notlikeable .likedislike{
 
 .likedislike {
 	width: 100px;
+	font-weight: bold;
 }
 
-.like {
+.like .likeall {
 	margin-left: 5px;
 }
-.like:hover {
+.like:hover, .likeall:hover{
 	cursor: pointer;
 	text-decoration: underline;
 }
 
-.undo {
+.undo, .undoall{
 	margin-left: 5px;
 }
 
-.undo:hover {
+.undo:hover, .undoall:hover{
 	cursor: pointer;
 	text-decoration: underline;
 }
 
-.dislike:hover {
+.dislike:hover, .dislikeall:hover{
 	cursor: pointer;
 	text-decoration: underline;
+}
+
+.inline_ld {
+	position: absolute;
 }
 .ins { background: #cfc; }
 .del { background: #fcc; }
