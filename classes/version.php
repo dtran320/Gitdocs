@@ -34,7 +34,7 @@ class Version {
 		else 
 			$this->repo = new Repository($docId, $userId);
 		$this->textCache = "";
-		$this->fileHandler = fopen("$location/document.html",'x');
+		$this->fileHandler = fopen("$location/document.html",'w');
 	}
 	
 	public function __destruct() {
