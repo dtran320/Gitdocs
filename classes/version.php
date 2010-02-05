@@ -74,7 +74,7 @@ class Version {
 	}
 
 	public function openVersionFile($branch = 0) {
-		$fileHandler = $repo->getFile($this, $branch);
+		$fileHandler = $this->repo->getFile($branch);
 		return $fileHandler;
 	}	
 	

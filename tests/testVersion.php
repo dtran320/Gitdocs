@@ -14,9 +14,9 @@ function testCreateVersion() {
 			echo "Failed.<br/>";
 			return false;
 		}
-/*	
+	
 	$unused = $version->openVersionFile();
- 	fclose($unused);		
+ /*	fclose($unused);		
 	$version->commit();
 	$version2 = Version::createNewVersion("2","1",$version);	
 	$unused = $version2->openVersionFile();
