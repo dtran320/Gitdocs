@@ -1,25 +1,55 @@
 //we don't want to use this global -- probably move to a class
 
-// THIS IS SO UGLY I AM SORRY I WILL FIX THIS :P
+/* 
+ * for compare_inline.php's inline diff view
+ */
 
-function addLikeDislikeLinks() {
- $('.likedislike').offset({left: 600});
+// make addlikedislikelinks() use this laters
+function placeLinks() {
+	var left_val = 650;
+	$('.inline_ld').each(function(index) {
+		var selector = ".inline_change" + index;
+		var top_val = $(selector).offset().top;
+
+		if ($(selector).css("display") == "none") {
+			top_val = $(selector).next().next().offset().top;
+		}
+
+		$(this).offset({left: left_val, top: top_val});
+	});
+}
+
+function addLikeDislikeLinks(view_type) {
+ var left_val = 650;
+ var top_val = $("#column_top").offset().top;
+ $('.likedislike').offset({left: left_val, top: top_val});
  $('.inline_change').each(function(index) {
 	$(this).addClass('inline_change'+index);
 	$(this).removeClass('inline_change');
-	var left_val = 600;
-	var top_val = $(this).offset().top;
-	var orig_txt = $(this).html();
-	var elem = $('.inline_ld').slice(index, index+1);
+	top_val = $(this).offset().top;	var elem = $('.inline_ld').slice(index, index+1);
 	elem.offset({left: left_val, top: top_val});
-	elem.html("<span style='display:inline-block;' class='like' onclick='like_inline(" + index +  ");'>like | </span> <span style='display:inline-block;' class='dislike' onclick='dislike_inline(" + index + ");'>dislike</span><span class='orig' style='display: none;'>" + orig_txt + "</span><span class='undo' onclick='undo_inline(" + index + ");' style='display:none;'>undo</span>");
-	var form_txt = $('#compare_form').html();
+	var orig_txt = $(this).html();
 
-	var type = (orig_txt.indexOf("<del>") != -1) ? "del" : "ins";
-	if (type == "del") {
-		type = (orig_txt.indexOf("<ins>") != -1) ? "change" : "del";
+	if(view_type == '_inline') {
+		var type = (orig_txt.indexOf("<del>") != -1) ? "del" : "ins";
+		if (type == "del") {
+			type = (orig_txt.indexOf("<ins>") != -1) ? "change" : "del";
+		}
+	} else {
+		var type = (orig_txt.indexOf("<del>") != -1) ? "del" : "ins";
+		if (type == "del") {
+			var mod = $(".inline_change" + index + " ~ .mod");
+			if (mod != null) {
+				type = "change";
+				var ins_txt = mod.html();
+				orig_txt += "!@!@" + ins_txt;
+			}
+		}
 	}
-	
+
+	elem.html("<span style='display:inline-block;' class='like' onclick='like" + view_type + "(" + index +  ");'>like | </span> <span style='display:inline-block;' class='dislike' onclick='dislike" + view_type + "(" + index + ");'>dislike</span><span class='orig' style='display: none;'>" + orig_txt + "</span><span class='undo' onclick='undo" +view_type +  "(" + index + ");' style='display:none;'>undo</span>");
+
+	var form_txt = $('#compare_form').html();
 	$('#compare_form').html(form_txt + ' <input type="hidden" id="hidden' + index + '" name="hidden' + index + '" value="boo">'
 	 + ' <input type="hidden" id="type' + index + '" name="type' + index + '" value="'+ type + '">');
 	});
@@ -40,10 +70,6 @@ function like_inline(num) {
 	elem.find('.undo').css('display', 'inline-block'); 
 
 	$('#hidden' + num).attr('value', 'like');
-	// i had no idea inline-block existed!
-	// do i like changing the display or replacing the entire thingie... HUM
-	// should prob do it the way i do for 2 column where the orig text is in the other div.
-	// does removing instead of changing display since make finding remaining 'likes' easier? or maybe it doesn't matter..
 }
 
 function dislike_inline(num) {
@@ -116,173 +142,132 @@ function undoAll_inline() {
 	}
 }
 
-
-function addFormData() {
-	var likeable_i = 0;
-	$('tr').each(function(index) {
-		if($(this).hasClass('likeable')) {
-				$(this).attr('id', 'line'+likeable_i);	
-				$(this).find('#origLeft').attr('id', 'origLeft'+likeable_i);
-				$(this).find('#origRight').attr('id', 'origRight'+likeable_i);
-				$(this).find('.like').attr('onclick', 'like(' + likeable_i +');');
-				$(this).find('.dislike').attr('onclick', 'dislike(' + likeable_i +');');
-
-				var type = $(this).find('.leftChange').html() == '-' ? "del" : "ins";
-				if (type == "del") {
-					type = $(this).find('.rightChange').html() == '+' ? "change" : "del";
-				}
+function like_2col(num) {
+	var selector = ".inline_change" + num;
+	var css_float = $(selector).css("float");
 	
-				var form_txt = $('#compare_form').html();
-				$('#compare_form').html(form_txt + ' <input type="hidden" id="hidden' + likeable_i + '" name="hidden' + likeable_i + '" value="boo">'
-				+ ' <input type="hidden" id="type' + likeable_i + '" name="type' + likeable_i + '" value="'+ type + '">');
-				likeable_i++;
+	if (css_float == "right") {
+		// insert
+		$(selector).css("float", "left");
+		$(selector).css("clear", "both");
+	} else {
+		// delete or change
+		var mod = $(selector).next(); // buggish
+		if (mod.hasClass("mod")) {
+			mod.css("float", "left");
+			mod.css("clear", "both");
 		}
-	});
-}
+		$(selector).css("display", "none");
+	}
 
-function like(num) {
-	var origRightSelector = "#origRight"+num;
-	var rightSelector = '#line' + num + ' td.rightText .visibleText';
-	var leftSelector = "#line" + num + ' td.leftText .visibleText';
+	var elem = $('.inline_ld').slice(num, num+1);
+	elem.find('.like').css('display', 'none');
+	elem.find('.dislike').css('display', 'none');
+	elem.find('.undo').css('display', 'inline-block'); 
 
-	var rightText = $(origRightSelector).html();
-
-	rightText = rightText.replace("<ins>", "");
-	rightText = rightText.replace("</ins>", "");
-	$(rightSelector).html(rightText);
-	$(leftSelector).html(rightText);
-
-	$('#line'+num + ' td.leftText').addClass('grayed');
-	$('#line'+num + ' td.rightText').addClass('grayed');
-
-	$("#line"+num + " td.likedislike").html('<span class="undo" onclick="undo('+ num +');">undo</span>');
-//	alert($('#hidden'+num).attr('value'));
+	placeLinks();
 	$('#hidden' + num).attr('value', 'like');
-//	alert($('#hidden'+num).attr('value'));
 }
 
-function undo(num) {
-	var origRightSelector = "#origRight"+num;
-	var origLeftSelector = "#origLeft" + num;
-
-	var rightSelector = "#line"+num + " td.rightText .visibleText";
-	var leftSelector = "#line"+num + " td.leftText .visibleText";
-
-	$(leftSelector).html($(origLeftSelector).html());
-	$(rightSelector).html($(origRightSelector).html());
-
-	$('#line'+num + ' td.leftText').removeClass('grayed');
-	$('#line'+num + ' td.rightText').removeClass('grayed');
-
-	$("#line"+num + " td.likedislike").html('<span class="like" onclick="like('+ num + ');">like</span> | <span class="dislike" onclick="dislike('+ num +');">dislike</span>');
-	$('#hidden' + num).attr('value', 'undo');
-}
-
-function dislike(num) {
-	var leftSelector = "#line" + num + ' td.leftText .visibleText';
-	var rightSelector = "#line" + num + ' td.rightText .visibleText';
+//. for now..
+function dislike_2col(num) {
+	var selector = ".inline_change" + num;
+	var css_float = $(selector).css("float");
 	
-	var leftText = $(leftSelector).html();
-	leftText = leftText.replace("<del>", "");
-	leftText = leftText.replace("</del>", "");
-	$(leftSelector).html(leftText);
+	if (css_float == "right") {
+		$(selector).css("height", "10px");
+		$(selector).css("overflow", "hidden");
+	} else {
+		// delete or change
+		var mod = $(selector).next(); // buggish
+		if (mod.hasClass("mod")) {
+			mod.css("height", "10px");
+			mod.css("overflow", "hidden");
+		}
+		var txt = $(selector).html();
+		txt = txt == null ? "" : txt.replace("<del>", "");
+		txt = txt.replace("</del>", "");
+		$(selector).html(txt);
+	}
 
-	var rightText = $(rightSelector).html();
-	rightText = rightText.replace("<ins>", "");
-	rightText = rightText.replace("</ins>", "");
-	$(rightSelector).html(rightText);
+	var elem = $('.inline_ld').slice(num, num+1);
+	elem.find('.like').css('display', 'none');
+	elem.find('.dislike').css('display', 'none');
+	elem.find('.undo').css('display', 'inline-block'); 
 
-	$('#line'+num + ' td.leftText').addClass('grayed');
-	$('#line'+num + ' td.rightText').addClass('grayed');
-
-	$("#line"+num + " td.likedislike").html('<span class="undo" onclick="undo('+ num +');">undo</span>');
+	placeLinks();
 	$('#hidden' + num).attr('value', 'dislike');
 }
 
-function likeAll() {
-  $('table.diff tr.likeable').each(function(index) {
-			var html = $(this).find('.likedislike').html();
-			var canLike = html.indexOf("like(");
-			if (canLike != -1) {
-				var end = html.indexOf(";", canLike);
-				var cmd = html.substring(canLike, end);
-				eval(cmd);
-			}
-  });
-}
+function undo_2col(num){
+	var elem = $('.inline_ld').slice(num, num+1);
+	elem.find('.like').css('display', 'inline-block');
+	elem.find('.dislike').css('display', 'inline-block');
+	elem.find('.undo').css('display', 'none'); 
 
-function dislikeAll() {
-  $('table.diff tr.likeable').each(function(index) {
-			var html = $(this).find('.likedislike').html();
-			var canLike = html.indexOf("dislike(");
-			if (canLike != -1) {
-				var end = html.indexOf(";", canLike);
-				var cmd = html.substring(canLike, end);
-				eval(cmd);
-			}
-  });
-}
-
-function undoAll() {
-  $('table.diff tr.likeable').each(function(index) {
-			var html = $(this).find('.likedislike').html();
-			var canLike = html.indexOf("undo(");
-			if (canLike != -1) {
-				var end = html.indexOf(";", canLike);
-				var cmd = html.substring(canLike, end);
-				eval(cmd);
-			}
-  });
-}
-
-var pendingChanges = 4;
-
-
-function closeDropdown() {
-	$("#compare_help_dropdown").hide();
-}
-
-function acceptChange(num) {
-	markBubbleDone(num);
-	var textName = "#text_change" + num;
-	$(textName).removeClass("your_changes");
-	$(textName).removeClass("their_changes");
-}
-
-function rejectChange(num) {
-	markBubbleDone(num);
-	var textName = "#text_change" + num;
-	$(textName).hide();
-}
-
-function acceptAllChanges() {
-	for (var i=1; i<=4; i++) {
-		var bubbleName = "#change_bubble" + i;
-		if(!$(bubbleName).hasClass("bubble_resolved")) {
-			acceptChange(i);
+	var orig_txt = elem.find('.orig').html();
+	var selector = '.inline_change' + num;
+	var index = orig_txt == null ? -1 : orig_txt.indexOf("!@!@");
+	if (index != -1) {
+		$(selector).css("display", "block");
+		$(selector).html(orig_txt.substring(0, index));
+		var mod = $(selector).next();
+		if (mod.hasClass("mod")) {
+			mod.css("float", "right");
+			mod.css("height", "");		
+			mod.css("clear", "none");
 		}
+	} else if ((orig_txt == null ? "" : orig_txt).indexOf("<ins>") != -1) {
+		$(selector).css("float", "right");
+		$(selector).css("height", "");
+		$(selector).css("clear", "both");
+									
+	}
+	placeLinks();
+	$('#hidden' + num).attr('value', 'undo');
+
+}
+
+function likeAll_2col() {
+	var arr = new Array();
+	var i = 0;
+	$('.like').each(function(index) {
+			if($(this).css('display') != 'none') {
+				arr[i] = index;
+				i++;
+		}
+	}); 
+	for (var j = 0; j < i; j++) {
+		like_2col(arr[j]);
 	}
 }
 
-function rejectAllChanges() {
-	for (var i=1; i<=4; i++) {
-		var bubbleName = "#change_bubble" + i;
-		if(!$(bubbleName).hasClass("bubble_resolved")) {
-			rejectChange(i);
+function dislikeAll_2col() {
+	var arr = new Array();
+	var i = 0;
+	$('.dislike').each(function(index) {
+			if($(this).css('display') != 'none') {
+				arr[i] = index;
+				i++;
 		}
+	}); 
+	for (var j = 0; j < i; j++) {
+		dislike_2col(arr[j]);
 	}
 }
 
-function markBubbleDone(num) {
-	var mergeName = "#bubble_merge" + num;
-	$(mergeName).hide();
-	var bubbleName = "#change_bubble" + num;
-	$(bubbleName).addClass("bubble_resolved");
-	pendingChanges--;
-	updateRemaining();
+function undoAll_2col() {
+	var arr = new Array();
+	var i = 0;
+	$('.undo').each(function(index) {
+			if($(this).css('display') != 'none') {
+				arr[i] = index;
+				i++;
+		}
+	}); 
+	for (var j = 0; j < i; j++) {
+		undo_2col(arr[j]);
+	}
 }
 
-function updateRemaining() {
-	$("#accept_all").html("Accept all remaining(" + pendingChanges + ")");
-	$("#reject_all").html("Reject all remaining(" + pendingChanges + ")");
-}
+

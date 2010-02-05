@@ -1,15 +1,14 @@
 {include file="header.tpl"}
 
 <div class="box left_main">
-	<div class="box_title">Comparing -- {$d_name} <a href="compare_inline.php" style="color:red;">==AB TESTING CLICK HERE==</a><form id="compare_form" action="compare_post.php" method="post"><input type="submit" value="Save"></form></div>
+	<div class="box_title">Comparing -- {$d_name} <a href="compare_inline.php" style="color:red;">==AB TESTING CLICK HERE==</a><form id="compare_form" action="compare_post.php" method="post"><input type="submit" value="Save">{$input}</form></div>
 	<div class="box_content">
-	<table class="diff">
-	<tr><th></th><th></th><th>your <span class="v_name">{$v_name}</span></th>
-	<th></th><th>{$other_u_name}'s <span class="v_name">{$other_v_name}</span></th>
-	<th><span class="likedislike"><span class="like" onclick="likeAll();">L</span> | <span class="dislike" onclick="dislikeAll();">D</span> |<span class="undo" onclick="undoAll();">U</span></span></th>
-	</tr>
-	{$diff}
-	</table>
+	<div style="width: 600px; font-size: 13px;">
+	<div id="column_top" style="width: 300px; float: left;">your <span class="v_name">{$v_name}</span></div>
+	<div style="width: 300px; float: right;">{$other_u_name}'s <span class="v_name">{$other_v_name}</span></div>
+	<div class="likedislike" style="position: absolute;"><span class="likeall" onclick="likeAll_2col();">L</span> | <span class="dislikeall" onclick="dislikeAll_2col();">D</span> |<span class="undoall" onclick="undoAll_2col();">U</span></div>
+		{$diff}
+	</div>
 	</div> <!--box content-->
 </div> <!--box left_main-->
 
@@ -53,7 +52,7 @@
 	{literal}
 	//<![CDATA[
 		$(document).ready(function(){
-			addFormData();	
+			addLikeDislikeLinks('_2col');	
 		});
 	//]]>
 	{/literal}

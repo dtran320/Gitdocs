@@ -110,7 +110,11 @@ class Text_Diff_Renderer_inline extends Text_Diff_Renderer {
     {
         /* If we've already split on words, don't try to do so again - just
          * display. */
-        if ($this->_split_level == 'words') {
+
+				// marcia commented this condition out
+				// because the non-changed parts weren't easily enclosable in a tag
+
+        //if ($this->_split_level == 'words') {
             $prefix = '';
             while ($orig[0] !== false && $final[0] !== false &&
                    substr($orig[0], 0, 1) == ' ' &&
@@ -120,7 +124,7 @@ class Text_Diff_Renderer_inline extends Text_Diff_Renderer {
                 $final[0] = substr($final[0], 1);
             }
             return $prefix . $this->_deleted($orig) . $this->_added($final);
-        }
+        //}
 
         $text1 = implode("\n", $orig);
         $text2 = implode("\n", $final);
@@ -166,7 +170,7 @@ class Text_Diff_Renderer_inline extends Text_Diff_Renderer {
 
     function _encode(&$string)
     {
-        $string = htmlspecialchars($string);
+        //$string = htmlspecialchars($string);
     }
 
 }
