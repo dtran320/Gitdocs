@@ -22,7 +22,7 @@ class Repository {
 		if(!mkdir("$location", 0700)) return false;				  
 		if($versionToClone) {
 			$otherRepoLocation = $versionToClone->getRepoLocation();
-			$command = "cd $location; git clone $otherRepoLocation";
+			$command = "cd $location/..; git clone $otherRepoLocation $location";
 			//TODO: Escape this? necessary?
 			exec($command);
 		} else {
