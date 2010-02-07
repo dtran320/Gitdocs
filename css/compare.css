@@ -124,24 +124,27 @@ tr.notlikeable .likedislike{
 	font-weight: bold;
 }
 
-.like .likeall {
+.like {
 	margin-left: 5px;
 }
-.like:hover, .likeall:hover{
+span.like:hover, span.likeall:hover{
 	cursor: pointer;
 	text-decoration: underline;
 }
 
-.undo, .undoall{
+.displaynone {
+	display:none;
+}
+.undo {
 	margin-left: 5px;
 }
 
-.undo:hover, .undoall:hover{
+span.undo:hover, span.undoall:hover{
 	cursor: pointer;
 	text-decoration: underline;
 }
 
-.dislike:hover, .dislikeall:hover{
+span.dislike:hover, span.dislikeall:hover{
 	cursor: pointer;
 	text-decoration: underline;
 }
@@ -151,10 +154,7 @@ tr.notlikeable .likedislike{
 }
 .ins { background: #cfc; }
 .del { background: #fcc; }
-/*
-ins { background: #9f9; }
-del { background: #f99; }
-*/
+
 ins { background: #cfc; }
 del { background: #fcc; }
 hr { background: none; border: none; border-top: 2px dotted #000; color: #fff; }
@@ -165,7 +165,7 @@ hr { background: none; border: none; border-top: 2px dotted #000; color: #fff; }
 
 .faded {
 	background: #EEECEF;
-	opacity: 0.4;
+	/*opacity: 0.4;*/
 }
 
 

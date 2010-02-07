@@ -47,10 +47,10 @@ function addLikeDislikeLinks(view_type) {
 		}
 	}
 
-	elem.html("<span style='display:inline-block;' class='like' onclick='like" + view_type + "(" + index +  ");'>like | </span> <span style='display:inline-block;' class='dislike' onclick='dislike" + view_type + "(" + index + ");'>dislike</span><span class='orig' style='display: none;'>" + orig_txt + "</span><span class='undo' onclick='undo" +view_type +  "(" + index + ");' style='display:none;'>undo</span>");
+	elem.html("<span class='like' onclick='like" + view_type + "(" + index +  ");'>like | </span> <span class='dislike' onclick='dislike" + view_type + "(" + index + ");'>dislike</span><span class='orig' style='display: none;'>" + orig_txt + "</span><span class='undo displaynone' onclick='undo" +view_type +  "(" + index + ");'>undo</span>");
 
-	var form_txt = $('#compare_form').html();
-	$('#compare_form').html(form_txt + ' <input type="hidden" id="hidden' + index + '" name="hidden' + index + '" value="boo">'
+	var form_txt = $('#merge_form').html();
+	$('#merge_form').html(form_txt + ' <input type="hidden" id="hidden' + index + '" name="hidden' + index + '" value="boo">'
 	 + ' <input type="hidden" id="type' + index + '" name="type' + index + '" value="'+ type + '">');
 	});
 }
@@ -65,9 +65,9 @@ function like_inline(num) {
 	$(selector).html(txt);
 	$(selector + ' del').addClass('faded');
 	var elem = $('.inline_ld').slice(num, num+1);
-	elem.find('.like').css('display', 'none');
-	elem.find('.dislike').css('display', 'none');
-	elem.find('.undo').css('display', 'inline-block'); 
+	elem.find('.like').addClass('displaynone');
+	elem.find('.dislike').addClass('displaynone');
+	elem.find('.undo').removeClass('displaynone');
 
 	$('#hidden' + num).attr('value', 'like');
 }
@@ -82,9 +82,9 @@ function dislike_inline(num) {
 	$(selector).html(txt);
 	$(selector + ' ins').addClass('faded');
 	var elem = $('.inline_ld').slice(num, num+1);
-	elem.find('.like').css('display', 'none');
-	elem.find('.dislike').css('display', 'none');
-	elem.find('.undo').css('display', 'inline-block');
+	elem.find('.like').addClass('displaynone');
+	elem.find('.dislike').addClass('displaynone');
+	elem.find('.undo').removeClass('displaynone');
 
 	$('#hidden' + num).attr('value', 'dislike');
 }
@@ -94,9 +94,9 @@ function undo_inline(num) {
 	var elem = $('.inline_ld').slice(num, num+1);
 	var txt = elem.find('.orig').html();	
 	$(selector).html(txt);
-	elem.find('.like').css('display', 'inline-block');
-	elem.find('.dislike').css('display', 'inline-block');
-	elem.find('.undo').css('display', 'none');
+	elem.find('.like').removeClass('displaynone');
+	elem.find('.dislike').removeClass('displaynone');
+	elem.find('.undo').addClass('displaynone');
 	$('#hidden' + num).attr('value', 'undo');
 }
 
@@ -104,7 +104,7 @@ function likeAll_inline() {
 	var arr = new Array();
 	var i = 0;
 	$('.like').each(function(index) {
-			if($(this).css('display') != 'none') {
+			if(!$(this).hasClass('displaynone')) {
 				arr[i] = index;
 				i++;
 		}
@@ -118,7 +118,7 @@ function dislikeAll_inline() {
 	var arr = new Array();
 	var i = 0;
 	$('.dislike').each(function(index) {
-			if($(this).css('display') != 'none') {
+			if(!$(this).hasClass('displaynone')) {
 				arr[i] = index;
 				i++;
 		}
@@ -132,7 +132,7 @@ function undoAll_inline() {
 	var arr = new Array();
 	var i = 0;
 	$('.undo').each(function(index) {
-			if($(this).css('display') != 'none') {
+			if(!$(this).hasClass('displaynone')) {
 				arr[i] = index;
 				i++;
 		}
@@ -161,9 +161,9 @@ function like_2col(num) {
 	}
 
 	var elem = $('.inline_ld').slice(num, num+1);
-	elem.find('.like').css('display', 'none');
-	elem.find('.dislike').css('display', 'none');
-	elem.find('.undo').css('display', 'inline-block'); 
+	elem.find('.like').addClass('displaynone');
+	elem.find('.dislike').addClass('displaynone');
+	elem.find('.undo').removeClass('displaynone');
 
 	placeLinks();
 	$('#hidden' + num).attr('value', 'like');
@@ -191,9 +191,9 @@ function dislike_2col(num) {
 	}
 
 	var elem = $('.inline_ld').slice(num, num+1);
-	elem.find('.like').css('display', 'none');
-	elem.find('.dislike').css('display', 'none');
-	elem.find('.undo').css('display', 'inline-block'); 
+	elem.find('.like').addClass('displaynone');
+	elem.find('.dislike').addClass('displaynone');
+	elem.find('.undo').removeClass('displaynone');
 
 	placeLinks();
 	$('#hidden' + num).attr('value', 'dislike');
@@ -201,9 +201,9 @@ function dislike_2col(num) {
 
 function undo_2col(num){
 	var elem = $('.inline_ld').slice(num, num+1);
-	elem.find('.like').css('display', 'inline-block');
-	elem.find('.dislike').css('display', 'inline-block');
-	elem.find('.undo').css('display', 'none'); 
+	elem.find('.like').removeClass('displaynone');
+	elem.find('.dislike').removeClass('displaynone');
+	elem.find('.undo').addClass('displaynone');
 
 	var orig_txt = elem.find('.orig').html();
 	var selector = '.inline_change' + num;

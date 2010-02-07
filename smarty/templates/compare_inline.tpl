@@ -1,8 +1,14 @@
 {include file="header.tpl"}
 
+		<form id="compare_form" action="compare_2col.php" method="post" style="display:none;">
+			<input type="hidden" name="d_id" value="{$d_id}" />
+			<input type="hidden" name="u_id" value="{$u_id}" />
+			<input type="hidden" id="other_u_id" name="other_u_id" value="{$other_u_id}" />
+		</form>
+
 <div class="left_main">
 	<div class="box" style="width: 600px;">
-	<div class="box_title">Comparing -- {$d_name} <a href="compare_2col.php" style="color: red;">==AB TESTING CLICK HERE==</a> <form id="compare_form" action="compare_post.php" method="post"><input type="submit" value="Save"></form></div>
+	<div class="box_title">Comparing -- {$d_name} <a onclick="$('#compare_form').submit();" style="color: red;">==AB TESTING CLICK HERE==</a> <form id="merge_form" action="compare_post.php" method="post"><input type="submit" value="Save"></form></div>
 	<div class="box_content" style="font-size: 13px; width: 500px;">
 	<div id="column_top">your <span class="v_name">{$v_name}</span> and {$other_u_name}'s <span class="v_name">{$other_v_name}</span></div>
 	{$diff}

@@ -98,6 +98,9 @@ class Version {
 		return $this->repo->getLocation();
 	}
 	
+	public function getDescription() {
+		return $this->description;
+	}
 	public function getUserId(){
 		return $this->userId;
 	}
