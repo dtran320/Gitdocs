@@ -60,6 +60,7 @@ class Version {
 	//just saves, update lastSavedTime
 	public function save($text) {
 		$this->textCache = $text;
+		$this->updateTimestamp();
 		return fwrite($this->fileHandler, $text);
 		//fclose($fileHandler);
 		//TODO: flesh out, merge with ckeditor	
@@ -68,7 +69,7 @@ class Version {
 	
 	//saves, does git commit, returns new Version object
 	public function commit() {
-	//	$this->save();	
+		$this->save();	
 		$this->repo->commit();
 		return $this;
 	}
@@ -114,6 +115,25 @@ class Version {
 		else return false;
 	}
 	
+	public function updateTimestamp($time=0) {
+		if(!$time) $time = time();
+		$db = new DB();
+		$updateTimeQuery = "UPDATE Versions SET last_saved_time='$time' WHERE doc_fk='{$this->docId}' AND u_fk='{$this->userId}'";
+		return $db->execQuery($updateTimeQuery);
+	}
+	
+	public function getName() {
+		$db = new DB();
+		$selectQuery = "select v_name FROM Versions WHERE doc_fk='{$this->docId}' AND u_fk='{$this->userId}'";
+		$db->execQuery($renameQuery);
+		$row = $db->getNextRow();
+		return $row["v_name"];
+	}
+	
+	public function getDocument() {
+		return fread($this->fileHandler, 8192);
+	}
+	
 	public function rename($newName) {
 		$db = new DB();
 		$newName = mysql_real_escape_string($newName);
@@ -133,9 +153,9 @@ class Version {
 			"ON Versions.u_fk = Users.u_id " .
 			"WHERE u_id = '$userId' ORDER BY last_saved_time DESC";
 		if($n > 0) $selectQuery .= " LIMIT 0, $n";
-		echo $selectQuery;
 		$db->execQuery($selectQuery);
 		while($row = $db->getNextRow()) {
+			$row['timestamp'] = getLocalTime($row['timestamp']);
 			$versions[] = $row;
 		}
 		return $versions;

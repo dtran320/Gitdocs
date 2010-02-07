@@ -8,6 +8,7 @@
 require_once(dirname(__FILE__) . "/../config.php");
 require_once(dirname(__FILE__) . "/../db/db.php");
 
+
 class Document {
 	
 	//attributes
@@ -40,11 +41,6 @@ class Document {
 		$newName = mysql_real_escape_string($newName);
 		$renameQuery = "UPDATE Documents SET name = '$newName' WHERE doc_id='{$this->docId}'";
 		return $db->execQuery($renameQuery);
-	}
-	//n gets most recent docs, if n=0, get everything
-	public function getUsersDocuments($n=0) {
-		$db = new DB();
-		
 	}
 	
 }

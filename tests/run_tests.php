@@ -16,7 +16,7 @@ testCreateUser();
 //testCreateDocument();
 //testCreateVersion();
 testGetRecentVersionsForUser();
-testDiff();
+//testDiff();
 echo "Done!";
 
 ?>

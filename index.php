@@ -16,7 +16,8 @@ $smarty->assign('pop_docs',
 "<a href='viewer.php'>CS140 Notes</a>"));
 
 if($user = User::getLoggedInUser()) {
-	$my_recent_docs = array("doc1", "doc2", "doc3");
+	$my_recent_docs = $user->getRecentDocuments(3);
+
 	$smarty->assign('my_recent_docs', $my_recent_docs);
 	
 	$smarty->assign('logged_in_user', $user->getUserInfo());

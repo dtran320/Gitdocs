@@ -10,6 +10,9 @@
 require_once(dirname(__FILE__) . "/../config.php");
 require_once(dirname(__FILE__) . "/../db/db.php");
 require_once(dirname(__FILE__) . "/../lib/utils.php");
+
+require_once("version.php");
+
 class User {
 	
 	private $salt;
@@ -103,6 +106,15 @@ class User {
 	public static function logout() {
 		//faster & cleaner than calling unset?
 		$_SESSION = array();
+	}
+	
+	public function getAllDocuments() {
+		return $this->getRecentDocuments(0);
+	}
+	
+	//n gets most recent docs, if n=0, get everything
+	public function getRecentDocuments($n=0) {
+		return Version::getRecentVersionsForUser($this->userId, $n);
 	}
 	
 }
