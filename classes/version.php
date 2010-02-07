@@ -170,6 +170,24 @@ class Version {
 		return $db->execQuery($renameQuery);
 	}
 	
+	public static function getRecentGlobalVersions($n=0) {
+		$db = new DB();
+		$versions = array();
+		$selectQuery = "SELECT doc_id as dId, name as dName, v_name as vName, v_id as vId, username, display_name as displayName, last_saved_time as timestamp " .
+			"FROM Versions INNER JOIN Documents " . 
+			"ON Versions.doc_fk = Documents.doc_id " .
+			"INNER JOIN Users " .
+			"ON Versions.u_fk = Users.u_id " .
+			"ORDER BY last_saved_time DESC";
+		if($n > 0) $selectQuery .= " LIMIT 0, $n";
+		$db->execQuery($selectQuery);
+		while($row = $db->getNextRow()) {
+			$row['timestamp'] = getLocalTime($row['timestamp']);
+			$versions[] = $row;
+		}
+		return $versions;
+	}
+	
 	//get n most recent versions for User, everything if n =0
 	//assume userId is sanitized (passed from User class)
 	public static function getRecentVersionsForUser($userId, $n=0) {

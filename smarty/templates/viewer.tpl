@@ -4,8 +4,8 @@
 	<div class="box_title">{$d_name} -- <span class="v_name">{$v_name}</span> -- <span class="u_name">{$u_name}</span> 
 			<form id="editor_form" class="big_form" method="post" action="editor.php" style="float:right;">
 				<input type="hidden" name="action" value="clone" />
-				<input type="hidden" name="document_id" value="1" />
-				<input type="hidden" name="owner_id" value="1" />
+				<input type="hidden" name="document_id" value="{$d_id}" />
+				<input type="hidden" name="owner_id" value="{$v_id}" />
 				<input type="submit" name="submit" value="Start Working off this version"/>
 			</form>
 		</div>

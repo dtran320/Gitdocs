@@ -19,7 +19,7 @@
 <div class="box">
 	<div class="box_title">My Recent Documents</div>
         <div class="box_content">
-		<table>
+		<table class="document_list">
 		{section name=i loop=$my_recent_docs}
 		<tr><td><a href="{$my_recent_docs[i].link}"><p class="no_line_height">{$my_recent_docs[i].dName} - {$my_recent_docs[i].vName}</p><p class="small_text no_line_height">{$my_recent_docs[i].timestamp}</p></a></td></tr>
 		{/section}
@@ -32,6 +32,18 @@
 </div><!-- end container col-->
 
 <div class="right_side45">
+
+	<div class="box">
+		<div class="box_title">Recently saved documents</div>
+	       	<div class="box_content">
+				<table class="document_list">
+					{section name=i loop=$recent_global_docs}
+						<tr><td>{$recent_global_docs[i].displayName}</td><td><a href="{$recent_global_docs[i].link}"><p class="no_line_height">{$recent_global_docs[i].dName} - {$recent_global_docs[i].vName}</p><p class="small_text no_line_height">{$my_recent_docs[i].timestamp}</p></a></td></tr>
+					{/section}
+						</table>
+				</div><!-- end box content -->
+			</div>
+	
 <div class="box">
 	<div class="box_title">Popular topics</div>
        	<div class="box_content">
@@ -43,8 +55,9 @@
 			{/section}
 			</table>
 			</div>
-		</div>
 </div>
+</div>
+
 
 <div class="box">
 	 <div class="box_title">Popular documents</div>
@@ -55,9 +68,10 @@
 			{/section}
 			</table>
 		</div>
-</div>
+	</div>
 </div>
 
+</div> <!-- end right_side -->
 </div><!-- end container -->
 
 {include file="footer.tpl"}
