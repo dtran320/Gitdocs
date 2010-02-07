@@ -74,9 +74,13 @@ class Repository {
 			    	git merge master;";
 		echo "command: $command \n";
 		exec($command);
-		$command = "cd $this->location; 
+		exec("git remote", $branchesList);
+		if(in_array($otherVersion->getUserId(), $branchesList)) {	
+			$command ="cd $this->location; git fetch ". $otherVersion->getUserID();
+		} else {
+			$command = "cd $this->location; 
 			 	git remote add -t ". $myVersion->getUserId() ." -f ". $otherVersion->getUserId() ." $otherLocation;";
-		
+		}		
 		echo "command: $command \n";
 		exec($command);
 		$command = "cd $this->location; git diff -U10000 ". $otherVersion->getUserId() ."/". $myVersion->getUserId();
