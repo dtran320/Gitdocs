@@ -4,7 +4,6 @@ require('init_smarty.php');
 require('lib/simplediff.php');
 require('classes/user.php');
 require('classes/diff.php');
-require('classes/version.php');
 
 include_once "lib/Diff/Diff.php";
 include_once "lib/Diff/Diff/Renderer.php";
