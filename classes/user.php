@@ -11,7 +11,7 @@ require_once(dirname(__FILE__) . "/../config.php");
 require_once(dirname(__FILE__) . "/../db/db.php");
 require_once(dirname(__FILE__) . "/../lib/utils.php");
 
-require_once("version.php");
+require_once(dirname(__FILE__). "/version.php");
 
 class User {
 	

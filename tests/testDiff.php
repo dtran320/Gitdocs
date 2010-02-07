@@ -2,8 +2,8 @@
 
 require_once(dirname(__FILE__) . "/../config.php");
 
-require_once(dirname(__FILE__) . "/../classes/Version.php");
-require_once(dirname(__FILE__) . "/../classes/Diff.php");
+require_once(dirname(__FILE__) . "/../classes/version.php");
+require_once(dirname(__FILE__) . "/../classes/diff.php");
 
 function testDiff() {
 	echo "diffing version";

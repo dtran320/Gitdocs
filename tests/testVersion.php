@@ -1,12 +1,11 @@
 <?php
 
 require_once(dirname(__FILE__) . "/../config.php");
-
-require_once(dirname(__FILE__) . "/../classes/Version.php");
+require_once(dirname(__FILE__) . "/../classes/version.php");
 
 function testCreateVersion() {
 	echo "Creating version";
-	$version = Version::createNewVersion("1","1");
+	$version = Version::createNewVersion("1","2");
 
 		if($version)
 			echo "Created new version for dtran320 of doc 1\n";
@@ -18,7 +17,7 @@ function testCreateVersion() {
 	$unused = $version->openVersionFile();
  	fclose($unused);		
 	$version->commit();
-	$version2 = Version::createNewVersion("2","1",$version);	
+	$version2 = Version::createNewVersion("2","2",$version);	
 	$unused = $version2->openVersionFile();
 	fclose($unused);
 	$version2->commit();
