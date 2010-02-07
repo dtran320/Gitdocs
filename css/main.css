@@ -263,7 +263,11 @@ a:hover {
 	color: #999999;
 }
 
+.highlighted {
+	background: yellow;
+	cursor: pointer;
+}
+
 .doc_title input[type="text"] {
 	border: 0px;
-	
 }

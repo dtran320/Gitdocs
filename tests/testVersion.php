@@ -27,8 +27,11 @@ function testCreateVersion() {
 	$diffResult = $version->diff($version2);
 	echo "diff result:\n";
 	Print_r($diffResult);
-	
+}
 
+function testGetRecentVersionsForUser() {	
+	$v = Version::getRecentVersionsForUser(23);
+	var_dump($v);
 }
 
 ?>

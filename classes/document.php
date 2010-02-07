@@ -32,6 +32,19 @@ class Document {
 	public function __construct($docId, $name = 0 ){
 		$this->docId = $docId;
 		$this->name = $name;
+	} 
+	
+	public function rename($newName) {
+		//verify that the logged in user owns this doc later?
+		$db = new DB();
+		$newName = mysql_real_escape_string($newName);
+		$renameQuery = "UPDATE Documents SET name = '$newName' WHERE doc_id='{$this->docId}'";
+		return $db->execQuery($renameQuery);
+	}
+	//n gets most recent docs, if n=0, get everything
+	public function getUsersDocuments($n=0) {
+		$db = new DB();
+		
 	}
 	
 }

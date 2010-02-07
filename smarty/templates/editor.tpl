@@ -4,24 +4,21 @@
 	<form id="doc_title" class="doc_title">
 	<div class="box_title">
 		<div style="float: left;">Editing -- 
-			<input type="text" name="d_name" value="{$d_name}"/> -- <input type="text" name="v_name" class="v_name" value="{$v_name}" /></span> -- <span class="u_name">{$u_name}</span> </div>
+			<input type="text" id="change_d_name" name="change_d_name" value="{$d_name}"/> -- <input type="text" id="change_v_name" name="change_v_name" class="v_name" value="{$v_name}" /></span> -- <span class="u_name">{$u_name}</span> </div>
 	</form>
 	<form id="save_form" class="big_form" action="actions/saveshare.php" method="post" style="float:right;">
 		<input type="hidden" name="action" value="save" />
 		<input type="hidden" name="d_id" value="{$d_id}" />
 		<input type="hidden" name="u_id" value="{$u_id}" />
-		<input type="hidden" name="doc_text" id="doc_text" value="asdf" />
-		<input type="submit" name="submit" value="Save"/>
-		<input type="submit" name="submit" value="Publish"/>
-	</form>
-
+		<input type="submit" name="submit" value="Save" onclick="updateElement();"/>
+		<input type="submit" name="submit" value="Publish" onclick="updateElement();"/>
+	</div><!-- end box_title -->
 		<div id="save_status" class="status"></div>
-	</div>
 	<div class="clear_fix"></div>
+
 	<div class="box_content">
 			<div id="loader"><img src="images/ajax-loader.gif"></div>
 			<div>
-			<form method="post">
 				<textarea name="editor1" id="editor1">
 				{$v_text}
 				</textarea>
@@ -83,14 +80,31 @@
 		];
 		CKEDITOR.config.height = 	$(window).height() - 200;
 		$(document).ready(function(){
-			$("#editor1").ckeditor(hideLoader("loader"));			
+			$("#editor1").ckeditor(hideLoader("loader"));	
+			// bind form using 'ajaxForm' 
+		    $('#save_form').ajaxForm({ 
+		        beforeSubmit:  preSaveVersion,  // pre-submit callback 
+		        success:       postSaveVersion  // post-submit callback 
+		    });
 		});
 
-	    // bind form using 'ajaxForm' 
-	    $('#save_form').ajaxForm({ 
-	        beforeSubmit:  preSaveVersion,  // pre-submit callback 
-	        success:       postSaveVersion  // post-submit callback 
-	    });
+			//bind document and version names
+			$('#change_d_name').mouseenter(function() {
+				$('#change_d_name').addClass('highlighted'); 
+				}).mouseleave(function() {
+					$('#change_d_name').removeClass('highlighted');
+				}).click(function() {
+					changeDName('#change_d_name', '{/literal}{$d_id}{literal}');
+				});
+				
+			$('#change_v_name').mouseenter(function() {
+				$('#change_v_name').addClass('highlighted'); 
+				}).mouseleave(function() {
+					$('#change_v_name').removeClass('highlighted');
+				}).click(function() {
+					changeVName('#change_v_name', '{/literal}{$d_id}{literal}','{/literal}{$u_id}{literal}');
+				});
+
 	//]]>
 	{/literal}
 	</script>

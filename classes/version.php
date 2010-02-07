@@ -60,7 +60,7 @@ class Version {
 	//just saves, update lastSavedTime
 	public function save($text) {
 		$this->textCache = $text;
-		fwrite($this->fileHandler, $text);
+		return fwrite($this->fileHandler, $text);
 		//fclose($fileHandler);
 		//TODO: flesh out, merge with ckeditor	
 		
@@ -106,12 +106,41 @@ class Version {
 	}
 	
 	public function getDocument() {
+		$db = new DB();
 		$getDocQuery = "SELECT doc_id, name FROM Documents WHERE doc_id='{$this->docId}'";
 		$db->execQuery($getDocQuery);
 		$row = $db->getNextRow();
 		if($row) return new Document($row['doc_id'], $row['name']);
 		else return false;
 	}
+	
+	public function rename($newName) {
+		$db = new DB();
+		$newName = mysql_real_escape_string($newName);
+		$renameQuery = "UPDATE Versions SET v_name = '$newName' WHERE doc_fk='{$this->docId}' AND u_fk='{$this->userId}'";
+		return $db->execQuery($renameQuery);
+	}
+	
+	//get n most recent versions for User, everything if n =0
+	//assume userId is sanitized (passed from User class)
+	public static function getRecentVersionsForUser($userId, $n=0) {
+		$db = new DB();
+		$versions = array();
+		$selectQuery = "SELECT doc_id as dId, name as dName, v_name as vName, v_id as vId, last_saved_time as timestamp " .
+			"FROM Versions INNER JOIN Documents " . 
+			"ON Versions.doc_fk = Documents.doc_id " .
+			"INNER JOIN Users " .
+			"ON Versions.u_fk = Users.u_id " .
+			"WHERE u_id = '$userId' ORDER BY last_saved_time DESC";
+		if($n > 0) $selectQuery .= " LIMIT 0, $n";
+		echo $selectQuery;
+		$db->execQuery($selectQuery);
+		while($row = $db->getNextRow()) {
+			$versions[] = $row;
+		}
+		return $versions;
+	}
 }
+
 
 ?>

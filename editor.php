@@ -12,7 +12,7 @@ if($user = User::getLoggedInUser()) {
 	$smarty->assign('logged_in_user', $user->getUserInfo());
 	
 	$action = postVarClean("action"); //"clone", otherwise "new"
-	
+	$smarty->assign('action', $action);
 	if ($action=="clone") {
 	$documentId = postVarClean("document_id");
 	$ownerId = postVarClean("owner_id");
