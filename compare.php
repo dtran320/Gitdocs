@@ -12,7 +12,6 @@ include_once "lib/Diff/Diff/Renderer/inline.php";
 if($user = User::getLoggedInUser()) {
 
 	$smarty->assign('logged_in_user', $user->getUserInfo());
-	$d_id = 3; // hard code for now, but will be passed in when we have real docs
 	$doc = Document::getDocInfoForId($d_id);
 	$version = new Version($d_id, $u_id);
 	$other_version = new Version($d_id, $other_u_id);

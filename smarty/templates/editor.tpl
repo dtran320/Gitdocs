@@ -6,7 +6,7 @@
 		<div style="float: left;">Editing -- 
 			<input type="text" id="change_d_name" name="change_d_name" value="{$d_name}"/> -- <input type="text" id="change_v_name" name="change_v_name" class="v_name" value="{$v_name}" /></span> -- <span class="u_name">{$displayName}</span> </div>
 	</form>
-	<form id="compare_form" action="compare_2col.php" method="post" style="display:none;">
+	<form id="compare_form" action="{if $u_id % 2 == 0}compare_2col.php {else}compare_inline.php{/if}" method="post" style="display:none;">
 		<input type="hidden" name="d_id" value="{$d_id}" />
 		<input type="hidden" name="u_id" value="{$u_id}" />
 		<input type="hidden" id="other_u_id" name="other_u_id" value="" />
