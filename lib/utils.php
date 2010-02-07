@@ -33,6 +33,9 @@ function getVarClean($fieldName) {
 	return htmlEscape(getVar($fieldName));
 }
 
+function getLocalTime($time) {
+	return date("M d Y h:i A", $time);
+}
 
 
 ?>

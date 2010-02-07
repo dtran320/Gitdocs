@@ -10,9 +10,9 @@ $displayName = postVar("display_name");
 
 if($user = User::createNewUser($username, $password, $passwordConfirm, $displayName)) {
 	$user->login();
-	echo "SUCCESS";
+	echo 1;
 }
 else
-	echo "FAILED";
+	echo 0;
 
 ?>

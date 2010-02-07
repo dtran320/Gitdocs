@@ -14,7 +14,7 @@
 	<div class="right_side45" style="margin-left: 20px;">
 		<div class="headline">Sign up and start sharing:</div>
 		<div class="signup_error" id="signup_error"></div>
-		<form id="signup" class="big_form" method="post">
+		<form id="signup" class="big_form" action="actions/signup.php" method="post">
 			<table>
 				<tr>
 					<td><label for="username">Username:</label></td>
