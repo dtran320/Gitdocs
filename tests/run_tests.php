@@ -5,10 +5,10 @@ error_reporting(E_ALL);
 
 require_once(dirname(__FILE__) . "/../classes/user.php");
 
-include('testUser.php');
-include('testDocument.php');
-include('testVersion.php');
-include('testDiff.php');
+require_once('testUser.php');
+require_once('testDocument.php');
+require_once('testVersion.php');
+require_once('testDiff.php');
 
 echo "Running tests...<br/>";
 define("DEBUG", true);
