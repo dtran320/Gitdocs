@@ -1,6 +1,5 @@
 <?
 session_start();
-
 require('classes/user.php');
 require('init_smarty.php');
 
