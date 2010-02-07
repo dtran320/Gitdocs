@@ -15,7 +15,8 @@ define("DEBUG", true);
 testCreateUser();
 //testCreateDocument();
 //testCreateVersion();
-testDiff();
+testGetRecentVersionsForUser();
+//testDiff();
 echo "Done!";
 
 ?>

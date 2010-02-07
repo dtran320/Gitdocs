@@ -8,6 +8,7 @@
 require_once(dirname(__FILE__) . "/../config.php");
 require_once(dirname(__FILE__) . "/../db/db.php");
 
+
 class Document {
 	
 	//attributes
@@ -43,6 +44,14 @@ class Document {
 	public function __construct($docId, $name = 0 ){
 		$this->docId = $docId;
 		$this->name = $name;
+	} 
+	
+	public function rename($newName) {
+		//verify that the logged in user owns this doc later?
+		$db = new DB();
+		$newName = mysql_real_escape_string($newName);
+		$renameQuery = "UPDATE Documents SET name = '$newName' WHERE doc_id='{$this->docId}'";
+		return $db->execQuery($renameQuery);
 	}
 	
 }

@@ -21,7 +21,7 @@
         <div class="box_content">
 		<table>
 		{section name=i loop=$my_recent_docs}
-		<tr><td><p class="no_line_height">{$my_recent_docs[i]}</p><p class="small_text no_line_height">some time ago</p></td></tr>
+		<tr><td><p class="no_line_height">{$my_recent_docs[i].dName} - {$my_recent_docs[i].vName}</p><p class="small_text no_line_height">{$my_recent_docs[i].timestamp}</p></td></tr>
 		{/section}
 		</table>
 		<div style="padding-top:10px;">

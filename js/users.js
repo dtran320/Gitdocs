@@ -10,7 +10,7 @@ function signInUser(evt) {
 }
 
 function processSignIn(data) {
-	if(data=="SUCCESS") {
+	if(data=="1") {
     	window.location = "index.php";
 	}
 	else {
@@ -28,11 +28,11 @@ function signUpUser(evt) {
 }
 
 function processSignUp(data) {
-	if(data=="SUCCESS") {
+	if(data=="1") {
 	window.location="index.php";
 	}
-	else { //should eventually capture errors
-		$("#signup_error").html("Error with your signup");
+	else { //should eventually capture errors and tell them what's wrong
+		$("#signup_error").html("Error with your signup. Please try again.");
 		$("#signup_error").addClass("error");
 	}
 }

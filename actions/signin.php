@@ -8,8 +8,8 @@ $password = postVar("password");
 
 $user = new User($username);
 if($user && $user->checkAndDoLogin($password))
-	echo "SUCCESS";
+	echo 1;
 else
-	echo "FAILED";
+	echo 0;
 
 ?>

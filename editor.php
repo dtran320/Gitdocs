@@ -10,8 +10,12 @@ require_once('classes/document.php');
 if($user = User::getLoggedInUser()) {
 	
 	$smarty->assign('logged_in_user', $user->getUserInfo());
-	$action = postVarClean("action"); //"clone", otherwise "new"
+	$smarty->assign('u_id', $user->userId);
+	$smarty->assign('u_name', $user->username);
 	
+	$action = postVarClean("action"); //"clone", "open", otherwise "new"
+	$smarty->assign('action', $action);
+
 	if ($action=="clone") {
 	$documentId = postVarClean("document_id");
 	$ownerId = postVarClean("owner_id");
@@ -32,10 +36,8 @@ if($user = User::getLoggedInUser()) {
 		array('images/bella8.jpg', '<a class="v_name">fall 2008</a><br />by bella8 2y ago', '3'),
 		));
 		
-		$smarty->assign('u_id', $user->userId);
 		$smarty->assign('d_name', "CS294H Notes");
 		$smarty->assign('v_name', "key points");
-		$smarty->assign('u_name', $user->username);
 	$smarty->assign('v_text', '<p>“Coming out with us Masen?”</p>
 
 					<p>“No thanks,” Edward replied, barely taking a glimpse at Newton<span class="your_changes" id="text_change1">, who was standing way too close to him for his liking</span>.</p>
@@ -60,15 +62,25 @@ if($user = User::getLoggedInUser()) {
 		$smarty->display('editor.tpl');
 
 }//end if action is clone
+
+else if($action=="open") {
+	$d_id = postVar("d_id");
+	$d_name = postVar("d_name");
+	$version = new Version($d_id, $user->userId);
+	$smarty->assign('d_id', $d_id);
+	$smarty->assign('v_name', $version->getName());
+	$smarty->assign('v_text', $version->getDocument());
+}
+
 else { //action is new
 	$document = Document::CreateNewDocument();
 	$v_name = 'Untitled';
 	$version = Version::CreateNewVersion($user->userId, $document->docId);
 	$smarty->assign('d_id', $document->docId);
-	$smarty->assign('u_id', $user->userId);
+
 	$smarty->assign('d_name', $document->name);
 	$smarty->assign('v_name', 'Untitled');
-	$smarty->assign('u_name', $user->username);
+
 	$smarty->assign('v_text', '');
 	
 	// we should flesh out all the different phrases instead of doing this:
