@@ -1,10 +1,9 @@
 <?
-include_once"compare.php";
+$d_id = $_POST['d_id'];
+$u_id =  $_POST['u_id'];
+$other_u_id = $_POST['other_u_id'];
 
-$patch = file_get_contents('tests/example.patch');
-$diff = new Text_Diff('string', array($patch));
-$renderer = new Text_Diff_Renderer_inline();
-$out = $renderer->render($diff);
+include_once"compare.php";
 
 $out = '<span class="likedislike"><span class="likeall" onclick="likeAll_inline();">L</span> | <span class="dislikeall" onclick="dislikeAll_inline();">D</span> |<span class="undoall" onclick="undoAll_inline();">U</span></span>' . $out;
 

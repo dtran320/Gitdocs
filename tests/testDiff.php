@@ -3,6 +3,7 @@
 require_once(dirname(__FILE__) . "/../config.php");
 
 require_once(dirname(__FILE__) . "/../classes/Version.php");
+require_once(dirname(__FILE__) . "/../classes/Diff.php");
 
 function testDiff() {
 	echo "diffing version";
@@ -11,7 +12,7 @@ function testDiff() {
 	$diffResult = $version->diff($version2);
 	echo "diff result:\n";
 	Print_r($diffResult);
-	
+	echo "generating diff objects\n";
 
 }
 

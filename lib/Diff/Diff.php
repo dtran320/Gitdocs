@@ -1,5 +1,8 @@
 <?php
 /**
+
+http://pear.php.net/package/Text_Diff
+
  * General API for generating and formatting diffs - the differences between
  * two sequences of strings.
  *

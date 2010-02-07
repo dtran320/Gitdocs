@@ -15,6 +15,7 @@ if($user = User::getLoggedInUser()) {
 	
 	$action = postVarClean("action"); //"clone", "open", otherwise "new"
 	$smarty->assign('action', $action);
+
 	if ($action=="clone") {
 	$documentId = postVarClean("document_id");
 	$ownerId = postVarClean("owner_id");
@@ -30,9 +31,9 @@ if($user = User::getLoggedInUser()) {
 
 		));
 	$smarty->assign('others', array(
-		array('images/mlee.jpg', '<a href="compare.php" class="v_name">winter 2010</a><br/>by mlee 8h ago'),
-		array('images/dtran.jpg', '<a class="v_name">winter 2010</a><br />by dtran 1d ago'),
-		array('images/bella8.jpg', '<a class="v_name">fall 2008</a><br />by bella8 2y ago'),
+		array('images/mlee.jpg', '<a class="v_name">winter 2010</a><br/>by mlee 8h ago', '1'),
+		array('images/dtran.jpg', '<a class="v_name">winter 2010</a><br />by dtran 1d ago', '2'),
+		array('images/bella8.jpg', '<a class="v_name">fall 2008</a><br />by bella8 2y ago', '3'),
 		));
 		
 		$smarty->assign('d_name', "CS294H Notes");
@@ -58,16 +59,6 @@ if($user = User::getLoggedInUser()) {
 					<p>“No, I’m heading back. You?”</p>
 		');
 		
-		// we should flesh out all the different phrases instead of doing this:
-		$smarty->assign('history', array(
-			array("left", "images/mlinsey.jpg","you are now editing <span class='v_name'>{$v_name}</span>, which has not been saved."),
-			array("right", "images/dtran.jpg","you started from dtran's <span class='v_name'>forest</span> 5m ago")
-			));
-		$smarty->assign('others', array(
-			array('images/mlee.jpg', '<a href="compare.php" class="v_name">new desc. of Edward</a><p class="med_text no_line_height">by mlee 8h ago</p>'),
-			array('images/dtran.jpg', '<a class="v_name">forest</a><br />by dtran 1d ago'),
-			array('images/bella8.jpg', '<a class="v_name">forest</a><br />by bella8 2d ago')
-			));
 		$smarty->display('editor.tpl');
 
 }//end if action is clone
@@ -100,9 +91,6 @@ else { //action is new
 	$smarty->display('editor.tpl');
 	
 }
-
-	
-
 
 } // end if user logged in
 else {

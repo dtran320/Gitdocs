@@ -1,11 +1,9 @@
 <?
-include_once "compare.php";
+$d_id = $_POST['d_id'];
+$u_id =  $_POST['u_id'];
+$other_u_id = $_POST['other_u_id'];
 
-// output of git diff instead of reading patch from file!!
-$patch = file_get_contents('tests/example.patch');
-$diff = new Text_Diff('string', array($patch));
-$renderer = new Text_Diff_Renderer_inline();
-$out = $renderer->render($diff);
+include_once "compare.php";
 
 // cheating with the separation between logic and display, but whatevs for now
 $out = str_replace("<ins>", "<div style='float: right; width: 300px; clear: both;' class='inline_change'><ins>", $out);

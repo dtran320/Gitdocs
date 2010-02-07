@@ -74,16 +74,20 @@ class Repository {
 			    	git merge master;";
 		echo "command: $command \n";
 		exec($command);
-		$command = "cd $this->location; 
+		exec("git remote", $branchesList);
+		if(in_array($otherVersion->getUserId(), $branchesList)) {	
+			$command ="cd $this->location; git fetch ". $otherVersion->getUserID();
+		} else {
+			$command = "cd $this->location; 
 			 	git remote add -t ". $myVersion->getUserId() ." -f ". $otherVersion->getUserId() ." $otherLocation;";
-		
+		}		
 		echo "command: $command \n";
 		exec($command);
 		$command = "cd $this->location; git diff -U10000 ". $otherVersion->getUserId() ."/". $myVersion->getUserId();
 		
 		echo "command: $command \n";
 		exec($command, $result);
-		return $result;
+		return array_slice($result, 1);
 						
 	}
 	
@@ -92,10 +96,12 @@ class Repository {
 	public function merge($myVersion, $otherVersion, &$arrDiffs) {
 	 	$myFileArr = $myVersion->readFileToArray();
 		$otherFileArr = $otherVersion->readFileToArray($myVersion->getUserId());	
-	
+			
 		//undo changes which were rejected
 		foreach($arrDiffs as $diff) {
 			if($userAction == "rejected") {
+			//figure out line number that diff hapened on.
+				
 				if($diff->type == "ins"){
 					unset($otherFileArr[$diff->index]);		
 				} else if($diff->type == "del") {
@@ -106,7 +112,7 @@ class Repository {
 		$myfile = $myVersion->openVersionFile();
 		foreach($myFileArr as $line) { fwrite($myfile,$line);}
 		fclose($myFile);
-		commit();	
+		$myVersion->commit();	
 		
 		$otherFile = $otherVersion->openVersionFile($myVersion->getUserId());
 		foreach($otherFileArr as $line) { fwrite($otherFile,$line);}

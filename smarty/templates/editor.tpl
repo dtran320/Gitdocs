@@ -12,7 +12,16 @@
 		<input type="hidden" name="u_id" value="{$u_id}" />
 		<input type="submit" name="submit" value="Save" onclick="updateElement();"/>
 		<input type="submit" name="submit" value="Publish" onclick="updateElement();"/>
+	</form>
+
+		<form id="compare_form" action="compare_2col.php" method="post" style="display:none;">
+			<input type="hidden" name="d_id" value="{$d_id}" />
+			<input type="hidden" name="u_id" value="{$u_id}" />
+			<input type="hidden" id="other_u_id" name="other_u_id" value="" />
+		</form>
+
 	</div><!-- end box_title -->
+
 		<div id="save_status" class="status"></div>
 	<div class="clear_fix"></div>
 
@@ -58,7 +67,8 @@
 					<div style="float: left; padding-right:6px;"><img src="{$others[i][0]}" /> </div>
 					<div class="med_text"> 
 						<span style="float:left">{$others[i][1]}</span>
-						<a class="comparable" href="compare_2col.php">compare</a>
+						<a class="comparable" onclick="$('#other_u_id').val('{$others[i][2]}'); $('#compare_form').submit();">compare</a>
+
 					</div>
 			</td></tr>
 			{/section}
