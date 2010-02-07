@@ -17,7 +17,7 @@ $smarty->assign('pop_docs',
 
 if($user = User::getLoggedInUser()) {
 	$my_recent_docs = $user->getRecentDocuments(3);
-
+	
 	$smarty->assign('my_recent_docs', $my_recent_docs);
 	
 	$smarty->assign('logged_in_user', $user->getUserInfo());
