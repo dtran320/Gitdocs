@@ -86,12 +86,24 @@ class User {
 					);
 	}
 	
+	//returns array with username, displayName, iconPtr for u_id, false if no matches
+	public static function getUserInfoForId($id) {
+		$db = new DB();
+		$id = mysql_real_escape_string($id);
+		$userInfoQuery = "SELECT username, display_name AS displayName, icon_ptr AS iconPtr FROM Users " .
+			"WHERE u_id='{$id}'";
+		var_dump($userInfoQuery);
+		$db->execQuery($userInfoQuery);
+		$row = $db->getNextRow();
+		return $row;
+
+	}
+	
 	//should this be static? Probably not...
 	public static function logout() {
 		//faster & cleaner than calling unset?
 		$_SESSION = array();
 	}
-
 	
 }
 
