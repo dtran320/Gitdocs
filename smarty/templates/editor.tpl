@@ -4,21 +4,20 @@
 	<form id="doc_title" class="doc_title">
 	<div class="box_title">
 		<div style="float: left;">Editing -- 
-			<input type="text" id="change_d_name" name="change_d_name" value="{$d_name}"/> -- <input type="text" id="change_v_name" name="change_v_name" class="v_name" value="{$v_name}" /></span> -- <span class="u_name">{$u_name}</span> </div>
+			<input type="text" id="change_d_name" name="change_d_name" value="{$d_name}"/> -- <input type="text" id="change_v_name" name="change_v_name" class="v_name" value="{$v_name}" /></span> -- <span class="u_name">{$displayName}</span> </div>
 	</form>
+	<form id="compare_form" action="compare_2col.php" method="post" style="display:none;">
+		<input type="hidden" name="d_id" value="{$d_id}" />
+		<input type="hidden" name="u_id" value="{$u_id}" />
+		<input type="hidden" id="other_u_id" name="other_u_id" value="" />
+	</form>
+	
 	<form id="save_form" class="big_form" action="actions/saveshare.php" method="post" style="float:right;">
 		<input type="hidden" name="action" value="save" />
 		<input type="hidden" name="d_id" value="{$d_id}" />
 		<input type="hidden" name="u_id" value="{$u_id}" />
 		<input type="submit" name="submit" value="Save" onclick="updateElement();"/>
 		<input type="submit" name="submit" value="Publish" onclick="updateElement();"/>
-	</form>
-
-		<form id="compare_form" action="compare_2col.php" method="post" style="display:none;">
-			<input type="hidden" name="d_id" value="{$d_id}" />
-			<input type="hidden" name="u_id" value="{$u_id}" />
-			<input type="hidden" id="other_u_id" name="other_u_id" value="" />
-		</form>
 
 	</div><!-- end box_title -->
 

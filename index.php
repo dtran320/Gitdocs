@@ -16,7 +16,11 @@ $smarty->assign('pop_docs',
 
 if($user = User::getLoggedInUser()) {
 	$my_recent_docs = $user->getRecentDocuments(3);
-	
+	//preprocess to figure out links
+	foreach($my_recent_docs as $k => $v) {
+		$my_recent_docs[$k]["link"] = "editor.php?v_id=" . $my_recent_docs[$k]["vId"];
+	}
+
 	$smarty->assign('my_recent_docs', $my_recent_docs);
 	
 	$smarty->assign('logged_in_user', $user->getUserInfo());
