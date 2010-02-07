@@ -53,3 +53,12 @@
 .clearfix {
 	clear:both;
 }
+
+table.document_list td {
+	padding: 0px 4px;
+}
+table.document_list td:hover {
+	cursor: pointer;
+	background: #EEECEF;
+	
+}

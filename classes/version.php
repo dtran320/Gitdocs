@@ -16,15 +16,37 @@ class Version {
 	private $docId;
 	private $description;
 	private $lastSavedTime;
-	
+	private $versionId;
 	private $commitId; //sha-1 hash
 	private $repo;
 	
 	public $textCache;
 	public $fileHandler;
 	
-	public function __construct($docId, $userId, $repo = 0,$description = 0) {
+	public function __construct($docId=0, $userId=0, $repo = 0,$description = 0, $v_id = 0) {
 		global $DOCUMENTS_PATH;
+		$db = new DB();	
+		if($v_id) {
+			$this->versionId = $v_id;
+			$v_id = mysql_real_escape_string($v_id);
+			$selectQuery = "SELECT doc_fk, u_fk FROM Versions WHERE v_id='{$v_id}'";
+			$db->execQuery($selectQuery);
+			$row = $db->getNextRow();
+			if($row) {
+				$docId = $row['doc_fk'];
+				$userId = $row['u_fk'];
+			}
+		}
+		else {
+			$docIdSafe = mysql_real_escape_string($docId);
+			$userIdSafe = mysql_real_escape_string($userId);
+			$getVersionId = "SELECT v_id FROM Versions WHERE doc_fk='{$docIdSafe}' AND u_fk='{$userIdSafe}'";
+			$db->execQuery($getVersionId);
+			$row = $db->getNextRow();
+			if($row)
+				$this->versionId = $row["v_id"];
+		}
+		
 		$location = "$DOCUMENTS_PATH$docId/$userId";
 		$this->docId = $docId;	
 		$this->userId = $userId;
@@ -33,9 +55,12 @@ class Version {
 			$this->repo = $repo;
 		else 
 			$this->repo = new Repository($location);
+
 		$this->textCache = "";
 		$this->fileHandler = fopen("$location/document.html",'r+');
 	}
+	
+	
 	
 	public function __destruct() {
 		fclose($this->fileHandler);
@@ -46,8 +71,9 @@ class Version {
 		$db = new DB();
 		$params = array("docId" => $docId, "userId" => $userId, "repoPtr" => $repo->getLocation());
 		mysqlEscapeArray($params);
-		$newVersionQuery = "INSERT INTO Versions(doc_fk, u_fk, repo_ptr) " .
-                        "VALUES('{$params["docId"]}', '{$params["userId"]}', '{$params["repoPtr"]}')";
+		$time = time();
+		$newVersionQuery = "INSERT INTO Versions(doc_fk, u_fk, repo_ptr, last_saved_time) " .
+                        "VALUES('{$params["docId"]}', '{$params["userId"]}', '{$params["repoPtr"]}', '{$time}')";
 		$db->execQuery($newVersionQuery);
 		return new Version($docId, $userId, $repo,$description);	
 	}
@@ -127,13 +153,13 @@ class Version {
 	
 	public function getName() {
 		$db = new DB();
-		$selectQuery = "select v_name FROM Versions WHERE doc_fk='{$this->docId}' AND u_fk='{$this->userId}'";
-		$db->execQuery($renameQuery);
+		$selectQuery = "SELECT v_name FROM Versions WHERE v_id='{$this->versionId}'";
+		$db->execQuery($selectQuery);
 		$row = $db->getNextRow();
 		return $row["v_name"];
 	}
 	
-	public function getDocument() {
+	public function getDocFromDisk() {
 		return fread($this->fileHandler, 8192);
 	}
 	
@@ -142,6 +168,24 @@ class Version {
 		$newName = mysql_real_escape_string($newName);
 		$renameQuery = "UPDATE Versions SET v_name = '$newName' WHERE doc_fk='{$this->docId}' AND u_fk='{$this->userId}'";
 		return $db->execQuery($renameQuery);
+	}
+	
+	public static function getRecentGlobalVersions($n=0) {
+		$db = new DB();
+		$versions = array();
+		$selectQuery = "SELECT doc_id as dId, name as dName, v_name as vName, v_id as vId, username, display_name as displayName, last_saved_time as timestamp " .
+			"FROM Versions INNER JOIN Documents " . 
+			"ON Versions.doc_fk = Documents.doc_id " .
+			"INNER JOIN Users " .
+			"ON Versions.u_fk = Users.u_id " .
+			"ORDER BY last_saved_time DESC";
+		if($n > 0) $selectQuery .= " LIMIT 0, $n";
+		$db->execQuery($selectQuery);
+		while($row = $db->getNextRow()) {
+			$row['timestamp'] = getLocalTime($row['timestamp']);
+			$versions[] = $row;
+		}
+		return $versions;
 	}
 	
 	//get n most recent versions for User, everything if n =0
