@@ -75,12 +75,12 @@ class Repository {
 				git stash; 
 				git branch ". $myVersion->getUserId() ."; 
 				git checkout ". $myVersion->getUserId(). "; 
-				echo drning: mysql_real_escape_string() expects pocument.html merge=discardMine > $otherLocation/.gitattributes;
+				echo document.html merge=discardMine > $otherLocation/.gitattributes;
 				git config merge.discardMine.name \"discard my changes if conflicts\";
 				git config merge.discardMine.driver \"".dirname(__FILE__). "/../scripts/discardMine.sh %0 %A %B\";
 				git commit -a -m 'prepared branch merge strategy';
 			    	git merge master;";
-		echo "command: $command \n";
+		if (DEBUG) echo "command: $command \n";
 		exec($command);
 		exec("cd $this->location; git remote", $branchesList);
 		if(in_array($otherVersion->getUserId(), $branchesList)) {	
@@ -89,12 +89,12 @@ class Repository {
 			$command = "cd $this->location; 
 			 	git remote add -t ". $myVersion->getUserId() ." -f ". $otherVersion->getUserId() ." $otherLocation;";
 		}		
-		echo "command: $command \n";
+		if(DEBUG) echo "command: $command \n";
 		exec($command);
 		//TODO: use real file length instead of big constant
 		$command = "cd $this->location; git checkout master; git diff -U10000 ". $otherVersion->getUserId() ."/". $myVersion->getUserId();
 		
-		echo "command: $command \n";
+		if(DEBUG) echo "command: $command \n";
 		exec($command, $result);
 		return array_slice($result, 1);
 						
@@ -105,18 +105,17 @@ class Repository {
 	public function merge($myVersion, $otherVersion, &$arrDiffs) {
 		
 	  	$command = "cd $this->location; git checkout master; git diff -U0 ".$otherVersion->getUserId() ."/".$myVersion->getUserId();
-		echo "command: $command \n";
+		if(DEBUG) echo "command: $command \n";
 		exec($command, $diffResult);
 		$diffResult = implode("\n", $diffResult);
 		preg_match_all('/\n@@ -(\d+),?(\d+)? \+(\d+),?(\d+)?/', $diffResult, $diffLineNums);	
-		print_r($diffLineNums); 		
 
 		//in git diff, "2," means the edit was one line long (not zero). update diffLineNums to reflect this.
 		foreach($diffLineNums[4] as $index => $curr) {if($curr==="") $diffLineNums[4][$index]=1;}
 		foreach($diffLineNums[2] as $index => $curr) {if($curr==="") $diffLineNums[2][$index]=1;}
-		print_r($diffLineNums);
+		if(DEBUG) print_r($diffLineNums);
 
-		print_r($arrDiffs);	
+		if(DEBUG) print_r($arrDiffs);	
 			
 	 	$myFileArr = $myVersion->readFileToArray();
 		$otherFileArr = $otherVersion->readFileToArray($myVersion->getUserId());	
@@ -127,8 +126,8 @@ class Repository {
 			} else if($diff->userAction == UserDiffAction::accepted) {
 				array_splice($myFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"]);	
 			}
-			print_r($myFileArr);
-			print_r($otherFileArr);
+			if(DEBUG)print_r($myFileArr);
+			if(DEBUG)print_r($otherFileArr);
 		}	
 		$myfile = $myVersion->openVersionFile();
 		foreach($myFileArr as $line) { fwrite($myfile,$line);}
