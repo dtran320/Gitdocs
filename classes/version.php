@@ -92,10 +92,14 @@ class Version {
 		//TODO: flesh out, merge with ckeditor	
 		
 	}
+
+	//Call publish instead of commit when user hits publish button (ie you have new text to save to disk)
+	public function publish($text) {
+		$this->save($text);
+		$this->commit();
+	}
 	
-	//saves, does git commit, returns new Version object
 	public function commit() {
-		$this->save();	
 		$this->repo->commit();
 		return $this;
 	}

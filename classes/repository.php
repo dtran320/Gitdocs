@@ -74,7 +74,7 @@ class Repository {
 			    	git merge master;";
 		echo "command: $command \n";
 		exec($command);
-		exec("git remote", $branchesList);
+		exec("cd $this->location; git remote", $branchesList);
 		if(in_array($otherVersion->getUserId(), $branchesList)) {	
 			$command ="cd $this->location; git fetch ". $otherVersion->getUserID();
 		} else {
@@ -83,7 +83,7 @@ class Repository {
 		}		
 		echo "command: $command \n";
 		exec($command);
-		$command = "cd $this->location; git diff -U10000 ". $otherVersion->getUserId() ."/". $myVersion->getUserId();
+		$command = "cd $this->location; git checkout master; git diff -U10000 ". $otherVersion->getUserId() ."/". $myVersion->getUserId();
 		
 		echo "command: $command \n";
 		exec($command, $result);
@@ -96,17 +96,18 @@ class Repository {
 	public function merge($myVersion, $otherVersion, &$arrDiffs) {
 	 	$myFileArr = $myVersion->readFileToArray();
 		$otherFileArr = $otherVersion->readFileToArray($myVersion->getUserId());	
-			
+	  	$command = "cd $this->location; git checkout master; git diff -U0 ".$otherVersion->getUserId() ."/".$myVersion->getUserId();
+		echo "command: $command \n";
+		exec($command, $diffResult);
+		$diffResult = implode("\n", $diffResult);
+		preg_match_all('/\n@@ -(\d+),?(\d+)? \+(\d+),?(\d+)?/', $diffResult, $diffLineNums);	
+		 		
 		//undo changes which were rejected
 		foreach($arrDiffs as $diff) {
-			if($userAction == "rejected") {
-			//figure out line number that diff hapened on.
-				
-				if($diff->type == "ins"){
-					unset($otherFileArr[$diff->index]);		
-				} else if($diff->type == "del") {
-					unset($myFileArr[$diff->index]);	
-				}
+			if($userAction == Diff::rejected) {
+				array_splice($otherFileArr, $diffLineNums[2], $diffLineNums[3]);	
+			} else if($userAction == Diff::accepted) {
+				array_splice($otherFileArr, $diffLineNums[0], $diffLineNums[1]);	
 			}
 		}	
 		$myfile = $myVersion->openVersionFile();
