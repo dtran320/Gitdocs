@@ -91,6 +91,7 @@ class Repository {
 		}		
 		echo "command: $command \n";
 		exec($command);
+		//TODO: use real file length instead of big constant
 		$command = "cd $this->location; git checkout master; git diff -U10000 ". $otherVersion->getUserId() ."/". $myVersion->getUserId();
 		
 		echo "command: $command \n";
@@ -113,9 +114,9 @@ class Repository {
 		//undo changes which were rejected
 		foreach($arrDiffs as $diff) {
 			if($userAction == Diff::rejected) {
-				array_splice($otherFileArr, $diffLineNums[2], $diffLineNums[3]);	
+				array_splice($otherFileArr, $diffLineNums[3]["$diff->index"], $diffLineNums[4]["$diff->index"]);	
 			} else if($userAction == Diff::accepted) {
-				array_splice($otherFileArr, $diffLineNums[0], $diffLineNums[1]);	
+				array_splice($otherFileArr, $diffLineNums[1]["diff->index"], $diffLineNums[2]["$diff->index"]);	
 			}
 		}	
 		$myfile = $myVersion->openVersionFile();

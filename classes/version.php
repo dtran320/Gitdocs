@@ -139,6 +139,10 @@ class Version {
 		return $this->docId;
 	}
 	
+	public function getVersionId(){
+		return $this->versionId;
+	}
+	
 	public function getDocument() {
 		$db = new DB();
 		$getDocQuery = "SELECT doc_id, name FROM Documents WHERE doc_id='{$this->docId}'";
