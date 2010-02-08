@@ -28,9 +28,10 @@ function testCreateVersion($docId = 1, &$version, &$version2) {
 	}
 	$unused = $version2->openVersionFile();
 	
+	fwrite($unused, "this is a new line in the branched version. I'll take this change\n");
 	fwrite($unused, "this is a line in the initial version, before branching\n");
 
-	fwrite($unused, "this is a new line in the branched version\n");
+	fwrite($unused, "this is a new line in the branched version. I'll nix this change\n");
 	fclose($unused);
 	$version2->commit();
 	$v2arr = $version2->readFileToArray();

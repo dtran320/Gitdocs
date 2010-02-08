@@ -120,8 +120,8 @@ class Version {
 	public function merge($otherVersion, &$diffs) {
 		//TODO:parse diffs, open other version, undo changes
 		
-		$repo->merge($this, $otherVersion, $diffs);
-		commit();
+		$this->repo->merge($this, $otherVersion, $diffs);
+		$this->commit();
 		return true;
 	}
 

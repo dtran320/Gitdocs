@@ -75,7 +75,7 @@ class Repository {
 				git stash; 
 				git branch ". $myVersion->getUserId() ."; 
 				git checkout ". $myVersion->getUserId(). "; 
-				echo document.html merge=discardMine > $otherLocation/.gitattributes;
+				echo drning: mysql_real_escape_string() expects pocument.html merge=discardMine > $otherLocation/.gitattributes;
 				git config merge.discardMine.name \"discard my changes if conflicts\";
 				git config merge.discardMine.driver \"".dirname(__FILE__). "/../scripts/discardMine.sh %0 %A %B\";
 				git commit -a -m 'prepared branch merge strategy';
@@ -103,25 +103,36 @@ class Repository {
 	
 	
 	public function merge($myVersion, $otherVersion, &$arrDiffs) {
-	 	$myFileArr = $myVersion->readFileToArray();
-		$otherFileArr = $otherVersion->readFileToArray($myVersion->getUserId());	
+		
 	  	$command = "cd $this->location; git checkout master; git diff -U0 ".$otherVersion->getUserId() ."/".$myVersion->getUserId();
 		echo "command: $command \n";
 		exec($command, $diffResult);
 		$diffResult = implode("\n", $diffResult);
 		preg_match_all('/\n@@ -(\d+),?(\d+)? \+(\d+),?(\d+)?/', $diffResult, $diffLineNums);	
-		 		
+		print_r($diffLineNums); 		
+
+		//in git diff, "2," means the edit was one line long (not zero). update diffLineNums to reflect this.
+		foreach($diffLineNums[4] as $index => $curr) {if($curr==="") $diffLineNums[4][$index]=1;}
+		foreach($diffLineNums[2] as $index => $curr) {if($curr==="") $diffLineNums[2][$index]=1;}
+		print_r($diffLineNums);
+
+		print_r($arrDiffs);	
+			
+	 	$myFileArr = $myVersion->readFileToArray();
+		$otherFileArr = $otherVersion->readFileToArray($myVersion->getUserId());	
 		//undo changes which were rejected
 		foreach($arrDiffs as $diff) {
-			if($userAction == Diff::rejected) {
-				array_splice($otherFileArr, $diffLineNums[3]["$diff->index"], $diffLineNums[4]["$diff->index"]);	
-			} else if($userAction == Diff::accepted) {
-				array_splice($otherFileArr, $diffLineNums[1]["diff->index"], $diffLineNums[2]["$diff->index"]);	
+			if($diff->userAction == UserDiffAction::rejected) {
+				array_splice($otherFileArr, $diffLineNums[1]["$diff->index"] - 1, (int)$diffLineNums[2]["$diff->index"]);	
+			} else if($diff->userAction == UserDiffAction::accepted) {
+				array_splice($myFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"]);	
 			}
+			print_r($myFileArr);
+			print_r($otherFileArr);
 		}	
 		$myfile = $myVersion->openVersionFile();
 		foreach($myFileArr as $line) { fwrite($myfile,$line);}
-		fclose($myFile);
+		fclose($myfile);
 		$myVersion->commit();	
 		
 		$otherFile = $otherVersion->openVersionFile($myVersion->getUserId());
@@ -129,11 +140,9 @@ class Repository {
 		fclose($otherFile);	
 		$otherVersion->commit();
 	
-		$command = "cd $this->location; git merge $otherVersion->userId/$myVersion->userId"; 
-		$exec($command, $err);
-		if($err) {
-			echo "Merge Error! $result";
-		}
+		$command = "cd $this->location; git fetch ". $otherVersion->getUserId() . ";git merge ". $otherVersion->getUserId(). "/" . $myVersion->getUserId(); 
+		exec($command, $err);
+		
 	}
 
 }
