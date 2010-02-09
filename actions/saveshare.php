@@ -19,6 +19,14 @@ if($action=="save") {
 	else echo "0";
 }
 
+else if ($action=="publish"){
+    	$docText = postVar("editor1");
+        $version = new Version($d_id, $u_id);
+        $status = $version->publish($docText);
+        if($status) echo "1";
+        else echo "0";	
+}
+
 else if ($action=="renameV") {
 	$versionName = postVar("v_name");
 	$version = new Version($d_id, $u_id);

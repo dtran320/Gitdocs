@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 /* ----------------------------------------------------------------------------
  * Document class
  * Object-relational class for the documents 
@@ -58,7 +57,7 @@ class Document {
 	public function getAllVersions($n=0){
 		$versions = array();
 		$db = new DB();
-		$query = "SELECT v_id, doc_fk, u_fk, v_name, last_saved_time as timestamp FROM Versions WHERE doc_fk='{$this->docId}'";
+		$query = "SELECT icon_ptr,v_name, display_name, last_saved_time as timestamp, u_id FROM Versions,Users WHERE doc_fk='{$this->docId}' AND u_id=u_fk";
 		if($n>0)  $query .= " LIMIT 0, $n";
 		$db->execQuery($query);
 		while($row = $db->getNextRow()){

@@ -17,7 +17,7 @@ class Repository {
 	public static function CreateNewRepository($docId, $userId,$versionToClone = 0) {
 		global $DOCUMENTS_PATH;
 		$location = "$DOCUMENTS_PATH$docId/$userId";
-		if(!mkdir("$location", 0700)) {
+		if(!mkdir("$location", 0777)) {
 			// TODO: if can't make dir, then it could already exist
 			// but this is potentially hazardous
 			return new Repository($location);			
@@ -36,7 +36,7 @@ class Repository {
 			$fh = fopen("$location/document.html",'x');
 			fclose($fh);	
 			$command = "cd $location ; git init; git add document.html; git commit -a -m first-commit";
-			exec($command);
+			exec($command, $result);
 		}
 		return new Repository($location);
 	}
@@ -96,7 +96,7 @@ class Repository {
 		
 		if(DEBUG) echo "command: $command \n";
 		exec($command, $result);
-		return array_slice($result, 1);
+		return array_slice($result, 2);
 						
 	}
 	
