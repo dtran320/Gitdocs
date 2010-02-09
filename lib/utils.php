@@ -34,6 +34,7 @@ function getVarClean($fieldName) {
 }
 
 function getLocalTime($time) {
+	date_default_timezone_set('America/Los_Angeles');
 	return date("M d Y h:i A", $time);
 }
 
