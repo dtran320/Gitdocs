@@ -36,8 +36,8 @@ if($user = User::getLoggedInUser()) {
 		array('images/bella8.jpg', '<a class="v_name">fall 2008</a><br />by bella8 2y ago'),
 		));
 
-//	$patch = implode("\n", $version->diff($other_version));
-	$patch = file_get_contents('tests/example.patch');
+	$patch = implode("\n", $version->diff($other_version));
+//	$patch = file_get_contents('tests/example.patch');
 	$diff = new Text_Diff('string', array($patch));
 	$renderer = new Text_Diff_Renderer_inline();
 	$out = $renderer->render($diff);
