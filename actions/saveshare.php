@@ -11,7 +11,7 @@ $u_id = postVarClean("u_id");
 
 //echo 1 as status for success, 0 for fail... might want to make this JSON with a status and specific errors
 
-if($action=="save") {
+if($action=="Save") {
 	$docText = postVar("editor1");
 	$version = new Version($d_id, $u_id);
 	$status = $version->save($docText);
@@ -19,7 +19,7 @@ if($action=="save") {
 	else echo "0";
 }
 
-else if ($action=="publish"){
+else if ($action=="Publish"){
     	$docText = postVar("editor1");
         $version = new Version($d_id, $u_id);
         $status = $version->publish($docText);
