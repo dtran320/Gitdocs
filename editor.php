@@ -6,7 +6,6 @@ require_once('lib/utils.php');
 require('init_smarty.php');
 require_once('classes/version.php');
 require_once('classes/document.php');
-ini_set('error_reporting', E_ALL);
 
 if($user = User::getLoggedInUser()) {
 	$smarty->assign('logged_in_user', $user->getUserInfo());
