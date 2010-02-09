@@ -13,11 +13,11 @@
 	</form>
 	
 	<form id="save_form" class="big_form" action="actions/saveshare.php" method="post" style="float:right;">
-		<input type="hidden" name="action" value="save" />
+		<!-- <input type="hidden" name="action" value="save" /> -->
 		<input type="hidden" name="d_id" value="{$d_id}" />
 		<input type="hidden" name="u_id" value="{$u_id}" />
-		<input type="submit" name="submit" value="Save" onclick="updateElement();"/>
-		<input type="submit" name="submit" value="Publish" onclick="updateElement();"/>
+		<input type="submit" name="action" value="Save" onclick="updateElement();"/>
+		<input type="submit" name="action" value="Publish" onclick="updateElement();"/>
 
 	</div><!-- end box_title -->
 

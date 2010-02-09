@@ -46,7 +46,7 @@ class Repository {
 	}
 	
 	public function commit() {
-		$command = "cd $this->location; git commit -a -m placeholdercommitmsg";
+		$command = "cd $this->location; git add document.html; git commit -a -m placeholdercommitmsg";
 		exec($command);
 	}
 	
