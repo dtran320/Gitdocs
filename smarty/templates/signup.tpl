@@ -41,27 +41,26 @@
 <div style="margin-left: 20px;">
 <div class="headline_blue">Explore Gitdocs</div>
 	<div class="left_side45">
-<div class="box">
-	<div class="box_title">Popular topics</div>
-       	<div class="box_content">
-		<div style="padding-bottom:20px;">
-			<table>
-			{section name=i loop=$pop_tops}
-			<tr><td><span style="color:{cycle values="#1E1E1F, #67666A, #807F83, #CBC9CF"}">{$pop_tops[i]}</span></td></tr>
-	<!-- el gray from kuler -->
-			{/section}
-			</table>
-			</div>
-		</div>
-</div>
-</div>
+		<div class="box">
+				<div class="box_title">Recently saved documents</div>
+			       	<div class="box_content">
+						<table class="document_list">
+							{section name=i loop=$recent_global_docs}
+								<tr><td>{$recent_global_docs[i].displayName}</td><td><a href="{$recent_global_docs[i].link}"><p class="no_line_height">{$recent_global_docs[i].dName} - {$recent_global_docs[i].vName}</p><p class="small_text no_line_height">{$recent_global_docs[i].timestamp}</p></a></td></tr>
+							{/section}
+								</table>
+						</div><!-- end box content -->
+			</div><!-- end box -->
+</div><!-- end left -->
 <div class="right_side45">
 <div class="box">
-	 <div class="box_title">Popular documents</div>
+	 <div class="box_title">Recent <a href="http://twitter.com/gitdocs">@gitdocs</a> updates</div>
        <div class="box_content">
 			<table>
-			{section name=i loop=$pop_docs}
-			<tr><td>{$pop_docs[i]}</td></tr>
+			{section name=i loop=$twitter_updates}
+			<tr><td>{$twitter_updates[i].update_time}</td></tr>
+			<tr><td>{$twitter_updates[i].update_text}</td></tr>
+			<tr><td>&nbsp;</td></tr>
 			{/section}
 			</table>
 		</div>
