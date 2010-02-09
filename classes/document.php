@@ -54,6 +54,20 @@ class Document {
 		return $db->execQuery($renameQuery);
 	}
 	
+	//returns array containing each user's current version
+	public function getAllVersions($n=0){
+		$versions = array();
+		$db = new DB();
+		$query = "SELECT v_id, doc_fk, u_fk, v_name, last_saved_time as timestamp FROM Versions WHERE doc_fk='{$this->docId}'";
+		if($n>0)  $query .= " LIMIT 0, $n";
+		$db->execQuery($query);
+		while($row = $db->getNextRow()){
+			$row['timestamp'] = getLocalTime($row['timestamp']);
+			$versions[] = $row;
+		}
+		return $versions;
+	}
+	
 }
 
 ?>

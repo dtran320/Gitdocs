@@ -18,7 +18,7 @@ function testCreateDocument() {
 	echo ($document->name == "testdoc")? "Yes!" : "No!";
 	
 	echo "<br/>";
-	return($document->docId);
+	return($document);
 
 }
 

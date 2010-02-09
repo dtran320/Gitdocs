@@ -6,7 +6,9 @@ require_once(dirname(__FILE__) . "/../classes/version.php");
 require_once(dirname(__FILE__) . "/../classes/diff.php");
 
 function testMerge() {
-	$docId = testCreateDocument();
+	$doc = testCreateDocument();
+	
+	$docId = $doc->docId; 
 	testCreateVersion($docId, $version, $version2);
 			
 	//testDiff($docId);
@@ -15,6 +17,9 @@ function testMerge() {
 	$diff2 = new Diff($docId,1,2,UserDiffAction::rejected, DiffType::mod,1);
 	$diffArray = array($diff1, $diff2);
 	$version->merge($version2, $diffArray);		
+	
+	$versions = $doc->getAllVersions();
+	print_r($versions);
 }
 
 ?>
