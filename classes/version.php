@@ -98,6 +98,7 @@ class Version {
 	public function publish($text) {
 		$this->save($text);
 		$this->commit();
+		return true; //TODO: need to update repo->commit to return error code
 	}
 	
 	public function commit() {
