@@ -96,7 +96,7 @@ class Repository {
 		
 		if(DEBUG) echo "command: $command \n";
 		exec($command, $result);
-		return array_slice($result, 1);
+		return array_slice($result, 2);
 						
 	}
 	
