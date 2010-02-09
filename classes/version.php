@@ -87,8 +87,7 @@ class Version {
 	public function save($text) {
 		$this->textCache = $text;
 		$this->updateTimestamp();
-		return fwrite($this->fileHandler, $text);
-		//ftruncate($this->fileHandler, ftell($this->fileHandler))
+		return (fwrite($this->fileHandler, $text) && ftruncate($this->fileHandler, ftell($this->fileHandler)));
 		//fclose($fileHandler);
 		//TODO: flesh out, merge with ckeditor	
 		
