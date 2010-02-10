@@ -19,13 +19,14 @@
 <div class="box">
 	<div class="box_title">My Recent Documents</div>
         <div class="box_content">
-		<table class="document_list">
+		<!-- don't change this id w/o changing references in gitdocs.js -->
+		<table class="document_list" id="my_recent_docs">
 		{section name=i loop=$my_recent_docs}
 		<tr><td><a href="{$my_recent_docs[i].link}"><p class="no_line_height">{$my_recent_docs[i].dName} - {$my_recent_docs[i].vName}</p><p class="small_text no_line_height">{$my_recent_docs[i].timestamp}</p></a></td></tr>
 		{/section}
 		</table>
 		<div style="padding-top:10px;">
-		<a href="index.php">See All My Documents</a>
+		<div id="show_my_recent_docs"><a onclick="showAllMyDocuments();">See All My Documents</a></div>
 		</div>	
 	</div><!-- end box_content -->
 </div><!-- end box -->
