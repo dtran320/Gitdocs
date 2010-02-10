@@ -92,7 +92,7 @@ class Repository {
 		if(DEBUG) echo "command: $command \n";
 		exec($command);
 		//TODO: use real file length instead of big constant
-		$command = "cd $this->location; git checkout master; git diff -U10000 ". $otherVersion->getUserId() ."/". $myVersion->getUserId();
+		$command = "cd $this->location; git checkout  ". $otherVersion->getUserId() ."/". $myVersion->getUserId() . "; git diff -U10000 master"; 
 		
 		if(DEBUG) echo "command: $command \n";
 		exec($command, $result);
