@@ -31,12 +31,12 @@ function addLikeDislikeLinks(view_type) {
 	var orig_txt = $(this).html();
 
 	if(view_type == '_inline') {
-		var type = (orig_txt.indexOf("<del>") != -1) ? "del" : "ins";
+  	var type = (orig_txt.indexOf("<del>") != -1) ? "del" : "ins";
 		if (type == "del") {
-			type = (orig_txt.indexOf("<ins>") != -1) ? "change" : "del";
+		type = (orig_txt.indexOf("<ins>") != -1) ? "change" : "del";
 		}
 	} else {
-		var type = (orig_txt.indexOf("<del>") != -1) ? "del" : "ins";
+		var type = ($(this).hasClass("del")) ? "del" : "ins";
 		if (type == "del") {
 			var mod = $(".inline_change" + index + " ~ .mod");
 			if (mod != null) {
@@ -47,12 +47,25 @@ function addLikeDislikeLinks(view_type) {
 		}
 	}
 
-	elem.html("<span class='like' onclick='like" + view_type + "(" + index +  ");'>like | </span> <span class='dislike' onclick='dislike" + view_type + "(" + index + ");'>dislike</span><span class='orig' style='display: none;'>" + orig_txt + "</span><span class='undo displaynone' onclick='undo" +view_type +  "(" + index + ");'>undo</span>");
+	elem.html("<span class='like' onclick=\"makeMergeChoice" + view_type + "(" + index +  ", 'like');\">like | </span>" 
+					+ "<span class='dislike' onclick=\"makeMergeChoice" + view_type + "(" + index + ", 'dislike');\">dislike</span>" 
+					+ "<span class='orig' style='display: none;'>" + orig_txt + "</span>" 
+					+ "<span class='undo displaynone' onclick=\"makeMergeChoice" +view_type +  "(" + index + ", 'undo');\">undo</span>");
 
 	var form_txt = $('#merge_form').html();
 	$('#merge_form').html(form_txt + ' <input type="hidden" id="hidden' + index + '" name="hidden' + index + '" value="boo">'
 	 + ' <input type="hidden" id="type' + index + '" name="type' + index + '" value="'+ type + '">');
 	});
+}
+
+function makeMergeChoice_inline(num, choice) {
+	if (choice == "like") {
+		like_inline(num);
+	} else if (choice == "dislike") {
+		dislike_inline(num);
+	} else {
+		undo_inline(num);
+	}
 }
 
 function like_inline(num) {
@@ -64,11 +77,8 @@ function like_inline(num) {
 	}
 	$(selector).html(txt);
 	$(selector + ' del').addClass('faded');
-	var elem = $('.inline_ld').slice(num, num+1);
-	elem.find('.like').addClass('displaynone');
-	elem.find('.dislike').addClass('displaynone');
-	elem.find('.undo').removeClass('displaynone');
 
+	toggleLinks(num);
 	$('#hidden' + num).attr('value', 'like');
 }
 
@@ -81,11 +91,9 @@ function dislike_inline(num) {
 	}
 	$(selector).html(txt);
 	$(selector + ' ins').addClass('faded');
-	var elem = $('.inline_ld').slice(num, num+1);
-	elem.find('.like').addClass('displaynone');
-	elem.find('.dislike').addClass('displaynone');
-	elem.find('.undo').removeClass('displaynone');
 
+
+	toggleLinks(num);
 	$('#hidden' + num).attr('value', 'dislike');
 }
 
@@ -94,9 +102,8 @@ function undo_inline(num) {
 	var elem = $('.inline_ld').slice(num, num+1);
 	var txt = elem.find('.orig').html();	
 	$(selector).html(txt);
-	elem.find('.like').removeClass('displaynone');
-	elem.find('.dislike').removeClass('displaynone');
-	elem.find('.undo').addClass('displaynone');
+
+	toggleLinks(num);
 	$('#hidden' + num).attr('value', 'undo');
 }
 
@@ -142,132 +149,58 @@ function undoAll_inline() {
 	}
 }
 
-function like_2col(num) {
-	var selector = ".inline_change" + num;
-	var css_float = $(selector).css("float");
-	
-	if (css_float == "right") {
-		// insert
-		$(selector).css("float", "left");
-		$(selector).css("clear", "both");
+function toggleLinks(num) {
+	var elem = $(".inline_ld").slice(num, num+1);
+	if (elem.find(".like").hasClass("displaynone")) {
+		elem.find(".like").removeClass("displaynone");
+		elem.find(".dislike").removeClass("displaynone");
+		elem.find(".undo").addClass("displaynone");
 	} else {
-		// delete or change
-		var mod = $(selector).next(); // buggish
-		if (mod.hasClass("mod")) {
-			mod.css("float", "left");
-			mod.css("clear", "both");
-		}
-		$(selector).css("display", "none");
+		elem.find(".like").addClass("displaynone");
+		elem.find(".dislike").addClass("displaynone");
+		elem.find(".undo").removeClass("displaynone");		
 	}
-
-	var elem = $('.inline_ld').slice(num, num+1);
-	elem.find('.like').addClass('displaynone');
-	elem.find('.dislike').addClass('displaynone');
-	elem.find('.undo').removeClass('displaynone');
-
-	placeLinks();
-	$('#hidden' + num).attr('value', 'like');
 }
 
-//. for now..
-function dislike_2col(num) {
-	var selector = ".inline_change" + num;
-	var css_float = $(selector).css("float");
-	
-	if (css_float == "right") {
-		$(selector).css("height", "10px");
-		$(selector).css("overflow", "hidden");
+function makeMergeChoice_2col(num, choice) {
+	var diff = $(".inline_change" + num);
+	var mod = diff.next();
+	if (choice == "undo") {
+		diff.removeClass("ins_like");
+		diff.removeClass("ins_dislike");
+		diff.removeClass("del_like");
+		diff.removeClass("del_dislike");
+		if (mod != null && mod.hasClass("mod")) {
+			mod.removeClass("mod_like");
+			mod.removeClass("mod_dislike");
+		}
 	} else {
-		// delete or change
-		var mod = $(selector).next(); // buggish
-		if (mod.hasClass("mod")) {
-			mod.css("height", "10px");
-			mod.css("overflow", "hidden");
+		if (diff.hasClass("ins")) {
+			diff.addClass("ins_" + choice);
+		} else {
+			diff.addClass("del_" + choice);
+			if (mod != null && mod.hasClass("mod")) {
+				mod.addClass("mod_" + choice);
+			}
 		}
-		var txt = $(selector).html();
-		txt = txt == null ? "" : txt.replace("<del>", "");
-		txt = txt.replace("</del>", "");
-		$(selector).html(txt);
 	}
 
-	var elem = $('.inline_ld').slice(num, num+1);
-	elem.find('.like').addClass('displaynone');
-	elem.find('.dislike').addClass('displaynone');
-	elem.find('.undo').removeClass('displaynone');
-
+	toggleLinks(num);
 	placeLinks();
-	$('#hidden' + num).attr('value', 'dislike');
+	$('#hidden' + num).attr('value', choice);
 }
 
-function undo_2col(num){
-	var elem = $('.inline_ld').slice(num, num+1);
-	elem.find('.like').removeClass('displaynone');
-	elem.find('.dislike').removeClass('displaynone');
-	elem.find('.undo').addClass('displaynone');
-
-	var orig_txt = elem.find('.orig').html();
-	var selector = '.inline_change' + num;
-	var index = orig_txt == null ? -1 : orig_txt.indexOf("!@!@");
-	if (index != -1) {
-		$(selector).css("display", "block");
-		$(selector).html(orig_txt.substring(0, index));
-		var mod = $(selector).next();
-		if (mod.hasClass("mod")) {
-			mod.css("float", "right");
-			mod.css("height", "");		
-			mod.css("clear", "none");
-		}
-	} else if ((orig_txt == null ? "" : orig_txt).indexOf("<ins>") != -1) {
-		$(selector).css("float", "right");
-		$(selector).css("height", "");
-		$(selector).css("clear", "both");
-									
-	}
-	placeLinks();
-	$('#hidden' + num).attr('value', 'undo');
-
-}
-
-function likeAll_2col() {
+function makeAllMergeChoices_2col(choice) {
 	var arr = new Array();
 	var i = 0;
-	$('.like').each(function(index) {
+	$('.' + choice).each(function(index) {
 			if($(this).css('display') != 'none') {
 				arr[i] = index;
 				i++;
 		}
 	}); 
 	for (var j = 0; j < i; j++) {
-		like_2col(arr[j]);
+			makeMergeChoice_2col(arr[j], choice);
 	}
 }
-
-function dislikeAll_2col() {
-	var arr = new Array();
-	var i = 0;
-	$('.dislike').each(function(index) {
-			if($(this).css('display') != 'none') {
-				arr[i] = index;
-				i++;
-		}
-	}); 
-	for (var j = 0; j < i; j++) {
-		dislike_2col(arr[j]);
-	}
-}
-
-function undoAll_2col() {
-	var arr = new Array();
-	var i = 0;
-	$('.undo').each(function(index) {
-			if($(this).css('display') != 'none') {
-				arr[i] = index;
-				i++;
-		}
-	}); 
-	for (var j = 0; j < i; j++) {
-		undo_2col(arr[j]);
-	}
-}
-
 

@@ -18,10 +18,9 @@ if($user = User::getLoggedInUser()) {
 	$smarty->assign('u_name', $user->username);
 	$smarty->assign('displayName', $user->displayName);
 	
-	if (!$v_id) {
-		$v_id = getVarClean("v_id");
-	}
-	if($v_id) { //opening an existing doc
+	
+
+	if($v_id = getVarClean("v_id")) { //opening an existing doc
 		$version = new Version(0,0,0,0, $v_id);
 		$versionName = $version->getName();
 		$docText = $version->getDocFromDisk();

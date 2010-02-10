@@ -34,7 +34,7 @@ class Document {
 		$id = mysql_real_escape_string($id);
 		$docInfoQuery = "SELECT name FROM Documents " .
 			"WHERE doc_id='{$id}'";
-		var_dump($docInfoQuery);
+		if (DEBUG) var_dump($docInfoQuery);
 		$db->execQuery($docInfoQuery);
 		$row = $db->getNextRow();
 		return $row;

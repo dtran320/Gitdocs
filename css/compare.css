@@ -152,20 +152,71 @@ span.dislike:hover, span.dislikeall:hover{
 .inline_ld {
 	position: absolute;
 }
-.ins { background: #cfc; }
-.del { background: #fcc; }
-
-ins { background: #cfc; }
-del { background: #fcc; }
-hr { background: none; border: none; border-top: 2px dotted #000; color: #fff; }
-
-.grayed {
-	background: #EEECEF;
+div.ins { 
+float: right;
+width: 300px;
+clear: both;
+background: #cfc; 
+margin-bottom:3px;
+overflow: hidden;
+}
+div.del { 
+background: #fcc; 
+margin-bottom:3px;
+overflow: hidden;
+float: left;
+width: 300px;
+clear: left;
 }
 
-.faded {
+div.mod {
+	float: right;
+	width: 300px;
+	clear: none;
+}
+
+div.ins_like {
+	float: left;
+	clear: both;
+}
+
+div.ins_dislike {
+	height: 10px;
+}
+
+div.mod_dislike {
+	height: 10px;
+}
+div.mod_like {
+	float: left;
+	clear: both;
+}
+div.del_like {
+	height: 10px;
+}
+
+div.del_dislike {
+}
+
+
+ins, ins p { 
+	background: #cfc; 
+	text-decoration: none;
+}
+del, del p { 
+	background: #fcc; 
+	text-decoration: none;
+}
+
+hr { background: none; border: none; border-top: 2px dotted #000; color: #fff; }
+
+.grayed, .grayed p {
+	background: #EEECEF; 
+}
+
+.faded, .faded p {
 	background: #EEECEF;
-	/*opacity: 0.4;*/
+	opacity: 0.4;
 }
 
 

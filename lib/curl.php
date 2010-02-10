@@ -6,7 +6,7 @@ class CurlResult {
 	public $info;
 	
 	function __construct() {
-		$this->tranfserResult = "";
+		$this->transferResult = "";
 		$this->info = "";
 	}
 	

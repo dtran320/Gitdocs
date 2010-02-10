@@ -7,12 +7,12 @@
 		</form>
 
 <div class="box left_main">
-	<div class="box_title">Comparing -- {$d_name} <a onclick="$('#compare_form').submit();" style="color:red;">==AB TESTING CLICK HERE==</a><form id="merge_form" action="compare_post.php" method="post"><input type="submit" value="Save">{$input}</form></div>
+	<div class="box_title">Comparing -- {$d_name} <a onclick="$('#compare_form').submit();" style="color:red;">== click for other view (not bug-free)==</a><form id="merge_form" action="compare_post.php" method="post"><input type="submit" value="Save">{$input}</form></div>
 	<div class="box_content">
 	<div style="width: 600px; font-size: 13px;">
 	<div id="column_top" style="width: 300px; float: left;">your <span class="v_name">{$v_name}</span></div>
 	<div style="width: 300px; float: right;">{$other_u_name}'s <span class="v_name">{$other_v_name}</span></div>
-	<div class="likedislike" style="position: absolute;"><span class="likeall" onclick="likeAll_2col();">L</span> | <span class="dislikeall" onclick="dislikeAll_2col();">D</span> | <span class="undoall" onclick="undoAll_2col();">U</span></div>
+	<div class="likedislike" style="position: absolute;"><span class="likeall" onclick="makeAllMergeChoices_2col('like');">L</span> | <span class="dislikeall" onclick="makeAllMergeChoices_2col('dislike');">D</span> | <span class="undoall" onclick="makeAllMergeChoices_2col('undo');">U</span></div>
 		{$diff}
 	</div>
 	</div> <!--box content-->
