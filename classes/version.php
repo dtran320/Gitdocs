@@ -169,6 +169,7 @@ class Version {
 	}
 	
 	public function getDocFromDisk() {
+		$this->repo->checkout("master");
 		return fread($this->fileHandler, 8192);
 	}
 	
