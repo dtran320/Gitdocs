@@ -18,8 +18,8 @@ function testMerge() {
 	$diffArray = array($diff1, $diff2);
 	$version->merge($version2, $diffArray);		
 	
-	$versions = $doc->getAllVersions();
-	print_r($versions);
+	//$versions = $doc->getAllVersions();
+	//print_r($versions);
 }
 
 ?>

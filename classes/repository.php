@@ -106,7 +106,9 @@ class Repository {
 	
 	public function merge($myVersion, $otherVersion, &$arrDiffs) {
 		
-	  	$command = "cd $this->location; git checkout master; git diff -U0 ".$otherVersion->getUserId() ."/".$myVersion->getUserId();
+		$otherLocation = $otherVersion->getRepoLocation();
+		$command = "cd $this->location; git checkout master; cd $otherLocation git checkout " . $myVersion->getUserId() . "; diff -U0 $this->location/document.html $otherLocation/document.html";
+	  	//$command = "cd $this->location; git checkout master; git diff -U0 ".$otherVersion->getUserId() ."/".$myVersion->getUserId();
 		if(DEBUG) echo "command: $command \n";
 		exec($command, $diffResult);
 		$diffResult = implode("\n", $diffResult);
@@ -122,15 +124,19 @@ class Repository {
 	 	$myFileArr = $myVersion->readFileToArray();
 		$otherFileArr = $otherVersion->readFileToArray($myVersion->getUserId());	
 		//undo changes which were rejected
-		foreach($arrDiffs as $diff) {
-			if($diff->userAction == UserDiffAction::rejected) {
-				array_splice($otherFileArr, $diffLineNums[1]["$diff->index"] - 1, (int)$diffLineNums[2]["$diff->index"]);	
-			} else if($diff->userAction == UserDiffAction::accepted) {
-				array_splice($myFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"]);	
-			}
+		
 			if(DEBUG)print_r($myFileArr);
 			if(DEBUG)print_r($otherFileArr);
+		foreach($arrDiffs as $diff) {
+			if($diff->userAction == UserDiffAction::accepted) {
+				array_splice($myFileArr, $diffLineNums[1]["$diff->index"] - 1, (int)$diffLineNums[2]["$diff->index"]);	
+			} else if($diff->userAction == UserDiffAction::rejected) {
+				array_splice($otherFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"]);	
+			}
 		}	
+
+			if(DEBUG)print_r($myFileArr);
+			if(DEBUG)print_r($otherFileArr);
 		$myfile = $myVersion->openVersionFile();
 		foreach($myFileArr as $line) { fwrite($myfile,$line);}
 		fclose($myfile);
