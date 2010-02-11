@@ -32,7 +32,7 @@ class Repository {
 			//TODO: Escape this? necessary?
 			$output = array();
 			exec($command, $output);
-			var_dump($output);
+
 			$version = new Version($docId, $userId);
 			$version->save($parent_version->getDocFromDisk());
 			
