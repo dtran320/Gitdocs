@@ -3,103 +3,8 @@ body {
 	padding: 0px;
 }
 
-.help_dropdown {
-	border: #3a7d75 10px solid;
-	background: #fff;
-	height: 250px;
-	width: 280px;
-	position: absolute;
-	margin-left: 300px;
-	margin-top: 100px;
-	z-index: 100;
-	-moz-box-shadow: 10px 10px 50px #3a7d75;
-	-webkit-box-shadow: 10px 10px 50px #3a7d75;
-	display:none;
-	padding: 10px;
-}
-
 .full {
 	clear: both;
-}
-
-.diff_changes {
-	width: 200px;
-	float: left;
-}
-
-.text_body {
-	margin: 10px;
-	padding: 5px;
-	width: 400px;
-	height: 400px;
-	overflow: auto;
-	border: 1px #000 solid;
-	float: right;
-}
-
-.big_button {
-	background: #263033;
-	color: #fff;
-	font-size: 1.5em; 
-	text-shadow: 2px 2px 3px #000000; 
-	height: 1.75em;
-	-moz-border-radius: 5px; 
-	-webkit-border-radius: 5px;
-	border: 1px #000; 
-	-moz-box-shadow: 1px 1px 3px #000;
-	-webkit-border-radius: 5px;
-	margin: 5px;
-}
-
-.change_bubble {
-	-moz-border-radius: 5px;
-	width: 175px;
-	height: 30px;
-	overflow: hidden;
-	margin: 10px 0px 10px 0px;
-}
-
-.bubble_resolved {
-	opacity: 0.5;
-}
-
-.bubble_spacer {
-	width: 175px;
-	height: 30px;
-	
-}
-
-.your_changes_icon {
-	background: url(../images/fam_fam_icons/user_green.png) no-repeat #A3F0FA;
-	padding-left: 20px;
-}
-
-.your_changes {
-	/*background: #00ee11;*/
-	background: #A3F0FA;
-}
-
-.their_changes_icon {
-	background: url(../images/fam_fam_icons/user_red.png) no-repeat #FEF38E;
-	padding-left: 20px;
-}
-.their_changes {
-	/*background: #ee0011;*/
-	background: #FEF38E;
-}
-
-.spacer100 {
-	width: 100px;
-	height: 1px;
-	float: left;
-}
-
-#save {
-	float: left;
-}
-
-#cancel {
-	float: left;
 }
 
 .link {
@@ -153,6 +58,7 @@ span.dislike:hover, span.dislikeall:hover{
 	position: absolute;
 }
 div.ins { 
+background: #cfc; 
 float: right;
 width: 300px;
 clear: both;
@@ -176,6 +82,7 @@ div.mod {
 }
 
 div.ins_like {
+	background: white;
 	float: left;
 	clear: both;
 }
@@ -193,25 +100,45 @@ div.mod_like {
 }
 div.del_like {
 	height: 10px;
+	float: right;
+	clear: both;
 }
 
 div.del_dislike {
+	background: white;
 }
 
 
+span.ins {
+	background: #cfc;
+}
+
+span.ins_like {
+}
+
+span.ins_dislike {
+}
+
+span.del {
+	background: #fcc;
+}
+span.del_like {
+}
+
+span.del_dislike {
+}
+
 ins, ins p { 
-	background: #cfc; 
 	text-decoration: none;
 }
 del, del p { 
-	background: #fcc; 
 	text-decoration: none;
 }
 
 hr { background: none; border: none; border-top: 2px dotted #000; color: #fff; }
 
 .grayed, .grayed p {
-	background: #EEECEF; 
+	background: white;  /* what a misnomer */
 }
 
 .faded, .faded p {

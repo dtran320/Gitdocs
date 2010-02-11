@@ -17,6 +17,8 @@ if($user = User::getLoggedInUser()) {
 	$other_version = new Version($d_id, $other_u_id);
 	$other_user = User::getUserInfoForId($other_u_id);
 
+	$smarty->assign('v_id', $version->getVersionId());
+	$smarty->assign('other_v_id', $other_version->getVersionId());
 	$smarty->assign('d_id', $d_id)	;
 	$smarty->assign('u_id', $u_id);
 	$smarty->assign('other_u_id', $other_u_id);
