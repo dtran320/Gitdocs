@@ -37,10 +37,11 @@ if($user = User::getLoggedInUser()) {
 
 		if ($action=="clone") {
 			$documentId = postVarClean("document_id");
-			$ownerId = postVarClean("owner_id");
+			$versionToClone = postVarClean("clone_id");
 			$description = postVarClean("description");
 	
-			$version = Version::CreateNewVersion($user->userId, $documentId, $ownerId, $description);
+			$version = Version::getVersionForUser($documentId, $user->userId, $versionToClone, $description);
+
 			$versionName = $version->getName();
 			$docText = $version->getDocFromDisk();
 			$document = $version->getDocument();
@@ -55,7 +56,7 @@ if($user = User::getLoggedInUser()) {
 		else { //action is new
 			$document = Document::CreateNewDocument();
 			$v_name = 'Untitled';
-			$version = Version::CreateNewVersion($user->userId, $document->docId);
+			$version = Version::CreateNewVersion($document->docId, $user->userId);
 			$smarty->assign('d_id', $document->docId);
 
 			$smarty->assign('d_name', $document->name);

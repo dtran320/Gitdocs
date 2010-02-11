@@ -19,7 +19,7 @@ if($action=="Save") {
 	else echo "0";
 }
 
-else if ($action=="Publish"){
+else if ($action=="Save and Publish"){
     	$docText = postVar("editor1");
         $version = new Version($d_id, $u_id);
         $status = $version->publish($docText);

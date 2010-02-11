@@ -6,9 +6,9 @@
 			<form id="editor_form" class="big_form" method="post" action="editor.php" style="float:right;">
 				<input type="hidden" name="action" value="clone" />
 				<input type="hidden" name="document_id" value="{$d_id}" />
-				<input type="hidden" name="owner_id" value="{$v_id}" />
+				<input type="hidden" name="clone_id" value="{$v_id}" />
 				<input type="hidden" name="description" value="{$v_name}" />
-				<input type="submit" name="submit" value="Start Working off this version"/>
+				<input type="submit" name="submit" value="{$submit_text}"/>
 			</form>
 		</div>
 		<div class="clear_fix"></div>

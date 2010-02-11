@@ -64,7 +64,7 @@ class Version {
 		fclose($this->fileHandler);
 	}
 	
-	public static function CreateNewVersion($userId, $docId, $versionToClone = 0, $description = 0) {
+	public static function CreateNewVersion($docId, $userId, $versionToClone = 0, $description = 0) {
 		$repo = Repository::CreateNewRepository($docId, $userId, $versionToClone);
 		if(!$repo) return false;
 		$db = new DB();
@@ -73,6 +73,7 @@ class Version {
 		$time = time();
 		$newVersionQuery = "INSERT INTO Versions(doc_fk, u_fk, repo_ptr, last_saved_time) " .
                         "VALUES('{$params["docId"]}', '{$params["userId"]}', '{$params["repoPtr"]}', '{$time}')";
+		if(DEBUG) echo $newVersionQuery;
 		$db->execQuery($newVersionQuery);
 		return new Version($docId, $userId, $repo,$description);	
 	}
@@ -86,6 +87,7 @@ class Version {
 	public function save($text) {
 		$this->textCache = $text;
 		$this->updateTimestamp();
+		if($text==0) return true; //make saving a blank doc okay
 		return (fwrite($this->fileHandler, $text) && ftruncate($this->fileHandler, ftell($this->fileHandler)));
 
 	}
@@ -155,7 +157,13 @@ class Version {
 		if(!$time) $time = time();
 		$db = new DB();
 		$updateTimeQuery = "UPDATE Versions SET last_saved_time='$time' WHERE doc_fk='{$this->docId}' AND u_fk='{$this->userId}'";
-		return $db->execQuery($updateTimeQuery);
+		$result = $db->execQuery($updateTimeQuery);
+		if($result) {
+			$db->execQuery("SELECT last_saved_time FROM Versions WHERE v_id='$this->versionId'");
+			$row = $db->getNextRow();
+			return ($this->lastSavedTime = $row["last_saved_time"]);		
+		}
+		else return false;
 	}
 	
 	public function getName() {
@@ -176,6 +184,32 @@ class Version {
 		$newName = mysql_real_escape_string($newName);
 		$renameQuery = "UPDATE Versions SET v_name = '$newName' WHERE doc_fk='{$this->docId}' AND u_fk='{$this->userId}'";
 		return $db->execQuery($renameQuery);
+	}
+	
+	public static function doesUserHaveVersion($doc_id, $u_id) {
+		$db = new DB();
+		$doc_id = mysql_real_escape_string($doc_id);
+		$u_id = mysql_real_escape_string($u_id);
+		
+		$selectQuery = "SELECT v_id FROM Versions where doc_fk='$doc_id' AND u_fk='$u_id'";
+
+		$db->execQuery($selectQuery);
+		if($row = $db->getNextRow()){
+
+			return $row["v_id"];
+		}
+		else return false;
+	}
+	
+	public static function getVersionForUser($doc_id, $u_id, $version_to_clone, $description) {
+		if($v_id = Version::doesUserHaveVersion($doc_id, $u_id)) {
+			return new Version(0, 0, 0, 0, $v_id);
+		}
+		else {
+			echo "cloning $version_to_clone";
+			return Version::CreateNewVersion($doc_id, $u_id, $version_to_clone, $description);
+		}
+		
 	}
 	
 	public static function getRecentGlobalVersions($n=0) {

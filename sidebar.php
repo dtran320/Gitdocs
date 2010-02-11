@@ -13,7 +13,7 @@ function getClassmates($document, $user) {
 		$others = array();
 		foreach($versions as $row) {
 			if($row['u_id'] == $user->userId) continue;		
-			if(!$row['icon_ptr']) $row['icon_ptr'] = 'images/bella8.jpg';
+			if(!$row['icon_ptr']) $row['icon_ptr'] = 'images/default.jpg';
 			$others[] = array($row['icon_ptr'], "<a class=\"v_name\">$row[v_name]</a><br/>by $row[display_name] $row[timestamp]", $row['u_id'], $row['v_id']);
 		}
 	return $others;

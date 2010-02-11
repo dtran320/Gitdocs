@@ -30,13 +30,14 @@ if($user = User::getLoggedInUser()) {
 		$versionName = $version->getName();
 		$docText = $version->getDocFromDisk();
 		$document = $version->getDocument();
+
 		$smarty->assign('d_id', $document->docId);
 		$smarty->assign('d_name', $document->name);
 		$smarty->assign('v_id', $v_id);
 		$smarty->assign('v_name', $versionName);
 		$smarty->assign('v_text', $docText);
 		$smarty->assign('others', getClassmates($document, $user));
-		
+		$smarty->assign('submit_text', (Version::doesUserHaveVersion($document->docId, $user->userId)? "Go to my version" : "Start working off this version"));
 	}
 	$smarty->display('viewer.tpl');
 }//end if user logged in
