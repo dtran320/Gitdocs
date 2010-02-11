@@ -11,6 +11,7 @@ require_once('lib/utils.php');
 require('init_smarty.php');
 require_once('classes/version.php');
 require_once('classes/document.php');
+require_once('sidebar.php');
 
 if($user = User::getLoggedInUser()) {
 	$smarty->assign('logged_in_user', $user->getUserInfo());
@@ -34,27 +35,10 @@ if($user = User::getLoggedInUser()) {
 		$smarty->assign('v_id', $v_id);
 		$smarty->assign('v_name', $versionName);
 		$smarty->assign('v_text', $docText);
-		$smarty->assign('others', array(
-			array('images/mlee.jpg', 'winter 2010','by mlee 8h ago'), 
-			array('images/dtran.jpg', 'winter 2010','by dtran 1d ago'),
-			array('images/bella8.jpg', 'fall 2008', 'by bella8 2y ago')
-			));
+		$smarty->assign('others', getClassmates($document, $user));
 		
 	}
-	else {
-	// temp..
-	$smarty->assign('d_name', 'CS294 Class Notes');
-	$smarty->assign('v_name', 'winter 2010');
-	$smarty->assign('u_name', 'dtran');
-	$smarty->assign('v_text', 'will we ever see this?');
-	$smarty->assign('others', array(
-		array('images/mlee.jpg', 'winter 2010','by mlee 8h ago'), 
-		array('images/dtran.jpg', 'winter 2010','by dtran 1d ago'),
-		array('images/bella8.jpg', 'fall 2008', 'by bella8 2y ago')
-		));
-
-}
-$smarty->display('viewer.tpl');
+	$smarty->display('viewer.tpl');
 }//end if user logged in
 else {
 	$smarty->assign('signin_error', "You must sign up or login to do that.");

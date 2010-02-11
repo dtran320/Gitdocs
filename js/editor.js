@@ -16,10 +16,16 @@ function DisplayMine() {
          $("#othersversions_selected").hide();
 }
 
-function change_selection(n) {
+// changes ckeditor to display selected version's text
+function change_selection(n, v_id) {
 	$(".selected").removeClass("selected");
-	$("#td_" + n).addClass("selected");
+	$("#td_" + n).addClass("selected");	
+
+// this will go to ?v_id of whatever page we were on (editor or viewer)
+//	window.location = window.location.href.substring(0, window.location.href.indexOf("?")) + "?v_id="+v_id;
+	window.location = "viewer.php?v_id=" + v_id;
 }
+
 
 /* -----------------------------------------------------------------------------------------------
  * Saving and renaming

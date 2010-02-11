@@ -40,10 +40,6 @@ body {
 	background: #EEECEF;
 }
 
-.selected .comparable {
-	color: #EEECEF;
-}
-
 td.selectable:hover {
 	background: #EEECEF;
 	cursor: pointer;
@@ -52,15 +48,13 @@ td.selectable:hover a.v_name {
 	text-decoration: underline;
 }
 
-.comparable {
-	float: right;
-	color: white;
-	font-weight: bold;
-	font-size: 11px;
-	margin-right:5px;
+.comparable:hover {
+	text-decoration: underline;
 }
 
-td.selectable:hover .comparable {
+.comparable {
+	font-weight: bold;
+	font-size: 11px;
 	color:#263033;
 }
 

@@ -20,7 +20,7 @@ if($user = User::getLoggedInUser()) {
 	$other_user = User::getUserInfoForId($other_u_id);
 
 	$smarty->assign('history', getHistory($version->getName(), $document));
-	$smarty->assign('others', getClassmates($user, $document));
+	$smarty->assign('others', getClassmates($document, $user));
 	$smarty->assign('v_id', $version->getVersionId());
 	$smarty->assign('other_v_id', $other_version->getVersionId());
 	$smarty->assign('d_id', $d_id)	;

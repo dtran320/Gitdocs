@@ -1,10 +1,6 @@
 //we don't want to use this global -- probably move to a class
 
-/* 
- * for compare_inline.php's inline diff view
- */
 
-// make addlikedislikelinks() use this laters
 function placeLinks() {
 	var left_val = 650;
 	var top_val = $("#column_top").offset().top;
@@ -46,6 +42,67 @@ function addLikeDislikeLinks(view_type) {
 	 + ' <input type="hidden" id="type' + index + '" name="type' + index + '" value="' + type +  '">');
 	});
 }
+
+
+function toggleLinks(num) {
+	var elem = $(".inline_ld").slice(num, num+1);
+	if (elem.find(".like").hasClass("displaynone")) {
+		elem.find(".like").removeClass("displaynone");
+		elem.find(".dislike").removeClass("displaynone");
+		elem.find(".undo").addClass("displaynone");
+	} else {
+		elem.find(".like").addClass("displaynone");
+		elem.find(".dislike").addClass("displaynone");
+		elem.find(".undo").removeClass("displaynone");		
+	}
+}
+
+function makeMergeChoice_2col(num, choice) {
+	var diff = $(".inline_change" + num);
+	var mod = diff.next();
+	if (choice == "undo") {
+		diff.removeClass("ins_like");
+		diff.removeClass("ins_dislike");
+		diff.removeClass("del_like");
+		diff.removeClass("del_dislike");
+		if (mod != null && mod.hasClass("mod")) {
+			mod.removeClass("mod_like");
+			mod.removeClass("mod_dislike");
+		}
+	} else {
+		if (diff.hasClass("ins")) {
+			diff.addClass("ins_" + choice);
+		} else {
+			diff.addClass("del_" + choice);
+			if (mod != null && mod.hasClass("mod")) {
+				mod.addClass("mod_" + choice);
+			}
+		}
+	}
+
+	toggleLinks(num);
+	placeLinks();
+	$('#hidden' + num).attr('value', choice);
+}
+
+function makeAllMergeChoices_2col(choice) {
+	var arr = new Array();
+	var i = 0;
+	$('.' + choice).each(function(index) {
+			if($(this).css('display') != 'none') {
+				arr[i] = index;
+				i++;
+		}
+	}); 
+	for (var j = 0; j < i; j++) {
+			makeMergeChoice_2col(arr[j], choice);
+	}
+}
+
+/*
+ * inline compare is below -- do we even like it? 
+ * poorly coded below -- 
+ */
 
 function makeMergeChoice_inline(num, choice) {
 	if (choice == "like") {
@@ -135,61 +192,6 @@ function undoAll_inline() {
 	}); 
 	for (var j = 0; j < i; j++) {
 		undo_inline(arr[j]);
-	}
-}
-
-function toggleLinks(num) {
-	var elem = $(".inline_ld").slice(num, num+1);
-	if (elem.find(".like").hasClass("displaynone")) {
-		elem.find(".like").removeClass("displaynone");
-		elem.find(".dislike").removeClass("displaynone");
-		elem.find(".undo").addClass("displaynone");
-	} else {
-		elem.find(".like").addClass("displaynone");
-		elem.find(".dislike").addClass("displaynone");
-		elem.find(".undo").removeClass("displaynone");		
-	}
-}
-
-function makeMergeChoice_2col(num, choice) {
-	var diff = $(".inline_change" + num);
-	var mod = diff.next();
-	if (choice == "undo") {
-		diff.removeClass("ins_like");
-		diff.removeClass("ins_dislike");
-		diff.removeClass("del_like");
-		diff.removeClass("del_dislike");
-		if (mod != null && mod.hasClass("mod")) {
-			mod.removeClass("mod_like");
-			mod.removeClass("mod_dislike");
-		}
-	} else {
-		if (diff.hasClass("ins")) {
-			diff.addClass("ins_" + choice);
-		} else {
-			diff.addClass("del_" + choice);
-			if (mod != null && mod.hasClass("mod")) {
-				mod.addClass("mod_" + choice);
-			}
-		}
-	}
-
-	toggleLinks(num);
-	placeLinks();
-	$('#hidden' + num).attr('value', choice);
-}
-
-function makeAllMergeChoices_2col(choice) {
-	var arr = new Array();
-	var i = 0;
-	$('.' + choice).each(function(index) {
-			if($(this).css('display') != 'none') {
-				arr[i] = index;
-				i++;
-		}
-	}); 
-	for (var j = 0; j < i; j++) {
-			makeMergeChoice_2col(arr[j], choice);
 	}
 }
 

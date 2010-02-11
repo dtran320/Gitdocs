@@ -70,7 +70,7 @@ if($user = User::getLoggedInUser()) {
 	
 		}
 	} //end else
-	$smarty->assign('others', getClassmates($user, $document));
+	$smarty->assign('others', getClassmates($document, $user));
 	$smarty->display('editor.tpl');
 } // end if user logged in
 else {
