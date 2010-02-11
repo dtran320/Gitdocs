@@ -63,3 +63,5 @@
 		</script>
 	{/if}
  </div><!-- end wide_header -->
+
+<a id="feedback" href="http://gitdocs-bugs.doesntexist.com">&nbsp;</a>
