@@ -36,8 +36,6 @@ if($user = User::getLoggedInUser()) {
 		array('images/dtran.jpg', '<a class="v_name">winter 2010</a><br />by dtran 1d ago'),
 		array('images/bella8.jpg', '<a class="v_name">fall 2008</a><br />by bella8 2y ago'),
 		));
-
-	
 	$diff_array = insertSameTags($version->diff($other_version));
 	$patch = implode("\n", $diff_array);
 //$patch = file_get_contents('tests/example.patch');

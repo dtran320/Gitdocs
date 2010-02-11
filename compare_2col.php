@@ -23,7 +23,7 @@ $out = str_replace("</del>", $del_close, $out);
 $out = str_replace("<same>", $same_open, $out);
 $out = str_replace("</same>", $same_close, $out);
 
-$out = str_replace($del_close . "\n" . $ins_open,	"</del></div><div  class='mod ins'><ins>", $out);	
+//$out = str_replace($del_close . "\n" . $ins_open,	"</del></div><div  class='mod ins'><ins>", $out);	
 
 $smarty->assign('diff', $out);
 $smarty->display('compare.tpl');

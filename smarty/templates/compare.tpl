@@ -59,6 +59,7 @@
 	//<![CDATA[
 		$(document).ready(function(){
 			addLikeDislikeLinks('_2col');	
+			placeLinks();
 		});
 	//]]>
 	{/literal}
