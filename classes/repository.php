@@ -17,22 +17,29 @@ class Repository {
 	public static function CreateNewRepository($docId, $userId,$versionToClone = 0) {
 		global $DOCUMENTS_PATH;
 		$location = "$DOCUMENTS_PATH$docId/$userId";
+/*
 		if(!mkdir("$location", 0777)) {
 			// TODO: if can't make dir, then it could already exist
 			// but this is potentially hazardous
 			return new Repository($location);			
 		}
+		*/
 		if(DEBUG) echo "new repo location:$location\n";
 		if($versionToClone) {
 			$parent_version = new Version(0, 0, 0, 0, $versionToClone);
 			$otherRepoLocation = $parent_version->getRepoLocation();
 			$command = "cd $location/..; git clone $otherRepoLocation $location";
 			//TODO: Escape this? necessary?
-			exec($command);
+			$output = array();
+			exec($command, $output);
+			var_dump($output);
 			$version = new Version($docId, $userId);
 			$version->save($parent_version->getDocFromDisk());
 			
 		} else {
+			//okay to go here?
+			mkdir("$location", 0777);
+			
 			$fh = fopen("$location/document.html",'x');
 			fclose($fh);	
 			$command = "cd $location ; git init; git add document.html; git commit -a -m first-commit";

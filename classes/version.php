@@ -207,7 +207,6 @@ class Version {
 			return new Version(0, 0, 0, 0, $v_id);
 		}
 		else {
-			echo "cloning $version_to_clone";
 			return Version::CreateNewVersion($doc_id, $u_id, $version_to_clone, $description);
 		}
 		
