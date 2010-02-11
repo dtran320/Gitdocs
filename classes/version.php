@@ -87,7 +87,7 @@ class Version {
 	public function save($text) {
 		$this->textCache = $text;
 		$this->updateTimestamp();
-		if($text==0) return true; //make saving a blank doc okay
+		//if($text==0) return true;
 		return (fwrite($this->fileHandler, $text) && ftruncate($this->fileHandler, ftell($this->fileHandler)));
 
 	}
@@ -157,13 +157,14 @@ class Version {
 		if(!$time) $time = time();
 		$db = new DB();
 		$updateTimeQuery = "UPDATE Versions SET last_saved_time='$time' WHERE doc_fk='{$this->docId}' AND u_fk='{$this->userId}'";
-		$result = $db->execQuery($updateTimeQuery);
+		return $result = $db->execQuery($updateTimeQuery);
+	/*
 		if($result) {
 			$db->execQuery("SELECT last_saved_time FROM Versions WHERE v_id='$this->versionId'");
 			$row = $db->getNextRow();
 			return ($this->lastSavedTime = $row["last_saved_time"]);		
 		}
-		else return false;
+		else return false;*/
 	}
 	
 	public function getName() {
