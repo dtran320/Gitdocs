@@ -7,6 +7,8 @@
 // make addlikedislikelinks() use this laters
 function placeLinks() {
 	var left_val = 650;
+	var top_val = $("#column_top").offset().top;
+ 	$('.likedislike').offset({left: left_val, top: top_val});
 	$('.inline_ld').each(function(index) {
 		var selector = ".inline_change" + index;
 		var top_val = $(selector).offset().top;
