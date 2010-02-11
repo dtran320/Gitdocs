@@ -101,10 +101,6 @@ class User {
 		$row = $db->getNextRow();
 		if(!$row["iconPtr"]) $row["iconPtr"] = "images/default.jpg";
 		
-		$this->username = $row["username"];
-		$this->iconPtr = $row["iconPtr"];
-		$this->displayName = $row["displayName"];
-		
 		return $row;
 
 	}

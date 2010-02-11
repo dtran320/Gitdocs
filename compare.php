@@ -26,7 +26,8 @@ if($user = User::getLoggedInUser()) {
 	$smarty->assign('d_id', $d_id)	;
 	$smarty->assign('u_id', $u_id);
 	$smarty->assign('other_u_id', $other_u_id);
-	$smarty->assign('d_name', $doc['name']);
+	$smarty->assign('d_name', $document->name);
+
 	$smarty->assign('v_name', $version->getName());
 	$smarty->assign('other_u_name', $other_user['username']);
 	$smarty->assign('other_v_name', $other_version->getName());

@@ -1,4 +1,8 @@
 <?
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 $d_id = $_POST['d_id'];
 $u_id =  $_POST['u_id'];
 $other_u_id = $_POST['other_u_id'];
