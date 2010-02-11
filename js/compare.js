@@ -12,11 +12,6 @@ function placeLinks() {
 	$('.inline_ld').each(function(index) {
 		var selector = ".inline_change" + index;
 		var top_val = $(selector).offset().top;
-
-		if ($(selector).css("display") == "none") {
-			top_val = $(selector).next().next().offset().top;
-		}
-
 		$(this).offset({left: left_val, top: top_val});
 	});
 }
@@ -35,18 +30,10 @@ function addLikeDislikeLinks(view_type) {
 	if(view_type == '_inline') {
   	var type = (orig_txt.indexOf("<del>") != -1) ? "del" : "ins";
 		if (type == "del") {
-		type = (orig_txt.indexOf("<ins>") != -1) ? "change" : "del";
+		//type = (orig_txt.indexOf("<ins>") != -1) ? "change" : "del";
 		}
 	} else {
 		var type = ($(this).hasClass("del")) ? "del" : "ins";
-		if (type == "del") {
-			var mod = $(".inline_change" + index + " ~ .mod");
-			if (mod != null) {
-				type = "change";
-				var ins_txt = mod.html();
-				orig_txt += "!@!@" + ins_txt;
-			}
-		}
 	}
 
 	elem.html("<span class='like' onclick=\"makeMergeChoice" + view_type + "(" + index +  ", 'like');\">like | </span>" 
@@ -56,7 +43,7 @@ function addLikeDislikeLinks(view_type) {
 
 	var form_txt = $('#merge_form').html();
 	$('#merge_form').html(form_txt + ' <input type="hidden" id="hidden' + index + '" name="hidden' + index + '" value="boo">'
-	 + ' <input type="hidden" id="type' + index + '" name="type' + index + '" value="'+ type + '">');
+	 + ' <input type="hidden" id="type' + index + '" name="type' + index + '" value="' + type +  '">');
 	});
 }
 

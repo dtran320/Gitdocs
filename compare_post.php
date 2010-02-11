@@ -1,7 +1,13 @@
 <?
 
+require ('lib/utils.php');
 require('classes/diff.php');
 
+$v_id = postVarClean("v_id");
+$other_v_id = postVarClean("other_v_id");
+
+echo "v_id: " . $v_id . "<br/>";
+echo "other_v_id" . $other_v_id . "<br/>";
 $i = 0;
 $diffs = array();
 
@@ -24,9 +30,9 @@ while (isset($_POST['hidden' . $i])) {
 
 // so at this point i have an array of Diff objects, here you go marky mark.
 //$myVersion = new Version(
-/*foreach ($diffs as $diff) {
+foreach ($diffs as $diff) {
 	echo $diff->userAction . ' ' . $diff->type . ' ' . $diff->index . '<br/>';
-}*/
+}
 
 
 ?>

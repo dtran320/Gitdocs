@@ -57,7 +57,7 @@ if($user = User::getLoggedInUser()) {
 $smarty->display('viewer.tpl');
 }//end if user logged in
 else {
-	$smarty->assign('signin_error', "You must sign up or login to create a version.");
+	$smarty->assign('signin_error', "You must sign up or login to do that.");
 	$smarty->display('signup.tpl');
 }
 ?>

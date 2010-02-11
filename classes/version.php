@@ -60,11 +60,10 @@ class Version {
 		$this->fileHandler = fopen("$location/document.html",'r+');
 	}
 	
-	
-	
 	public function __destruct() {
 		fclose($this->fileHandler);
 	}
+	
 	public static function CreateNewVersion($userId, $docId, $versionToClone = 0, $description = 0) {
 		$repo = Repository::CreateNewRepository($docId, $userId, $versionToClone);
 		if(!$repo) return false;
