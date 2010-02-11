@@ -1,13 +1,14 @@
 <?
 
-require ('lib/utils.php');
-require('classes/diff.php');
+require_once('lib/utils.php');
+require_once('classes/diff.php');
+require_once('classes/version.php');
 
 $v_id = postVarClean("v_id");
 $other_v_id = postVarClean("other_v_id");
 
-echo "v_id: " . $v_id . "<br/>";
-echo "other_v_id" . $other_v_id . "<br/>";
+//echo "v_id: " . $v_id . "<br/>";
+//echo "other_v_id" . $other_v_id . "<br/>";
 $i = 0;
 $diffs = array();
 
@@ -29,10 +30,12 @@ while (isset($_POST['hidden' . $i])) {
 }
 
 // so at this point i have an array of Diff objects, here you go marky mark.
-//$myVersion = new Version(
-foreach ($diffs as $diff) {
-	echo $diff->userAction . ' ' . $diff->type . ' ' . $diff->index . '<br/>';
-}
+$myVersion = new Version($v_id);
+$otherVersion = new Version($other_v_id);
+$myVersion->merge($otherVersion, $diffs);
+//foreach ($diffs as $diff) {
+//	echo $diff->userAction . ' ' . $diff->type . ' ' . $diff->index . '<br/>';
+//}
 
 
 ?>
