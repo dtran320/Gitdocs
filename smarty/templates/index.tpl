@@ -25,12 +25,11 @@
 		<tr><td><a href="{$my_recent_docs[i].link}"><p class="no_line_height">{$my_recent_docs[i].dName} - {$my_recent_docs[i].vName}</p><p class="small_text no_line_height">{$my_recent_docs[i].timestamp}</p></a></td></tr>
 		{/section}
 		</table>
-		<div style="padding-top:10px;">
+		<div style="padding-top:10px;"></div>	
 		<div id="show_my_recent_docs"><a onclick="showAllMyDocuments();">See All My Documents</a></div>
-		</div>	
 	</div><!-- end box_content -->
 </div><!-- end box -->
-</div><!-- end container col-->
+</div><!-- end left side-->
 
 <div class="right_side45">
 
@@ -56,8 +55,8 @@
 			{/section}
 			</table>
 			</div>
-</div>
-</div>
+		</div><!-- end box content -->
+</div> <!-- end box -->
 
 
 <div class="box">
@@ -69,8 +68,7 @@
 			{/section}
 			</table>
 		</div>
-	</div>
-</div>
+</div> <!-- end box -->
 
 </div> <!-- end right_side -->
 </div><!-- end container -->

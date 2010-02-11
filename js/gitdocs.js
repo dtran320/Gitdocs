@@ -8,10 +8,14 @@ function hideLoader(elem) {
 }
 
 function postShowAllMyDocuments(docs) {
-	var currHtml = $('#show_my_recent_docs').html();
-	$('#show_my_recent_docs').html(currHtml + '<img src="images/ajax-loader.gif">');
-	
-	for
+	$('#show_my_recent_docs').html('Retrieving <img src="images/ajax-loader.gif">');
+	var docHtml = '';
+
+	for(var i=0; i<docs.length; i++) {
+		docHtml += "<tr><td><a href='" + docs[i]["link"]+"'><p class='no_line_height'>"+docs[i]['dName'] +" - " + (docs[i]['vName']? docs[i]['vName'] : "")+ "</p><p class='small_text no_line_height'>"+docs[i]['timestamp']+"</p></a></td></tr>";
+	}
+	$('#my_recent_docs').html(docHtml);
+
 	$('#show_my_recent_docs').hide();
 }
 
