@@ -60,7 +60,7 @@ class User {
 		if($row = $db->getNextRow()) {
 			$this->passwordHash = $row["pwd_hash"];
 			$this->displayName = $row["display_name"];
-			$this->iconPtr = $row["icon_ptr"];
+			$this->iconPtr = $row["icon_ptr"]? $row["icon_ptr"] : "images/default.jpg";
 			$this->salt = $row["salt"];
 			$this->userId = $row["u_id"];
 		}
@@ -82,6 +82,7 @@ class User {
 	
 	//Used for templating
 	public function getUserInfo() {
+		$this->iconPtr = ($this->iconPtr? $this->iconPtr : "images/default.jpg");
 		return array(
 					"username" => $this->username,
 					"iconPtr" => $this->iconPtr,
@@ -98,6 +99,12 @@ class User {
 		if (DEBUG) var_dump($userInfoQuery);
 		$db->execQuery($userInfoQuery);
 		$row = $db->getNextRow();
+		if(!$row["iconPtr"]) $row["iconPtr"] = "images/default.jpg";
+		
+		$this->username = $row["username"];
+		$this->iconPtr = $row["iconPtr"];
+		$this->displayName = $row["displayName"];
+		
 		return $row;
 
 	}

@@ -18,6 +18,7 @@ if($user = User::getLoggedInUser()) {
 	$smarty->assign('u_id', $user->userId);
 	$smarty->assign('u_name', $user->username);
 	$smarty->assign('displayName', $user->displayName);
+	$smarty->assign('iconPtr', $user->iconPtr);
 	
 	if($v_id = getVarClean("v_id")) { //opening an existing doc
 		$version = new Version(0,0,0,0, $v_id);
@@ -64,7 +65,7 @@ if($user = User::getLoggedInUser()) {
 	
 			// we should flesh out all the different phrases instead of doing this:
 			$smarty->assign('history', array(
-				array("left", "images/mlinsey.jpg","you are now editing <span class='v_name'>{$v_name}</span>, which has not been saved."),
+				array("left", $user->iconPtr,"you are now editing <span class='v_name'>{$v_name}</span>, which has not been saved."),
 				));
 			//$smarty->assign('others', array());
 	

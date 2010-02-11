@@ -1,4 +1,5 @@
-<?
+<?php
+
 session_start();
 require_once('classes/user.php');
 require_once('classes/version.php');
