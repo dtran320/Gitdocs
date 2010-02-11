@@ -272,3 +272,14 @@ a:hover {
 .doc_title input[type="text"] {
 	border: 0px;
 }
+
+#feedback {
+	background-image:url("../images/feedback.png");
+	height:120px;
+	width:30px;
+	right: 0;
+	bottom: 0;
+	position:fixed;
+	text-decoration:none;
+
+}
