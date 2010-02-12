@@ -7,8 +7,8 @@ require_once('classes/version.php');
 $v_id = postVarClean("v_id");
 $other_v_id = postVarClean("other_v_id");
 
-echo "v_id: " . $v_id . "<br/>";
-echo "other_v_id" . $other_v_id . "<br/>";
+if(DEBUG) echo "v_id: " . $v_id . "<br/>";
+if(DEBUG) echo "other_v_id" . $other_v_id . "<br/>";
 $i = 0;
 $diffs = array();
 
