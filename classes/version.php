@@ -15,7 +15,7 @@ class Version {
 	private $userId;
 	private $docId;
 	private $description;
-	private $lastSavedTime;
+	public $lastSavedTime;
 	private $versionId;
 	private $commitId; //sha-1 hash
 	private $repo;
@@ -157,14 +157,14 @@ class Version {
 		if(!$time) $time = time();
 		$db = new DB();
 		$updateTimeQuery = "UPDATE Versions SET last_saved_time='$time' WHERE doc_fk='{$this->docId}' AND u_fk='{$this->userId}'";
-		return $result = $db->execQuery($updateTimeQuery);
-	/*
+		$result = $db->execQuery($updateTimeQuery);
+	
 		if($result) {
 			$db->execQuery("SELECT last_saved_time FROM Versions WHERE v_id='$this->versionId'");
 			$row = $db->getNextRow();
 			return ($this->lastSavedTime = $row["last_saved_time"]);		
 		}
-		else return false;*/
+		else return false;
 	}
 	
 	public function getName() {

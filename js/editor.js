@@ -41,7 +41,7 @@ function preSaveVersion(formData, jqForm, options) {
 }
 
 function postSaveVersion(data) {
-	var status = data=="1"? "Document saved." : "Error saving document.";
+	var status = (data=="0"? "Error saving document." : data);
 	$("#save_status").html(status);
 }
 
