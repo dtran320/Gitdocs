@@ -114,14 +114,18 @@ class Repository {
 	public function merge($myVersion, $otherVersion, &$arrDiffs) {
 		
 		$otherLocation = $otherVersion->getRepoLocation();
+
+		//get diff between each version
 		$command = "cd $this->location; git checkout master; cd $otherLocation git checkout " . $myVersion->getUserId() . "; diff -U0 $this->location/document.html $otherLocation/document.html";
 	  	//$command = "cd $this->location; git checkout master; git diff -U0 ".$otherVersion->getUserId() ."/".$myVersion->getUserId();
 		if(DEBUG) echo "command: $command \n";
 		exec($command, $diffResult);
 		$diffResult = implode("\n", $diffResult);
+	
+		//find all changes in diff (marked by format @@ -line#,len +line#,len @@ in diff output
 		preg_match_all('/\n@@ -(\d+),?(\d+)? \+(\d+),?(\d+)?/', $diffResult, $diffLineNums);	
 
-		//in git diff, "2," means the edit was one line long (not zero). update diffLineNums to reflect this.
+		//in git diff, "2," means the edit starting on line 2 was one line long (not zero). update diffLineNums to reflect this.
 		foreach($diffLineNums[4] as $index => $curr) {if($curr==="") $diffLineNums[4][$index]=1;}
 		foreach($diffLineNums[2] as $index => $curr) {if($curr==="") $diffLineNums[2][$index]=1;}
 		if(DEBUG) print_r($diffLineNums);
