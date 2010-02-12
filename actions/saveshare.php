@@ -23,7 +23,7 @@ else if ($action=="Save and Publish"){
     	$docText = postVar("editor1");
         $version = new Version($d_id, $u_id);
         $status = $version->publish($docText);
-        if($status) echo "1";
+        if($status) echo "Last saved " . getLocalTime($version->lastSavedTime);
         else echo "0";	
 }
 
