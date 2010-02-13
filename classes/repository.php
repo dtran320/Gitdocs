@@ -161,6 +161,9 @@ class Repository {
 		$command = "cd $this->location; git fetch ". $otherVersion->getUserId() . ";git merge ". $otherVersion->getUserId(). "/" . $myVersion->getUserId(); 
 		exec($command, $err);
 		
+		$command = "cd $otherLocation; git checkout master";
+		exec($command);
+		
 	}
 
 }

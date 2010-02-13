@@ -35,10 +35,13 @@ if($user = User::getLoggedInUser()) {
 	$diff_array = insertSameTags($version->diff($other_version));
 	$patch = implode("\n", $diff_array);
 //$patch = file_get_contents('tests/example.patch');
-	$diff = new Text_Diff('string', array($patch));
-	$renderer = new Text_Diff_Renderer_inline();
-	$out = $renderer->render($diff);
-
+	if($patch) {	
+		$diff = new Text_Diff('string', array($patch));
+		$renderer = new Text_Diff_Renderer_inline();
+		$out = $renderer->render($diff);
+	} else {
+		$out = "Your version is identical to {$other_user['username']}'s. <a href=\"editor.php?v_id={$version->getVersionId()}\">Click here to return to your version</a>.";
+	}
 } else {
 	$smarty->assign('signin_error', "You must sign up or login to do that.");
 	$smarty->display('signup.tpl');
