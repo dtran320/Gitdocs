@@ -17,22 +17,12 @@ class Repository {
 	public static function CreateNewRepository($docId, $userId,$versionToClone = 0) {
 		global $DOCUMENTS_PATH;
 		$location = "$DOCUMENTS_PATH$docId/$userId";
-/*
-		if(!mkdir("$location", 0777)) {
-			// TODO: if can't make dir, then it could already exist
-			// but this is potentially hazardous
-			return new Repository($location);			
-		}
-		*/
 		if(DEBUG) echo "new repo location:$location\n";
 		if($versionToClone) {
 			$parent_version = new Version(0, 0, 0, 0, $versionToClone);
 			$otherRepoLocation = $parent_version->getRepoLocation();
-			$command = "cd $location/..; git clone $otherRepoLocation $location";
-			//TODO: Escape this? necessary?
-			$output = array();
-			exec($command, $output);
-
+			$command = "cd $location/..; git clone $otherRepoLocation $location 2>&1";
+			$output = runCommand($command);
 			$version = new Version($docId, $userId);
 			$version->save($parent_version->getDocFromDisk());
 			
@@ -43,7 +33,7 @@ class Repository {
 			$fh = fopen("$location/document.html",'x');
 			fclose($fh);	
 			$command = "cd $location ; git init; git add document.html; git commit -a -m first-commit";
-			exec($command, $result);
+			$result = runCommand($command);
 		}
 		return new Repository($location);
 	}
@@ -54,7 +44,7 @@ class Repository {
 	
 	public function commit() {
 		$command = "cd $this->location; git add document.html; git commit -a -m placeholdercommitmsg";
-		exec($command);
+		runCommand($command);			
 	}
 	
 	public function getFile($branch = 0) {
@@ -72,7 +62,7 @@ class Repository {
 	
 	public function checkout($branch){	
 		$command = "cd $this->location; git checkout $branch";
-		exec($command);
+		runCommand($command);
 	}
 	
 	public function diff($myVersion, $otherVersion) {
@@ -88,8 +78,9 @@ class Repository {
 				git commit -a -m 'prepared branch merge strategy';
 			    	git merge master;";
 		if (DEBUG) echo "command: $command \n";
-		exec($command);
-		exec("cd $this->location; git remote", $branchesList);
+		runCommand($command);
+		$command = "cd $this->location; git remote";
+		$branchesList = runCommand($command);
 		if(in_array($otherVersion->getUserId(), $branchesList)) {	
 			$command ="cd $this->location; git fetch ". $otherVersion->getUserID();
 		} else {
@@ -97,14 +88,14 @@ class Repository {
 			 	git remote add -t ". $myVersion->getUserId() ." -f ". $otherVersion->getUserId() ." $otherLocation;";
 		}		
 		if(DEBUG) echo "command: $command \n";
-		exec($command);
+		runCommand($command);
 		//TODO: use real file length instead of big constant
 		$command = "cd $otherLocation; git checkout " . $myVersion->getUserId() . "; cd $this->location; git checkout master;";
-		exec($command);
+		runCommand($command);
 		$command = "diff -U10000 $this->location/document.html $otherLocation/document.html"; 
 		
 		if(DEBUG) echo "command: $command \n";
-		exec($command, $result);
+		$result = runCommand($command);
 		return $result;
 						
 	}
@@ -117,9 +108,8 @@ class Repository {
 
 		//get diff between each version
 		$command = "cd $this->location; git checkout master; cd $otherLocation git checkout " . $myVersion->getUserId() . "; diff -U0 $this->location/document.html $otherLocation/document.html";
-	  	//$command = "cd $this->location; git checkout master; git diff -U0 ".$otherVersion->getUserId() ."/".$myVersion->getUserId();
 		if(DEBUG) echo "command: $command \n";
-		exec($command, $diffResult);
+		$diffResult = runCommand($command);
 		$diffResult = implode("\n", $diffResult);
 	
 		//find all changes in diff (marked by format @@ -line#,len +line#,len @@ in diff output
@@ -159,11 +149,9 @@ class Repository {
 		$otherVersion->commit();
 	
 		$command = "cd $this->location; git fetch ". $otherVersion->getUserId() . ";git merge ". $otherVersion->getUserId(). "/" . $myVersion->getUserId(); 
-		exec($command, $err);
-		
+		$err= runCommand($command);	
 		$command = "cd $otherLocation; git checkout master";
-		exec($command);
-		
+		runCommand($command);	
 	}
 
 }

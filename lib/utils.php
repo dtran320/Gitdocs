@@ -38,5 +38,17 @@ function getLocalTime($time) {
 	return date("M d Y h:i A", $time);
 }
 
+function runCommand($command) {
+	//$command = escapeshellcmd($command);
+	$output = array();
+	exec($command, $output);
+	if(LOG) {
+         	global $LOG_PATH;
+                $log = fopen("$LOG_PATH", "a");
+                fwrite($log, "\ncommand:$command\noutput:\n".implode('\n',$output)). "\n________\n";
+                fclose($log);
+        }
+	return $output;
+}
 
 ?>
