@@ -22,7 +22,7 @@
 		<!-- don't change this id w/o changing references in gitdocs.js -->
 		<table class="document_list" id="my_recent_docs">
 		{section name=i loop=$my_recent_docs}
-		<tr><td><a href="{$my_recent_docs[i].link}"><p class="no_line_height">{$my_recent_docs[i].dName} - {$my_recent_docs[i].vName}</p><p class="time small_text no_line_height" id="{$recent_global_docs[i].timestamp}">{$my_recent_docs[i].timestamp}</p></a></td></tr>
+		<tr><td><a href="{$my_recent_docs[i].link}"><p>{$my_recent_docs[i].dName} - {$my_recent_docs[i].vName}</p><p class="time small_text no_line_height" id="{$recent_global_docs[i].timestamp}">{$my_recent_docs[i].timestamp}</p></a></td></tr>
 		{/section}
 		</table>
 		<div style="padding-top:10px;"></div>	
