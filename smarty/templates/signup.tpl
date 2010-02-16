@@ -46,7 +46,7 @@
 			       	<div class="box_content">
 						<table class="document_list">
 							{section name=i loop=$recent_global_docs}
-								<tr><td>{$recent_global_docs[i].displayName}</td><td><a href="{$recent_global_docs[i].link}"><p class="no_line_height">{$recent_global_docs[i].dName} - {$recent_global_docs[i].vName}</p><p class="small_text no_line_height">{$recent_global_docs[i].timestamp}</p></a></td></tr>
+								<tr><td>{$recent_global_docs[i].displayName}</td><td><a href="{$recent_global_docs[i].link}"><p class="no_line_height">{$recent_global_docs[i].dName} - {$recent_global_docs[i].vName}</p><p class="time small_text no_line_height" id="{$recent_global_docs[i].timestamp}">{$recent_global_docs[i].timestamp}</p></a></td></tr>
 							{/section}
 								</table>
 						</div><!-- end box content -->
@@ -58,7 +58,7 @@
        <div class="box_content">
 			<table>
 			{section name=i loop=$twitter_updates}
-			<tr><td>{$twitter_updates[i].update_time}</td></tr>
+			<tr><td class="time" id="{$twitter_updates[i].update_time}">{$twitter_updates[i].update_time}</td></tr>
 			<tr><td>{$twitter_updates[i].update_text}</td></tr>
 			<tr><td>&nbsp;</td></tr>
 			{/section}
@@ -71,11 +71,17 @@
 <script type="text/javascript">
 	{literal}
 	//<![CDATA[
+	$(document).ready(function() {
+		$(".time").prettyDate();
+		setInterval(function(){ $(".time").prettyDate(); }, 10000);
 		$("#signup_username").placeholder();
 		$("#signup_display_name").placeholder();
 		$("#signup_confirm_password").placeholder();
 		$("#signup_password").placeholder();
+		});
+		
 	//]]>
 	{/literal}
 </script>
+
 {include file="footer.tpl"}
