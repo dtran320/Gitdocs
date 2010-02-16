@@ -25,6 +25,7 @@
  <script src="js/lib/jquery.metadata.js" type="text/javascript" charset="utf-8"></script>
  <script src="js/users.js" type="text/javascript" charset="utf-8"></script>
  <script src="js/lib/jquery.placeholder.js" type="text/javascript" charset="utf-8"></script>
+ <script src="js/lib/pretty-dates.js" type="text/javascript" charset="utf-8"></script>
 
  </head>
  <body>

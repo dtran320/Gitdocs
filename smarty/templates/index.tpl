@@ -22,7 +22,7 @@
 		<!-- don't change this id w/o changing references in gitdocs.js -->
 		<table class="document_list" id="my_recent_docs">
 		{section name=i loop=$my_recent_docs}
-		<tr><td><a href="{$my_recent_docs[i].link}"><p class="no_line_height">{$my_recent_docs[i].dName} - {$my_recent_docs[i].vName}</p><p class="small_text no_line_height">{$my_recent_docs[i].timestamp}</p></a></td></tr>
+		<tr><td><a href="{$my_recent_docs[i].link}"><p class="no_line_height">{$my_recent_docs[i].dName} - {$my_recent_docs[i].vName}</p><p class="time small_text no_line_height" id="{$recent_global_docs[i].timestamp}">{$my_recent_docs[i].timestamp}</p></a></td></tr>
 		{/section}
 		</table>
 		<div style="padding-top:10px;"></div>	
@@ -38,7 +38,7 @@
 	       	<div class="box_content">
 				<table class="document_list">
 					{section name=i loop=$recent_global_docs}
-						<tr><td>{$recent_global_docs[i].displayName}</td><td><a href="{$recent_global_docs[i].link}"><p class="no_line_height">{$recent_global_docs[i].dName} - {$recent_global_docs[i].vName}</p><p class="small_text no_line_height">{$recent_global_docs[i].timestamp}</p></a></td></tr>
+						<tr><td>{$recent_global_docs[i].displayName}</td><td><a href="{$recent_global_docs[i].link}"><p class="no_line_height">{$recent_global_docs[i].dName} - {$recent_global_docs[i].vName}</p><p class="time small_text no_line_height" id="{$recent_global_docs[i].timestamp}">{$recent_global_docs[i].timestamp}</p></a></td></tr>
 					{/section}
 						</table>
 				</div><!-- end box content -->
@@ -72,5 +72,14 @@
 
 </div> <!-- end right_side -->
 </div><!-- end container -->
-
+<script type="text/javascript">
+	{literal}
+	//<![CDATA[
+	$(document).ready(function() {
+		$(".time").prettyDate();
+		setInterval(function(){ $(".time").prettyDate(); }, 10000);
+		});
+		//]]>
+		{/literal}
+	</script>
 {include file="footer.tpl"}
