@@ -1,7 +1,7 @@
 {include file="header.tpl"}
 
 <div class="box left_main">
-	<div class="box_title">{$d_name} -- <span class="v_name">{$v_name}</span> 
+	<div class="box_title">Viewing -- {$d_name} -- <span class="v_name">{$v_name}</span> 
   -- <span class="u_name">{$author_name}</span>
 			<form id="editor_form" class="big_form" method="post" action="editor.php" style="float:right;">
 				<input type="hidden" name="action" value="clone" />

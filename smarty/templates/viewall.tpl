@@ -1,9 +1,7 @@
 {include file="header.tpl"}
 
 <div class="box left_main">
-	<div class="box_title">{$d_name} -- <span class="v_name">{$v_names}</span> --
-			 <span class="u_name">{$author_names}</span> 
-		</div>
+	<div class="box_title">Viewing all -- {$d_name}</div>
 		<div class="clear_fix"></div>
 	<div class="box_content">
 
@@ -21,11 +19,10 @@
 
 <div class="box right_side">
   <div class="box_title">
-	title
+	what should go here?
 	</div><!-- box_title-->
-
  	<div class="box_content" id="otherversionspanel" style="display:block;">
-		<p>hi there!</p>
+		useful navigation would be nice
 	</div>	
 </div>
 {include file="footer.tpl"}
