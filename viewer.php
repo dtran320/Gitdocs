@@ -16,7 +16,6 @@ require_once('sidebar.php');
 if($user = User::getLoggedInUser()) {
 	$smarty->assign('logged_in_user', $user->getUserInfo());
 	$smarty->assign('u_id', $user->userId);
-	$smarty->assign('u_name', $user->username);
 	$smarty->assign('displayName', $user->displayName);
 	
 	$v_id = getVarClean("v_id");
@@ -27,6 +26,8 @@ if($user = User::getLoggedInUser()) {
 			exit(0);	
 		}
 
+		$author_info = User::getUserInfoForId($version->getUserId());
+		$smarty->assign('author_name', $author_info['displayName']);
 		$versionName = $version->getName();
 		$docText = $version->getDocFromDisk();
 		$document = $version->getDocument();
