@@ -41,8 +41,9 @@ class Document {
 	}
 
 	public static function getAllClasses() {
+		// returns string with all classnames, separated by commas 
 		$db = new DB();
-		$query = "SELECT distinct dept_name, course_num FROM Documents;";
+		$query = "SELECT distinct dept_name, course_num FROM Documents ORDER BY dept_name, course_num;";
 		$db->execQuery($query);
 		$classes = '';
 		while($row = $db->getNextRow()){
