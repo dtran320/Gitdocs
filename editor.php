@@ -32,6 +32,7 @@ if($user = User::getLoggedInUser()) {
 		$document = $version->getDocument();
 		$smarty->assign('d_id', $document->docId);
 		$smarty->assign('d_name', $document->name);
+		$smarty->assign('class_name', $document->getClassName()); 
 		$smarty->assign('v_name', $versionName);
 		$smarty->assign('v_text', $docText);
 		$smarty->assign('history', getHistory($versionName, $document));
@@ -51,6 +52,7 @@ if($user = User::getLoggedInUser()) {
 			$document = $version->getDocument();
 			$smarty->assign('d_id', $document->docId);
 			$smarty->assign('d_name', $document->name);
+			$smarty->assign('class_name', $document->getClassName());
 			$smarty->assign('v_name', $versionName);
 			$smarty->assign('v_text', $docText);
 			$smarty->assign('history', getHistory($versionName, $document));
@@ -65,6 +67,7 @@ if($user = User::getLoggedInUser()) {
 
 			$smarty->assign('d_name', $document->name);
 			$smarty->assign('v_name', 'Untitled');
+			$smarty->assign('class_name', 'Unknown Class');
 
 			$smarty->assign('v_text', '');
 	

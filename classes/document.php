@@ -52,6 +52,30 @@ class Document {
 		$renameQuery = "UPDATE Documents SET name = '$newName' WHERE doc_id='{$this->docId}'";
 		return $db->execQuery($renameQuery);
 	}
+
+	public function renameClass($newClassName) {
+		$db = new DB();
+		$newClassName = mysql_real_escape_string($newClassName);
+
+		// TODO: what about Computer Science 106a vs CS 106a vs CS106a vs cs106a etc etc??
+		// currently the string up to the first number is the dept name
+		// the remainder of the string is the course num
+		$newDeptName = "";
+		$newCourseNum = "";
+		for ($i = 0; $i < strlen($newClassName); $i++) {
+			$char = substr($newClassName, $i, 1);
+			if (!is_numeric($char)) {
+				$newDeptName .= $char;
+			} else {
+				$newCourseNum = substr($newClassName, $i);
+				break;
+			}	
+		}
+		$newDeptName = strtoupper(trim($newDeptName));
+		$newCourseNum = strtoupper(trim($newCourseNum));
+		$renameQuery = "UPDATE Documents SET dept_name = '$newDeptName', course_num = '$newCourseNum' WHERE doc_id='{$this->docId}'";
+		return $db->execQuery($renameQuery);
+	}
 	
 	//returns array containing each user's current version
 	public function getAllVersions($n=0){
@@ -66,6 +90,15 @@ class Document {
 		}
 		return $versions;
 	}
+
+	public function getClassName() {
+		$db = new DB();
+		$query = "SELECT dept_name, course_num FROM Documents WHERE doc_id='{$this->docId}';";
+		$db->execQuery($query);
+		$row = $db->getNextRow();
+		return $row['dept_name'] . ' ' . $row['course_num'];		
+	}
+
 	
 }
 
