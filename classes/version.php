@@ -268,7 +268,7 @@ class Version {
 			$versions[$k]["vName"] = stripslashes($versions[$k]["vName"]);
 			$versions[$k]["vName"] = $versions[$k]["vName"]? " - " . $versions[$k]["vName"] : "";
 			$versions[$k]["dName"] = stripslashes($versions[$k]["dName"]);
-			$versions[$k]["link"] = "viewer.php?v_id=" . $my_recent_docs[$k]["vId"];
+			$versions[$k]["link"] = "editor.php?v_id=" . $my_recent_docs[$k]["vId"];
 		}
 		return $versions;
 		
@@ -306,7 +306,7 @@ class Version {
 			$my_version_feed[$k]["vName"] = $my_version_feed[$k]["vName"]? " - " . $my_version_feed[$k]["vName"] : "";
 			$my_version_feed[$k]["dName"] = stripslashes($my_version_feed[$k]["dName"]);
 			$my_version_feed[$k]["iconPtr"] = ($my_version_feed[$k]["iconPtr"]? $my_version_feed[$k]["iconPtr"] : "images/default.jpg");
-			$my_version_feed[$k]["link"] = "editor.php?v_id=" . $my_version_feed[$k]["vId"];
+			$my_version_feed[$k]["link"] = "viewer.php?v_id=" . $my_version_feed[$k]["vId"];
 		}
 		return $my_version_feed;
 	}
