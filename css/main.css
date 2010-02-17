@@ -24,7 +24,7 @@ body {
 }
  
 .center_container {
-	width: 80%;
+	width: 90%;
 	margin: auto auto;
 }
 
@@ -165,9 +165,20 @@ a:hover {
 	font-weight: bold;
 }
 
+.left_side30 {
+	float: left;
+	width: 30%;
+}
+
+
 .left_side45 {
 	float: left;
 	width: 45%;
+}
+
+.right_side60 {
+	float: right;
+	width: 60%;
 }
 
 .right_side45 {
