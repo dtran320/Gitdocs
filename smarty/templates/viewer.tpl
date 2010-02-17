@@ -1,8 +1,8 @@
 {include file="header.tpl"}
 
 <div class="box left_main">
-	<div class="box_title">{$d_name} -- <span class="v_name">{$v_name}</span> 
-<!--   because want to show orig version's user<span class="u_name">{$u_name}</span> -->
+	<div class="box_title">Viewing -- {$d_name} -- <span class="v_name">{$v_name}</span> 
+  -- <span class="u_name">{$author_name}</span>
 			<form id="editor_form" class="big_form" method="post" action="editor.php" style="float:right;">
 				<input type="hidden" name="action" value="clone" />
 				<input type="hidden" name="document_id" value="{$d_id}" />
@@ -33,6 +33,7 @@
 
  	<div class="box_content" id="otherversionspanel" style="display:block;">
 		<table style="width:100%">
+			<tr><td class="selectable" colspan="2" onclick="window.location='viewall.php?d_id={$d_id}';"><a class="v_name">view all</a></td></tr>
 			{section name=i loop=$others}
 			<tr><td id="td_{$smarty.section.i.index}" 
 					class="selectable {if $others[i][3] == $v_id}selected{/if}" 
