@@ -55,9 +55,11 @@
 }
 
 table.document_list td {
-	padding: 0px 4px;
+	padding: 0px 5px;
+	cell-spacing: 0px;
+	margin: 0px;
 }
-table.document_list td:hover {
+table.document_list tr:hover {
 	cursor: pointer;
 	background: #EEECEF;
 	
