@@ -67,7 +67,7 @@ if($user = User::getLoggedInUser()) {
 
 			$smarty->assign('d_name', $document->name);
 			$smarty->assign('v_name', 'Untitled');
-			$smarty->assign('class_name', 'Unknown Class');
+			$smarty->assign('class_name', 'Unknown Course');
 
 			$smarty->assign('v_text', '');
 	
@@ -75,10 +75,11 @@ if($user = User::getLoggedInUser()) {
 			$smarty->assign('history', array(
 				array("left", $user->iconPtr,"you are now editing <span class='v_name'>{$v_name}</span>, which has not been saved."),
 				));
-			//$smarty->assign('others', array());
-	
 		}
 	} //end else
+
+	$all_classes = Document::getAllClasses();
+	$smarty->assign('all_classes', $all_classes);
 	$smarty->assign('others', getClassmates($document, $user));
 	$smarty->display('editor.tpl');
 } // end if user logged in

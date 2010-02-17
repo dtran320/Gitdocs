@@ -40,6 +40,17 @@ class Document {
 		return $row;
 	}
 
+	public static function getAllClasses() {
+		$db = new DB();
+		$query = "SELECT distinct dept_name, course_num FROM Documents;";
+		$db->execQuery($query);
+		$classes = '';
+		while($row = $db->getNextRow()){
+			$classes .= $row['dept_name'] . ' ' . $row['course_num'] . ',';
+		}
+		return $classes;
+	}
+
 	public function __construct($docId, $name = 0 ){
 		$this->docId = $docId;
 		$this->name = $name;

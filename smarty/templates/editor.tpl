@@ -42,6 +42,7 @@
 
 	<script type="text/javascript">
 	{literal}
+
 	//<![CDATA[
 		CKEDITOR.config.toolbar = [
 				// for full toolbar: look at http://docs.cksource.com/CKEditor_3.x/Developers_Guide/Toolbar
@@ -58,7 +59,9 @@
 		    $('#save_form').ajaxForm({ 
 		        beforeSubmit:  preSaveVersion,  // pre-submit callback 
 		        success:       postSaveVersion  // post-submit callback 
-		    });
+	    });
+			var classes = '{/literal}{$all_classes}{literal}'.split(',');
+			$('#change_class').autocomplete(classes);
 		});
 
 			//bind document and version names
@@ -78,13 +81,28 @@
 					changeVName('#change_v_name', '{/literal}{$d_id}{literal}','{/literal}{$u_id}{literal}');
 				});
 
+			var hasFocus = false;
 			$('#change_class').mouseenter(function() {
 				$('#change_class').addClass('highlighted'); 
 				}).mouseleave(function() {
+					if(!hasFocus) {
+						$('#change_class').removeClass('highlighted');
+					}
+				}).result(function(event, data, formatted) {
+						changeClass('#change_class', '{/literal}{$d_id}{literal}');
+				}).focus(function() {
+					hasFocus = true;
+					$('#change_class').addClass('highlighted');
+				}).blur(function() {
+					hasFocus = false;
 					$('#change_class').removeClass('highlighted');
-				}).click(function() {
-					changeClass('#change_class', '{/literal}{$d_id}{literal}');
+				}).unbind("keypress").keypress(function(e) {
+					if (e.keyCode == 13) {
+						changeClass('#change_class', '{/literal}{$d_id}{literal}');			
+					}
 				});
+			// TODO: if user selects something from the dropdown, then fires twice.
+
 
 	//]]>
 	{/literal}
