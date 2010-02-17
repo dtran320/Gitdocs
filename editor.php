@@ -22,6 +22,10 @@ if($user = User::getLoggedInUser()) {
 	
 	if($v_id = getVarClean("v_id")) { //opening an existing doc
 		$version = new Version(0,0,0,0, $v_id);
+		if($version->getUserId() != $user->userId) {
+			header('Location: viewer.php?v_id='.$v_id);
+			exit(0);
+		}
 		$versionName = $version->getName();
 		$docText = $version->getDocFromDisk();
 		
