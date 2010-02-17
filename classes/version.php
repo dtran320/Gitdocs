@@ -268,7 +268,7 @@ class Version {
 			$versions[$k]["vName"] = stripslashes($versions[$k]["vName"]);
 			$versions[$k]["vName"] = $versions[$k]["vName"]? " - " . $versions[$k]["vName"] : "";
 			$versions[$k]["dName"] = stripslashes($versions[$k]["dName"]);
-			$versions[$k]["link"] = "editor.php?v_id=" . $my_recent_docs[$k]["vId"];
+			$versions[$k]["link"] = "viewer.php?v_id=" . $my_recent_docs[$k]["vId"];
 		}
 		return $versions;
 		
