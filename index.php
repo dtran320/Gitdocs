@@ -26,7 +26,7 @@ if($user = User::getLoggedInUser()) {
 	//preprocess to figure out links
 	$smarty->assign('my_recent_docs', $my_recent_docs);
 	
-	$my_recent_version_feed = $user->getRecentVersionFeedClean(5);
+	$my_recent_version_feed = $user->getRecentVersionFeedClean(8);
 
 	$smarty->assign('my_recent_version_feed', $my_recent_version_feed);
 	

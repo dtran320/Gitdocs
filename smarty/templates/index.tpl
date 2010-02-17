@@ -42,32 +42,6 @@
 						</table>
 				</div><!-- end box content -->
 			</div>
-	
-<div class="box">
-	<div class="box_title">Popular topics</div>
-       	<div class="box_content">
-		<div style="padding-bottom:20px;">
-			<table>
-			{section name=i loop=$pop_tops}
-			<tr><td><span style="color:{cycle values="#1E1E1F, #67666A, #807F83, #CBC9CF"}">{$pop_tops[i]}</span></td></tr>
-	<!-- el gray from kuler -->
-			{/section}
-			</table>
-			</div>
-		</div><!-- end box content -->
-</div> <!-- end box -->
-
-
-<div class="box">
-	 <div class="box_title">Popular documents</div>
-       <div class="box_content">
-			<table>
-			{section name=i loop=$pop_docs}
-			<tr><td>{$pop_docs[i]}</td></tr>
-			{/section}
-			</table>
-		</div>
-</div> <!-- end box -->
 
 </div> <!-- end right_side -->
 </div><!-- end container -->
