@@ -17,25 +17,18 @@ $smarty->assign('pop_docs',
 "<a href='viewer.php'>CS294 Class Notes</a>", 
 "<a href='viewer.php'>CS140 Notes</a>"));
 
-$recent_global_docs = Version::getRecentGlobalVersions(5);
-foreach($recent_global_docs as $k => $v)  {
-	$recent_global_docs[$k]["vName"] = stripslashes($recent_global_docs[$k]["vName"]);
-	$recent_global_docs[$k]["dName"] = stripslashes($recent_global_docs[$k]["dName"]);
-	$recent_global_docs[$k]["link"] = "viewer.php?v_id=" . $recent_global_docs[$k]["vId"];
-}
-	
+$recent_global_docs = Version::getRecentGlobalVersionsClean(5);
+
 $smarty->assign('recent_global_docs', $recent_global_docs);
 
 if($user = User::getLoggedInUser()) {
-	$my_recent_docs = $user->getRecentDocuments(5);
+	$my_recent_docs = $user->getRecentDocumentsClean(5);
 	//preprocess to figure out links
-	foreach($my_recent_docs as $k => $v) {
-		$my_recent_docs[$k]["vName"] = stripslashes($my_recent_docs[$k]["vName"]);
-		$my_recent_docs[$k]["dName"] = stripslashes($my_recent_docs[$k]["dName"]);
-		$my_recent_docs[$k]["link"] = "editor.php?v_id=" . $my_recent_docs[$k]["vId"];
-	}
-
 	$smarty->assign('my_recent_docs', $my_recent_docs);
+	
+	$my_recent_version_feed = $user->getRecentVersionFeedClean(5);
+
+	$smarty->assign('my_recent_version_feed', $my_recent_version_feed);
 	
 	$smarty->assign('logged_in_user', $user->getUserInfo());
 

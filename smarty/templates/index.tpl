@@ -34,7 +34,18 @@
 <div class="right_side45">
 
 	<div class="box">
-		<div class="box_title">Recently saved documents</div>
+		<div class="box_title">What my classmates are doing</div>
+	       	<div class="box_content">
+				<table class="document_list">
+					{section name=i loop=$my_recent_version_feed}
+						<tr><td>{$my_recent_version_feed[i].displayName}</td><td><a href="{$my_recent_version_feed[i].link}"><p class="no_line_height">{$my_recent_version_feed[i].dName} - {$my_recent_version_feed[i].vName}</p><p class="time small_text no_line_height" id="{$my_recent_version_feed[i].timestamp}">{$my_recent_version_feed[i].timestamp}</p></a></td></tr>
+					{/section}
+						</table>
+				</div><!-- end box content -->
+			</div>
+
+	<div class="box">
+		<div class="box_title">Global recently saved documents</div>
 	       	<div class="box_content">
 				<table class="document_list">
 					{section name=i loop=$recent_global_docs}

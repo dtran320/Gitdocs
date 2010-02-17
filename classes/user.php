@@ -120,6 +120,18 @@ class User {
 		return Version::getRecentVersionsForUser($this->userId, $n);
 	}
 	
+	public function getRecentDocumentsClean($n=0) {
+		return Version::getRecentVersionsForUserClean($this->userId, $n);
+	}
+	
+	public function getRecentVersionFeed($n=0) {
+		return Version::getRecentVersionFeedForUser($this->userId, $n);
+	}
+	
+	public function getRecentVersionFeedClean($n=0) {
+		return Version::getRecentVersionFeedForUserClean($this->userId, $n);
+	}
+	
 }
 
 ?>

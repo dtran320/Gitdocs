@@ -230,6 +230,16 @@ class Version {
 		return $versions;
 	}
 	
+	public static function getRecentGlobalVersionsClean($n=0) {
+		$versions = Version::getRecentGlobalVersions($n);
+		foreach($versions as $k => $v)  {
+			$versions[$k]["vName"] = stripslashes($versions[$k]["vName"]);
+			$versions[$k]["dName"] = stripslashes($versions[$k]["dName"]);
+			$versions[$k]["link"] = "viewer.php?v_id=" . $versions[$k]["vId"];
+		}
+		return $versions;
+	}
+	
 	//get n most recent versions for User, everything if n =0
 	//assume userId is sanitized (passed from User class)
 	public static function getRecentVersionsForUser($userId, $n=0) {
@@ -248,6 +258,52 @@ class Version {
 			$versions[] = $row;
 		}
 		return $versions;
+	}
+	
+	public static function getRecentVersionsForUserClean($userId, $n=0) {
+		$versions = Version::getRecentVersionsForUser($userId, $n);
+		foreach($versions as $k => $v) {
+			$versions[$k]["vName"] = stripslashes($versions[$k]["vName"]);
+			$versions[$k]["dName"] = stripslashes($versions[$k]["dName"]);
+			$versions[$k]["link"] = "editor.php?v_id=" . $my_recent_docs[$k]["vId"];
+		}
+		return $versions;
+		
+	}
+	
+	//get n most recent versions for User, everything if n =0
+	//assume userId is sanitized (passed from User class)
+	public static function getRecentVersionFeedForUser($userId, $n=0) {
+		$db = new DB();
+		$versions = array();
+		$selectQuery = "SELECT doc_id as dId, name as dName, v_name as vName, v_id as vId, last_saved_time as timestamp, username, display_name as displayName " .
+			"FROM Versions INNER JOIN Documents " . 
+			"ON Versions.doc_fk = Documents.doc_id " .
+			"INNER JOIN Users " .
+			"ON Versions.u_fk = Users.u_id " .
+			"WHERE doc_id IN " .
+			"(SELECT doc_fk from Versions WHERE u_fk = '$userId') " . 
+			"AND u_fk != '$userId' " .
+			"ORDER BY last_saved_time DESC";
+		if($n > 0) $selectQuery .= " LIMIT 0, $n";
+		$db->execQuery($selectQuery);
+		while($row = $db->getNextRow()) {
+			$row['timestamp'] = getLocalTime($row['timestamp']);
+			$versions[] = $row;
+		}
+		return $versions;
+	}
+	
+	public static function getRecentVersionFeedForUserClean($userId, $n=0) {
+		$my_version_feed = Version::getRecentVersionFeedForUser($userId, $n);
+		
+		//preprocess to figure out links
+		foreach($my_version_feed as $k => $v) {
+			$my_version_feed[$k]["vName"] = stripslashes($my_version_feed[$k]["vName"]);
+			$my_version_feed[$k]["dName"] = stripslashes($my_version_feed[$k]["dName"]);
+			$my_version_feed[$k]["link"] = "editor.php?v_id=" . $my_version_feed[$k]["vId"];
+		}
+		return $my_version_feed;
 	}
 }
 
