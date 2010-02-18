@@ -12,7 +12,7 @@ function postShowAllMyDocuments(docs) {
 	var docHtml = '';
 
 	for(var i=0; i<docs.length; i++) {
-		docHtml += "<tr><td><a href='" + docs[i]["link"]+"'><p class='no_line_height'>"+docs[i]['dName'] + docs[i]['vName']+ "</p><p class='time small_text no_line_height' id='" + docs[i]['timestamp'] + "'>" + docs[i]['timestamp']+"</p></a></td></tr>";
+		docHtml += "<tr><td><a href='" + docs[i]["link"]+"'><p>"+docs[i]['dName'] + docs[i]['vName']+ "</p><p class='time small_text' id='" + docs[i]['timestamp'] + "'>" + docs[i]['timestamp']+"</p></a></td></tr>";
 	}
 	$('#my_recent_docs').html(docHtml);
 
@@ -30,7 +30,7 @@ function fetchRecentVersions(docs) {
 	var docHtml = '';
 	
 	for(var i=0; i<docs.length; i++) {
-		docHtml += "<tr><td><img src="+ docs[i]["iconPtr"] +"></td><td>"+ docs[i]["displayName"] + " saved a version of </td><td><a href='" + docs[i]["link"]+"'><p class='no_line_height'>"+docs[i]['dName'] + docs[i]['vName']+ "</a></p></td><td><p class='time small_text no_line_height' id='" + docs[i]['timestamp'] + "'>" + docs[i]['timestamp']+"</p></td></tr>";
+		docHtml += "<tr><td><img src="+ docs[i]["iconPtr"] +"></td><td>"+ docs[i]["displayName"] + " saved a version of </td><td><a href='" + docs[i]["link"]+"'><p>"+docs[i]['dName'] + docs[i]['vName']+ "</a></p></td><td><p class='time small_text' id='" + docs[i]['timestamp'] + "'>" + docs[i]['timestamp']+"</p></td></tr>";
 	}
 	$('#my_version_feed').html(docHtml);
 	$('.time').prettyDate();

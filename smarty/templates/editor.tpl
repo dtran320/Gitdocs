@@ -47,10 +47,10 @@
 		CKEDITOR.config.toolbar = [
 				// for full toolbar: look at http://docs.cksource.com/CKEditor_3.x/Developers_Guide/Toolbar
 				['Cut','Copy','Paste', '-', 'Undo','Redo'],
-				['Bold','Italic','Underline'],
+				['Bold','Italic','Underline', 'NumberedList','BulletedList'],
 				['Font','FontSize'],
 				['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
-				['Maximize']
+				['Maximize', 'Source']
 		];
 		CKEDITOR.config.height = 	$(window).height() - 200;
 		$(document).ready(function(){
