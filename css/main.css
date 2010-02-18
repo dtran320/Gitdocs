@@ -38,6 +38,7 @@ body {
 
 .selected {
 	background: #EEECEF;
+	font-weight: bold;
 }
 
 td.selectable:hover {
