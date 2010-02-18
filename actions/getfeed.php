@@ -6,7 +6,10 @@ require_once(dirname(__FILE__) . '/../classes/version.php');
 require_once(dirname(__FILE__) . '/../lib/utils.php');
 
 if($user = User::getLoggedInUser()) {
-	$my_version_feed = $user->getRecentVersionFeedClean(8);
+	
+	$filter = postVarClean("filter");
+	
+	$my_version_feed = $user->getRecentVersionFeedClean(8, $filter);
 	echo json_encode($my_version_feed);
 }
 else echo "0";

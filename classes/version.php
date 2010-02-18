@@ -305,7 +305,7 @@ class Version {
 	
 	//get n most recent versions for User, everything if n =0
 	//assume userId is sanitized (passed from User class)
-	public static function getRecentVersionFeedForUser($userId, $n=0) {
+	public static function getRecentVersionFeedForUser($userId, $n=0, $filter=0) {
 		$db = new DB();
 		$versions = array();
 		$selectQuery = "SELECT doc_id as dId, name as dName, v_name as vName, v_id as vId, last_saved_time as timestamp, username, display_name as displayName, icon_ptr as iconPtr " .
@@ -314,8 +314,13 @@ class Version {
 			"INNER JOIN Users " .
 			"ON Versions.u_fk = Users.u_id " .
 			"WHERE doc_id IN " .
-			"(SELECT doc_fk from Versions WHERE u_fk = '$userId') " . 
-			"AND u_fk != '$userId' " .
+			"(SELECT doc_fk from Versions WHERE u_fk = '$userId') " .
+			"AND u_fk != '$userId' ";
+		if($filter) {
+			$filterArr = Document::splitClassName($filter);
+			$selectQuery .= "AND dept_name='{$filterArr[0]}' AND course_num='{$filterArr[1]}'";
+		}
+		$selectQuery .=
 			"ORDER BY last_saved_time DESC";
 		if($n > 0) $selectQuery .= " LIMIT 0, $n";
 		$db->execQuery($selectQuery);
@@ -326,8 +331,8 @@ class Version {
 		return $versions;
 	}
 	
-	public static function getRecentVersionFeedForUserClean($userId, $n=0) {
-		$my_version_feed = Version::getRecentVersionFeedForUser($userId, $n);
+	public static function getRecentVersionFeedForUserClean($userId, $n=0, $filter=0) {
+		$my_version_feed = Version::getRecentVersionFeedForUser($userId, $n, $filter);
 		
 		//preprocess to figure out links
 		foreach($my_version_feed as $k => $v) {

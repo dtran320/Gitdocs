@@ -138,6 +138,17 @@ class Document {
 		return $row['dept_name'] . ' ' . $row['course_num'];		
 	}
 
+	public function getClassesForUser($userId) {
+		$db = new DB();
+		$classes = array();
+		$query = "SELECT DISTINCT(CONCAT(dept_name, course_num)) as course FROM Documents " .
+			"INNER JOIN Versions on doc_fk = doc_id " .
+			"WHERE u_fk='$userId' GROUP BY doc_id ";
+		$db->execQuery($query);
+		while($row = $db->getNextRow())
+			$classes[] = $row['course'];
+		return $classes;
+	}
 	
 }
 

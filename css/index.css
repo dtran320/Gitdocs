@@ -54,13 +54,21 @@
 	clear:both;
 }
 
+table.document_list {
+	border-spacing: 0px;
+}
+
 table.document_list td {
 	padding: 0px 5px;
-	cell-spacing: 0px;
 	margin: 0px;
 }
 table.document_list tr:hover {
 	cursor: pointer;
 	background: #EEECEF;
-	
+}
+
+#notes_for_class tr:hover {
+	cursor:pointer;
+	background: #263033;
+	color: #fff;
 }
