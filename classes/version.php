@@ -275,7 +275,7 @@ class Version {
 	public static function getRecentVersionsForUser($userId, $n=0) {
 		$db = new DB();
 		$versions = array();
-		$selectQuery = "SELECT doc_id as dId, name as dName, v_name as vName, v_id as vId, last_saved_time as timestamp " .
+		$selectQuery = "SELECT doc_id as dId, name as dName, v_name as vName, v_id as vId, last_saved_time as timestamp, CONCAT(dept_name, course_num) as course " .
 			"FROM Versions INNER JOIN Documents " . 
 			"ON Versions.doc_fk = Documents.doc_id " .
 			"INNER JOIN Users " .
@@ -294,6 +294,7 @@ class Version {
 		$versions = Version::getRecentVersionsForUser($userId, $n);
 		foreach($versions as $k => $v) {
 			$versions[$k]["vName"] = stripslashes($versions[$k]["vName"]);
+			$versions[$k]["course"] = $versions[$k]["course"]? $versions[$k]["course"] . ":": "";
 			$versions[$k]["vName"] = $versions[$k]["vName"]? " - " . $versions[$k]["vName"] : "";
 			$versions[$k]["dName"] = stripslashes($versions[$k]["dName"]);
 			$versions[$k]["link"] = "editor.php?v_id=" . $versions[$k]["vId"];

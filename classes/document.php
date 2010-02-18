@@ -73,7 +73,9 @@ class Document {
 	public static function getNotesForClass($className) {
 		$db = new DB();
 		$split = Document::splitClassName($className);
-		$query ='select doc_id, name from Documents where dept_name="'. $split[0].'" and course_num="'. $split[1] .'";';
+		$query = "SELECT doc_id, name, count(*) as count from Documents " .
+			"WHERE dept_name='{$split[0]}' AND course_num='{$split[1]}' " .
+		 	" GROUP BY doc_id ORDER BY count;";
 		$db->execQuery($query);
 
 		$notes = array();

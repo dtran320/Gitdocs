@@ -12,7 +12,7 @@ function postShowAllMyDocuments(docs) {
 	var docHtml = '';
 
 	for(var i=0; i<docs.length; i++) {
-		docHtml += "<tr><td><a href='" + docs[i]["link"]+"'><p>"+docs[i]['dName'] + docs[i]['vName']+ "</p><p class='time small_text' id='" + docs[i]['timestamp'] + "'>" + docs[i]['timestamp']+"</p></a></td></tr>";
+		docHtml += "<tr><td><a href='" + docs[i]["link"]+"'><p><strong>" + docs[i]['course'] + "</strong>" +docs[i]['dName'] + docs[i]['vName']+ "</p><p class='time small_text' id='" + docs[i]['timestamp'] + "'>" + docs[i]['timestamp']+"</p></a></td></tr>";
 	}
 	$('#my_recent_docs').html(docHtml);
 

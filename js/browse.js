@@ -16,7 +16,7 @@ function showNotesForClass(className) {
 function postShowNotesForClass(notes) {
 	var notesHtml = '';
 	for(var i = 0; i < notes.length; i++) {
-		notesHtml += '<tr><td onclick="window.location=\'viewall.php?d_id=' + notes[i]['doc_id']+'\'"><p>'+ notes[i]['name'] + '</p></td></tr>';
+		notesHtml += '<tr><td onclick="window.location=\'viewall.php?d_id=' + notes[i]['doc_id']+'\'"><p>'+ notes[i]['name'] + ' (' +  notes[i]['count'] +')</p></td></tr>';
 	} 
 	var table = $('#notes_for_class');
 	table.html(notesHtml);

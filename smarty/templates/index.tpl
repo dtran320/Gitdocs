@@ -23,8 +23,12 @@
         <div class="box_content">
 		<!-- don't change this id w/o changing references in gitdocs.js -->
 		<table class="document_list" id="my_recent_docs">
+		{if $my_recent_docs|@count == 0}
+			You don't have any notes yet. <a href="editor.php">Take notes!</a>
+		{/if}
+		
 		{section name=i loop=$my_recent_docs}
-		<tr><td onclick="window.location='{$my_recent_docs[i].link}'"><p>{$my_recent_docs[i].dName} {$my_recent_docs[i].vName}</p><p class="time small_text " id="{$recent_global_docs[i].timestamp}">{$my_recent_docs[i].timestamp}</p></td></tr>
+		<tr><td onclick="window.location='{$my_recent_docs[i].link}'"><p><strong>{$my_recent_docs[i].course}</strong>{$my_recent_docs[i].dName} {$my_recent_docs[i].vName}</p><p class="time small_text " id="{$recent_global_docs[i].timestamp}">{$my_recent_docs[i].timestamp}</p></td></tr>
 		{/section}
 		</table>
 		<div style="padding-top:10px;"></div>	
@@ -37,7 +41,10 @@
 	<div class="box">
 		<div class="box_title">What my classmates are doing</div>
        	<div class="box_content">
-				<table class="document_list" id="my_version_feed">
+			{if $my_recent_version_feed|@count == 0}
+			You currently don't have any shared classnotes. <strong><a href="browse.php">Browse classes</a></strong>
+			{/if}
+				<table class="document_list" id="my_version_feed">					
 					{section name=i loop=$my_recent_version_feed}
 						<tr onclick="window.location='{$my_recent_version_feed[i].link}';"><td><img src="{$my_recent_version_feed[i].iconPtr}"></td><td>{$my_recent_version_feed[i].displayName} saved a version of </td><td><p>{$my_recent_version_feed[i].dName} {$my_recent_version_feed[i].vName}</p></td><td><p class="time small_text" id="{$my_recent_version_feed[i].timestamp}">{$my_recent_version_feed[i].timestamp}</p></td></tr>
 					{/section}
