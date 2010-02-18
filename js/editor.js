@@ -61,3 +61,8 @@ function changeVName(elem, d_id, u_id) {
 function updateVersionHistory() {
 	
 }
+
+function changeClass(elem, d_id) {
+	var className = $(elem).val();
+	$.post("actions/saveshare.php", { action: 'renameClass', d_id: d_id, class_name: className });
+}	

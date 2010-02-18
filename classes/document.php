@@ -40,6 +40,49 @@ class Document {
 		return $row;
 	}
 
+	public static function splitClassName($newClassName) {
+		$newDeptName = "";
+		$newCourseNum = "";
+		for ($i = 0; $i < strlen($newClassName); $i++) {
+			$char = substr($newClassName, $i, 1);
+			if (!is_numeric($char)) {
+				$newDeptName .= $char;
+			} else {
+				$newCourseNum = substr($newClassName, $i);
+				break;
+			}	
+		}
+		$newDeptName = strtoupper(trim($newDeptName));
+		$newCourseNum = strtoupper(trim($newCourseNum));
+		return array($newDeptName, $newCourseNum);
+	}
+
+	public static function getAllClasses() {
+		// returns string with all classnames, separated by commas 
+		$db = new DB();
+		$query = "SELECT distinct dept_name, course_num FROM Documents ORDER BY dept_name, course_num;";
+		$db->execQuery($query);
+		$classes = '';
+		while($row = $db->getNextRow()){
+			$classes .= $row['dept_name'] . ' ' . $row['course_num'] . ',';
+		}
+		$classes = substr($classes, 0, strlen($classes)-1);
+		return $classes;
+	}
+
+	public static function getNotesForClass($className) {
+		$db = new DB();
+		$split = Document::splitClassName($className);
+		$query ='select doc_id, name from Documents where dept_name="'. $split[0].'" and course_num="'. $split[1] .'";';
+		$db->execQuery($query);
+
+		$notes = array();
+		while($row = $db->getNextRow()) {
+			$notes[] = $row;
+		}	
+		return $notes;
+	}
+
 	public function __construct($docId, $name = 0 ){
 		$this->docId = $docId;
 		$this->name = $name;
@@ -50,6 +93,21 @@ class Document {
 		$db = new DB();
 		$newName = mysql_real_escape_string($newName);
 		$renameQuery = "UPDATE Documents SET name = '$newName' WHERE doc_id='{$this->docId}'";
+		return $db->execQuery($renameQuery);
+	}
+
+
+	public function renameClass($newClassName) {
+		$db = new DB();
+		$newClassName = mysql_real_escape_string($newClassName);
+
+		// TODO: what about Computer Science 106a vs CS 106a vs CS106a vs cs106a etc etc??
+		// currently the string up to the first number is the dept name
+		// the remainder of the string is the course num
+		$split = Document::splitClassName($newClassName);
+		$newDeptName = $split[0];
+		$newCourseNum = $split[1];
+		$renameQuery = "UPDATE Documents SET dept_name = '$newDeptName', course_num = '$newCourseNum' WHERE doc_id='{$this->docId}'";
 		return $db->execQuery($renameQuery);
 	}
 	
@@ -66,6 +124,15 @@ class Document {
 		}
 		return $versions;
 	}
+
+	public function getClassName() {
+		$db = new DB();
+		$query = "SELECT dept_name, course_num FROM Documents WHERE doc_id='{$this->docId}';";
+		$db->execQuery($query);
+		$row = $db->getNextRow();
+		return $row['dept_name'] . ' ' . $row['course_num'];		
+	}
+
 	
 }
 

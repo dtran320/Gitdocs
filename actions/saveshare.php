@@ -47,4 +47,11 @@ else if($action=="updateHistory") {
 	echo $json_encode($version->getVersionHistory());
 }
 
+else if ($action=="renameClass") {
+	$className = postVar("class_name");
+	$doc = new Document($d_id);
+	if($doc->renameClass($className)) echo "1";
+	else echo "0";
+}
+
 ?>
