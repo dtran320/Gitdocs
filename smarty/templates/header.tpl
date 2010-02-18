@@ -5,16 +5,17 @@
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
  <title>GitDocs - Where the world writes</title>
  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
- <!-- // vrindavan flower from kuler.adobe.com -->
  <link rel="stylesheet" type="text/css" href="css/main.css"/> 
  <link rel="stylesheet" type="text/css" href="css/index.css"/> 
  <link rel="stylesheet" type="text/css" href="css/compare.css"/> 
  <link rel="stylesheet" type="text/css" href="css/import.css"/>
  <link rel="stylesheet" type="text/css" href="css/tabs.css"/>
+ <link rel="stylesheet" type="text/css" href="css/jquery.autocomplete.css"/>
 
  <script type="text/javascript" src="js/lib/jquery-1.4.js"></script>
  <script type="text/javascript" src="js/gitdocs.js"></script>
  <script type="text/javascript" src="js/compare.js"></script>
+ <script type="text/javascript" src="js/browse.js"></script>
  <script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
  <script type="text/javascript" src="./ckeditor/adapters/jquery.js"></script>
  <script type="text/javascript" src="js/editor.js"></script>
@@ -26,6 +27,8 @@
  <script src="js/users.js" type="text/javascript" charset="utf-8"></script>
  <script src="js/lib/jquery.placeholder.js" type="text/javascript" charset="utf-8"></script>
  <script src="js/lib/pretty-dates.js" type="text/javascript" charset="utf-8"></script>
+ <script src="js/lib/jquery.autocomplete.js" type="text/javascript" charset="utf-8"></script>
+
 
  </head>
  <body>
