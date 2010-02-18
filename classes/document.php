@@ -73,9 +73,10 @@ class Document {
 	public static function getNotesForClass($className) {
 		$db = new DB();
 		$split = Document::splitClassName($className);
-		$query = "SELECT doc_id, name, count(*) as count from Documents " .
+		$query = "SELECT doc_id, name, count(v_id) as count, max(last_saved_time) as max_time from Documents " .
+			"INNER JOIN Versions on doc_id = doc_fk " .
 			"WHERE dept_name='{$split[0]}' AND course_num='{$split[1]}' " .
-		 	" GROUP BY doc_id ORDER BY count;";
+		 	" GROUP BY doc_id ORDER BY max_time DESC;";
 		$db->execQuery($query);
 
 		$notes = array();
