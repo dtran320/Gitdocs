@@ -50,7 +50,7 @@ class Repository {
 	public function getFile($branch = 0) {
 		if(!$branch) $branch = "master";
 		$this->checkout($branch);
-		$fh = fopen("$this->location/document.html",'r+');
+		$fh = fopen("{$this->location}/document.html",'r+');
 		return $fh;
 	}
 

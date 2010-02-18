@@ -12,7 +12,7 @@
   <div class="box_content" id="myversionspanel" style="display:none;">
   	<table>
 			{section name=i loop=$history}	
-				<tr><td><div style="padding-left: 6px; padding-right:6px;"></div><div class="med_text">{$history[i].revision} <span class="time" id="{$history[i].time}">{$history[i].time}</span></div></td></tr>
+				<tr><td><a href="viewer.php?v_id={$v_id}&r_id={$history[i].hash}">{$history[i].revision}</a></td><td><td class="time" id="{$history[i].time}">{$history[i].time}</td></tr>
 			{/section}
 		</table> 
 	</div>

@@ -35,7 +35,6 @@ if($user = User::getLoggedInUser()) {
 		$smarty->assign('d_name', stripslashes($document->name));
 		$smarty->assign('v_name', stripslashes($versionName));
 		$smarty->assign('class_name', $document->getClassName()); 
-		$smarty->assign('v_name', $versionName);
 
 		$smarty->assign('v_text', $docText);
 		

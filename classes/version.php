@@ -57,6 +57,8 @@ class Version {
 			$this->repo = new Repository($this->location);
 
 		$this->textCache = "";
+		//$this->fileHandler = fopen("$location/document.html",'r+');
+		
 		$this->fileHandler = $this->repo->getFile();
 	}
 	
@@ -80,13 +82,15 @@ class Version {
 
 	//returns array of Versions
 	public function getVersionHistory() {
-		$command = "cd {$this->location}; git log --format=%ct";
-		$versions = runCommand($command);
-		$revision = count($versions);
+		$command = "cd {$this->location}; git log --format='%H %ct'";
+		$output = runCommand($command);
+		$revision = count($output);
 		$revisions = array();
-		foreach($versions as $k => $version) {
+		foreach($output as $k => $version) {
 			$revisions[$k]['revision'] = "Revision " . $revision;
-			$revisions[$k]['time'] = getLocalTime($version);
+			$versionArr = explode(" ", $version);
+			$revisions[$k]['hash'] = $versionArr[0];
+			$revisions[$k]['time'] = getLocalTime($versionArr[1]);
 			$revision--;
 		}
 		return $revisions;
