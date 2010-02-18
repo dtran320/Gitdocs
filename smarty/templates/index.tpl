@@ -28,7 +28,8 @@
 		{/if}
 		
 		{section name=i loop=$my_recent_docs}
-		<tr><td onclick="window.location='{$my_recent_docs[i].link}'"><p><strong>{$my_recent_docs[i].course}</strong>{$my_recent_docs[i].dName} {$my_recent_docs[i].vName}</p><p class="time small_text " id="{$recent_global_docs[i].timestamp}">{$my_recent_docs[i].timestamp}</p></td></tr>
+		<tr onclick="window.location='{$my_recent_docs[i].link}'">
+			<td><strong>{$my_recent_docs[i].course}</strong>{$my_recent_docs[i].dName} {$my_recent_docs[i].vName}</td><td class="time small_text " id="{$recent_global_docs[i].timestamp}">{$my_recent_docs[i].timestamp}</td></tr>
 		{/section}
 		</table>
 		<div style="padding-top:10px;"></div>	
