@@ -24,7 +24,7 @@
 		<!-- don't change this id w/o changing references in gitdocs.js -->
 		<table class="document_list" id="my_recent_docs">
 		{section name=i loop=$my_recent_docs}
-		<tr><td><a href="{$my_recent_docs[i].link}"><p>{$my_recent_docs[i].dName} {$my_recent_docs[i].vName}</p><p class="time small_text " id="{$recent_global_docs[i].timestamp}">{$my_recent_docs[i].timestamp}</p></a></td></tr>
+		<tr><td onclick="window.location='{$my_recent_docs[i].link}'"><p>{$my_recent_docs[i].dName} {$my_recent_docs[i].vName}</p><p class="time small_text " id="{$recent_global_docs[i].timestamp}">{$my_recent_docs[i].timestamp}</p></td></tr>
 		{/section}
 		</table>
 		<div style="padding-top:10px;"></div>	
@@ -39,7 +39,7 @@
        	<div class="box_content">
 				<table class="document_list" id="my_version_feed">
 					{section name=i loop=$my_recent_version_feed}
-						<tr><td><img src="{$my_recent_version_feed[i].iconPtr}"></td><td>{$my_recent_version_feed[i].displayName} saved a version of </td><td><a href="{$my_recent_version_feed[i].link}"><p>{$my_recent_version_feed[i].dName} {$my_recent_version_feed[i].vName}</p></a></td><td><p class="time small_text" id="{$my_recent_version_feed[i].timestamp}">{$my_recent_version_feed[i].timestamp}</p></td></tr>
+						<tr onclick="window.location='{$my_recent_version_feed[i].link}';"><td><img src="{$my_recent_version_feed[i].iconPtr}"></td><td>{$my_recent_version_feed[i].displayName} saved a version of </td><td><p>{$my_recent_version_feed[i].dName} {$my_recent_version_feed[i].vName}</p></td><td><p class="time small_text" id="{$my_recent_version_feed[i].timestamp}">{$my_recent_version_feed[i].timestamp}</p></td></tr>
 					{/section}
 						</table>
 				</div><!-- end box content -->
