@@ -12,6 +12,8 @@ require_once('lib/utils.php');
 require('init_smarty.php');
 
 if($user = User::getLoggedInUser()) {
+	$smarty->assign('logged_in_user', $user->getUserInfo());
+	
 	$all_classes = Document::getAllClasses();
 	$all_classes = explode(",", $all_classes);
 	$smarty->assign('all_classes', $all_classes);
