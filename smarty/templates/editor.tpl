@@ -95,6 +95,7 @@
 					$('#change_class').addClass('highlighted');
 				}).blur(function() {
 					hasFocus = false;
+					changeClass('#change_class', '{/literal}{$d_id}{literal}');
 					$('#change_class').removeClass('highlighted');
 				}).unbind("keypress").keypress(function(e) {
 					if (e.keyCode == 13) {

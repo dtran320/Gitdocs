@@ -19,7 +19,6 @@
        	<div class="box_content">
 				<table class="document_list" id="notes_for_class">
 				</table>
-
 				</div><!-- end box content -->
 	</div>
 
