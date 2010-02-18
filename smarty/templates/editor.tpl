@@ -20,7 +20,7 @@
 	<form id="save_form" class="big_form" action="actions/saveshare.php" method="post" style="float:right;">
 		<input type="hidden" name="d_id" value="{$d_id}" />
 		<input type="hidden" name="u_id" value="{$u_id}" />
-		<input type="submit" name="action" value="Save and Publish" onclick="updateElement();"/>
+		<input type="submit" name="action" value="Save" onclick="updateElement();"/>
 
 	</div><!-- end box_title -->
 
@@ -97,6 +97,7 @@
 					$('#change_class').addClass('highlighted');
 				}).blur(function() {
 					hasFocus = false;
+					changeClass('#change_class', '{/literal}{$d_id}{literal}');
 					$('#change_class').removeClass('highlighted');
 				}).unbind("keypress").keypress(function(e) {
 					if (e.keyCode == 13) {

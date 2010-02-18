@@ -10,6 +10,7 @@ require_once(dirname(__FILE__) . "/../config.php");
 class Repository {
 
 	private $location;
+	private $lock_fh;
 
 	public function __construct($location) {
 		$this->location = $location;
@@ -42,22 +43,38 @@ class Repository {
 		return $this->location;
 	}
 	
-	public function commit() {
+
+	public function AcquireLock() {
+		$this->lock_fh = fopen("$this->location/.lock", "w+");
+		return flock($this->lock_fh, LOCK_EX);
+	}	
+	public function ReleaseLock() {
+		flock($this->lock_fh, LOCK_UN);
+		fclose($this->lock_fh);
+	}
+	
+	public function commit() {	
+		if(!$this->AcquireLock()) return false;
 		$command = "cd $this->location; git add document.html; git commit -a -m placeholdercommitmsg";
 		runCommand($command);			
+		$this->ReleaseLock();
 	}
 	
 	public function getFile($branch = 0) {
+		if(!$this->AcquireLock()) return false;
 		if(!$branch) $branch = "master";
 		$this->checkout($branch);
 		$fh = fopen("{$this->location}/document.html",'r+');
+		$this->ReleaseLock();
 		return $fh;
 	}
 
 	public function readFileToArray($branch = 0) {
+		if(!$this->AcquireLock()) return false;	
 		if(!$branch) $branch = "master";
 		$this->checkout($branch);
 		return file("$this->location/document.html");
+		$this->ReleaseLock();
 	}
 	
 	public function checkout($branch){	
@@ -67,6 +84,7 @@ class Repository {
 	
 	public function diff($myVersion, $otherVersion) {
 		$myVersion->commit();
+		if(!$this->AcquireLock()) return "ERROR: COULD NOT ACQUIRE LOCK\n";
 		$otherLocation = $otherVersion->getRepoLocation();
 		$command = "cd $otherLocation; 
 				git stash; 
@@ -96,6 +114,7 @@ class Repository {
 		
 		if(DEBUG) echo "command: $command \n";
 		$result = runCommand($command);
+		$this->ReleaseLock();
 		return $result;
 						
 	}
@@ -106,6 +125,10 @@ class Repository {
 		
 		$otherLocation = $otherVersion->getRepoLocation();
 
+	 	$myFileArr = $myVersion->readFileToArray();
+		$otherFileArr = $otherVersion->readFileToArray($myVersion->getUserId());	
+	
+		if(!$this->AcquireLock()) return false;
 		//get diff between each version
 		$command = "cd $this->location; git checkout master; cd $otherLocation git checkout " . $myVersion->getUserId() . "; diff -U0 $this->location/document.html $otherLocation/document.html";
 		if(DEBUG) echo "command: $command \n";
@@ -122,8 +145,6 @@ class Repository {
 
 		if(DEBUG) print_r($arrDiffs);	
 			
-	 	$myFileArr = $myVersion->readFileToArray();
-		$otherFileArr = $otherVersion->readFileToArray($myVersion->getUserId());	
 		//undo changes which were rejected
 		
 			if(DEBUG)print_r($myFileArr);
@@ -133,8 +154,10 @@ class Repository {
 			$otherEdit = array_slice($otherFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"]);
 			if($diff->userAction == UserDiffAction::accepted) {
 				array_splice($myFileArr, $diffLineNums[1]["$diff->index"] - 1, (int)$diffLineNums[2]["$diff->index"], $otherEdit);	
+			//	array_splice($otherFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"]);
 			} else if($diff->userAction == UserDiffAction::rejected) {
 				array_splice($otherFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"], $myEdit);	
+			//	array_splice($myFileArr, $diffLineNums[1]["$diff->index"] - 1, (int)$diffLineNums[2]["$diff->index"]);
 			}
 		}	
 
@@ -154,6 +177,7 @@ class Repository {
 		$err= runCommand($command);	
 		$command = "cd $otherLocation; git checkout master";
 		runCommand($command);	
+		$this->ReleaseLock();
 	}
 
 }

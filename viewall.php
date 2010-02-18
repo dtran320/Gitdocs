@@ -23,19 +23,26 @@ if($user = User::getLoggedInUser()) {
 		$document = new Document($d_id);
 		$version_infos = $document->getAllVersions();
 		$versions = array();
+		$userHasDoc = false;
 		foreach ($version_infos as $v_info) {
 			$author_name = $v_info['display_name'];
 			$icon_ptr = $v_info['icon_ptr'] ? $v_info['icon_ptr'] : 'images/default.jpg';
 			$v_id = $v_info['v_id'];
 			$version = new Version(0,0,0,0, $v_id);
+			$author_id = $version->getUserId();
+			if($author_id == $user->userId) {
+				$userHasDoc = true;
+			}
 			$v_text = $version->getDocFromDisk();
 			$v_name = $version->getName();
-			$versions[] = array($author_name, $icon_ptr, $v_name, $v_text);
+			$versions[] = array($author_name, $icon_ptr, $v_name, $v_text, $v_id, $author_id);
 		}
 		$d_info = Document::getDocInfoForId($d_id);
 		$smarty->assign('d_name', $d_info['name']);
 		$smarty->assign('versions', $versions);
 
+		$smarty->assign('d_id', $d_id);
+		$smarty->assign('userHasDoc', $userHasDoc);
 		$smarty->display('viewall.tpl');
 	} else {
 	}

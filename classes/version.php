@@ -101,7 +101,11 @@ class Version {
 		$this->textCache = $text;
 		$this->updateTimestamp();
 		//if($text==0) return true;
-		return (fwrite($this->fileHandler, $text) && ftruncate($this->fileHandler, ftell($this->fileHandler)));
+		$this->repo->AcquireLock();
+		$this->repo->checkout("master");
+		$result = (fwrite($this->fileHandler, $text) && ftruncate($this->fileHandler, ftell($this->fileHandler)));
+		$this->repo->ReleaseLock();
+		return $result;
 
 	}
 
