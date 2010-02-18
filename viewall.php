@@ -35,7 +35,7 @@ if($user = User::getLoggedInUser()) {
 			}
 			$v_text = $version->getDocFromDisk();
 			$v_name = $version->getName();
-			$versions[] = array($author_name, $icon_ptr, $v_name, $v_text, $v_id);
+			$versions[] = array($author_name, $icon_ptr, $v_name, $v_text, $v_id, $author_id);
 		}
 		$d_info = Document::getDocInfoForId($d_id);
 		$smarty->assign('d_name', $d_info['name']);

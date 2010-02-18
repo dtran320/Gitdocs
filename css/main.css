@@ -230,17 +230,20 @@ a:hover {
 
 .big_form input[type="submit"], button.big {
 	margin: 5px;
-	background: #2fb81b;
+	background: #263033;
 	color: #fff;
 	font-size: 1.4em; 
 	height: 1.6em;
 	font-weight:bold;
-	text-shadow: 2px 2px 3px #0914b0; 
-	-moz-border-radius: 20px; 
+	text-shadow: 2px 2px 3px #000000; 
+/*	-moz-border-radius: 20px; 
 	-webkit-border-radius: 20px;
-	border: 1px #000; 
+*/
+	border: 1px #000;
+/* 
 	-moz-box-shadow: 2px 4px 4px #000;
 	-webkit-box-shadow: 2px 4px 4px #000;
+*/
 	cursor: pointer;
 }
 .reg_form input[type="submit"] {
