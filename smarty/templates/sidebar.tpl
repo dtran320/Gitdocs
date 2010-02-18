@@ -5,8 +5,8 @@
 		<li class = "active" id="myversions_tab"><span onclick="DisplayMine()"><a class="active">History</a></span></li>
 	</ul>
 	<ul class="tabs primary" id="othersversions_selected">
-	 <li class="active"><span onclick="DisplayOthers()"><a class="active">Classmates</span></a></li>
-	 <li id="myversions_tab"><span onclick="DisplayMine()"><a>History</span></a></li>
+	 <li class="active"><span onclick="DisplayOthers()"><a class="active">Classmates</a></span></li>
+	 <li id="myversions_tab"><span onclick="DisplayMine()"><a>History</a></span></li>
 	</ul>
 	</div><!-- box_title-->
   <div class="box_content" id="myversionspanel" style="display:none;">

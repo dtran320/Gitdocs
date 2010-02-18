@@ -13,18 +13,18 @@ require_once('document.php');
 
 class Version {
 	
-	private $userId;
-	private $docId;
+	private $userId, $docId;
 	private $description;
 	public $lastSavedTime;
-	private $versionId;
+	public $versionId;
 	private $commitId; //sha-1 hash
 	private $repo;
 	private $location;
 	public $textCache;
 	public $fileHandler;
+	private $branch;
 	
-	public function __construct($docId=0, $userId=0, $repo = 0,$description = 0, $v_id = 0) {
+	public function __construct($docId=0, $userId=0, $repo = 0,$description = 0, $v_id = 0, $branch = 0) {
 		global $DOCUMENTS_PATH;
 		$db = new DB();	
 		if($v_id) {
@@ -58,8 +58,9 @@ class Version {
 
 		$this->textCache = "";
 		//$this->fileHandler = fopen("$location/document.html",'r+');
-		
-		$this->fileHandler = $this->repo->getFile();
+		$this->branch = $branch? $branch : "master";
+		$this->fileHandler = $this->repo->getFile($this->branch);
+
 	}
 	
 	public function __destruct() {
@@ -96,6 +97,12 @@ class Version {
 		return $revisions;
 	}
 	
+	public function getVersionSaveTime() {
+		$command = "cd {$this->location}; git log {$this->branch} -1 --format='%ct'";
+		$output = runCommand($command);
+		return getLocalTime($output[0]);
+	}
+	
 	//just saves, update lastSavedTime
 	public function save($text) {
 		$this->textCache = $text;
@@ -128,6 +135,12 @@ class Version {
 	
 	public function readFileToArray($branch = 0) {
 		return $this->repo->readFileToArray($branch);
+	}
+	
+	public function getDocFromDisk() {
+		if(DEBUG) echo "Opening branch " . $this->branch;
+		$this->repo->checkout($this->branch);
+		return fread($this->fileHandler, 8192);
 	}
 	
 	public function diff($otherVersion) {
@@ -192,12 +205,6 @@ class Version {
 		return $row["v_name"];
 	}
 	
-	public function getDocFromDisk($branch=0) {
-		if(!$branch) $branch = "master";
-		$this->repo->checkout($branch);
-		return fread($this->fileHandler, 8192);
-	}
-	
 	public function rename($newName) {
 		$db = new DB();
 		$newName = mysql_real_escape_string($newName);
@@ -229,7 +236,10 @@ class Version {
 		}
 		
 	}
-	
+	/*-------------------------------------------------------------------------------------------
+	 * Version List Functions - list global docs, recent docs for a user, and recent versions
+	 * that the user has a version of
+	 *-------------------------------------------------------------------------------------------*/
 	public static function getRecentGlobalVersions($n=0) {
 		$db = new DB();
 		$versions = array();

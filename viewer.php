@@ -20,8 +20,12 @@ if($user = User::getLoggedInUser()) {
 	
 	$v_id = getVarClean("v_id");
 	if($v_id) { //opening an existing doc
-		$version = new Version(0,0,0,0, $v_id);
-		if ($version->getUserId() == $user->userId) {	
+		$r_id = getVarClean("r_id");
+		$branch = $r_id? $r_id : "master";
+		$version = new Version(0,0,0,0, $v_id, $branch);
+
+		//if this is a current version that belongs to the user, go to editor
+		if (!$r_id && $version->getUserId() == $user->userId) {	
 			header('Location: editor.php?v_id='.$v_id);
 			exit(0);	
 		}
@@ -38,7 +42,24 @@ if($user = User::getLoggedInUser()) {
 		$smarty->assign('v_name', $versionName);
 		$smarty->assign('v_text', $docText);
 		$smarty->assign('others', getClassmates($document, $user));
-		$smarty->assign('submit_text', (Version::doesUserHaveVersion($document->docId, $user->userId)? "Go to my version" : "Start working off this version"));
+		
+		//
+		if($r_id) {
+			$smarty->assign('timestamp', $version->getVersionSaveTime());
+			$submit_text = "Return to current version";
+			$action = "current";
+		}
+		else if(Version::doesUserHaveVersion($document->docId, $user->userId)) {
+			$submit_text = "Go to my version";
+			$action = "current";
+		}
+		else {
+			$submit_text = "Start working off this version";
+			$action = "clone";
+		}
+
+		$smarty->assign('action', $action);
+		$smarty->assign('submit_text', $submit_text);
 	}
 	$smarty->display('viewer.tpl');
 }//end if user logged in

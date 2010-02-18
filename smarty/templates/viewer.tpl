@@ -1,10 +1,15 @@
 {include file="header.tpl"}
 
 <div class="box left_main">
-	<div class="box_title">Viewing -- {$d_name} -- <span class="v_name">{$v_name}</span> 
+	<div class="box_title">
+	<div style="float:left;"> Viewing -- {$d_name} -- <span class="v_name">{$v_name}</span> 
   -- <span class="u_name">{$author_name}</span>
+	{if isset($timestamp)}
+		<div class="old_timestamp">You are viewing an old revision from <span class="time" id="{$timestamp}">{$timestamp}</span></div>
+	{/if}
+	</div>
 			<form id="editor_form" class="big_form" method="post" action="editor.php" style="float:right;">
-				<input type="hidden" name="action" value="clone" />
+				<input type="hidden" name="action" value="{$action}" />
 				<input type="hidden" name="document_id" value="{$d_id}" />
 				<input type="hidden" name="clone_id" value="{$v_id}" />
 				<input type="hidden" name="description" value="{$v_name}" />
@@ -13,7 +18,7 @@
 		</div>
 		<div class="clear_fix"></div>
 	<div class="box_content">
-			<div id="loader"><img src="images/ajax-loader.gif"></div>
+
 			<div>
 			<form method="post">
 				<textarea id="editor1">
@@ -52,7 +57,8 @@
 		CKEDITOR.config.toolbar = [];
 		CKEDITOR.config.height = 	$(window).height() - 200;
 		$(document).ready(function(){
-			$("#editor1").ckeditor(hideLoader("loader"));			
+			$("#editor1").ckeditor(hideLoader("loader"));	
+			$(".time").prettyDate();		
 		});
 
 	//]]>

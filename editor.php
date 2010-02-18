@@ -20,10 +20,18 @@ if($user = User::getLoggedInUser()) {
 	$smarty->assign('displayName', $user->displayName);
 	$smarty->assign('iconPtr', $user->iconPtr);
 	
-	if($v_id = getVarClean("v_id")) { //opening an existing doc
-		$version = new Version(0,0,0,0, $v_id);
+	$action = postVarClean("action"); //"clone", "open", otherwise "new"
+	$smarty->assign('action', $action);
+
+	if(($v_id = getVarClean("v_id")) || $action=="current") { //opening an existing doc
+		if($v_id) 
+			$version = new Version(0,0,0,0, $v_id);
+		else {
+			$document_id = postVarClean("document_id");
+			$version = new Version($document_id, $user->userId);
+		}
 		if($version->getUserId() != $user->userId) {
-			header('Location: viewer.php?v_id='.$v_id);
+			header('Location: viewer.php?v_id='. $version->versionId);
 			exit(0);
 		}
 		$versionName = $version->getName();
@@ -31,20 +39,15 @@ if($user = User::getLoggedInUser()) {
 		
 		$document = $version->getDocument();
 		$smarty->assign('d_id', $document->docId);
-
+		$smarty->assign('v_id', $version->versionId);
 		$smarty->assign('d_name', stripslashes($document->name));
 		$smarty->assign('v_name', stripslashes($versionName));
 		$smarty->assign('class_name', $document->getClassName()); 
 
 		$smarty->assign('v_text', $docText);
 		
-		//Set sidebar history
-		$versionHistory = $version->getVersionHistory();
-		$smarty->assign('history', $versionHistory);
 		
 	} else {
-		$action = postVarClean("action"); //"clone", "open", otherwise "new"
-		$smarty->assign('action', $action);
 
 		if ($action=="clone") {
 			$documentId = postVarClean("document_id");
@@ -83,7 +86,11 @@ if($user = User::getLoggedInUser()) {
 				));
 		}
 	} //end else
-
+	
+	//Set sidebar history
+	$versionHistory = $version->getVersionHistory();
+	$smarty->assign('history', $versionHistory);
+	
 	$all_classes = Document::getAllClasses();
 	$smarty->assign('all_classes', $all_classes);
 	$smarty->assign('others', getClassmates($document, $user));
