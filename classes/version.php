@@ -83,7 +83,7 @@ class Version {
 
 	//returns array of Versions
 	public function getVersionHistory() {
-		$command = "cd {$this->location}; git log --format='%H %ct'";
+		$command = "cd {$this->location}; git log --pretty=format:'%H %ct'";
 		$output = runCommand($command);
 		$revision = count($output);
 		$revisions = array();
@@ -98,7 +98,7 @@ class Version {
 	}
 	
 	public function getVersionSaveTime() {
-		$command = "cd {$this->location}; git log {$this->branch} -1 --format='%ct'";
+		$command = "cd {$this->location}; git log {$this->branch} -1 --pretty=format:'%ct'";
 		$output = runCommand($command);
 		return getLocalTime($output[0]);
 	}
