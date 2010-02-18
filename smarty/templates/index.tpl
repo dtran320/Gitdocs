@@ -60,7 +60,7 @@
 	//<![CDATA[
 	$(document).ready(function() {
 		$(".time").prettyDate();
-		setInterval(function(){ $.post("actions/getFeed.php", { "foo" : "bar" },
+		setInterval(function(){ $.post("actions/getfeed.php", { "foo" : "bar" },
 		   function(data){
 			fetchRecentVersions(data); }, "json") }, 10000);
 		setInterval(function(){ $(".time").prettyDate(); }, 10000);
