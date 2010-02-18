@@ -81,6 +81,8 @@ class Document {
 
 		$notes = array();
 		while($row = $db->getNextRow()) {
+			$row['count'] = $row['count']==1? $row['count'] . " version" : $row['count'] . " versions";
+			$row['max_time'] = getLocalTime($row['max_time']);
 			$notes[] = $row;
 		}	
 		return $notes;

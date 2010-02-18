@@ -16,7 +16,7 @@ function showNotesForClass(className) {
 function postShowNotesForClass(notes) {
 	var notesHtml = '';
 	for(var i = 0; i < notes.length; i++) {
-		notesHtml += '<tr><td onclick="window.location=\'viewall.php?d_id=' + notes[i]['doc_id']+'\'"><p>'+ notes[i]['name'] + ' (' +  notes[i]['count'] +')</p></td></tr>';
+		notesHtml += '<tr onclick="window.location=\'viewall.php?d_id=' + notes[i]['doc_id']+'\'"><td><strong>'+ notes[i]['name'] + '</strong></td>' + '<td>' + notes[i]['count'] + '</td><td class="time" id="'+ notes[i]['max_time'] +'">' + notes[i]['max_time'] + '</td></tr>';
 	} 
 	var table = $('#notes_for_class');
 	table.html(notesHtml);
@@ -25,6 +25,7 @@ function postShowNotesForClass(notes) {
 	var ctop = cy - (table.height()/2);
 	var top_val = ctop < 115 ? 115 : ctop;
 	table.offset({top: top_val});
+	$('.time').prettyDate();
 }
 
 
