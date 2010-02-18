@@ -6,11 +6,13 @@
 	<div class="box_title"></div>
 	<div class="box_content">
 		<div id="doc_link_left">
-		<a href="editor.php">New Notes</a>
-		
+		<a href="editor.php">New</a>
 		</div>
 		<div id="doc_link_right">
-		<a href="import.php">Upload Notes</a>
+		<a href="import.php">Upload</a>
+		</div>
+		<div id="doc_link_right">
+		<a href="browse.php">Browse</a>
 		</div>
 		<div class="clearfix"></div>
 	</div>
@@ -34,14 +36,14 @@
 <div class="right_side60">
 	<div class="box">
 		<div class="box_title">What my classmates are doing</div>
-	       	<div class="box_content">
+       	<div class="box_content">
 				<table class="document_list" id="my_version_feed">
 					{section name=i loop=$my_recent_version_feed}
 						<tr><td><img src="{$my_recent_version_feed[i].iconPtr}"></td><td>{$my_recent_version_feed[i].displayName} saved a version of </td><td><a href="{$my_recent_version_feed[i].link}"><p>{$my_recent_version_feed[i].dName} {$my_recent_version_feed[i].vName}</p></a></td><td><p class="time small_text" id="{$my_recent_version_feed[i].timestamp}">{$my_recent_version_feed[i].timestamp}</p></td></tr>
 					{/section}
 						</table>
 				</div><!-- end box content -->
-			</div>
+	</div>
 
 </div> <!-- end right_side -->
 </div><!-- end container -->
