@@ -74,6 +74,8 @@
 				}).click(function() {
 					changeVName('#change_v_name', '{/literal}{$d_id}{literal}','{/literal}{$u_id}{literal}');
 				});
+				$(".time").prettyDate();
+				
 
 	//]]>
 	{/literal}

@@ -31,10 +31,14 @@ if($user = User::getLoggedInUser()) {
 		
 		$document = $version->getDocument();
 		$smarty->assign('d_id', $document->docId);
-		$smarty->assign('d_name', $document->name);
-		$smarty->assign('v_name', $versionName);
+		$smarty->assign('d_name', stripslashes($document->name));
+		$smarty->assign('v_name', stripslashes($versionName));
 		$smarty->assign('v_text', $docText);
-		$smarty->assign('history', getHistory($versionName, $document));
+		
+		//Set sidebar history
+		$versionHistory = $version->getVersionHistory();
+		$smarty->assign('history', $versionHistory);
+		
 	} else {
 		$action = postVarClean("action"); //"clone", "open", otherwise "new"
 		$smarty->assign('action', $action);

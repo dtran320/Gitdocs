@@ -1,23 +1,23 @@
 <div class="box right_side">
   <div class="box_title">
-	<ul class = "tabs primary" id ="myversions_selected">
+	<ul class = "tabs primary" id ="myversions_selected" style="display:none;">
+		<li ><span onclick="DisplayOthers()"><a>Classmates</a></span></li>
 		<li class = "active" id="myversions_tab"><span onclick="DisplayMine()"><a class="active">History</a></span></li>
-		<li><span onclick="DisplayOthers()"><a>Classmates</a></span></li>
 	</ul>
-	<ul class="tabs primary" id="othersversions_selected" style="display:none;">
-	 <li id="myversions_tab"><span onclick="DisplayMine()"><a>History</span></a></li>
+	<ul class="tabs primary" id="othersversions_selected">
 	 <li class="active"><span onclick="DisplayOthers()"><a class="active">Classmates</span></a></li>
+	 <li id="myversions_tab"><span onclick="DisplayMine()"><a>History</span></a></li>
 	</ul>
 	</div><!-- box_title-->
-  <div class="box_content" id="myversionspanel" style="display:block;">
+  <div class="box_content" id="myversionspanel" style="display:none;">
   	<table>
 			{section name=i loop=$history}	
-				<tr><td><div style="float: {$history[i][0]}; padding-left: 6px; padding-right:6px;"><img src="{$history[i][1]}" /> </div><div class="med_text align_{$history[i][0]}">{$history[i][2]}</div></td></tr>
+				<tr><td><div style="padding-left: 6px; padding-right:6px;"></div><div class="med_text">{$history[i].revision} <span class="time" id="{$history[i].time}">{$history[i].time}</span></div></td></tr>
 			{/section}
 		</table> 
 	</div>
 	
-	<div class="box_content" id="otherversionspanel" style="display:none;">
+	<div class="box_content" id="otherversionspanel" style="display:block;">
 			<table style="width:100%">
 			{if $others|@count == 0}
 			None of your classmates have a version of this yet!

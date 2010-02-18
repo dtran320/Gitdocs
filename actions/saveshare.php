@@ -42,4 +42,9 @@ else if ($action=="renameD") {
 	
 }
 
+else if($action=="updateHistory") {
+	$version = new Version($d_id, $u_id);
+	echo $json_encode($version->getVersionHistory());
+}
+
 ?>

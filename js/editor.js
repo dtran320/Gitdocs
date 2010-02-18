@@ -43,6 +43,7 @@ function preSaveVersion(formData, jqForm, options) {
 function postSaveVersion(data) {
 	var status = (data=="0"? "Error saving document." : data);
 	$("#save_status").html(status);
+	updateVersionHistory();
 }
 
 function changeDName(elem, d_id) {
@@ -55,4 +56,8 @@ function changeVName(elem, d_id, u_id) {
 	var vName = prompt("Enter a new version name (subtitle):", $(elem).val());
 	$(elem).val(vName);
 	$.post("actions/saveshare.php", { action: 'renameV', d_id: d_id, u_id : u_id, v_name : vName });
+}
+
+function updateVersionHistory() {
+	
 }

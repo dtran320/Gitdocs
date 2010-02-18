@@ -5,9 +5,10 @@
  * 
  * Gitdocs Jan 2010
  * ---------------------------------------------------------------------------- */
-require_once(dirname(__FILE__) . "/../config.php");
-require_once(dirname(__FILE__) . "/../db/db.php");
-require_once(dirname(__FILE__) . "/repository.php");
+require_once(dirname(__FILE__) . '/../config.php');
+require_once(dirname(__FILE__) . '/../db/db.php');
+require_once(dirname(__FILE__) . '/repository.php');
+require_once(dirname(__FILE__) . '/../lib/utils.php');
 require_once('document.php');
 
 class Version {
@@ -19,7 +20,7 @@ class Version {
 	private $versionId;
 	private $commitId; //sha-1 hash
 	private $repo;
-	
+	private $location;
 	public $textCache;
 	public $fileHandler;
 	
@@ -46,18 +47,17 @@ class Version {
 			if($row)
 				$this->versionId = $row["v_id"];
 		}
-		
-		$location = "$DOCUMENTS_PATH$docId/$userId";
+		$this->location = "$DOCUMENTS_PATH$docId/$userId";
 		$this->docId = $docId;	
 		$this->userId = $userId;
 		$this->description = $description;
 		if($repo)
 			$this->repo = $repo;
 		else 
-			$this->repo = new Repository($location);
+			$this->repo = new Repository($this->location);
 
 		$this->textCache = "";
-		$this->fileHandler = fopen("$location/document.html",'r+');
+		$this->fileHandler = $this->repo->getFile();
 	}
 	
 	public function __destruct() {
@@ -80,7 +80,16 @@ class Version {
 
 	//returns array of Versions
 	public function getVersionHistory() {
-		
+		$command = "cd {$this->location}; git log --format=%ct";
+		$versions = runCommand($command);
+		$revision = count($versions);
+		$revisions = array();
+		foreach($versions as $k => $version) {
+			$revisions[$k]['revision'] = "Revision " . $revision;
+			$revisions[$k]['time'] = getLocalTime($version);
+			$revision--;
+		}
+		return $revisions;
 	}
 	
 	//just saves, update lastSavedTime
@@ -175,8 +184,9 @@ class Version {
 		return $row["v_name"];
 	}
 	
-	public function getDocFromDisk() {
-		$this->repo->checkout("master");
+	public function getDocFromDisk($branch=0) {
+		if(!$branch) $branch = "master";
+		$this->repo->checkout($branch);
 		return fread($this->fileHandler, 8192);
 	}
 	
