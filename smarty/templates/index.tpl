@@ -43,7 +43,7 @@
 		<div class="box_title">What my classmates are doing 
 			
 		<span id="filter" style="float:right;">
-			<span class="option selected" id="All" onclick="setFilter('All')">All </span>
+			<span class="option selected" id="All" onclick="setFilter('All')">All</span>
 			{section name=i loop=$my_classes}
 				| <span class="option" id="{$my_classes[i]}" onclick="setFilter('{$my_classes[i]}')">{$my_classes[i]}</span>
 			{/section}
