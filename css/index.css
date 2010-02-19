@@ -72,3 +72,16 @@ table.document_list tr:hover {
 	background: #263033;
 	color: #fff;
 }
+
+#filter {
+	font-weight: normal;
+}
+
+#filter span:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+#filter .selected {
+	font-weight:bold;
+}

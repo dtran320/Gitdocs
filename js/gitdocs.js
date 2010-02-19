@@ -37,5 +37,13 @@ function fetchRecentVersions(docs) {
 	
 }
 
+function setFilter(class) {
+	$('#filter .option').removeClass("selected");
+	$('#filter #' + class).addClass("selected");
+	$('#my_version_feed').html('Retrieving <img src="images/ajax-loader.gif">');
+	$.post("actions/getfeed.php", { "filter" : $('#filter .selected').text() },
+	   function(data){
+		fetchRecentVersions(data); }, "json");
+}
 
 

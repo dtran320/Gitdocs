@@ -40,11 +40,16 @@
 
 <div class="right_side60">
 	<div class="box">
-		<div class="box_title">What my classmates are doing <span id="filter" style="float:right;">
-		{section name=i loop=$my_classes}
-			{$my_classes[i]} |
-		{/section}
-		</span></div>
+		<div class="box_title">What my classmates are doing 
+			
+		<span id="filter" style="float:right;">
+			<span class="option selected" id="All" onclick="setFilter('All')">All </span>
+			{section name=i loop=$my_classes}
+				| <span class="option" id="{$my_classes[i]}" onclick="setFilter('{$my_classes[i]}')">{$my_classes[i]}</span>
+			{/section}
+			</span>
+		</span>
+		</div>
        	<div class="box_content">
 			{if $my_recent_version_feed|@count == 0}
 			You currently don't have any shared classnotes. <strong><a href="browse.php">Browse classes</a></strong>
@@ -64,7 +69,7 @@
 	//<![CDATA[
 	$(document).ready(function() {
 		$(".time").prettyDate();
-		setInterval(function(){ $.post("actions/getfeed.php", { "filter" : "" },
+		setInterval(function(){ $.post("actions/getfeed.php", { "filter" : $('#filter .selected').text() },
 		   function(data){
 			fetchRecentVersions(data); }, "json") }, 10000);
 		setInterval(function(){ $(".time").prettyDate(); }, 10000);
