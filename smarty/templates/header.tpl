@@ -34,7 +34,8 @@
  <body>
  <div class="wide_header">
 	<div style="float:left;">
-	<div class="wide_gitdocs"><a href="index.php">GitDocs</a> <span class="page_title">Where the world writes</span></div>
+	<div class="wide_gitdocs"><a href="index.php">GitDocs</a> <span class="page_title">Work collectively
+		without losing individuality</span></div>
 	</div>
 	{if isset($logged_in_user) }
 		<div class="float_right" style="margin:20px 10px 0px 0px;">
