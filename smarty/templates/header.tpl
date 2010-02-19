@@ -12,6 +12,8 @@
  <link rel="stylesheet" type="text/css" href="css/tabs.css"/>
  <link rel="stylesheet" type="text/css" href="css/jquery.autocomplete.css"/>
 
+ <link rel="stylesheet" type="text/css" href="lib/Jcrop/css/jquery.Jcrop.css" />
+
  <script type="text/javascript" src="js/lib/jquery-1.4.js"></script>
  <script type="text/javascript" src="js/gitdocs.js"></script>
  <script type="text/javascript" src="js/compare.js"></script>
@@ -19,6 +21,10 @@
  <script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
  <script type="text/javascript" src="./ckeditor/adapters/jquery.js"></script>
  <script type="text/javascript" src="js/editor.js"></script>
+
+ <script type="text/javascript" src="lib/Jcrop/js/jquery.min.js"></script>
+ <script type="text/javascript" src="lib/Jcrop/js/jquery.Jcrop.js"></script>
+
 
  <script src="js/lib/jquery.form.js" type="text/javascript" charset="utf-8"></script>
  <script src="js/lib/jquery.validate.min.js" type="text/javascript" charset="utf-8"></script>
