@@ -54,7 +54,7 @@
 		];
 		CKEDITOR.config.height = 	$(window).height() - 200;
 		$(document).ready(function(){
-			$("#editor1").ckeditor(hideLoader("loader"));	
+			$("#editor1").ckeditor();
 			// bind form using 'ajaxForm' 
 		    $('#save_form').ajaxForm({ 
 		        beforeSubmit:  preSaveVersion,  // pre-submit callback 
