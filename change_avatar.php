@@ -5,6 +5,7 @@ require('classes/user.php');
 
 if($user = User::getLoggedInUser()) {
 	$smarty->assign('logged_in_user', $user->getUserInfo());
+	$smarty->assign('u_id', $user->userId);
 	$smarty->display('change_avatar.tpl');
 
 } else {

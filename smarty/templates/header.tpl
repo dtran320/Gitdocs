@@ -12,7 +12,7 @@
  <link rel="stylesheet" type="text/css" href="css/tabs.css"/>
  <link rel="stylesheet" type="text/css" href="css/jquery.autocomplete.css"/>
 
-<!-- <link rel="stylesheet" type="text/css" href="lib/Jcrop/css/jquery.Jcrop.css" />-->
+ <link rel="stylesheet" type="text/css" href="lib/Jcrop/css/jquery.Jcrop.css" />
 
  <script type="text/javascript" src="js/lib/jquery-1.4.js"></script>
  <script type="text/javascript" src="js/gitdocs.js"></script>
