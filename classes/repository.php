@@ -46,7 +46,9 @@ class Repository {
 
 	public function AcquireLock() {
 		$this->lock_fh = fopen("$this->location/.lock", "w+");
-		return flock($this->lock_fh, LOCK_EX);
+		$retVal = flock($this->lock_fh, LOCK_EX);
+		if(!$retVal) echo "FAILED GETTING LOCK!";
+		return $retVal;
 	}	
 	public function ReleaseLock() {
 		flock($this->lock_fh, LOCK_UN);
@@ -124,7 +126,11 @@ class Repository {
 	public function merge($myVersion, $otherVersion, &$arrDiffs) {
 		
 		$otherLocation = $otherVersion->getRepoLocation();
-
+		/*var_dump($myVersion);
+		echo("\nblahblah here is the fileHandler:<br>\n");
+		var_dump($myVersion->fileHandler);
+		echo("\n");
+*/
 	 	$myFileArr = $myVersion->readFileToArray();
 		$otherFileArr = $otherVersion->readFileToArray($myVersion->getUserId());	
 	
@@ -163,10 +169,13 @@ class Repository {
 
 			if(DEBUG)print_r($myFileArr);
 			if(DEBUG)print_r($otherFileArr);
-		$myfile = $myVersion->openVersionFile();
-		foreach($myFileArr as $line) { fwrite($myfile,$line);}
+		//$this->checkout("master");
+		$myFile = $myVersion->fileHandler;
+		//if(!$myFile) echo "couldn't open my file!!!!!!\n";
+		foreach($myFileArr as $line) { fwrite($myFile,$line);}
+		//var_dump($myFile);
 		ftruncate($myFile, ftell($myFile));
-		fclose($myfile);
+		fclose($myFile);
 		$myVersion->commit();	
 		
 		$otherFile = $otherVersion->openVersionFile($myVersion->getUserId());
