@@ -28,7 +28,7 @@
 	<div class="clear_fix"></div>
 
 	<div class="box_content">
-			<div id="loader"><img src="images/ajax-loader.gif"></div>
+<!--			<div id="loader"><img src="images/ajax-loader.gif"></div> -->
 			<div>
 				<textarea name="editor1" id="editor1">
 				{$v_text}
