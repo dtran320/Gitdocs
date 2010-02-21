@@ -159,10 +159,13 @@ class Repository {
 			$myEdit = array_slice($myFileArr, $diffLineNums[1]["$diff->index"] -1, (int)$diffLineNums[2]["diff->index"]);
 			$otherEdit = array_slice($otherFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"]);
 			if($diff->userAction == UserDiffAction::accepted) {
-				array_splice($myFileArr, $diffLineNums[1]["$diff->index"] - 1, (int)$diffLineNums[2]["$diff->index"] );	
+				if ($diff->type == DiffType::del)
+					array_splice($myFileArr, $diffLineNums[1]["$diff->index"]-1, (int)$diffLineNums[2]["$diff->index"],$otherEdit );	
+				else
+					array_splice($myFileArr, $diffLineNums[1]["$diff->index"], (int)$diffLineNums[2]["$diff->index"],$otherEdit );
 			//	array_splice($otherFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"]);
 			} else if($diff->userAction == UserDiffAction::rejected) {
-				array_splice($otherFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"]);	
+				array_splice($otherFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"], $otherEdit);	
 			//	array_splice($myFileArr, $diffLineNums[1]["$diff->index"] - 1, (int)$diffLineNums[2]["$diff->index"]);
 			}
 		}	
