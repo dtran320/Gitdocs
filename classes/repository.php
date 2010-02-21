@@ -126,11 +126,6 @@ class Repository {
 	public function merge($myVersion, $otherVersion, &$arrDiffs) {
 		
 		$otherLocation = $otherVersion->getRepoLocation();
-		/*var_dump($myVersion);
-		echo("\nblahblah here is the fileHandler:<br>\n");
-		var_dump($myVersion->fileHandler);
-		echo("\n");
-*/
 	 	$myFileArr = $myVersion->readFileToArray();
 		$otherFileArr = $otherVersion->readFileToArray($myVersion->getUserId());	
 	
@@ -156,27 +151,25 @@ class Repository {
 			if(DEBUG)print_r($myFileArr);
 			if(DEBUG)print_r($otherFileArr);
 		foreach($arrDiffs as $diff) {
-			$myEdit = array_slice($myFileArr, $diffLineNums[1]["$diff->index"] -1, (int)$diffLineNums[2]["diff->index"]);
+			$myEdit = array_slice($myFileArr, $diffLineNums[1]["$diff->index"] -1, (int)$diffLineNums[2]["$diff->index"]);
 			$otherEdit = array_slice($otherFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"]);
 			if($diff->userAction == UserDiffAction::accepted) {
 				if ($diff->type == DiffType::del)
 					array_splice($myFileArr, $diffLineNums[1]["$diff->index"]-1, (int)$diffLineNums[2]["$diff->index"],$otherEdit );	
 				else
 					array_splice($myFileArr, $diffLineNums[1]["$diff->index"], (int)$diffLineNums[2]["$diff->index"],$otherEdit );
-			//	array_splice($otherFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"]);
 			} else if($diff->userAction == UserDiffAction::rejected) {
-				array_splice($otherFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"], $otherEdit);	
-			//	array_splice($myFileArr, $diffLineNums[1]["$diff->index"] - 1, (int)$diffLineNums[2]["$diff->index"]);
+				if($diff->type == DiffType::del)
+					array_splice($otherFileArr, $diffLineNums[3]["$diff->index"], (int)$diffLineNums[4]["$diff->index"], $myEdit);	
+				else
+					array_splice($otherFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"], $myEdit);	
 			}
 		}	
 
 			if(DEBUG)print_r($myFileArr);
 			if(DEBUG)print_r($otherFileArr);
-		//$this->checkout("master");
 		$myFile = $myVersion->fileHandler;
-		//if(!$myFile) echo "couldn't open my file!!!!!!\n";
 		foreach($myFileArr as $line) { fwrite($myFile,$line);}
-		//var_dump($myFile);
 		ftruncate($myFile, ftell($myFile));
 		fclose($myFile);
 		$myVersion->commit();	
