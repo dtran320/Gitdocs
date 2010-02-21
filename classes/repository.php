@@ -165,11 +165,13 @@ class Repository {
 			if(DEBUG)print_r($otherFileArr);
 		$myfile = $myVersion->openVersionFile();
 		foreach($myFileArr as $line) { fwrite($myfile,$line);}
+		ftruncate($myFile, ftell($myFile));
 		fclose($myfile);
 		$myVersion->commit();	
 		
 		$otherFile = $otherVersion->openVersionFile($myVersion->getUserId());
 		foreach($otherFileArr as $line) { fwrite($otherFile,$line);}
+		ftruncate($otherFile, ftell($otherFile));
 		fclose($otherFile);	
 		$otherVersion->commit();
 	

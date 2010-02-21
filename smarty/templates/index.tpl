@@ -47,7 +47,6 @@
 			{section name=i loop=$my_classes}
 				| <span class="option" id="{$my_classes[i]}" onclick="setFilter('{$my_classes[i]}')">{$my_classes[i]}</span>
 			{/section}
-			</span>
 		</span>
 		</div>
        	<div class="box_content">

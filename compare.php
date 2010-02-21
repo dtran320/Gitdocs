@@ -1,7 +1,6 @@
 <?
 session_start();
 require('init_smarty.php');
-require('lib/simplediff.php');
 require('classes/user.php');
 require('classes/diff.php');
 require_once("sidebar.php");
