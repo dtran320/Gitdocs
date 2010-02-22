@@ -30,7 +30,7 @@ function fetchRecentVersions(docs) {
 	var docHtml = '';
 	
 	for(var i=0; i<docs.length; i++) {
-		docHtml += "<tr onclick=window.location='" + docs[i]["link"] + "'><td><img src='images/pix/"+ docs[i]["uId"] + "_small.jpg'></td><td>"+ docs[i]["displayName"] + " saved a version of </td><td>"+docs[i]['dName'] + docs[i]['vName']+ "</td><td><p class='time small_text' id='" + docs[i]['timestamp'] + "'>" + docs[i]['timestamp']+"</p></td></tr>";
+		docHtml += "<tr onclick=window.location='" + docs[i]["link"] + "'><td><img src='"+ docs[i]["iconPtr"] +"'></td><td>"+ docs[i]["displayName"] + " saved a version of </td><td>"+docs[i]['dName'] + docs[i]['vName']+ "</td><td><p class='time small_text' id='" + docs[i]['timestamp'] + "'>" + docs[i]['timestamp']+"</p></td></tr>";
 	}
 	$('#my_version_feed').html(docHtml);
 	$('.time').prettyDate();

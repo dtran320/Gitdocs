@@ -51,4 +51,10 @@ function runCommand($command) {
 	return $output;
 }
 
+function getIconPtr($u_id) {
+		$path =  "images/pix/" . $u_id . "_small.jpg";
+		$icon_ptr = file_exists(dirname(__FILE__) . "/../" . $path) ? $path : "images/default.jpg";
+		return $icon_ptr;
+}
+
 ?>
