@@ -12,14 +12,14 @@
 			<input type="submit" value="Upload File" />
 		</form>
 
-		<table>
+		<table id="pix">
 		<tr>
 		<td>
-		<img id="cropbox" src="actions/crop.php?u_id={$u_id}" />
+		<img id="cropbox" src="images/pix/{$u_id}_big.jpg" />
 		</td>
 		<td>
 		<div style="width:50px;height:50px;overflow:hidden;">
-			<img id="preview" src="actions/crop.php?u_id={$u_id}" />
+			<img id="preview" src="images/pix/{$u_id}_big2.jpg" />
 		</div>
 		
 		</td>
@@ -48,12 +48,21 @@
 
 		// from tutorial 3 of jcrop doc
 		jQuery(window).load(function(){
+			{/literal}
+			{if $avatar_exists}
+
+			{literal}
+
 			$('#cropbox').Jcrop({
 				onChange: showPreview,
 				onSelect: showPreview,
 				aspectRatio: 1,
 				setSelect: [ 0, 0, 100, 100 ]
 			});
+
+			{/literal}
+			{/if}
+			{literal}
 
 	    $('#crop_form').ajaxForm({ 	
         success:	postCrop  // post-submit callback 
@@ -69,15 +78,8 @@
 			//TODO: success/failure msg or something
 			var success = true;			
 			if(success) {
-				$('#cropbox').attr('src', 'actions/crop.php?u_id={/literal}{$u_id}{literal}');
-				$('#preview').attr('src', 'actions/crop.php?u_id={/literal}{$u_id}{literal}');
-				$('#cropbox').Jcrop({
-						onChange: showPreview,
-						onSelect: showPreview,
-						aspectRatio: 1,
-						setSelect: [ 0, 0, 100, 100 ]
-					});
-
+				window.location = 'change_avatar.php';
+		
 			} else {
 				// error message
 			}
