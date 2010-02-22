@@ -28,7 +28,7 @@
 	<div class="clear_fix"></div>
 
 	<div class="box_content">
-			
+
 			<div>
 				<textarea name="editor1" id="editor1">
 				{$v_text}
