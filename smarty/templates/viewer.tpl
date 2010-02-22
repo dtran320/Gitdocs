@@ -41,11 +41,11 @@
 			<tr><td class="selectable" colspan="2" onclick="window.location='viewall.php?d_id={$d_id}';"><a class="v_name">view all</a></td></tr>
 			{section name=i loop=$others}
 			<tr><td id="td_{$smarty.section.i.index}" 
-					class="selectable {if $others[i][3] == $v_id}selected{/if}" 
-					onclick="change_selection({$smarty.section.i.index}, {$others[i][3]})">
-					<div style="float: left; padding-right:6px;"><img src="{$others[i][0]}" /></div>
+					class="selectable {if $others[i].vid == $v_id}selected{/if}" 
+					onclick="change_selection({$smarty.section.i.index}, {$others[i].vid})">
+					<div style="float: left; padding-right:6px;"><img src="{$others[i].iconPtr}" /></div>
 					<div class="med_text">
-						<span style="float:left">{$others[i][1]}</span>
+						<span style="float:left">{$others[i].names}</span>
 					</div>
 			</td></tr>
 			{/section}

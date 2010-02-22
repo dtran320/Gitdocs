@@ -110,7 +110,7 @@ class User {
 		//faster & cleaner than calling unset?
 		$_SESSION = array();
 	}
-	
+
 	public function getAllDocuments() {
 		return $this->getRecentDocuments(0);
 	}
