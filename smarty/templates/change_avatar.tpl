@@ -11,7 +11,7 @@
 			Choose a file to upload: <input name="uploadedfile" type="file" /><br />
 			<input type="submit" value="Upload File" />
 		</form>
-		<p>(if the picture update properly, try refreshing...)</p>
+		<p>(if the picture doesn't seem to upload properly, try refreshing...)</p>
 		<table id="pix">
 		<tr>
 		<td>
