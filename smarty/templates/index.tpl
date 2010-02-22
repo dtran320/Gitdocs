@@ -9,7 +9,7 @@
 		<a href="editor.php">New</a>
 		</div>
 		<div id="doc_link_right">
-		<a href="import.php">Upload</a>
+		<a href="upload.php">Upload</a>
 		</div>
 		<div id="doc_link_right">
 		<a href="browse.php">Browse</a>

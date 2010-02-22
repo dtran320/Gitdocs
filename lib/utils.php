@@ -1,5 +1,7 @@
 <?php
 
+require_once(dirname(__FILE__) . '/../config.php');
+
 /* ----------------------------------------------------------------------------
  * General library functions
  * author: David
