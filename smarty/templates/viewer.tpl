@@ -43,7 +43,7 @@
 			<tr><td id="td_{$smarty.section.i.index}" 
 					class="selectable {if $others[i].vid == $v_id}selected{/if}" 
 					onclick="change_selection({$smarty.section.i.index}, {$others[i].vid})">
-					<div style="float: left; padding-right:6px;"><img src="images/pix/{$others[i].uid}_small.jpg" /></div>
+					<div style="float: left; padding-right:6px;"><img src="{$others[i].iconPtr}" /></div>
 					<div class="med_text">
 						<span style="float:left">{$others[i].names}</span>
 					</div>

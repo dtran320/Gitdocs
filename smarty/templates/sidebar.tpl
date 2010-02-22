@@ -27,7 +27,7 @@
 			<tr><td id="td_{$smarty.section.i.index}"
 					class="selectable"
 					onclick="change_selection({$smarty.section.i.index}, {$others[i].vid})">
-					<div style="float: left; padding-right:6px;"><img src="images/pix/{$others[i].uid}_small.jpg" /> </div>
+					<div style="float: left; padding-right:6px;"><img src="{$others[i].iconPtr}" /> </div>
 						<span class="med_text" style="float:left">{$others[i].names}</span>
 				</td><td class="selectable med_text comparable" onclick="$('#other_u_id').val('{$others[i].uid}'); $('#compare_form').submit();">
 						<a>compare</a>

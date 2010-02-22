@@ -23,7 +23,7 @@
 
 	{section name=i loop=$versions}	
 				<div style="border-bottom: 1px solid #BBB; padding-top: 5px;">
-				<img src="images/pix/{$versions[i].author_id}_small.jpg" />
+				<img src="{$versions[i].iconPtr}" />
 				<span>{$versions[i].author_name}</span> <!-- author name -->
 				<span class="v_name">{$versions[i].v_name}</span>
 				{if !$userHasDoc}
