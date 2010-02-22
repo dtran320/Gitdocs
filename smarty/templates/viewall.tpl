@@ -23,24 +23,24 @@
 
 	{section name=i loop=$versions}	
 				<div style="border-bottom: 1px solid #BBB; padding-top: 5px;">
-				<img src="{$versions[i][1]}" />
-				<span>{$versions[i][0]}</span> <!-- author name -->
-				<span class="v_name">{$versions[i][2]}</span>
+				<img src="images/pix/{$versions[i].author_id}_small.jpg" />
+				<span>{$versions[i].author_name}</span> <!-- author name -->
+				<span class="v_name">{$versions[i].v_name}</span>
 				{if !$userHasDoc}
 					<a style="float: right;" onclick="
-						$('#editor_form input[name=clone_id]').val('{$versions[i][4]}');
-						$('#editor_form input[name=description]').val('{$versions[i][2]}');
+						$('#editor_form input[name=clone_id]').val('{$versions[i].v_id}');
+						$('#editor_form input[name=description]').val('{$versions[i].v_name}');
 						$('#editor_form').submit();">Start working off this version</a>
 				{else}
-					{if $u_id != $versions[i][5]}
+					{if $u_id != $versions[i].author_id}
 					<a style="float: right;" onclick="
-						$('#compare_form input[name=other_u_id]').val('{$versions[i][5]}');
+						$('#compare_form input[name=other_u_id]').val('{$versions[i].author_id}');
 						$('#compare_form').submit();">Compare</a>
 					{else}
 					<a style="float: right;" onclick="$('#editor_form input[name=submit]').click();">Go to my version</a>
 					{/if}
 				{/if}
-				<span style="font-size:12px">{$versions[i][3]}</span>
+				<span style="font-size:12px">{$versions[i].v_text}</span>
 				</div>
 	{/section}
 			

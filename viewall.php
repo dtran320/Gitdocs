@@ -26,7 +26,6 @@ if($user = User::getLoggedInUser()) {
 		$userHasDoc = false;
 		foreach ($version_infos as $v_info) {
 			$author_name = $v_info['display_name'];
-			$icon_ptr = $v_info['icon_ptr'] ? $v_info['icon_ptr'] : 'images/default.jpg';
 			$v_id = $v_info['v_id'];
 			$version = new Version(0,0,0,0, $v_id);
 			$author_id = $version->getUserId();
@@ -35,7 +34,7 @@ if($user = User::getLoggedInUser()) {
 			}
 			$v_text = $version->getDocFromDisk();
 			$v_name = $version->getName();
-			$versions[] = array($author_name, $icon_ptr, $v_name, $v_text, $v_id, $author_id);
+			$versions[] = array('author_name'=> $author_name, 'v_name'=> $v_name, 'v_text' =>$v_text, 'v_id' => $v_id, 'author_id'=>$author_id);
 		}
 		$d_info = Document::getDocInfoForId($d_id);
 		$smarty->assign('d_name', $d_info['name']);

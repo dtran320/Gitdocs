@@ -308,7 +308,7 @@ class Version {
 	public static function getRecentVersionFeedForUser($userId, $n=0, $filter=0) {
 		$db = new DB();
 		$versions = array();
-		$selectQuery = "SELECT doc_id as dId, name as dName, v_name as vName, v_id as vId, last_saved_time as timestamp, username, display_name as displayName, icon_ptr as iconPtr " .
+		$selectQuery = "SELECT u_id as uId, doc_id as dId, name as dName, v_name as vName, v_id as vId, last_saved_time as timestamp, username, display_name as displayName, icon_ptr as iconPtr " .
 			"FROM Versions INNER JOIN Documents " . 
 			"ON Versions.doc_fk = Documents.doc_id " .
 			"INNER JOIN Users " .

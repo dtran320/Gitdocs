@@ -55,7 +55,7 @@
 			{/if}
 				<table class="document_list" id="my_version_feed">					
 					{section name=i loop=$my_recent_version_feed}
-						<tr onclick="window.location='{$my_recent_version_feed[i].link}';"><td><img src="{$my_recent_version_feed[i].iconPtr}"></td><td>{$my_recent_version_feed[i].displayName} saved a version of </td><td><p>{$my_recent_version_feed[i].dName} {$my_recent_version_feed[i].vName}</p></td><td><p class="time small_text" id="{$my_recent_version_feed[i].timestamp}">{$my_recent_version_feed[i].timestamp}</p></td></tr>
+						<tr onclick="window.location='{$my_recent_version_feed[i].link}';"><td><img src="images/pix/{$my_recent_version_feed[i].uId}_small.jpg"></td><td>{$my_recent_version_feed[i].displayName} saved a version of </td><td><p>{$my_recent_version_feed[i].dName} {$my_recent_version_feed[i].vName}</p></td><td><p class="time small_text" id="{$my_recent_version_feed[i].timestamp}">{$my_recent_version_feed[i].timestamp}</p></td></tr>
 					{/section}
 						</table>
 				</div><!-- end box content -->
