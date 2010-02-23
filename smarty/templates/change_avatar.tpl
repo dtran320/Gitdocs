@@ -1,3 +1,4 @@
+
 {include file="header.tpl"}
 
 <div class="container center_container">
@@ -78,7 +79,7 @@
 			//TODO: success/failure msg or something
 			var success = true;			
 			if(success) {
-				window.location = 'change_avatar.php';
+//				window.location = 'change_avatar.php';
 		
 			} else {
 				// error message
