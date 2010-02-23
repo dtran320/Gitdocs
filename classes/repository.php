@@ -137,20 +137,26 @@ class Repository {
 		$diffResult = implode("\n", $diffResult);
 	
 		//find all changes in diff (marked by format @@ -line#,len +line#,len @@ in diff output
-		preg_match_all('/\n@@ -(\d+),?(\d+)? \+(\d+),?(\d+)?/', $diffResult, $diffLineNums);	
-
+		preg_match_all('/\n@@ -(\d+),?(\d+)? \+(\d+),?(\d+)?/', $diffResult, $diffLineNums);
+		//$split = preg_split('/\n@@ -(\d+),?(\d+)? \+(\d+),?(\d+)?/', $diffResult);
+		//print_r($diffLineNums);
+		//print_r($split);
 		//in git diff, "2," means the edit starting on line 2 was one line long (not zero). update diffLineNums to reflect this.
 		foreach($diffLineNums[4] as $index => $curr) {if($curr==="") $diffLineNums[4][$index]=1;}
 		foreach($diffLineNums[2] as $index => $curr) {if($curr==="") $diffLineNums[2][$index]=1;}
 		if(DEBUG) print_r($diffLineNums);
 
-		if(DEBUG) print_r($arrDiffs);	
-			
+		if(DEBUG)  print_r($arrDiffs);	
+	/*	
+		foreach($split as $index =>$currSplit) {
+			if(preg_match('/(\n-.*)+(\n\+.*)/', $currSplit) + preg_match('(/(\n\+.*)+(\n-.*)/') > 0) 
+				$arrDiffs[$index - 1]->DiffType = DiffType::mod;//BUT THIS WON'T WORK! YOU CAN ACCEPT/REJ CHANGES INDIVIDUALLY!!!
+		}		*/
 		//undo changes which were rejected
 		
 			if(DEBUG)print_r($myFileArr);
 			if(DEBUG)print_r($otherFileArr);
-		foreach($arrDiffs as $diff) {
+		foreach(array_reverse($arrDiffs) as $diff) {//reversed so offsets for later diffs aren't affected
 			$myEdit = array_slice($myFileArr, $diffLineNums[1]["$diff->index"] -1, (int)$diffLineNums[2]["$diff->index"]);
 			$otherEdit = array_slice($otherFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"]);
 			if($diff->userAction == UserDiffAction::accepted) {
@@ -168,7 +174,7 @@ class Repository {
 
 			if(DEBUG)print_r($myFileArr);
 			if(DEBUG)print_r($otherFileArr);
-		$myFile = $myVersion->fileHandler;
+		$myFile = $myVersion->openVersionFile();
 		foreach($myFileArr as $line) { fwrite($myFile,$line);}
 		ftruncate($myFile, ftell($myFile));
 		fclose($myFile);
