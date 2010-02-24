@@ -243,7 +243,7 @@ class Version {
 	public static function getRecentGlobalVersions($n=0) {
 		$db = new DB();
 		$versions = array();
-		$selectQuery = "SELECT doc_id as dId, name as dName, v_name as vName, v_id as vId, username, display_name as displayName, last_saved_time as timestamp, icon_ptr as iconPtr " .
+		$selectQuery = "SELECT doc_id as dId, name as dName, v_name as vName, v_id as vId, username, display_name as displayName, last_saved_time as timestamp, u_id as uId " .
 			"FROM Versions INNER JOIN Documents " . 
 			"ON Versions.doc_fk = Documents.doc_id " .
 			"INNER JOIN Users " .
@@ -264,8 +264,8 @@ class Version {
 			$versions[$k]["vName"] = stripslashes($versions[$k]["vName"]);
 			$versions[$k]["dName"] = stripslashes($versions[$k]["dName"]);
 			$versions[$k]["vName"] = $versions[$k]["vName"]? " - " . $versions[$k]["vName"] : "";
-			$versions[$k]["iconPtr"] = ($versions[$k]["iconPtr"]? $versions[$k]["iconPtr"] : "images/default.jpg");
 			$versions[$k]["link"] = "viewer.php?v_id=" . $versions[$k]["vId"];
+			$versions[$k]["iconPtr"] = getIconPtr($versions[$k]["uId"]);
 		}
 		return $versions;
 	}
@@ -308,7 +308,7 @@ class Version {
 	public static function getRecentVersionFeedForUser($userId, $n=0, $filter=0) {
 		$db = new DB();
 		$versions = array();
-		$selectQuery = "SELECT doc_id as dId, name as dName, v_name as vName, v_id as vId, last_saved_time as timestamp, username, display_name as displayName, icon_ptr as iconPtr " .
+		$selectQuery = "SELECT u_id as uId, doc_id as dId, name as dName, v_name as vName, v_id as vId, last_saved_time as timestamp, username, display_name as displayName " .
 			"FROM Versions INNER JOIN Documents " . 
 			"ON Versions.doc_fk = Documents.doc_id " .
 			"INNER JOIN Users " .
@@ -339,7 +339,7 @@ class Version {
 			$my_version_feed[$k]["vName"] = stripslashes($my_version_feed[$k]["vName"]);
 			$my_version_feed[$k]["vName"] = $my_version_feed[$k]["vName"]? " - " . $my_version_feed[$k]["vName"] : "";
 			$my_version_feed[$k]["dName"] = stripslashes($my_version_feed[$k]["dName"]);
-			$my_version_feed[$k]["iconPtr"] = ($my_version_feed[$k]["iconPtr"]? $my_version_feed[$k]["iconPtr"] : "images/default.jpg");
+			$my_version_feed[$k]["iconPtr"] = getIconPtr($my_version_feed[$k]["uId"]);
 			$my_version_feed[$k]["link"] = "viewer.php?v_id=" . $my_version_feed[$k]["vId"];
 		}
 		return $my_version_feed;
