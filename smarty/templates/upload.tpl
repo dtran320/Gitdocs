@@ -22,14 +22,21 @@
            $(document).ready(function() {
 
 	       $('#upload_form').ajaxForm({ 	
-		 success: postUploadDoc,  // post-submit callback 
+		 beforeSubmit: preUploadDoc,
+		 success: postUploadDoc // post-submit callback 
 	       });
 	     });
 
+
+                function preUploadDoc() {
+		  $('#doc_preview').html("<img src='images/ajax-loader.gif'>");
+                }
+
 		function postUploadDoc(data) {
 		  if(Number(data) > 0) {
-		    $('#doc_preview').html('Successfully uploaded file. Redirecting you to it.');
-		   window.location='editor.php?v_id=' + data;
+		    $('#doc_preview').html('Successfully uploaded file. Redirecting you to the editor...');
+		    setTimeout(function() { window.location='editor.php?v_id=' + data; },
+			       1000);
 		  }
 		  else {
 		    $('#doc_preview').html(data);
