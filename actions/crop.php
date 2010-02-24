@@ -7,7 +7,11 @@ $u_id = postVarClean('u_id');
 
 $AVATARS_PATH = 'images/pix/';
 $big_filename = dirname(__FILE__) . '/../' . $AVATARS_PATH . $u_id . '_big.jpg';
-$small_filename = dirname(__FILE) . '/../' . $AVATARS_PATH . $u_id . '_small.jpg';
+$small_filename = dirname(__FILE__) . '/../' . $AVATARS_PATH . $u_id . '_small.jpg';
+
+//echo $big_filename . ", " . $small_filename;
+
+echo $_FILES['uploadedfile']['tmp_name'];
 
 //TODO: 
 // file size
