@@ -22,7 +22,7 @@ $recent_global_docs = Version::getRecentGlobalVersionsClean(5);
 $smarty->assign('recent_global_docs', $recent_global_docs);
 
 if($user = User::getLoggedInUser()) {
-	$my_recent_docs = $user->getRecentDocumentsClean(5);
+	$my_recent_docs = $user->getRecentDocumentsClean(8);
 	//preprocess to figure out links
 	$smarty->assign('my_recent_docs', $my_recent_docs);
 	

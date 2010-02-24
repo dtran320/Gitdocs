@@ -243,7 +243,7 @@ class Version {
 	public static function getRecentGlobalVersions($n=0) {
 		$db = new DB();
 		$versions = array();
-		$selectQuery = "SELECT doc_id as dId, name as dName, v_name as vName, v_id as vId, username, display_name as displayName, last_saved_time as timestamp " .
+		$selectQuery = "SELECT doc_id as dId, name as dName, v_name as vName, v_id as vId, username, display_name as displayName, last_saved_time as timestamp, u_id as uId " .
 			"FROM Versions INNER JOIN Documents " . 
 			"ON Versions.doc_fk = Documents.doc_id " .
 			"INNER JOIN Users " .
@@ -265,6 +265,7 @@ class Version {
 			$versions[$k]["dName"] = stripslashes($versions[$k]["dName"]);
 			$versions[$k]["vName"] = $versions[$k]["vName"]? " - " . $versions[$k]["vName"] : "";
 			$versions[$k]["link"] = "viewer.php?v_id=" . $versions[$k]["vId"];
+			$versions[$k]["iconPtr"] = getIconPtr($versions[$k]["uId"]);
 		}
 		return $versions;
 	}
