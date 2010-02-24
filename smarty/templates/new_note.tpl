@@ -61,7 +61,7 @@ validate radio button on submit
 			}
 
 			if (date == "") {
-				error += "\nPlease specify the date";				
+				error += "\nPlease specify the date.";				
 			}				
 			if (error != "") {
 				alert (error);

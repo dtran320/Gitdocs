@@ -137,38 +137,53 @@ class Repository {
 		$diffResult = implode("\n", $diffResult);
 	
 		//find all changes in diff (marked by format @@ -line#,len +line#,len @@ in diff output
-		preg_match_all('/\n@@ -(\d+),?(\d+)? \+(\d+),?(\d+)?/', $diffResult, $diffLineNums);	
-
+		preg_match_all('/\n@@ -(\d+),?(\d+)? \+(\d+),?(\d+)?/', $diffResult, $diffLineNums);
+		$split = preg_split('/\n@@ -(\d+),?(\d+)? \+(\d+),?(\d+)?/', $diffResult);
+		//print_r($diffLineNums);
+		//print_r($split);
 		//in git diff, "2," means the edit starting on line 2 was one line long (not zero). update diffLineNums to reflect this.
 		foreach($diffLineNums[4] as $index => $curr) {if($curr==="") $diffLineNums[4][$index]=1;}
 		foreach($diffLineNums[2] as $index => $curr) {if($curr==="") $diffLineNums[2][$index]=1;}
-		if(DEBUG) print_r($diffLineNums);
+		//print_r($diffLineNums);
 
-		if(DEBUG) print_r($arrDiffs);	
-			
+		if(DEBUG)  print_r($arrDiffs);	
+		
+		//print_r($split);
+		foreach($split as $index =>$currSplit) {
+			echo "\ncurr split:$currSplit\n";
+			echo preg_match('/(\n-\t.*)+(\n\+\t.*)/', $currSplit);
+			if(preg_match('/(\n-\t.*)+(\n\+\t.*)/', $currSplit) + preg_match('/(\n\+\t.*)+(\n-\t.*)/', $currSplit) > 0) {
+				for($i = 1; $i<5; $i++) {	
+					array_splice($diffLineNums[$i], $index - 1, 0, $diffLineNums[$i][$index - 1]);
+				}
+				$diffLineNums[4][$index-1] = 0;
+				$diffLineNums[2][$index] = 0;	
+		//print_r($diffLineNums);
+			}
+		}	
 		//undo changes which were rejected
 		
 			if(DEBUG)print_r($myFileArr);
 			if(DEBUG)print_r($otherFileArr);
-		foreach($arrDiffs as $diff) {
+		foreach(array_reverse($arrDiffs) as $diff) {//reversed so offsets for later diffs aren't affected
 			$myEdit = array_slice($myFileArr, $diffLineNums[1]["$diff->index"] -1, (int)$diffLineNums[2]["$diff->index"]);
 			$otherEdit = array_slice($otherFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"]);
 			if($diff->userAction == UserDiffAction::accepted) {
 				if ($diff->type == DiffType::del)
-					array_splice($myFileArr, $diffLineNums[1]["$diff->index"]-1, (int)$diffLineNums[2]["$diff->index"],$otherEdit );	
+					array_splice($myFileArr, $diffLineNums[1]["$diff->index"]-1, (int)$diffLineNums[2]["$diff->index"] );	
 				else
-					array_splice($myFileArr, $diffLineNums[1]["$diff->index"], (int)$diffLineNums[2]["$diff->index"],$otherEdit );
+					array_splice($myFileArr, $diffLineNums[1]["$diff->index"], (int)$diffLineNums[2]["$diff->index"], $otherEdit);
 			} else if($diff->userAction == UserDiffAction::rejected) {
-				if($diff->type == DiffType::del)
-					array_splice($otherFileArr, $diffLineNums[3]["$diff->index"], (int)$diffLineNums[4]["$diff->index"], $myEdit);	
-				else
-					array_splice($otherFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"], $myEdit);	
+				//if($diff->type == DiffType::del)
+					//array_splice($otherFileArr, $diffLineNums[3]["$diff->index"], (int)$diffLineNums[4]["$diff->index"], $myEdit);	
+				//else
+					//array_splice($otherFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"], $myEdit);	
 			}
 		}	
 
 			if(DEBUG)print_r($myFileArr);
 			if(DEBUG)print_r($otherFileArr);
-		$myFile = $myVersion->fileHandler;
+		$myFile = $myVersion->openVersionFile();
 		foreach($myFileArr as $line) { fwrite($myFile,$line);}
 		ftruncate($myFile, ftell($myFile));
 		fclose($myFile);
@@ -181,7 +196,7 @@ class Repository {
 		$otherVersion->commit();
 	
 		$command = "cd $this->location; git fetch ". $otherVersion->getUserId() . ";git merge ". $otherVersion->getUserId(). "/" . $myVersion->getUserId(); 
-		$err= runCommand($command);	
+		//$err= runCommand($command);	
 		$command = "cd $otherLocation; git checkout master";
 		runCommand($command);	
 		$this->ReleaseLock();
