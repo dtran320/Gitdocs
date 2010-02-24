@@ -25,6 +25,10 @@
 		 success:	postUpload  // post-submit callback 
 	       });
 	     });
+
+		function postUpload(data) {
+			$('#doc_preview').html(data);
+		}
 		//]]>
 	{/literal}
 	</script>

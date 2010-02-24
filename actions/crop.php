@@ -7,7 +7,6 @@ $u_id = postVarClean('u_id');
 
 $AVATARS_PATH = 'images/pix/';
 $big_filename = dirname(__FILE__) . '/../' . $AVATARS_PATH . $u_id . '_big.jpg';
-
 $small_filename = dirname(__FILE__) . '/../' . $AVATARS_PATH . $u_id . '_small.jpg';
 
 //TODO: 
