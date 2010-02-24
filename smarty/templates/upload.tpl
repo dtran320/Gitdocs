@@ -22,12 +22,18 @@
            $(document).ready(function() {
 
 	       $('#upload_form').ajaxForm({ 	
-		 success:	postUpload  // post-submit callback 
+		 success: postUploadDoc,  // post-submit callback 
 	       });
 	     });
 
-		function postUpload(data) {
-			$('#doc_preview').html(data);
+		function postUploadDoc(data) {
+		  if(Number(data) > 0) {
+		    $('#doc_preview').html('Successfully uploaded file. Redirecting you to it.');
+		   window.location='editor.php?v_id=' + data;
+		  }
+		  else {
+		    $('#doc_preview').html(data);
+		  }
 		}
 		//]]>
 	{/literal}

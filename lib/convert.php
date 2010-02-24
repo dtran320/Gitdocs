@@ -18,4 +18,8 @@ function getHtmlFromWordDoc($docLocation) {
     
 }
 
+function getDocTitle($docPath) {
+  return str_ireplace(".doc", "", basename($docPath));
+}
+
 ?>
