@@ -15,6 +15,7 @@
  <link rel="stylesheet" type="text/css" href="lib/Jcrop/css/jquery.Jcrop.css" />
  <link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui-1.7.2.custom.css" />
 
+
  <script type="text/javascript" src="js/lib/jquery-1.4.js"></script>
  <script type="text/javascript" src="js/gitdocs.js"></script>
  <script type="text/javascript" src="js/compare.js"></script>
