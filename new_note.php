@@ -1,4 +1,5 @@
 <?
+
 require_once('config.php');
 session_start();
 require_once('classes/user.php');

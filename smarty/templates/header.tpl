@@ -60,7 +60,7 @@
 		<div class="float_right" style="margin:20px 10px 0px 0px;">
 			<div class="login_error" id="login_error"></div>
 			<form id="login" class="reg_form" method="post">
-				<input type="text" id="login_username" name="username" value="" placeholder="Username"/>
+				<input type="text" id="login_username" name="username" value="" placeholder="Email/Username"/>
 				<input type="password" id="login_password" name="password" value="" placeholder="Password"/>
 				<input type="submit" name="submit" onclick="signInUser(event);" value="Login" />
 			</form>

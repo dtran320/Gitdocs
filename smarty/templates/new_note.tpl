@@ -18,7 +18,7 @@
 	<br/><br/>
 	<input type="submit" value="Create" />
 	</form>
-
+	<div class="error" id="new_note_error" style="display: none;"></div>
 	</div> <!--box content-->
 </div> <!--box left_main-->
 
@@ -47,6 +47,7 @@ validate radio button on submit
 				}
 			});
 	    $('#new_form').ajaxForm({ 
+			dataType:      'json', 
 	        beforeSubmit:  preCreateDoc,  // pre-submit callback 
 	        success:       postCreateDoc  // post-submit callback 
 	    });
@@ -79,6 +80,9 @@ validate radio button on submit
 				var v_id = response["v_id"];
 				window.location = "editor.php?v_id=" + v_id;
 			} 
+			else {
+				$('#new_note_error').html(response["error"]).show();
+			}
 		}
 
 

@@ -6,7 +6,7 @@ require_once(dirname(__FILE__) . '/../lib/utils.php');
 $username = postVar("username");
 $password = postVar("password");
 $passwordConfirm = postVar("password_confirm");
-$displayName = postVar("display_name");
+$displayName = postVar("first_name") . " " . postVar("last_name");
 
 if($user = User::createNewUser($username, $password, $passwordConfirm, $displayName)) {
 	$user->login();
