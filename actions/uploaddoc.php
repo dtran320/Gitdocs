@@ -13,8 +13,8 @@ $doc_filename = $DOCUMENTS_PATH . "tmp/document-{$random}.doc";
 
 $doc_title = getDocTitle($_FILES['uploadedfile']['name']);
 if($doc_title) {
-	$user_title = getVar('title');
-	$class_name = getVar('class_name');
+	$user_title = postVar('title');
+	$class_name = postVar('class_name');
 	if($user_title) $doc_title = $user_title;
   if($user = User::getLoggedInUser()) {
     if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $doc_filename)) {

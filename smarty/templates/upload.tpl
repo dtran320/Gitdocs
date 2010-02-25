@@ -7,6 +7,8 @@
 		<form id="upload_form" enctype="multipart/form-data" action="actions/uploaddoc.php" method="post">
 			<input type="hidden" name="action" value="upload" />
 			<input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+			<input name="hidden" name="title" value="{$title}" />
+			<input name="hidden" name="class_name" value="{$class_name}" />
 			Choose a file to upload: <input name="uploadedfile" type="file" /><br />
 			<input type="submit" value="Upload File" />
 		</form>

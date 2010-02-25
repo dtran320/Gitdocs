@@ -23,7 +23,7 @@
 		<tr>
 			<td> </td>
 			<td class="left">Optional title:</td>
-			<td><input type="text" name="title" id="note_title" value="" placeholder="{$title_placeholder}"/></td>
+			<td><input type="text" name="title" id="note_title" value=""/></td>
 		</tr>
 		<tr>
 			<td><img src="images/glass_numbers_2.png" height="30px"></td>
@@ -66,11 +66,7 @@ validate radio button on submit
 	    });
 	
 		$('#class_name').placeholder({
-			blankSubmit:  true
 			});
-		$('#note_title').placeholder({
-			blankSubmit:  true
-		});
 		
 		});
 
@@ -80,9 +76,6 @@ validate radio button on submit
 			var error = "";
 			if (class_name == "" || class_name == "{/literal}{$class_placeholder}{literal}") {
 				error += "Please specify the class.";
-			}
-			if($('#note_title').val() == "{/literal}{$title_placeholder}{literal}") {
-				$('#note_title').val('');
 			}
 			if (date == "") {
 				error += "\nPlease specify the date.";				
