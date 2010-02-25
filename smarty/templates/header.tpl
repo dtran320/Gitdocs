@@ -31,7 +31,6 @@
  <script src="js/lib/jquery.validate.min.js" type="text/javascript" charset="utf-8"></script>
  <script src="js/lib/additional-methods.js" type="text/javascript" charset="utf-8"></script>
  <script src="js/lib/jquery.metadata.js" type="text/javascript" charset="utf-8"></script>
- <script src="js/users.js" type="text/javascript" charset="utf-8"></script>
  <script src="js/lib/jquery.placeholder.js" type="text/javascript" charset="utf-8"></script>
  <script src="js/lib/pretty-dates.js" type="text/javascript" charset="utf-8"></script>
  <script src="js/lib/jquery.autocomplete.js" type="text/javascript" charset="utf-8"></script>
@@ -57,10 +56,10 @@
 	{else}
 		<div class="float_right" style="margin:20px 10px 0px 0px;">
 			<div class="login_error" id="login_error"></div>
-			<form id="login" class="reg_form" method="post">
+			<form id="login" class="reg_form" action="actions/signin.php" method="post">
 				<input type="text" id="login_username" name="username" value="" placeholder="Email/Username"/>
 				<input type="password" id="login_password" name="password" value="" placeholder="Password"/>
-				<input type="submit" name="submit" onclick="signInUser(event);" value="Login" />
+				<input type="submit" name="submit" value="Login" />
 			</form>
 		</div>
 		 <script type="text/javascript">
@@ -69,7 +68,22 @@
 				 $(document).ready(function() {
 					$("#login_username").placeholder();
 					$("#login_password").placeholder();
+					
+					$('#login').ajaxForm({
+						success:      	postSignIn
+					});
 				});
+				
+				function postSignIn(data) {
+					if(data=="1") {
+				    	window.location = "index.php";
+					}
+					else {
+						$("#login_error").html("Incorrect email/password combination.");
+						$("#login_error").addClass("error");
+					}
+				}
+				
 			//]]>
 			{/literal}
 		</script>

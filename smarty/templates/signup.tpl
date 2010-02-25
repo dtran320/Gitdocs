@@ -18,25 +18,25 @@
 			<table>
 				<tr>
 					<td><label for="username">Email:</label></td>
-					<td><input type="text" id="signup_username" name="username" value="" placeholder="Your email address"/></td>
+					<td><input type="text" id="signup_username" name="username" value=""/></td>
 				</tr>
 				<tr>
 					<td><label for="first_name">First Name:</label></td>
-					<td><input type="text" id="signup_first_name" name="first_name" value="" placeholder="Your first name"/></td>
+					<td><input type="text" id="signup_first_name" name="first_name" value=""/></td>
 				</tr>
 				<tr>
 					<td><label for="last_name">Last Name:</label></td>
-					<td><input type="text" id="signup_last_name" name="last_name" value="" placeholder="Your last name"/></td>
+					<td><input type="text" id="signup_last_name" name="last_name" value=""/></td>
 				</tr>
 				<tr>
 					<td><label for="password">Password:</label></td>
-					<td><input type="password" id="signup_password" name="password" value="" placeholder="password"/></td>
+					<td><input type="password" id="signup_password" name="password" value=""/></td>
 				</tr>
 				<tr>
 					<td><label for="password_confirm">Confirm Password:</label></td>
-					<td><input type="password" id="signup_confirm_password" name="password_confirm" value="" placeholder="password"/></td>
+					<td><input type="password" id="signup_confirm_password" name="password_confirm" value=""/></td>
 				</tr>
-				<tr><td></td><td><input type="submit" name="submit" class="green_button" value="Sign Up" onclick="signUpUser(event);"/></td></tr>
+				<tr><td></td><td><input type="submit" name="submit" class="green_button" value="Sign Up"/></td></tr>
 			</table>
 
 		</form>
@@ -81,12 +81,51 @@
 	$(document).ready(function() {
 		$(".time").prettyDate();
 		setInterval(function(){ $(".time").prettyDate(); }, 10000);
-		$("#signup_username").placeholder();
-		$("#signup_first_name").placeholder();
-		$("#signup_last_name").placeholder();
-		$("#signup_confirm_password").placeholder();
-		$("#signup_password").placeholder();
+		
+		$('#signup').ajaxForm({
+				 beforeSubmit: preSignUp,
+				 success: postSignUp
 		});
+
+	});
+		
+		function preSignUp() {
+			var username = $("#signup_username").val();
+			var firstname = $("#signup_first_name").val();
+			var lastname = $("#signup_last_name").val();
+			var password = $("#signup_password").val();
+			var password_c = $("#signup_confirm_password").val();
+			
+			var error = "";
+			if(username == "") {
+				error += "You must supply an email address/username.\n";
+			}
+			if(firstname == "") {
+				error += "You must enter a first name.\n";
+			}
+			if(lastname == "") {
+				error += "You must enter a last name.\n";
+			}
+			if(password == "" || password_c == "" || password != password_c) {
+				error += "Passwords must match and not be blank.\n";
+			}
+			
+			if (error != "") {
+				alert (error);
+				return false;
+			}
+			return true;
+		}
+		
+		function postSignUp(data) {
+			if(data=="1") {
+			window.location="index.php";
+			}
+			else { //should eventually capture errors and tell them what's wrong
+				$("#signup_error").html("Error with your signup. Please try again.");
+				$("#signup_error").addClass("error");
+			}
+		}
 		
 	//]]>
 	{/literal}
