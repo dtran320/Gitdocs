@@ -13,10 +13,14 @@ $doc_filename = $DOCUMENTS_PATH . "tmp/document-{$random}.doc";
 
 $doc_title = getDocTitle($_FILES['uploadedfile']['name']);
 if($doc_title) {
+	$user_title = getVar('title');
+	$class_name = getVar('class_name');
+	if($user_title) $doc_title = $user_title;
   if($user = User::getLoggedInUser()) {
     if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $doc_filename)) {
       $htmlFile = getHtmlFromWordDoc($doc_filename);
       $document = Document::CreateNewDocument($doc_title);
+	if($class_name) $document->renameClass($class_name);
       $version = Version::CreateNewVersion($document->docId, $user->userId);
       $version->publish($htmlFile['content']);
 

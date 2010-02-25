@@ -1,18 +1,16 @@
 {include file="header.tpl"}
 <div class="container center_container">
-<div class="left_side30">
+<div class="left_side35">
 
 <div class="box">
 	<div class="box_title"></div>
 	<div class="box_content">
-		<div id="doc_link_left">
-		<a href="new_note.php">New</a>
+		<div id="doc_link">
+		<a href="new_note.php"><button class="big"><img src="images/page_add.png">Add Notes</button></a>
 		</div>
-		<div id="doc_link_right">
-		<a href="upload.php">Upload</a>
-		</div>
-		<div id="doc_link_right">
-		<a href="browse.php">Browse</a>
+
+		<div id="doc_link">
+		<a href="browse.php"><button class="big"><img src="images/page_world.png">Browse Classes</button></a>
 		</div>
 		<div class="clearfix"></div>
 	</div>
@@ -63,9 +61,12 @@
 		<div class="box">
 				<div class="box_title">Recently saved documents</div>
 			       	<div class="box_content">
-						<table class="document_list">
+						<table class="document_list" id="recent_global">
 							{section name=i loop=$recent_global_docs}
-								<tr><td><img src="{$recent_global_docs[i].iconPtr}"></td><td>{$recent_global_docs[i].displayName}</td><td><a href="{$recent_global_docs[i].link}"><p class="no_line_height">{$recent_global_docs[i].dName} {$recent_global_docs[i].vName}</p><p class="time small_text no_line_height" id="{$recent_global_docs[i].timestamp}">{$recent_global_docs[i].timestamp}</p></a></td></tr>
+								<tr onclick="window.location='{$recent_global_docs[i].link};'">
+									<td><img src="{$recent_global_docs[i].iconPtr}"></td>
+									<td>{$recent_global_docs[i].displayName} saved a version of</td>
+									<td><p>{$recent_global_docs[i].dName} {$recent_global_docs[i].vName}</p></td><td><p class="time small_text" id="{$recent_global_docs[i].timestamp}">{$recent_global_docs[i].timestamp}</p></a></td></tr>
 							{/section}
 								</table>
 						</div><!-- end box content -->

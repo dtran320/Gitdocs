@@ -151,7 +151,7 @@ class Document {
 	}
 	
 	public static function getNormalizedDocName($type, $date, $title=0) {
-		return $type . "_" . $date . ($title? "_" . $title : "");
+		return ucfirst($type) . "_" . $date . ($title? "_" . ucfirst($title) : "");
 	}
 	
 	public static function getDocForClassTypeAndDate($class, $type, $date) {
