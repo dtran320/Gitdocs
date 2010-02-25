@@ -7,7 +7,7 @@
 	<table class="new_document">
 			<td><img src="images/glass_numbers_1.png" height="30px"></td>
 			<td class="left">What class are these notes for?</td>
-			<td><input type="text" id="class_name" name="class_name" value="" placeholder="e.g. CS 294H, IHUM 5A" /></td>
+			<td><input type="text" id="class_name" name="class_name" value="" placeholder="{$class_placeholder}" /></td>
 		</tr>
 		<tr>
 			<td> </td>
@@ -23,7 +23,7 @@
 		<tr>
 			<td> </td>
 			<td class="left">Optional title:</td>
-			<td><input type="text" name="title" id="note_title" value="" placeholder="e.g. Anh article"/></td>
+			<td><input type="text" name="title" id="note_title" value="" placeholder="{$title_placeholder}"/></td>
 		</tr>
 		<tr>
 			<td><img src="images/glass_numbers_2.png" height="30px"></td>
@@ -65,18 +65,25 @@ validate radio button on submit
 	        success:       postCreateDoc  // post-submit callback 
 	    });
 	
-		$('#class_name').placeholder();
-		$('#note_title').placeholder();
+		$('#class_name').placeholder({
+			blankSubmit:  true
+			});
+		$('#note_title').placeholder({
+			blankSubmit:  true
+		});
+		
 		});
 
 		function preCreateDoc() {
 			var class_name = $("#class_name").val();
 			var date = $("#date").val();
 			var error = "";
-			if (class_name == "") {
-				error += "Please specify the class."
+			if (class_name == "" || class_name == "{/literal}{$class_placeholder}{literal}") {
+				error += "Please specify the class.";
 			}
-
+			if($('#note_title').val() == "{/literal}{$title_placeholder}{literal}") {
+				$('#note_title').val('');
+			}
 			if (date == "") {
 				error += "\nPlease specify the date.";				
 			}				
