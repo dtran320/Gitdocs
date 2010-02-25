@@ -110,6 +110,7 @@ class Version {
 		//if($text==0) return true;
 		$this->repo->AcquireLock();
 		$this->repo->checkout("master");
+		rewind($this->fileHandler);
 		$result = (fwrite($this->fileHandler, $text) && ftruncate($this->fileHandler, ftell($this->fileHandler)));
 		$this->repo->ReleaseLock();
 		return $result;

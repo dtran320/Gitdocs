@@ -149,20 +149,22 @@ class Repository {
 		if(DEBUG)  print_r($arrDiffs);	
 		
 		//print_r($split);
+		$numAdded = 0;
 		foreach($split as $index =>$currSplit) {
 			if(DEBUG)echo "\ncurr split:$currSplit\n";
 			if(DEBUG)echo preg_match('/(\n-\t.*)+(\n\+\t.*)/', $currSplit);
 			if(preg_match('/(\n-\t.*)+(\n\+\t.*)/', $currSplit) + preg_match('/(\n\+\t.*)+(\n-\t.*)/', $currSplit) > 0) {
 				for($i = 1; $i<5; $i++) {	
-					array_splice($diffLineNums[$i], $index - 1, 0, $diffLineNums[$i][$index - 1]);
+					array_splice($diffLineNums[$i], $index - 1 + $numAdded, 0, $diffLineNums[$i][$index - 1 +$numAdded]);
 				}
-				$diffLineNums[4][$index-1] = 0;
-				$diffLineNums[2][$index] = 0;	
-		//print_r($diffLineNums);
+				$diffLineNums[4][$index-1+$numAdded] = 0;
+				$diffLineNums[2][$index+$numAdded] = 0;	
+				$numAdded++;
 			}
 		}	
 		//undo changes which were rejected
 		
+		if(DEBUG)print_r($diffLineNums);
 			if(DEBUG)print_r($myFileArr);
 			if(DEBUG)print_r($otherFileArr);
 		foreach(array_reverse($arrDiffs) as $diff) {//reversed so offsets for later diffs aren't affected
