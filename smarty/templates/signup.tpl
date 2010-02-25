@@ -44,7 +44,7 @@
 </div><!-- end box_full -->
 <div style="margin-left: 20px;">
 <div class="headline_blue">Explore Gitdocs</div>
-	<div class="left_side45">
+	<div class="left_side60">
 		<div class="box">
 				<div class="box_title">Recently saved documents</div>
 			       	<div class="box_content">
@@ -59,7 +59,7 @@
 						</div><!-- end box content -->
 			</div><!-- end box -->
 </div><!-- end left -->
-<div class="right_side45">
+<div class="right_side35">
 <div class="box">
 	 <div class="box_title">Recent <a href="http://twitter.com/gitdocs">@gitdocs</a> updates</div>
        <div class="box_content">
