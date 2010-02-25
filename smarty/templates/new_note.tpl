@@ -99,7 +99,7 @@ validate radio button on submit
 			else if(response["result"] == "upload") {
 				var title = response["title"];
 				var class_name = response["class"];
-				window.location = "upload.php?title=" + title + "&amp;class_name=" + class_name;
+				window.location = "upload.php?title=" + title + "&class_name=" + class_name;
 			}
 			else {
 				$('#new_note_error').html(response["error"]).show();
