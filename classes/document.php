@@ -6,7 +6,7 @@
  * ---------------------------------------------------------------------------- */
 require_once(dirname(__FILE__) . "/../config.php");
 require_once(dirname(__FILE__) . "/../db/db.php");
-
+require_once(dirname(__FILE__) . "/../lib/utils.php");
 
 class Document {
 	
@@ -68,6 +68,26 @@ class Document {
 		}
 		$classes = substr($classes, 0, strlen($classes)-1);
 		return $classes;
+	}
+
+	public static function getNotesAndUsersForClass($className) {
+		return array('notes' => Document::getNotesForClass($className), 
+								'avatars' => Document::getAvatarsForClass($className));
+	}
+
+	public static function getAvatarsForClass($className) {
+		$db = new DB();
+		$split = Document::splitClassName($className);
+
+		$query = 'SELECT DISTINCT u_fk as users FROM Documents INNER JOIN Versions on doc_id = doc_fk AND dept_name="' . $split[0] . '" AND course_num="' . $split[1] . '";';
+
+		$db->execQuery($query);
+
+		$avatars = array();
+		while($row = $db->getNextRow()) {
+			$avatars[] = getIconPtr($row['users']);
+		}	
+		return $avatars;		
 	}
 
 	public static function getNotesForClass($className) {

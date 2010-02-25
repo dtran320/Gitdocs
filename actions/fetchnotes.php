@@ -9,8 +9,8 @@ $action = postVarClean("action");
 $className = postVarClean("class_name");
 
 if($user = User::getLoggedInUser()) {
-	$notes = Document::getNotesForClass($className);
-	echo json_encode($notes);
+	$info = Document::getNotesAndUsersForClass($className);
+	echo json_encode($info);
 }
 else echo "0";
 

@@ -65,8 +65,7 @@ table.document_list tr:hover {
 
 #notes_for_class tr:hover {
 	cursor:pointer;
-	background: #263033;
-	color: #fff;
+	background: #EEECEF;
 }
 
 #filter {
