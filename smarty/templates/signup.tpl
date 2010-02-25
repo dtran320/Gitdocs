@@ -44,19 +44,22 @@
 </div><!-- end box_full -->
 <div style="margin-left: 20px;">
 <div class="headline_blue">Explore Gitdocs</div>
-	<div class="left_side45">
+	<div class="left_side60">
 		<div class="box">
 				<div class="box_title">Recently saved documents</div>
 			       	<div class="box_content">
-						<table class="document_list">
+						<table class="document_list" id="recent_global">
 							{section name=i loop=$recent_global_docs}
-								<tr><td><img src="{$recent_global_docs[i].iconPtr}"></td><td>{$recent_global_docs[i].displayName}</td><td><a href="{$recent_global_docs[i].link}"><p class="no_line_height">{$recent_global_docs[i].dName} {$recent_global_docs[i].vName}</p><p class="time small_text no_line_height" id="{$recent_global_docs[i].timestamp}">{$recent_global_docs[i].timestamp}</p></a></td></tr>
+								<tr onclick="window.location='{$recent_global_docs[i].link};'">
+									<td><img src="{$recent_global_docs[i].iconPtr}"></td>
+									<td>{$recent_global_docs[i].displayName} saved a version of</td>
+									<td><p>{$recent_global_docs[i].dName} {$recent_global_docs[i].vName}</p></td><td><p class="time small_text" id="{$recent_global_docs[i].timestamp}">{$recent_global_docs[i].timestamp}</p></a></td></tr>
 							{/section}
 								</table>
 						</div><!-- end box content -->
 			</div><!-- end box -->
 </div><!-- end left -->
-<div class="right_side45">
+<div class="right_side35">
 <div class="box">
 	 <div class="box_title">Recent <a href="http://twitter.com/gitdocs">@gitdocs</a> updates</div>
        <div class="box_content">

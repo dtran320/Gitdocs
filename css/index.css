@@ -11,16 +11,12 @@
 	padding-top:15px;
  }
 
-#doc_link_left {
-	padding-bottom:15px;
+#doc_link {
+	padding-bottom:5px;
+	padding-right: 5px;
 	float:left;
 }
 
-#doc_link_right {
-	float: left;
-	padding-bottom:15px;
-	padding-left: 10px;
-}
 #form_search {
 	padding-bottom:10px;
 }
