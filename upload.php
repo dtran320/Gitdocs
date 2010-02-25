@@ -9,7 +9,7 @@ if($user = User::getLoggedInUser()) {
 	$smarty->assign('u_id', $user->userId);
 	
 	$smarty->assign('title', getVar('title'));
-	$smarty->assign('class_name', getVar('title'));
+	$smarty->assign('class_name', getVar('class_name'));
 	
 	$smarty->display('upload.tpl');
 
