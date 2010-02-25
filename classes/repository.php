@@ -150,8 +150,8 @@ class Repository {
 		
 		//print_r($split);
 		foreach($split as $index =>$currSplit) {
-			echo "\ncurr split:$currSplit\n";
-			echo preg_match('/(\n-\t.*)+(\n\+\t.*)/', $currSplit);
+			if(DEBUG)echo "\ncurr split:$currSplit\n";
+			if(DEBUG)echo preg_match('/(\n-\t.*)+(\n\+\t.*)/', $currSplit);
 			if(preg_match('/(\n-\t.*)+(\n\+\t.*)/', $currSplit) + preg_match('/(\n\+\t.*)+(\n-\t.*)/', $currSplit) > 0) {
 				for($i = 1; $i<5; $i++) {	
 					array_splice($diffLineNums[$i], $index - 1, 0, $diffLineNums[$i][$index - 1]);
