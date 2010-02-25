@@ -13,20 +13,31 @@ function showNotesForClass(className) {
 		}, "json");
 }	
 
-function postShowNotesForClass(notes) {
+function postShowNotesForClass(info) {
 	var notesHtml = '';
+	var notes = info['notes'];
 	for(var i = 0; i < notes.length; i++) {
-		notesHtml += '<tr onclick="window.location=\'viewall.php?d_id=' + notes[i]['doc_id']+'\'"><td><strong>'+ notes[i]['name'] + '</strong></td>' + '<td>' + notes[i]['count'] + '</td><td class="time" id="'+ notes[i]['max_time'] +'">' + notes[i]['max_time'] + '</td></tr>';
+		notesHtml += '<tr onclick="window.location=\'viewall.php?d_id=' + notes[i]['doc_id']+'\'"><td style="width: 385px;"><strong>'+ notes[i]['name'] + '</strong></td>' + '<td style="width: 100px;">' + notes[i]['count'] + '</td><td style="width: 115px;" class="time" id="'+ notes[i]['max_time'] +'">' + notes[i]['max_time'] + '</td></tr>';
 	} 
 	var table = $('#notes_for_class');
 	table.html(notesHtml);
-	var selected = $('.selected');
-	var cy = selected.offset().top + (selected.height()/2);
-	var ctop = cy - (table.height()/2);
-	var top_val = ctop < 115 ? 115 : ctop;
-	table.offset({top: top_val});
 	$('.time').prettyDate();
+	var selected = $('.selected');
+	var top_val = selected.offset().top;
+	table.offset({top: top_val});
+
+	var avatars = info['avatars'];
+	var img_start = '<div style="padding:3px; float: left;"><img src="';
+	var img_end = '"></div>';
+	var avatarsHtml = '';
+	for(var i = 0; i < avatars.length; i++) {
+		avatarsHtml += img_start + avatars[i] + img_end;
+	} 
+  var avatars = $('#avatars');
+	avatars.html(avatarsHtml);
+	avatars.offset({top: top_val});
 }
+
 
 
 
