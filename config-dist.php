@@ -12,4 +12,7 @@ $DOCUMENTS_PATH = "";
 define("DEBUG", true);
 define('LOG', false);
 $LOG_PATH = "";
+
+$AVATARS_PATH = "";
+
 ?>

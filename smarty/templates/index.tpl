@@ -6,10 +6,10 @@
 	<div class="box_title"></div>
 	<div class="box_content">
 		<div id="doc_link_left">
-		<a href="editor.php">New</a>
+		<a href="new_note.php">New</a>
 		</div>
 		<div id="doc_link_right">
-		<a href="import.php">Upload</a>
+		<a href="upload.php">Upload</a>
 		</div>
 		<div id="doc_link_right">
 		<a href="browse.php">Browse</a>

@@ -150,6 +150,26 @@ class Document {
 		return $classes;
 	}
 	
+	public static function getNormalizedDocName($type, $date, $title=0) {
+		return $type . "_" . $date . ($title? "_" . $title : "");
+	}
+	
+	public static function getDocForClassTypeAndDate($class, $type, $date) {
+		$db = new DB();
+		$classSplit = Document::splitClassName($class);
+		$deptName = mysql_real_escape_string($classSplit[0]);
+		$courseNum = mysql_real_escape_string($classSplit[1]);
+		$name = Document::getNormalizedDocName($type, $date);
+		$type = mysql_real_escape_string($type);
+		$date = mysql_real_escape_string($date);
+		$query = "SELECT doc_id FROM Documents WHERE " .
+			"course_num='$courseNum' AND dept_name='$deptName' AND " .
+			"name LIKE '$name%'";
+		$db->execQuery($query);
+		if($row = $db->getNextRow()) return $row['doc_id'];
+		else return false;
+	}
+	
 }
 
 ?>

@@ -17,12 +17,16 @@
 		<form id="signup" class="big_form" action="actions/signup.php" method="post">
 			<table>
 				<tr>
-					<td><label for="username">Username:</label></td>
-					<td><input type="text" id="signup_username" name="username" value="" placeholder="Your login name"/></td>
+					<td><label for="username">Email:</label></td>
+					<td><input type="text" id="signup_username" name="username" value="" placeholder="Your email address"/></td>
 				</tr>
 				<tr>
-					<td><label for="display_name">Display Name:</label></td>
-					<td><input type="text" id="signup_display_name" name="display_name" value="" placeholder="Your display name"/></td>
+					<td><label for="first_name">First Name:</label></td>
+					<td><input type="text" id="signup_first_name" name="first_name" value="" placeholder="Your first name"/></td>
+				</tr>
+				<tr>
+					<td><label for="last_name">Last Name:</label></td>
+					<td><input type="text" id="signup_last_name" name="last_name" value="" placeholder="Your last name"/></td>
 				</tr>
 				<tr>
 					<td><label for="password">Password:</label></td>
@@ -32,7 +36,7 @@
 					<td><label for="password_confirm">Confirm Password:</label></td>
 					<td><input type="password" id="signup_confirm_password" name="password_confirm" value="" placeholder="password"/></td>
 				</tr>
-				<tr><td></td><td><input type="submit" name="submit" value="Sign Up" onclick="signUpUser(event);"/></td></tr>
+				<tr><td></td><td><input type="submit" name="submit" class="green_button" value="Sign Up" onclick="signUpUser(event);"/></td></tr>
 			</table>
 
 		</form>
@@ -75,7 +79,8 @@
 		$(".time").prettyDate();
 		setInterval(function(){ $(".time").prettyDate(); }, 10000);
 		$("#signup_username").placeholder();
-		$("#signup_display_name").placeholder();
+		$("#signup_first_name").placeholder();
+		$("#signup_last_name").placeholder();
 		$("#signup_confirm_password").placeholder();
 		$("#signup_password").placeholder();
 		});
