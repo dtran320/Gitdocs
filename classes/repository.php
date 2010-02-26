@@ -157,19 +157,31 @@ class Repository {
 				for($i = 1; $i<5; $i++) {	
 					array_splice($diffLineNums[$i], $index - 1 + $numAdded, 0, $diffLineNums[$i][$index - 1 +$numAdded]);
 				}
-				$diffLineNums[4][$index-1+$numAdded] = 0;
-				$diffLineNums[2][$index+$numAdded] = 0;	
+				$diffLineNums[2][$index-1+$numAdded] = 0;
+				$diffLineNums[4][$index+$numAdded] = 0;	
+				$diffLineNums[1][$index+$numAdded-1]--;
+				$temp = $arrDiffs[$index +$numAdded-1];
+				$arrDiffs[$index+$numAdded-1] = $arrDiffs[$index+$numAdded];
+				$arrDiffs[$index+$numAdded] = $temp;
+				$temp = $arrDiffs[$index+$numAdded-1]->index;
+				$arrDiffs[$index+$numAdded-1]->index = $arrDiffs[$index+$numAdded]->index;
+				$arrDiffs[$index+$numAdded]->index = $temp;
 				$numAdded++;
 			}
 		}	
 		//undo changes which were rejected
-		
+		print_r($arrDiffs);	
 		if(DEBUG)print_r($diffLineNums);
 			if(DEBUG)print_r($myFileArr);
 			if(DEBUG)print_r($otherFileArr);
+		$myFileCpy = $myFileArr;
+		$otherFileCpy = $otherFileArr;
 		foreach(array_reverse($arrDiffs) as $diff) {//reversed so offsets for later diffs aren't affected
-			$myEdit = array_slice($myFileArr, $diffLineNums[1]["$diff->index"] -1, (int)$diffLineNums[2]["$diff->index"]);
-			$otherEdit = array_slice($otherFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"]);
+			$myEdit = array_slice($myFileCpy, $diffLineNums[1]["$diff->index"] -1, (int)$diffLineNums[2]["$diff->index"]);
+			$otherEdit = array_slice($otherFileCpy, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"]);
+			if(DEBUG) echo "curr index:  $diff->index\n";	
+			//if(DEBUG) {echo "\nmyedit:".print_r($myEdit). "endmyedit\n";}
+			if(DEBUG) {echo "\nother:".print_r($otherEdit) ."endotheredit\n";}
 			if($diff->userAction == UserDiffAction::accepted) {
 				if ($diff->type == DiffType::del)
 					array_splice($myFileArr, $diffLineNums[1]["$diff->index"]-1, (int)$diffLineNums[2]["$diff->index"] );	
@@ -181,6 +193,9 @@ class Repository {
 				//else
 					//array_splice($otherFileArr, $diffLineNums[3]["$diff->index"] - 1, (int)$diffLineNums[4]["$diff->index"], $myEdit);	
 			}
+	
+			if(DEBUG)print_r($myFileArr);
+			if(DEBUG)print_r($otherFileArr);
 		}	
 
 			if(DEBUG)print_r($myFileArr);

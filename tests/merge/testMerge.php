@@ -32,7 +32,11 @@ require_once(dirname(__FILE__) . "/../../lib/utils.php");
 			//write document for testbotB
 			$botBversion->publish(file_get_contents(dirname(__FILE__)."/data/$rowIndex/$testIndex/branch.html"));
 			if(file_exists(dirname(__FILE__)."/data/$rowIndex/$testIndex/modified.html")) {
-				$botAversion->publish(file_get_contents(dirname(__FILE__)."/data/$rowIndex/$testIndex/modified.html"));
+				if(!$botAversion->publish(file_get_contents(dirname(__FILE__)."/data/$rowIndex/$testIndex/modified.html"))){
+					echo "couldn't write modified version!!\n";
+				}else{
+					echo "published successfully\n";
+				}
 			}
 			//create diffArray, select on index of this test
 			$diffArray = array();
