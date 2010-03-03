@@ -145,6 +145,7 @@ class Version {
 	public function getDocFromDisk() {
 		//if(DEBUG) echo "Opening branch " . $this->branch;
 		$this->repo->checkout($this->branch);
+		rewind($this->fileHandler);
 		return fread($this->fileHandler, 8192);
 	}
 	
