@@ -48,7 +48,7 @@
 
 		<div class="float_right"> 
 			<form id="form_search" class="reg_form" action="search.php" method="get">
-			<input type="text" name="query" value="Find a document" />
+			<input type="text" name="query" value="" placeholder="Find a Document"/>
 			<input type="submit" value="Search" />
 			</form>
 		</div>
