@@ -80,7 +80,7 @@ class Repository {
 	}
 	
 	public function checkout($branch){	
-		$command = "cd $this->location; git checkout $branch";
+		$command = "cd $this->location; git checkout $branch 2>&1";
 		runCommand($command);
 	}
 	
@@ -170,7 +170,7 @@ class Repository {
 			}
 		}	
 		//undo changes which were rejected
-		print_r($arrDiffs);	
+		//print_r($arrDiffs);	
 		if(DEBUG)print_r($diffLineNums);
 			if(DEBUG)print_r($myFileArr);
 			if(DEBUG)print_r($otherFileArr);

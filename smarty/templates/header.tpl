@@ -46,12 +46,12 @@
 		<div class="float_right" style="margin:20px 10px 0px 0px;">
 		<div class="float_left logged_in_user"><a href="new_note.php">Add Notes</a></strong> | <a href="browse.php">Browse Classes</a> | <a href="change_avatar.php">Account</a> | Logged in as {$logged_in_user.displayName} | <a href="index.php?action=logout">Logout</a></div>
 
-<!-->		<div class="float_right"> 
+		<div class="float_right"> 
 			<form id="form_search" class="reg_form" action="search.php" method="get">
 			<input type="text" name="query" value="Find a document" />
 			<input type="submit" value="Search" />
 			</form>
-		</div>-->
+		</div>
 		</div>
 	{else}
 		<div class="float_right" style="margin:20px 10px 0px 0px;">

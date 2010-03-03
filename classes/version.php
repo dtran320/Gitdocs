@@ -10,6 +10,7 @@ require_once(dirname(__FILE__) . '/../db/db.php');
 require_once(dirname(__FILE__) . '/repository.php');
 require_once(dirname(__FILE__) . '/../lib/utils.php');
 require_once('document.php');
+require_once('searchEngine.php');
 
 class Version {
 	
@@ -121,6 +122,9 @@ class Version {
 	public function publish($text) {
 		$this->save($text);
 		$this->commit();
+		$s = new SearchEngine();
+		$s->updateVersion($this);
+		$s->updateIndex();
 		return true; //TODO: need to update repo->commit to return error code
 	}
 	
@@ -139,7 +143,7 @@ class Version {
 	}
 	
 	public function getDocFromDisk() {
-		if(DEBUG) echo "Opening branch " . $this->branch;
+		//if(DEBUG) echo "Opening branch " . $this->branch;
 		$this->repo->checkout($this->branch);
 		return fread($this->fileHandler, 8192);
 	}
