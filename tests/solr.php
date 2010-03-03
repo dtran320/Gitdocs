@@ -4,7 +4,7 @@ require_once("../classes/searchEngine.php");
 $s = new SearchEngine();
 //$s->runQuery("original");
 //$s->indexAll();
-//$v = new Version(0,0,0,0,1000);
-//$s->updateVersion($v);
+$v = new Version(0,0,0,0,10);
+$s->updateVersion($v);
 $s->updateIndex();
 ?>

@@ -48,7 +48,7 @@ class SearchEngine {
 		$solrDoc->addField('link', "viewer.php?v_id=".$v->versionId);
 
 		$updateResponse = $this->client->addDocument($solrDoc);
-		//print_r($updateResponse->getResponse());
+		if(DEBUG)print_r($updateResponse->getResponse());
 	}	
 
 	/*runs a query, returns a SolrResponse object*/	
