@@ -36,13 +36,16 @@ class Document {
 	public static function getDocInfoForId($id) {
 		$db = new DB();
 		$id = mysql_real_escape_string($id);
-		$docInfoQuery = "SELECT name FROM Documents " .
+		$docInfoQuery = "SELECT name, type, lecture_date, dept_name, course_num FROM Documents " .
 			"WHERE doc_id='{$id}'";
 		if (DEBUG) var_dump($docInfoQuery);
 		$db->execQuery($docInfoQuery);
 		$row = $db->getNextRow();
+		$row['class_name'] = $row['dept_name'] . ' ' . $row['course_num'];
 		return $row;
 	}
+
+
 
 	public static function splitClassName($newClassName) {
 		$newDeptName = "";
