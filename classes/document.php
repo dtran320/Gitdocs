@@ -97,17 +97,29 @@ class Document {
 	public static function getNotesForClass($className) {
 		$db = new DB();
 		$split = Document::splitClassName($className);
-		$query = "SELECT doc_id, name, count(v_id) as count, max(last_saved_time) as max_time from Documents " .
+		$query = "SELECT doc_id, name, lecture_date, type from Documents " .
 			"INNER JOIN Versions on doc_id = doc_fk " .
 			"WHERE dept_name='{$split[0]}' AND course_num='{$split[1]}' " .
-		 	" GROUP BY doc_id ORDER BY max_time DESC;";
+		 	" GROUP BY doc_id ORDER BY lecture_date DESC;";
 		$db->execQuery($query);
 
 		$notes = array();
+		$i = -1;
+		$prev_date = '';
+		$curr_date = '';
 		while($row = $db->getNextRow()) {
-			$row['count'] = $row['count']==1? $row['count'] . " version" : $row['count'] . " versions";
-			$row['max_time'] = getLocalTime($row['max_time']);
-			$notes[] = $row;
+			$curr_date = $row['lecture_date'];
+			$type = $row['type'];
+			if ($curr_date != $prev_date) {
+				$i++;
+				$notes[$i] = array('lecture_id' => '', 'lecture'=>'', 'reading'=>'', 'reading_id' =>'', 'lecture_date'=>'');
+				$notes[$i]['lecture_date'] = $row['lecture_date'];
+			}
+			$key = $type ._id;
+			$doc_id = $row['doc_id'];
+			$notes[$i][$key] = $doc_id;
+			$notes[$i][$type] = $row['name'];
+			$prev_date = $curr_date;		
 		}	
 		return $notes;
 	}
@@ -205,7 +217,8 @@ class Document {
 		$date = mysql_real_escape_string($date);
 		$query = "SELECT doc_id FROM Documents WHERE " .
 			"course_num='$courseNum' AND dept_name='$deptName' AND " .
-			"lecture_date = '$date'";
+			"lecture_date = '$date' AND " .
+			"type = '$type';";
 /*
 		$query = "SELECT doc_id FROM Documents WHERE " .
 			"course_num='$courseNum' AND dept_name='$deptName' AND " .

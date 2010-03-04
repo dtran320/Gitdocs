@@ -8,7 +8,7 @@
 				<tr><td onclick="showNotesForClass('{$all_classes[i]}');"><p>{$all_classes[i]}</p></td></tr>
 			{/section}
 		</table>
-		<table class="document_list" id="notes_for_class" style="width: 600px;">
+		<table id="notes_for_class">
 		</table>
 		<div style="float: right;width: 280px;" id="avatars"></div>
 	</div><!-- end box_content -->

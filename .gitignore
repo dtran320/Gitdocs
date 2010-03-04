@@ -3,3 +3,4 @@ smarty/templates_c/*
 smarty/cache/*
 images/pix/*
 config.php
+config-solr.php
