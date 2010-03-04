@@ -14,7 +14,7 @@ class Document {
 	public $name, $docId;
 	
 	//Creates a new document, creates file structure on disk, create in DB
-	public static function CreateNewDocument($name = "New Document") {
+	public static function CreateNewDocument($name = "New Document", $class_name = "GD 555", $date = "", $type = "") {
 		global $DOCUMENTS_PATH;
 		//insert into database
 		$db = new DB();
@@ -26,6 +26,10 @@ class Document {
 		if(!mkdir("$DOCUMENTS_PATH$newDocID", 0700)) return false;
 		
 		$document = new Document($newDocID, $name);
+		$document->renameClass($class_name);
+		$document->setDate($date);
+		$document->setType($type);
+
 		return $document;
 	}
 	
@@ -121,6 +125,23 @@ class Document {
 		return $db->execQuery($renameQuery);
 	}
 
+	public function setDate($date) {
+		$db = new DB();
+		if ($date == '') {
+			$date = date('Y-m-d');
+		}
+		$query = "UPDATE Documents SET lecture_date = '{$date}' WHERE doc_id='{$this->docId}';";
+		return $db->execQuery($query);
+	}
+
+	public function setType($type) {
+		$db = new DB();
+		if($type == '') {
+			$type = 'lecture';
+		}
+		$query = "UPDATE Documents SET type = '{$type}' WHERE doc_id='{$this->docId}';";
+		return $db->execQuery($query);
+	}
 
 	public function renameClass($newClassName) {
 		$db = new DB();
@@ -179,12 +200,17 @@ class Document {
 		$classSplit = Document::splitClassName($class);
 		$deptName = mysql_real_escape_string($classSplit[0]);
 		$courseNum = mysql_real_escape_string($classSplit[1]);
-		$name = Document::getNormalizedDocName($type, $date);
+//		$name = Document::getNormalizedDocName($type, $date);
 		$type = mysql_real_escape_string($type);
 		$date = mysql_real_escape_string($date);
 		$query = "SELECT doc_id FROM Documents WHERE " .
 			"course_num='$courseNum' AND dept_name='$deptName' AND " .
+			"lecture_date = '$date'";
+/*
+		$query = "SELECT doc_id FROM Documents WHERE " .
+			"course_num='$courseNum' AND dept_name='$deptName' AND " .
 			"name LIKE '$name%'";
+*/
 		$db->execQuery($query);
 		if($row = $db->getNextRow()) return $row['doc_id'];
 		else return false;
