@@ -1,6 +1,7 @@
 body {
 	background: white;
-	font:15px arial,sans-serif;
+	font-size: 15px;
+	font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
 	color: #263033;
 	margin: 0px;
 	height: 100%;
@@ -303,12 +304,10 @@ img {
 }
 
 .lecture_title {
-	font-weight: bold;
 	color: #4183C4;
 }
 
 .reading_title {
-	font-weight: bold;
 	color: #41C483;
 }
 
@@ -322,4 +321,12 @@ img {
 
 #notes_for_class td{
 	border-bottom: 1px solid #CBC2D8;
+}
+
+.ellipsis {
+	white-space: nowrap; 
+	overflow:hidden; 
+	text-overflow:ellipsis; 
+	-o-text-overflow: ellipsis;
+	-moz-binding: url('../lib/ellipsis.xml#ellipsis');
 }

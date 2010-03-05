@@ -287,7 +287,9 @@ class Version {
 			"INNER JOIN Users " .
 			"ON Versions.u_fk = Users.u_id " .
 			"WHERE u_id = '$userId' ORDER BY last_saved_time DESC";
-		if($n > 0) $selectQuery .= " LIMIT 0, $n";
+		if($n > 0) {
+			$selectQuery .= " LIMIT 0, $n";
+		} 
 		$db->execQuery($selectQuery);
 		while($row = $db->getNextRow()) {
 			$row['timestamp'] = getLocalTime($row['timestamp']);
@@ -298,14 +300,22 @@ class Version {
 	
 	public static function getRecentVersionsForUserClean($userId, $n=0) {
 		$versions = Version::getRecentVersionsForUser($userId, $n);
+
+		$results = array();
+
 		foreach($versions as $k => $v) {
-			$versions[$k]["vName"] = stripslashes($versions[$k]["vName"]);
-			$versions[$k]["course"] = $versions[$k]["course"]? $versions[$k]["course"] . ":": "";
-			$versions[$k]["vName"] = $versions[$k]["vName"]? " - " . $versions[$k]["vName"] : "";
+			$course = $versions[$k]['course'];
 			$versions[$k]["dName"] = stripslashes($versions[$k]["dName"]);
 			$versions[$k]["link"] = "editor.php?v_id=" . $versions[$k]["vId"];
+			if (!isset($results[$course])) {
+				$results[$course] = array();
+			}
+			$results[$course][] = $versions[$k];
 		}
-		return $versions;
+
+		ksort($results);
+
+		return $results;
 		
 	}
 	
@@ -314,7 +324,7 @@ class Version {
 	public static function getRecentVersionFeedForUser($userId, $n=0, $filter=0) {
 		$db = new DB();
 		$versions = array();
-		$selectQuery = "SELECT u_id as uId, doc_id as dId, name as dName, v_name as vName, v_id as vId, last_saved_time as timestamp, username, display_name as displayName " .
+		$selectQuery = "SELECT u_id as uId, doc_id as dId, name as dName, v_name as vName, v_id as vId, last_saved_time as timestamp, username, display_name as displayName, type " .
 			"FROM Versions INNER JOIN Documents " . 
 			"ON Versions.doc_fk = Documents.doc_id " .
 			"INNER JOIN Users " .
