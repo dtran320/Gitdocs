@@ -1,4 +1,4 @@
-<div class="box right_side">
+
   <div class="box_title">
 	<ul class = "tabs primary" id ="myversions_selected" style="display:none;">
 		<li ><span onclick="DisplayOthers()"><a>Classmates</a></span></li>

@@ -22,7 +22,7 @@
 		<!-- don't change this id w/o changing references in gitdocs.js -->
 		<table class="document_list" id="my_recent_docs">
 		{if $my_recent_docs|@count == 0}
-			You don't have any notes yet. <a href="editor.php">Take notes!</a>
+			You don't have any notes yet. <a href="new_note.php">Take notes!</a>
 		{/if}
 		
 		{section name=i loop=$my_recent_docs}

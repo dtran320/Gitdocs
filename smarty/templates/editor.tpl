@@ -1,43 +1,50 @@
 {include file="header.tpl"}
-
+<form id="save_form" class="big_form" action="actions/saveshare.php" method="post">
+	<input type="hidden" name="d_id" value="{$d_id}" />
+	<input type="hidden" name="u_id" value="{$u_id}" />
+	
 <div class="box left_main">
-	<form id="doc_title" class="doc_title">
-	<div class="box_title">
-		<div style="float: left;">Editing -- 
-			<input type="text" id="change_class" name="change_class" value="{$class_name}" />	--
-			<input type="text" id="change_d_name" name="change_d_name" value="{$d_name}" /> -- 
-			<input type="text" id="change_v_name" name="change_v_name" class="v_name" value="{$v_name}" />-- 
-	
-			<span class="u_name">{$displayName}</span> 
-		</div>
-	</form>
-	<form id="compare_form" action="{if $u_id % 2 == 0}compare_2col.php {else}compare_2col.php{/if}" method="post" style="display:none;">
-		<input type="hidden" name="d_id" value="{$d_id}" />
-		<input type="hidden" name="u_id" value="{$u_id}" />
-		<input type="hidden" id="other_u_id" name="other_u_id" value="" />
-	</form>
-	
-	<form id="save_form" class="big_form" action="actions/saveshare.php" method="post" style="float:right;">
-		<input type="hidden" name="d_id" value="{$d_id}" />
-		<input type="hidden" name="u_id" value="{$u_id}" />
-		<input type="submit" name="action" value="Save" onclick="updateElement();"/>
+	<textarea name="editor1" id="editor1">
+		{$v_text}
+	</textarea>
 
-	</div><!-- end box_title -->
-
-		<div id="save_status" class="status"></div>
-	<div class="clear_fix"></div>
-
-	<div class="box_content">
-
-			<div>
-				<textarea name="editor1" id="editor1">
-				{$v_text}
-				</textarea>
-	</form>
-			</div>
-	</div> <!--box content-->
 </div> <!--box left_main-->
+<div class="box right_side">
+	<input type="submit" name="action" value="Save" onclick="updateElement();"/>	
+</form>
+<form id="doc_title" class="doc_title">
+<div class="box_title">
+	<div style="float: left;">
+		<table>
+		<tr><td colspan="2">Currently Editing </td></tr>
+		<tr>
+			<td><label for "change_class">Class:</td>
+			<td><input type="text" id="change_class" name="change_class" value="{$class_name}" /></td>
+		</tr>
+		<tr>
+			<td><label for "change_d_name">Document:</td>
+			<td><input type="text" id="change_d_name" name="change_d_name" value="{$d_name}" /></td>
+		</tr>
+		<tr>
+			<td><label for "change_v_name">Description:</td>
+			<td><input type="text" id="change_v_name" name="change_v_name" class="v_name" value="{$v_name}" /></td>
+		</tr>
+		</tr>
+	</table>
 
+	</div>
+</form>
+<form id="compare_form" action="{if $u_id % 2 == 0}compare_2col.php {else}compare_2col.php{/if}" method="post" style="display:none;">
+	<input type="hidden" name="d_id" value="{$d_id}" />
+	<input type="hidden" name="u_id" value="{$u_id}" />
+	<input type="hidden" id="other_u_id" name="other_u_id" value="" />
+</form>
+
+
+</div><!-- end box_title -->
+
+	<div id="save_status" class="status"></div>
+<div class="clear_fix"></div>
 {include file="sidebar.tpl"}
 
 	<script type="text/javascript">
