@@ -1,7 +1,7 @@
 {include file="header.tpl"}
 <div class="container center_container">
 <div class="box" style="width: 980px">
-	<div class="box_title">Browse Classes - choose a class to see its notes</div>
+	<div class="box_title">Browse Notes - choose a class to see its notes</div>
   <div class="box_content">
 		<table id="class_list" class="document_list" style="float: left; width:100px;">
 			{section name=i loop=$all_classes}	

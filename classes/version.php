@@ -324,7 +324,7 @@ class Version {
 	public static function getRecentVersionFeedForUser($userId, $n=0, $filter=0) {
 		$db = new DB();
 		$versions = array();
-		$selectQuery = "SELECT u_id as uId, doc_id as dId, name as dName, v_name as vName, v_id as vId, last_saved_time as timestamp, username, display_name as displayName, type " .
+		$selectQuery = "SELECT u_id as uId, doc_id as dId, name as dName, v_name as vName, v_id as vId, last_saved_time as timestamp, username, display_name as displayName, type, CONCAT(dept_name, course_num) as course " .
 			"FROM Versions INNER JOIN Documents " . 
 			"ON Versions.doc_fk = Documents.doc_id " .
 			"INNER JOIN Users " .
@@ -350,15 +350,21 @@ class Version {
 	public static function getRecentVersionFeedForUserClean($userId, $n=0, $filter=0) {
 		$my_version_feed = Version::getRecentVersionFeedForUser($userId, $n, $filter);
 		
+		$results = array();
 		//preprocess to figure out links
 		foreach($my_version_feed as $k => $v) {
 			$my_version_feed[$k]["vName"] = stripslashes($my_version_feed[$k]["vName"]);
-			$my_version_feed[$k]["vName"] = $my_version_feed[$k]["vName"]? " - " . $my_version_feed[$k]["vName"] : "";
+			$my_version_feed[$k]["vName"] = $my_version_feed[$k]["vName"]? $my_version_feed[$k]["vName"] : "";
 			$my_version_feed[$k]["dName"] = stripslashes($my_version_feed[$k]["dName"]);
 			$my_version_feed[$k]["iconPtr"] = getIconPtr($my_version_feed[$k]["uId"]);
 			$my_version_feed[$k]["link"] = "viewer.php?v_id=" . $my_version_feed[$k]["vId"];
+			$dId = $my_version_feed[$k]["dId"];
+			if (!isset($results[$dId])) {
+				$results[$dId] = array();
+			}
+			$results[$dId][] = $my_version_feed[$k];
 		}
-		return $my_version_feed;
+		return $results;
 	}
 }
 

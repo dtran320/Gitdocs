@@ -7,6 +7,12 @@
 				<input type="hidden" name="u_id" value="{$u_id}" />
 				<input type="hidden" id="other_u_id" name="other_u_id" value="" />
 			</form>
+			 <form id="editor_form" class="big_form" method="post" action="editor.php" style="float:right;">
+			<input type="hidden" name="action" value="clone" />
+			<input type="hidden" name="document_id" value="{$d_id}" />
+			<input type="hidden" name="clone_id" value="" />
+			<input type="hidden" name="description" value="" />
+			</form>
 	</div>
 		<div class="clear_fix"></div>
 	<div class="box_content">

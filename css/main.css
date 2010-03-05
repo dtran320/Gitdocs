@@ -323,6 +323,10 @@ img {
 	border-bottom: 1px solid #CBC2D8;
 }
 
+.bold {
+	font-weight: bold;
+}
+
 .ellipsis {
 	white-space: nowrap; 
 	overflow:hidden; 

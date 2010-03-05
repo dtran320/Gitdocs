@@ -57,10 +57,17 @@
 			You currently don't have any shared classnotes. <strong><a href="browse.php">Browse classes</a></strong>
 			{/if}
 				<table class="document_list" id="my_version_feed">					
-					{section name=i loop=$my_recent_version_feed}
-						<tr onclick="window.location='{$my_recent_version_feed[i].link}';"><td><img src="{$my_recent_version_feed[i].iconPtr}"></td><td><p><span class="username">{$my_recent_version_feed[i].displayName}</span> updated {$my_recent_version_feed[i].dName} {$my_recent_version_feed[i].vName}</p></td><td><p class="time small_text" id="{$my_recent_version_feed[i].timestamp}">{$my_recent_version_feed[i].timestamp}</p></td></tr>
-					{/section}
-						</table>
+					{foreach item=doc from=$my_recent_version_feed}
+						<tr><td onclick=window.location="viewall.php?d_id={$doc[0].dId}"><span class='bold {$doc[0].type}_title'>{$doc[0].dName}</span> -- {$doc[0].course}</td></tr>
+						{foreach item=update from=$doc}
+						<tr onclick=window.location="{$update.link}">
+							<td style='width:500px;'><img style='padding:5px; vertical-align:middle;' src='{$update.iconPtr}'><span class='username'>{$update.displayName}</span> -- {$update.vName}</td>
+			
+<td><p class='time small_text' id='{$update.timestamp}'> + {$update.timestamp}</p>
+</td></tr>
+						{/foreach}
+					{/foreach}
+				</table>
 				</div><!-- end box content -->
 	</div>
 		<div class="box">
