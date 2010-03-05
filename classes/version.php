@@ -281,7 +281,7 @@ class Version {
 	public static function getRecentVersionsForUser($userId, $n=0) {
 		$db = new DB();
 		$versions = array();
-		$selectQuery = "SELECT doc_id as dId, name as dName, v_name as vName, v_id as vId, last_saved_time as timestamp, CONCAT(dept_name, course_num) as course " .
+		$selectQuery = "SELECT doc_id as dId, name as dName, v_name as vName, v_id as vId, last_saved_time as timestamp, CONCAT(dept_name, course_num) as course, type " .
 			"FROM Versions INNER JOIN Documents " . 
 			"ON Versions.doc_fk = Documents.doc_id " .
 			"INNER JOIN Users " .

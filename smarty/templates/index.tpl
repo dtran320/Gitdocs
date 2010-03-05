@@ -17,7 +17,7 @@
 </div>
 
 <div class="box">
-	<div class="box_title">My Recent Documents</div>
+	<div class="box_title">My Recent Notes</div>
         <div class="box_content">
 		<!-- don't change this id w/o changing references in gitdocs.js -->
 		<div id="my_recent_docs">
@@ -29,7 +29,7 @@
 		{/if}
 		{foreach item=note from=$class}
 		<tr onclick="window.location='{$note.link}'">
-			<td style="width:300px;" class="ellipsis">{$note.dName} {$note.vName}</td><td style="width:100px; text-align:right;" class="time small_text " id="{$note.timestamp}">{$note.timestamp}</td></tr>
+			<td style="width:300px;"><span class="{$note.type}_title">{$note.dName}</span> -- {$note.vName}</td><td style="width:100px; text-align:right;" class="time small_text " id="{$note.timestamp}">{$note.timestamp}</td></tr>
 		{/foreach}
 		</table>
 		{/foreach}
