@@ -329,9 +329,12 @@ class Version {
 			"ON Versions.doc_fk = Documents.doc_id " .
 			"INNER JOIN Users " .
 			"ON Versions.u_fk = Users.u_id " .
-			"WHERE doc_id IN " .
-			"(SELECT doc_fk from Versions WHERE u_fk = '$userId') " .
+			"WHERE (dept_name, course_num) IN " .
+			"(SELECT dept_name, course_num FROM Documents " .
+				"INNER JOIN Versions on doc_fk = doc_id " .
+				"WHERE u_fk='$userId' GROUP BY doc_id) " .
 			"AND u_fk != '$userId' ";
+		echo $selectQuery;
 		if($filter) {
 			$filterArr = Document::splitClassName($filter);
 			$selectQuery .= "AND dept_name='{$filterArr[0]}' AND course_num='{$filterArr[1]}'";
