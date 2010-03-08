@@ -13,11 +13,21 @@ function showNotesForClass(className) {
 		}, "json");
 }	
 
+// array of lecture notes
+// array of reading responses
 function postShowNotesForClass(info) {
 	var notesHtml = '';
 	var notes = info['notes'];
 	for(var i = 0; i < notes.length; i++) {
-		notesHtml += '<tr onclick="window.location=\'viewall.php?d_id=' + notes[i]['doc_id']+'\'"><td style="width: 385px;"><strong>'+ notes[i]['name'] + '</strong></td>' + '<td style="width: 100px;">' + notes[i]['count'] + '</td><td style="width: 115px;" class="time" id="'+ notes[i]['max_time'] +'">' + notes[i]['max_time'] + '</td></tr>';
+		notesHtml += '<tr>' 
+							+ '<td style="width:300px;">'
+									+'<a class="lecture_title" href="viewall.php?d_id='+notes[i]['lecture_id'] +'">' 
+									+ notes[i]['lecture']+'</a></td>'
+							+ '<td style="width:300px;">'
+									+'<a class="reading_title" href="viewall.php?d_id='+notes[i]['reading_id'] +' ">' 
+									+ notes[i]['reading'] + '</a></td>'
+							+'<td style="width:100px;">' + notes[i]['lecture_date'] + '</td>'
+							+ '</tr>';
 	} 
 	var table = $('#notes_for_class');
 	table.html(notesHtml);
@@ -25,6 +35,9 @@ function postShowNotesForClass(info) {
 	var selected = $('.selected');
 	var top_val = selected.offset().top;
 	table.offset({top: top_val});
+
+/*
+ // 	do we want avatars or not?
 
 	var avatars = info['avatars'];
 	var img_start = '<div style="padding:3px; float: left;"><img src="';
@@ -36,6 +49,7 @@ function postShowNotesForClass(info) {
   var avatars = $('#avatars');
 	avatars.html(avatarsHtml);
 	avatars.offset({top: top_val});
+*/
 }
 
 

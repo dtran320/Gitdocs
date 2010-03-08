@@ -63,11 +63,6 @@ table.document_list tr:hover {
 	background: #EEECEF;
 }
 
-#notes_for_class tr:hover {
-	cursor:pointer;
-	background: #EEECEF;
-}
-
 #filter {
 	font-weight: normal;
 }

@@ -1,6 +1,7 @@
 body {
 	background: white;
-	font:15px arial,sans-serif;
+	font-size: 12px;
+	font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
 	color: #263033;
 	margin: 0px;
 	height: 100%;
@@ -97,7 +98,7 @@ a:hover {
 }
 
 .v_name {
-	color: #4183C4;
+	color: #C44183;
 	font-weight: bold;
 }
 .u_name {
@@ -301,4 +302,37 @@ img {
 	position:fixed;
 	text-decoration:none;
 
+}
+
+.lecture_title {
+	color: #4183C4; 
+}
+
+.reading_title {
+/*	color: #41C483; */
+	color: #4183C4; 
+}
+
+.username {
+	font-style: italic;
+}
+
+#notes_for_class {
+	border-collapse:collapse;
+}
+
+#notes_for_class td{
+	border-bottom: 1px solid #CBC2D8;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.ellipsis {
+	white-space: nowrap; 
+	overflow:hidden; 
+	text-overflow:ellipsis; 
+	-o-text-overflow: ellipsis;
+	-moz-binding: url('../lib/ellipsis.xml#ellipsis');
 }

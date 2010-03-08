@@ -22,7 +22,7 @@
 		</tr>
 		<tr>
 			<td> </td>
-			<td class="left">Optional title:</td>
+			<td class="left">Title:</td>
 			<td><input type="text" name="title" id="note_title" value=""/></td>
 		</tr>
 		<tr>
@@ -73,6 +73,7 @@ validate radio button on submit
 		function preCreateDoc() {
 			var class_name = $("#class_name").val();
 			var date = $("#date").val();
+			var title = $("#note_title").val();
 			var error = "";
 			if (class_name == "" || class_name == "{/literal}{$class_placeholder}{literal}") {
 				error += "Please specify the class.";
@@ -80,6 +81,10 @@ validate radio button on submit
 			if (date == "") {
 				error += "\nPlease specify the date.";				
 			}				
+
+			if (title == "") {
+				error += "\nPlease specify the title.";
+			}
 			if (error != "") {
 				alert (error);
 				return false;
