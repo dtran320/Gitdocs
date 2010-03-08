@@ -10,19 +10,22 @@
 
 </div> <!--box left_main-->
 <div class="box right_side">
-	<input type="submit" name="action" value="Save" onclick="updateElement();"/>	
+	<div style="margin-left: 10px; float: left;"><input type="submit" name="action" value="Save" onclick="updateElement();"/></div>
+	<div id="save_status" class="status" style="float: right;"></div>
 </form>
 <form id="doc_title" class="doc_title">
 <div class="box_title">
 	<div style="float: left;">
 		<table>
-		<tr><td colspan="2">Currently Editing </td></tr>
 		<tr>
 			<td><label for "change_class">Class:</td>
 			<td><input type="text" id="change_class" name="change_class" value="{$class_name}" /></td>
 		</tr>
 		<tr>
-			<td><label for "change_d_name">Document:</td>
+			<td colspan="2">{$d_info}</td>
+		</tr>
+		<tr>
+			<td><label for "change_d_name">Title:</td>
 			<td><input type="text" id="change_d_name" name="change_d_name" value="{$d_name}" /></td>
 		</tr>
 		<tr>
@@ -42,8 +45,6 @@
 
 
 </div><!-- end box_title -->
-
-	<div id="save_status" class="status"></div>
 <div class="clear_fix"></div>
 {include file="sidebar.tpl"}
 

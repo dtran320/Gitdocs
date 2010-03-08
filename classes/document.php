@@ -11,7 +11,7 @@ require_once(dirname(__FILE__) . "/../lib/utils.php");
 class Document {
 	
 	//attributes
-	public $name, $docId;
+	public $name, $docId, $type, $date, $class_name;
 	
 	//Creates a new document, creates file structure on disk, create in DB
 	public static function CreateNewDocument($name = "New Document", $class_name = "GD 555", $date = "", $type = "") {
@@ -31,6 +31,23 @@ class Document {
 		$document->setType($type);
 
 		return $document;
+	}
+	
+	public function __construct($docId, $name = 0){
+		$this->docId = $docId;
+		$db = new DB();
+		$id = mysql_real_escape_string($this->docId);
+		$query = "SELECT name, type, lecture_date, dept_name, course_num FROM Documents " .
+			"WHERE doc_id='$id'";
+		$db->execQuery($query);
+		if($row = $db->getNextRow()) {
+			$this->type = $row['type'];
+			$this->date = $row['lecture_date'];
+			$this->class_name = $row['dept_name'] . ' ' . $row['course_num'];
+			$this->name = $row['name'];
+		}
+		var_dump($this);
+		
 	}
 	
 	public static function getDocInfoForId($id) {
@@ -126,11 +143,6 @@ class Document {
 		}	
 		return $notes;
 	}
-
-	public function __construct($docId, $name = 0 ){
-		$this->docId = $docId;
-		$this->name = $name;
-	} 
 	
 	public function rename($newName) {
 		//verify that the logged in user owns this doc later?
@@ -146,7 +158,10 @@ class Document {
 			$date = date('Y-m-d');
 		}
 		$query = "UPDATE Documents SET lecture_date = '{$date}' WHERE doc_id='{$this->docId}';";
-		return $db->execQuery($query);
+		if($db->execQuery($query)) { 
+			$this->date = $date; return true; 
+		} else return false;
+		
 	}
 
 	public function setType($type) {
@@ -155,7 +170,9 @@ class Document {
 			$type = 'lecture';
 		}
 		$query = "UPDATE Documents SET type = '{$type}' WHERE doc_id='{$this->docId}';";
-		return $db->execQuery($query);
+		if($db->execQuery($query)) {
+			$this->type = $type; return true;
+		} else return false;
 	}
 
 	public function renameClass($newClassName) {
@@ -205,11 +222,12 @@ class Document {
 			$classes[] = $row['course'];
 		return $classes;
 	}
-	
+
+	/*
 	public static function getNormalizedDocName($type, $date, $title=0) {
 		return ucfirst($type) . "_" . $date . ($title? "_" . ucfirst($title) : "");
 	}
-	
+	*/
 	public static function getDocForClassTypeAndDate($class, $type, $date) {
 		$db = new DB();
 		$classSplit = Document::splitClassName($class);

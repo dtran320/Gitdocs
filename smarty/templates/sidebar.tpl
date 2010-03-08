@@ -19,10 +19,10 @@
 	
 	<div class="box_content" id="otherversionspanel" style="display:block;">
 			<table style="width:100%">
-			{if $others|@count == 0}
-			None of your classmates have a version of this yet!
-			{/if}
 			<tr><td class="selectable" colspan="2" onclick="window.location='viewall.php?d_id={$d_id}';"><a class="v_name">view all</a></td></tr>
+			{if $others|@count == 0}
+			<tr><td>None of your classmates have a version of this yet!</td></tr>
+			{/if}
 			{section name=i loop=$others}	
 			<tr><td id="td_{$smarty.section.i.index}"
 					class="selectable"

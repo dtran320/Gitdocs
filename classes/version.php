@@ -182,10 +182,10 @@ class Version {
 
 	public function getDocument() {
 		$db = new DB();
-		$getDocQuery = "SELECT doc_id, name FROM Documents WHERE doc_id='{$this->docId}'";
+		$getDocQuery = "SELECT doc_id FROM Documents WHERE doc_id='{$this->docId}'";
 		$db->execQuery($getDocQuery);
 		$row = $db->getNextRow();
-		if($row) return new Document($row['doc_id'], $row['name']);
+		if($row) return new Document($row['doc_id']);
 		else return false;
 	}
 	

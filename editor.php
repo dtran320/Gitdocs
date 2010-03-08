@@ -33,12 +33,13 @@ if($user = User::getLoggedInUser()) {
 		}
 		$versionName = $version->getName();
 		$docText = $version->getDocFromDisk();
-		
 		$document = $version->getDocument();
+		$doc_info = $document->type? ucfirst($document->type) . ($document->date? " - {$document->date}": "") : "";
 		$smarty->assign('d_id', $document->docId);
 		$smarty->assign('v_id', $version->versionId);
+		$smarty->assign('d_info', $doc_info);
 		$smarty->assign('d_name', stripslashes($document->name));
-		$smarty->assign('v_name', stripslashes($versionName));
+		$smarty->assign('v_name', $versionName? stripslashes($versionName) : "");
 		$smarty->assign('class_name', $document->getClassName()); 
 
 		$smarty->assign('v_text', $docText);
