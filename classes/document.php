@@ -113,10 +113,10 @@ class Document {
 		while($row = $db->getNextRow()) {
 			$curr_date = $row['lecture_date'];
 			$type = $row['type'];
-			if ($curr_date != $prev_date) {
+			if ($curr_date != $prev_date || $curr_date == '') {
 				$i++;
 				$notes[$i] = array('lecture_id' => '', 'lecture'=>'', 'reading'=>'', 'reading_id' =>'', 'lecture_date'=>'');
-				$notes[$i]['lecture_date'] = $row['lecture_date'];
+				$notes[$i]['lecture_date'] = $row['lecture_date'] != '' ? $row['lecture_date'] : 'unknown date';
 			}
 			$key = $type ._id;
 			$doc_id = $row['doc_id'];

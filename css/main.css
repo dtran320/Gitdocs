@@ -1,6 +1,6 @@
 body {
 	background: white;
-	font-size: 15px;
+	font-size: 12px;
 	font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
 	color: #263033;
 	margin: 0px;
@@ -304,11 +304,12 @@ img {
 }
 
 .lecture_title {
-	color: #4183C4;
+	color: #4183C4; 
 }
 
 .reading_title {
-	color: #41C483;
+/*	color: #41C483; */
+	color: #4183C4; 
 }
 
 .username {
