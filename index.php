@@ -32,10 +32,7 @@ if($user = User::getLoggedInUser()) {
 	$smarty->display('index.tpl');
 }
 else {
-	$twitter_updates = getGitdocsUpdates(3);
-	$smarty->assign('twitter_updates', $twitter_updates);
-	
-	$smarty->display('signup.tpl');
+	header('Location: signup.php');
 }
 ?>
 

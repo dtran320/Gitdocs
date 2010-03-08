@@ -47,7 +47,6 @@ if($user = User::getLoggedInUser()) {
 	}
 }
 else {
-	$smarty->assign('signin_error', "You must sign up or login to do that.");
-	$smarty->display('signup.tpl');
+	header('Location: signup.php');
 }
 ?>
