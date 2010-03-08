@@ -93,7 +93,16 @@ if($user = User::getLoggedInUser()) {
 	$smarty->display('editor.tpl');
 } // end if user logged in
 else {
-	header('Location: signup.php');
+	$twitter_updates = getGitdocsUpdates(3);
+	$smarty->assign('twitter_updates', $twitter_updates);
+
+	$recent_global_docs = Version::getRecentGlobalVersionsClean(5);
+	$smarty->assign('recent_global_docs', $recent_global_docs);
+	$smarty->assign('gitdocs_description', "<p>Why study for tests in isolation? Want to share notes but not sure how to do so effectively? 
+	Gitdocs allows you to upload your class notes and manage sections of notes from your classmates,
+	choosing only those contributions you feel will be helpful to your version of your notes.</p>");
+	$smarty->assign('signin_error', "You must be logged in to do that.");
+	$smarty->display('signup.tpl');
 }
 ?>
 <!-- Google Website Optimizer Conversion Script -->
