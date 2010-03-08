@@ -334,7 +334,6 @@ class Version {
 				"INNER JOIN Versions on doc_fk = doc_id " .
 				"WHERE u_fk='$userId' GROUP BY doc_id) " .
 			"AND u_fk != '$userId' ";
-		echo $selectQuery;
 		if($filter) {
 			$filterArr = Document::splitClassName($filter);
 			$selectQuery .= "AND dept_name='{$filterArr[0]}' AND course_num='{$filterArr[1]}'";
