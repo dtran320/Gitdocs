@@ -14,7 +14,7 @@ class Document {
 	public $name, $docId;
 	
 	//Creates a new document, creates file structure on disk, create in DB
-	public static function CreateNewDocument($name = "New Document") {
+	public static function CreateNewDocument($name = "New Document", $class_name = "GD 555", $date = "", $type = "") {
 		global $DOCUMENTS_PATH;
 		//insert into database
 		$db = new DB();
@@ -26,19 +26,26 @@ class Document {
 		if(!mkdir("$DOCUMENTS_PATH$newDocID", 0700)) return false;
 		
 		$document = new Document($newDocID, $name);
+		$document->renameClass($class_name);
+		$document->setDate($date);
+		$document->setType($type);
+
 		return $document;
 	}
 	
 	public static function getDocInfoForId($id) {
 		$db = new DB();
 		$id = mysql_real_escape_string($id);
-		$docInfoQuery = "SELECT name FROM Documents " .
+		$docInfoQuery = "SELECT name, type, lecture_date, dept_name, course_num FROM Documents " .
 			"WHERE doc_id='{$id}'";
 		if (DEBUG) var_dump($docInfoQuery);
 		$db->execQuery($docInfoQuery);
 		$row = $db->getNextRow();
+		$row['class_name'] = $row['dept_name'] . ' ' . $row['course_num'];
 		return $row;
 	}
+
+
 
 	public static function splitClassName($newClassName) {
 		$newDeptName = "";
@@ -93,17 +100,29 @@ class Document {
 	public static function getNotesForClass($className) {
 		$db = new DB();
 		$split = Document::splitClassName($className);
-		$query = "SELECT doc_id, name, count(v_id) as count, max(last_saved_time) as max_time from Documents " .
+		$query = "SELECT doc_id, name, lecture_date, type from Documents " .
 			"INNER JOIN Versions on doc_id = doc_fk " .
 			"WHERE dept_name='{$split[0]}' AND course_num='{$split[1]}' " .
-		 	" GROUP BY doc_id ORDER BY max_time DESC;";
+		 	" GROUP BY doc_id ORDER BY lecture_date DESC;";
 		$db->execQuery($query);
 
 		$notes = array();
+		$i = -1;
+		$prev_date = '';
+		$curr_date = '';
 		while($row = $db->getNextRow()) {
-			$row['count'] = $row['count']==1? $row['count'] . " version" : $row['count'] . " versions";
-			$row['max_time'] = getLocalTime($row['max_time']);
-			$notes[] = $row;
+			$curr_date = $row['lecture_date'];
+			$type = $row['type'];
+			if ($curr_date != $prev_date) {
+				$i++;
+				$notes[$i] = array('lecture_id' => '', 'lecture'=>'', 'reading'=>'', 'reading_id' =>'', 'lecture_date'=>'');
+				$notes[$i]['lecture_date'] = $row['lecture_date'];
+			}
+			$key = $type ._id;
+			$doc_id = $row['doc_id'];
+			$notes[$i][$key] = $doc_id;
+			$notes[$i][$type] = $row['name'];
+			$prev_date = $curr_date;		
 		}	
 		return $notes;
 	}
@@ -121,6 +140,23 @@ class Document {
 		return $db->execQuery($renameQuery);
 	}
 
+	public function setDate($date) {
+		$db = new DB();
+		if ($date == '') {
+			$date = date('Y-m-d');
+		}
+		$query = "UPDATE Documents SET lecture_date = '{$date}' WHERE doc_id='{$this->docId}';";
+		return $db->execQuery($query);
+	}
+
+	public function setType($type) {
+		$db = new DB();
+		if($type == '') {
+			$type = 'lecture';
+		}
+		$query = "UPDATE Documents SET type = '{$type}' WHERE doc_id='{$this->docId}';";
+		return $db->execQuery($query);
+	}
 
 	public function renameClass($newClassName) {
 		$db = new DB();
@@ -179,12 +215,18 @@ class Document {
 		$classSplit = Document::splitClassName($class);
 		$deptName = mysql_real_escape_string($classSplit[0]);
 		$courseNum = mysql_real_escape_string($classSplit[1]);
-		$name = Document::getNormalizedDocName($type, $date);
+//		$name = Document::getNormalizedDocName($type, $date);
 		$type = mysql_real_escape_string($type);
 		$date = mysql_real_escape_string($date);
 		$query = "SELECT doc_id FROM Documents WHERE " .
 			"course_num='$courseNum' AND dept_name='$deptName' AND " .
+			"lecture_date = '$date' AND " .
+			"type = '$type';";
+/*
+		$query = "SELECT doc_id FROM Documents WHERE " .
+			"course_num='$courseNum' AND dept_name='$deptName' AND " .
 			"name LIKE '$name%'";
+*/
 		$db->execQuery($query);
 		if($row = $db->getNextRow()) return $row['doc_id'];
 		else return false;

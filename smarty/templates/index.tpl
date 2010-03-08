@@ -6,30 +6,35 @@
 	<div class="box_title"></div>
 	<div class="box_content">
 		<div id="doc_link">
-		<a href="new_note.php"><button class="big"><img src="images/page_add.png">Add Notes</button></a>
+		<a href="new_note.php"><button class="big"><img src="images/page_add.png">Add</button></a>
 		</div>
 
 		<div id="doc_link">
-		<a href="browse.php"><button class="big"><img src="images/page_world.png">Browse Classes</button></a>
+		<a href="browse.php"><button class="big"><img src="images/page_world.png">Browse</button></a>
 		</div>
 		<div class="clearfix"></div>
 	</div>
 </div>
 
 <div class="box">
-	<div class="box_title">My Recent Documents</div>
+	<div class="box_title">My Recent Notes</div>
         <div class="box_content">
 		<!-- don't change this id w/o changing references in gitdocs.js -->
-		<table class="document_list" id="my_recent_docs">
+		<div id="my_recent_docs">
+		{foreach item=class from=$my_recent_docs}
+		<table class="document_list">
+		<tr><td><strong>{$class[0].course}</strong></td></tr>
 		{if $my_recent_docs|@count == 0}
 			You don't have any notes yet. <a href="new_note.php">Take notes!</a>
 		{/if}
-		
-		{section name=i loop=$my_recent_docs}
-		<tr onclick="window.location='{$my_recent_docs[i].link}'">
-			<td><strong>{$my_recent_docs[i].course}</strong>{$my_recent_docs[i].dName} {$my_recent_docs[i].vName}</td><td class="time small_text " id="{$recent_global_docs[i].timestamp}">{$my_recent_docs[i].timestamp}</td></tr>
-		{/section}
+		{foreach item=note from=$class}
+		<tr onclick="window.location='{$note.link}'">
+			<td style="width:300px;"><span class="{$note.type}_title">{$note.dName}</span> -- {$note.vName}</td><td style="width:100px; text-align:right;" class="time small_text " id="{$note.timestamp}">{$note.timestamp}</td></tr>
+		{/foreach}
 		</table>
+		{/foreach}
+		</div>
+
 		<div style="padding-top:10px;"></div>	
 		<div id="show_my_recent_docs"><a onclick="showAllMyDocuments();">See All My Documents</a></div>
 	</div><!-- end box_content -->
@@ -52,10 +57,17 @@
 			You currently don't have any shared classnotes. <strong><a href="browse.php">Browse classes</a></strong>
 			{/if}
 				<table class="document_list" id="my_version_feed">					
-					{section name=i loop=$my_recent_version_feed}
-						<tr onclick="window.location='{$my_recent_version_feed[i].link}';"><td><img src="{$my_recent_version_feed[i].iconPtr}"></td><td>{$my_recent_version_feed[i].displayName} saved a version of </td><td><p>{$my_recent_version_feed[i].dName} {$my_recent_version_feed[i].vName}</p></td><td><p class="time small_text" id="{$my_recent_version_feed[i].timestamp}">{$my_recent_version_feed[i].timestamp}</p></td></tr>
-					{/section}
-						</table>
+					{foreach item=doc from=$my_recent_version_feed}
+						<tr><td onclick=window.location="viewall.php?d_id={$doc[0].dId}"><span class='bold {$doc[0].type}_title'>{$doc[0].dName}</span> -- {$doc[0].course}</td></tr>
+						{foreach item=update from=$doc}
+						<tr onclick=window.location="{$update.link}">
+							<td style='width:500px;'><img style='padding:5px; vertical-align:middle;' src='{$update.iconPtr}'><span class='username'>{$update.displayName}</span> -- {$update.vName}</td>
+			
+<td><p class='time small_text' id='{$update.timestamp}'> + {$update.timestamp}</p>
+</td></tr>
+						{/foreach}
+					{/foreach}
+				</table>
 				</div><!-- end box content -->
 	</div>
 		<div class="box">
@@ -65,8 +77,7 @@
 							{section name=i loop=$recent_global_docs}
 								<tr onclick="window.location='{$recent_global_docs[i].link};'">
 									<td><img src="{$recent_global_docs[i].iconPtr}"></td>
-									<td>{$recent_global_docs[i].displayName} saved a version of</td>
-									<td><p>{$recent_global_docs[i].dName} {$recent_global_docs[i].vName}</p></td><td><p class="time small_text" id="{$recent_global_docs[i].timestamp}">{$recent_global_docs[i].timestamp}</p></a></td></tr>
+									<td><p><span class="username">{$recent_global_docs[i].displayName}</span> updated {$recent_global_docs[i].dName} {$recent_global_docs[i].vName}</p></td><td><p class="time small_text" id="{$recent_global_docs[i].timestamp}">{$recent_global_docs[i].timestamp}</p></a></td></tr>
 							{/section}
 								</table>
 						</div><!-- end box content -->

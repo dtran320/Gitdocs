@@ -7,12 +7,14 @@ require_once(dirname(__FILE__) . '/../classes/version.php');
 
 $class_name = postVarClean('class_name');
 $type = postVarClean('type');
-$date = date("M.d.Y", strtotime(postVarClean('date')));
+$date = date("Y-m-d", strtotime(postVarClean('date')));
 $title = postVarClean('title');
 
 $create = postVarClean('create');
 
-$doc_title = Document::getNormalizedDocName($type, $date, $title);
+//$doc_title = Document::getNormalizedDocName($type, $date, $title);
+$doc_title = $title != '' ? $title : 'untitled';
+
 
 if($doc_title) {
 	if($create =="New Blank Document") {
@@ -22,12 +24,11 @@ if($doc_title) {
 				$result_array = array('result' => 'exists', 'd_id' => $existing_doc);
 			}
 			else { //create new doc and redirect to it
-	      		$document = Document::CreateNewDocument($doc_title);
-				$document->renameClass($class_name);
-	      		$version = Version::CreateNewVersion($document->docId, $user->userId);
+				$document = Document::CreateNewDocument($doc_title, $class_name, $date, $type);
+    		$version = Version::CreateNewVersion($document->docId, $user->userId);
 				$result_array = array('result' => 'create', 'v_id' => $version->versionId);
 			}
-	  	}
+  	}
 		else {
 	  		$result_array = array('error' => 'Must be logged in.');
 		}

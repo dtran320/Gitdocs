@@ -24,22 +24,31 @@ if($user = User::getLoggedInUser()) {
 		$version_infos = $document->getAllVersions();
 		$versions = array();
 		$userHasDoc = false;
-		foreach ($version_infos as $v_info) {
+		foreach ($version_infos as $key => $v_info) {
 			$author_name = $v_info['display_name'];
 			$v_id = $v_info['v_id'];
 			$version = new Version(0,0,0,0, $v_id);
 			$author_id = $version->getUserId();
-			if($author_id == $user->userId) {
-				$userHasDoc = true;
-			}
 			$v_text = $version->getDocFromDisk();
 			$v_name = $version->getName();
 			$versions[] = array('author_name'=> $author_name, 'v_name'=> $v_name, 'v_text' =>$v_text, 'v_id' => $v_id, 'author_id'=>$author_id, 'iconPtr'=>getIconPtr($author_id));
+
+			if($author_id == $user->userId) {
+				$userHasDoc = true;
+				// swap so that own version is first.
+				$temp = $versions[0];
+				$versions[0] = $versions[$key];
+				$versions[$key] = $temp;
+			}
 		}
+
 		$d_info = Document::getDocInfoForId($d_id);
 		$smarty->assign('d_name', $d_info['name']);
-		$smarty->assign('versions', $versions);
+		$smarty->assign('type', $d_info['type']);
+		$smarty->assign('date', $d_info['lecture_date']);
+		$smarty->assign('class_name', $d_info['class_name']);
 
+		$smarty->assign('versions', $versions);
 		$smarty->assign('d_id', $d_id);
 		$smarty->assign('userHasDoc', $userHasDoc);
 		$smarty->display('viewall.tpl');

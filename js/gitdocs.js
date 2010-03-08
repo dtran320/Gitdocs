@@ -11,9 +11,17 @@ function postShowAllMyDocuments(docs) {
 	$('#show_my_recent_docs').html('Retrieving <img src="images/ajax-loader.gif">');
 	var docHtml = '';
 
-	for(var i=0; i<docs.length; i++) {
-		docHtml += "<tr onclick=window.location='"+ docs[i]["link"] + "'><td><strong>" + docs[i]['course'] + "</strong>" +docs[i]['dName'] + docs[i]['vName']+ "</td><td class='time small_text' id='" + docs[i]['timestamp'] + "'>" + docs[i]['timestamp']+"</a></td></tr>";
+	for (var course_name in docs) {
+		docHtml += '<table class="document_list">'
+						+ '<tr><td><strong>' + course_name + '</strong></td></tr>';
+		for (index in docs[course_name]) {
+			var note = docs[course_name][index];
+			docHtml += '<tr onclick="window.location=\'' + note['link'] + '\'">'
+				+ '<td style="width:300px;"><span class="'+ note['type'] +'_title">' + note['dName'] + '</span> -- ' + note['vName'] + '</td><td style="width:100px; text-align: right;" class="time small_text " id="' + note['timestamp'] + '">' + note['timestamp'] + '</td></tr>';
+		}
+		docHtml += '</table>';
 	}
+
 	$('#my_recent_docs').html(docHtml);
 	$('.time').prettyDate();
 	$('#show_my_recent_docs').hide();
@@ -28,18 +36,26 @@ function showAllMyDocuments() {
 
 function fetchRecentVersions(docs) {
 	var docHtml = '';
-	
-	for(var i=0; i<docs.length; i++) {
-		docHtml += "<tr onclick=window.location='" + docs[i]["link"] + "'><td><img src='"+ docs[i]["iconPtr"] +"'></td><td>"+ docs[i]["displayName"] + " saved a version of </td><td>"+docs[i]['dName'] + docs[i]['vName']+ "</td><td><p class='time small_text' id='" + docs[i]['timestamp'] + "'>" + docs[i]['timestamp']+"</p></td></tr>";
+	for (var doc_id in docs) {
+		docHtml += '<tr onclick=window.location="viewall.php?d_id='+ doc_id +'"><td>'+ '<span class="bold '+ docs[doc_id][0]['type'] + '_title">' + docs[doc_id][0]["dName"] + '</span> -- '+ docs[doc_id][0]["course"] +'</td></tr>';
+		for (var index in docs[doc_id]) {
+			var update = docs[doc_id][index];
+			docHtml += "<tr onclick=window.location='" + update["link"] + "'>"
+							+ "<td style='width:500px;'><img style='padding:5px; vertical-align:middle;' src='"+ update["iconPtr"] +"'>"
+							+ "<span class='username'>"+ update["displayName"] + "</span> -- "
+							+ update['vName']+ "</td>"
+							+ "<td><p class='time small_text' id='" + update['timestamp'] + "'>" + update['timestamp']+"</p></td></tr>";						
+		}
 	}
+
 	$('#my_version_feed').html(docHtml);
 	$('.time').prettyDate();
 	
 }
 
-function setFilter(class) {
+function setFilter(klass) {
 	$('#filter .option').removeClass("selected");
-	$('#filter #' + class).addClass("selected");
+	$('#filter #' + klass).addClass("selected");
 	$('#my_version_feed').html('Retrieving <img src="images/ajax-loader.gif">');
 	$.post("actions/getfeed.php", { "filter" : $('#filter .selected').text() },
 	   function(data){
