@@ -16,7 +16,7 @@
 	{if isset($timestamp)}
 		<div class="old_timestamp">You are viewing an old revision from <span class="time" id="{$timestamp}">{$timestamp}</span></div>
 	{/if}
-
+		<div style="float: left; margin-left: 10px;">
 			<form id="editor_form" class="big_form" method="post" action="editor.php" style="float:right;">
 				<input type="hidden" name="action" value="{$action}" />
 				<input type="hidden" name="document_id" value="{$d_id}" />
@@ -24,30 +24,32 @@
 				<input type="hidden" name="description" value="{$v_name}" />
 				<input type="submit" name="submit" value="{$submit_text}"/>
 			</form>
-
-		<div class="clear_fix"></div>
-	<form id="doc_title" class="doc_title">
-	<div class="box_title">
-		<div style="float: left;">
-			<table>
-			<tr><td colspan="2">Currently Editing </td></tr>
-			<tr>
-				<td><label for "change_class">Class:</td>
-				<td><input type="text" id="change_class" name="change_class" value="{$class_name}" /></td>
-			</tr>
-			<tr>
-				<td><label for "change_d_name">Document:</td>
-				<td><input type="text" id="change_d_name" name="change_d_name" value="{$d_name}" /></td>
-			</tr>
-			<tr>
-				<td><label for "change_v_name">Description:</td>
-				<td><input type="text" id="change_v_name" name="change_v_name" class="v_name" value="{$v_name}" /></td>
-			</tr>
-			</tr>
-		</table>
-
 		</div>
-	</form>
+		<div class="clear_fix"></div>
+		<form id="doc_title" class="doc_title">
+		<div class="box_title">
+			<div style="float: left;">
+				<table>
+				<tr>
+					<td><label for "change_class">Class:</td>
+					<td><input type="text" id="change_class" name="change_class" value="{$class_name}" /></td>
+				</tr>
+				<tr>
+					<td colspan="2">{$d_info}</td>
+				</tr>
+				<tr>
+					<td><label for "change_d_name">Title:</td>
+					<td><input type="text" id="change_d_name" name="change_d_name" value="{$d_name}" /></td>
+				</tr>
+				<tr>
+					<td><label for "change_v_name">Description:</td>
+					<td><input type="text" id="change_v_name" name="change_v_name" class="v_name" value="{$v_name}" /></td>
+				</tr>
+				</tr>
+			</table>
+
+			</div>
+		</form>
 		<div class="clear_fix"></div>
 
   <div class="box_title">
