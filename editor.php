@@ -3,6 +3,7 @@ require_once('config.php');
 
 session_start();
 require_once('classes/user.php');
+require_once('lib/twitter.php');
 require_once('lib/utils.php');
 require('init_smarty.php');
 require_once('classes/version.php');
