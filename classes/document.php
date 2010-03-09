@@ -27,7 +27,7 @@ class Document {
 		
 		$document = new Document($newDocID, $name);
 		$document->renameClass($class_name);
-		$document->setDate($date);
+		if($date) { $document->setDate($date);}
 		$document->setType($type);
 
 		return $document;

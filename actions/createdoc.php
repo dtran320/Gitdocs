@@ -7,7 +7,8 @@ require_once(dirname(__FILE__) . '/../classes/version.php');
 
 $class_name = postVarClean('class_name');
 $type = postVarClean('type');
-$date = date("Y-m-d", strtotime(postVarClean('date')));
+$rawDate = postVarClean('date');
+$date = $rawDate ? date("Y-m-d", strtotime(postVarClean('date'))) : "";
 $title = postVarClean('title');
 
 $create = postVarClean('create');
