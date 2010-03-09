@@ -46,7 +46,6 @@ class Document {
 			$this->class_name = $row['dept_name'] . ' ' . $row['course_num'];
 			$this->name = $row['name'];
 		}
-		var_dump($this);
 		
 	}
 	
