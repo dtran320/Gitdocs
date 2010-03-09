@@ -37,6 +37,7 @@ function updateElement() {
 
 function preSaveVersion(formData, jqForm, options) {
 	//do any validation?
+	$("#save_status").html("<img src ='images/ajax-loader.gif'>");
 	return true;
 }
 

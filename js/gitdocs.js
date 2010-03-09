@@ -37,11 +37,11 @@ function showAllMyDocuments() {
 function fetchRecentVersions(docs) {
 	var docHtml = '';
 	for (var doc_id in docs) {
-		docHtml += '<tr onclick=window.location="viewall.php?d_id='+ doc_id +'"><td>'+ '<span class="bold '+ docs[doc_id][0]['type'] + '_title">' + docs[doc_id][0]["dName"] + '</span> -- '+ docs[doc_id][0]["course"] +'</td></tr>';
+		docHtml += '<tr style="background-color: #EEECEF;" onclick=window.location="viewall.php?d_id='+ doc_id +'"><td>'+ '<span class="bold '+ docs[doc_id][0]['type'] + '_title">' + docs[doc_id][0]["dName"] + '</span> -- '+ docs[doc_id][0]["course"] +'</td><td style="background-color: #EEECEF;"></td></tr>';
 		for (var index in docs[doc_id]) {
 			var update = docs[doc_id][index];
 			docHtml += "<tr onclick=window.location='" + update["link"] + "'>"
-							+ "<td style='width:500px;'><img style='padding:5px; vertical-align:middle;' src='"+ update["iconPtr"] +"'>"
+							+ "<td style='width:500px;'><img style='padding:5px 5px 5px 10px; vertical-align:middle;' src='"+ update["iconPtr"] +"'>"
 							+ "<span class='username'>"+ update["displayName"] + "</span> -- "
 							+ update['vName']+ "</td>"
 							+ "<td><p class='time small_text' id='" + update['timestamp'] + "'>" + update['timestamp']+"</p></td></tr>";						

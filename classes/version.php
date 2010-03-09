@@ -182,10 +182,10 @@ class Version {
 
 	public function getDocument() {
 		$db = new DB();
-		$getDocQuery = "SELECT doc_id, name FROM Documents WHERE doc_id='{$this->docId}'";
+		$getDocQuery = "SELECT doc_id FROM Documents WHERE doc_id='{$this->docId}'";
 		$db->execQuery($getDocQuery);
 		$row = $db->getNextRow();
-		if($row) return new Document($row['doc_id'], $row['name']);
+		if($row) return new Document($row['doc_id']);
 		else return false;
 	}
 	
@@ -329,8 +329,10 @@ class Version {
 			"ON Versions.doc_fk = Documents.doc_id " .
 			"INNER JOIN Users " .
 			"ON Versions.u_fk = Users.u_id " .
-			"WHERE doc_id IN " .
-			"(SELECT doc_fk from Versions WHERE u_fk = '$userId') " .
+			"WHERE (dept_name, course_num) IN " .
+			"(SELECT dept_name, course_num FROM Documents " .
+				"INNER JOIN Versions on doc_fk = doc_id " .
+				"WHERE u_fk='$userId' GROUP BY doc_id) " .
 			"AND u_fk != '$userId' ";
 		if($filter) {
 			$filterArr = Document::splitClassName($filter);

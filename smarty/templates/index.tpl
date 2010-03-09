@@ -58,10 +58,10 @@
 			{/if}
 				<table class="document_list" id="my_version_feed">					
 					{foreach item=doc from=$my_recent_version_feed}
-						<tr><td onclick=window.location="viewall.php?d_id={$doc[0].dId}"><span class='bold {$doc[0].type}_title'>{$doc[0].dName}</span> -- {$doc[0].course}</td></tr>
+						<tr><td colspan="3" style="background-color: #EEECEF;" onclick=window.location="viewall.php?d_id={$doc[0].dId}"><span class='bold {$doc[0].type}_title'>{$doc[0].dName}</span> -- {$doc[0].course}</td></tr>
 						{foreach item=update from=$doc}
 						<tr onclick=window.location="{$update.link}">
-							<td style='width:500px;'><img style='padding:5px; vertical-align:middle;' src='{$update.iconPtr}'><span class='username'>{$update.displayName}</span> -- {$update.vName}</td>
+							<td style='width:500px;'><img style='padding:5px 5px 5px 10px;  vertical-align:middle;' src='{$update.iconPtr}'><span class='username'>{$update.displayName}</span> -- {$update.vName}</td>
 			
 <td><p class='time small_text' id='{$update.timestamp}'> + {$update.timestamp}</p>
 </td></tr>
