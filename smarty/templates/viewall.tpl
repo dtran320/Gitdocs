@@ -38,7 +38,7 @@
 						$('#compare_form input[name=other_u_id]').val('{$versions[i].author_id}');
 						$('#compare_form').submit();">Compare</a>
 					{else}
-					<a style="float: right;" onclick="$('#editor_form input[name=submit]').click();">Go to my version</a>
+					<a style="float: right;" onclick="$('#editor_form').submit();">Go to my version</a>
 					{/if}
 				{/if}
 				<span style="clear: left; float: left;font-size:12px">{$versions[i].v_text}</span>
