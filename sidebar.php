@@ -12,8 +12,9 @@ function getClassmates($document, $user) {
 		$versions = $document->getAllVersions();
 		$others = array();
 		foreach($versions as $row) {
+			$v_name = stripslashes($row['v_name']);
 			if($row['u_id'] == $user->userId) continue;		
-			$others[] = array("names"=>"<a class=\"v_name\">$row[v_name]</a><br/>by $row[display_name] $row[timestamp]", "uid"=>$row['u_id'], "vid"=>$row['v_id'], "iconPtr"=> getIconPtr($row["u_id"]));
+			$others[] = array("names"=>"<a class=\"v_name\">$v_name</a><br/>by $row[display_name] $row[timestamp]", "uid"=>$row['u_id'], "vid"=>$row['v_id'], "iconPtr"=> getIconPtr($row["u_id"]));
 		}
 	return $others;
 }

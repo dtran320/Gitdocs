@@ -17,6 +17,9 @@
 		<div class="old_timestamp">You are viewing an old revision from <span class="time" id="{$timestamp}">{$timestamp}</span></div>
 	{/if}
 		<div style="float: left; margin-left: 10px;">
+			{if isset($go_to_version)}
+				<a href="editor.php?v_id={$go_to_version}"><button class="big">{$submit_text}</button>
+			{else}
 			<form id="editor_form" class="big_form" method="post" action="editor.php" style="float:right;">
 				<input type="hidden" name="action" value="{$action}" />
 				<input type="hidden" name="document_id" value="{$d_id}" />
@@ -24,7 +27,9 @@
 				<input type="hidden" name="description" value="{$v_name}" />
 				<input type="submit" name="submit" value="{$submit_text}"/>
 			</form>
+			{/if}
 		</div>
+		
 		<div class="clear_fix"></div>
 		<form id="doc_title" class="doc_title">
 		<div class="box_title">

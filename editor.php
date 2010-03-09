@@ -34,12 +34,15 @@ if($user = User::getLoggedInUser()) {
 		$versionName = $version->getName();
 		$docText = $version->getDocFromDisk();
 		$document = $version->getDocument();
-		$doc_info = $document->type? ucfirst($document->type) . ($document->date? " - {$document->date}": "") : "";
+		
+		$docName = $document->getName();
+		$doc_info = $document->getInfo();
+		
 		$smarty->assign('d_id', $document->docId);
 		$smarty->assign('v_id', $version->versionId);
 		$smarty->assign('d_info', $doc_info);
-		$smarty->assign('d_name', stripslashes($document->name));
-		$smarty->assign('v_name', $versionName? stripslashes($versionName) : "");
+		$smarty->assign('d_name', $docName);
+		$smarty->assign('v_name', $versionName);
 		$smarty->assign('class_name', $document->getClassName()); 
 
 		$smarty->assign('v_text', $docText);
@@ -58,9 +61,9 @@ if($user = User::getLoggedInUser()) {
 			$docText = $version->getDocFromDisk();
 			$document = $version->getDocument();
 			$smarty->assign('d_id', $document->docId);
-			$smarty->assign('d_name', $document->name);
+			$smarty->assign('d_name', stripslashes($document->name));
 			$smarty->assign('class_name', $document->getClassName());
-			$smarty->assign('v_name', $versionName);
+			$smarty->assign('v_name', stripslashes($versionName));
 			$smarty->assign('v_text', $docText);
 			$smarty->assign('history', getHistory($versionName, $document));
 
@@ -72,7 +75,7 @@ if($user = User::getLoggedInUser()) {
 			$version = Version::CreateNewVersion($document->docId, $user->userId);
 			$smarty->assign('d_id', $document->docId);
 
-			$smarty->assign('d_name', $document->name);
+			$smarty->assign('d_name', stripslashes($document->name));
 			$smarty->assign('v_name', 'Untitled');
 			$smarty->assign('class_name', 'Unknown Course');
 
@@ -99,3 +102,14 @@ else {
 }
 ?>
 
+<!-- Google Website Optimizer Conversion Script -->
+<script type="text/javascript">
+if(typeof(_gat)!='object')document.write('<sc'+'ript src="http'+
+(document.location.protocol=='https:'?'s://ssl':'://www')+
+'.google-analytics.com/ga.js"></sc'+'ript>')</script>
+<script type="text/javascript">
+try {
+var gwoTracker=_gat._getTracker("UA-9743398-2");
+gwoTracker._trackPageview("/2637776227/goal");
+}catch(err){}</script>
+<!-- End of Google Website Optimizer Conversion Script -->

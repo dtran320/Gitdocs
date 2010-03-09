@@ -162,6 +162,16 @@ class Document {
 		} else return false;
 		
 	}
+	
+	public function getName() {
+		echo strlen($this->name);
+		return strlen($this->name) > 0 && $this->name != "null"? stripslashes($this->name) : "";
+	}
+
+	public function getInfo() {
+		return strlen($this->type) > 0 && $this->type != "null"? 
+			ucfirst($this->type) . (strlen($this->date) > 0 && $this->date != "null "? " - {$this->date}": "") : "";
+	}
 
 	public function setType($type) {
 		$db = new DB();

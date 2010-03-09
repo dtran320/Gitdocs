@@ -31,14 +31,3 @@ else {
 }
 
 ?>
-<!-- Google Website Optimizer Conversion Script -->
-<script type="text/javascript">
-if(typeof(_gat)!='object')document.write('<sc'+'ript src="http'+
-(document.location.protocol=='https:'?'s://ssl':'://www')+
-'.google-analytics.com/ga.js"></sc'+'ript>')</script>
-<script type="text/javascript">
-try {
-var gwoTracker=_gat._getTracker("UA-9743398-2");
-gwoTracker._trackPageview("/2637776227/goal");
-}catch(err){}</script>
-<!-- End of Google Website Optimizer Conversion Script -->

@@ -35,9 +35,13 @@ if($user = User::getLoggedInUser()) {
 		$versionName = $version->getName();
 		$docText = $version->getDocFromDisk();
 		$document = $version->getDocument();
-
+		$docName = $document->getName();
+		
+		$doc_info = $document->type? ucfirst($document->type) . ($document->date? " - {$document->date}": "") : "";
+		$smarty->assign('d_info', $doc_info);
+	
 		$smarty->assign('d_id', $document->docId);
-		$smarty->assign('d_name', $document->name);
+		$smarty->assign('d_name', $docName);
 		$smarty->assign('v_id', $v_id);
 		$smarty->assign('v_name', $versionName);
 		$smarty->assign('v_text', $docText);
@@ -51,6 +55,8 @@ if($user = User::getLoggedInUser()) {
 		}
 		else if(Version::doesUserHaveVersion($document->docId, $user->userId)) {
 			$submit_text = "Go to my version";
+			$other_version = new Version($document->docId, $user->userId);
+			$smarty->assign('go_to_version', $other_version->versionId);
 			$action = "current";
 		}
 		else {

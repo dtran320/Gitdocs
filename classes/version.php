@@ -208,7 +208,7 @@ class Version {
 		$selectQuery = "SELECT v_name FROM Versions WHERE v_id='{$this->versionId}'";
 		$db->execQuery($selectQuery);
 		$row = $db->getNextRow();
-		return $row["v_name"];
+		return strlen($row["v_name"]) > 0 && $row["v_name"] != "null"? stripslashes($row["v_name"]) : "";
 	}
 	
 	public function rename($newName) {
