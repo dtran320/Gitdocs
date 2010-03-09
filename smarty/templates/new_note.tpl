@@ -12,12 +12,15 @@
 		<tr>
 			<td> </td>
 			<td class="left">What type of notes are these?</td>
-			<td><input id="lecture" type="radio" name="type" value="lecture" checked/> 	Lecture notes
-				<input id="reading" type="radio" name="type" value="reading" /> Reading response</td>
+			<td><input id="lecture" type="radio" name="type" value="lecture" onclick="ShowCalendar()" checked/> 	Lecture notes
+				<input id="reading" type="radio" name="type" value="reading" onclick="ShowCalendar()"  /> Reading response
+				<input id="final" type="radio" name="type" value="final" onclick="HideCalendar()" /> Final Study Guide
+		</td>
+				
 		</tr>
 		<tr>
 			<td> </td>
-			<td class="left">What day are these notes for?</td>
+			<td class="left"><div id="datelabel">What day are these notes for?</div></td>
 			<td><div id="datepicker"></div><input id="date" type="hidden" name="date" value=""/></td>
 		</tr>
 		<tr>
@@ -73,12 +76,13 @@ validate radio button on submit
 		function preCreateDoc() {
 			var class_name = $("#class_name").val();
 			var date = $("#date").val();
+			var final =$("#final:checked").val();
 			var title = $("#note_title").val();
 			var error = "";
 			if (class_name == "" || class_name == "{/literal}{$class_placeholder}{literal}") {
 				error += "Please specify the class.";
 			}
-			if (date == "") {
+			if ((date == "") && (final != "final")) {
 				error += "\nPlease specify the date.";				
 			}				
 
