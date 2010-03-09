@@ -131,7 +131,7 @@ class Document {
 			$type = $row['type'];
 			if ($curr_date != $prev_date || $curr_date == '') {
 				$i++;
-				$notes[$i] = array('lecture_id' => '', 'lecture'=>'', 'reading'=>'', 'reading_id' =>'', 'lecture_date'=>'');
+				$notes[$i] = array('lecture_id' => '', 'lecture'=>'', 'reading'=>'', 'reading_id' =>'', 'lecture_date'=>'','final_id'=>'');
 				$notes[$i]['lecture_date'] = $row['lecture_date'] != '' ? $row['lecture_date'] : 'unknown date';
 			}
 			$key = $type ._id;

@@ -26,6 +26,9 @@ function postShowNotesForClass(info) {
 							+ '<td style="width:300px;">'
 									+'<a class="reading_title" href="viewall.php?d_id='+notes[i]['reading_id'] +' ">' 
 									+ notes[i]['reading'] + '</a></td>'
+							+ '<td style="width:300px;">'
+									+'<a class="final_title" href="viewall.php?d_id='+notes[i]['final_id'] +' ">' 
+									+ notes[i]['final'] + '</a></td>'
 							+'<td style="width:100px;">' + notes[i]['lecture_date'] + '</td>'
 							+ '</tr>';
 	} 
