@@ -1,3 +1,22 @@
+<script type="text/javascript">
+  {literal}
+ //<![CDATA[
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+//]]>
+{/literal}
+</script>
+<script type="text/javascript">
+  {literal}
+//<![CDATA[
+  try {
+  var pageTracker = _gat._getTracker("UA-15172992-1");
+  pageTracker._trackPageview();
+} catch(err) {}
+//]]>
+{/literal}
+</script>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
