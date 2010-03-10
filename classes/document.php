@@ -164,7 +164,6 @@ class Document {
 	}
 	
 	public function getName() {
-		echo strlen($this->name);
 		return strlen($this->name) > 0 && $this->name != "null"? stripslashes($this->name) : "";
 	}
 
