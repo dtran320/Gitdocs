@@ -50,8 +50,7 @@
 							{section name=i loop=$recent_global_docs}
 								<tr onclick="window.location='{$recent_global_docs[i].link};'">
 									<td><img src="{$recent_global_docs[i].iconPtr}"></td>
-									<td>{$recent_global_docs[i].displayName} saved a version of</td>
-									<td><p>{$recent_global_docs[i].dName} {$recent_global_docs[i].vName}</p></td><td><p class="time small_text" id="{$recent_global_docs[i].timestamp}">{$recent_global_docs[i].timestamp}</p></a></td></tr>
+									<td><p><span class="username">{$recent_global_docs[i].displayName}</span> saved <span class="lecture_title bold">{$recent_global_docs[i].dName}</span> <span class="v_name">{$recent_global_docs[i].vName}</span></p></td><td><p class="time small_text" id="{$recent_global_docs[i].timestamp}">{$recent_global_docs[i].timestamp}</p></a></td></tr>
 							{/section}
 								</table>
 						</div><!-- end box content -->
