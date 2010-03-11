@@ -28,7 +28,7 @@
 					class="selectable"
 					onclick="change_selection({$smarty.section.i.index}, {$others[i].vid})">
 					<div style="float: left; padding-right:6px;"><img src="{$others[i].iconPtr}" /> </div>
-						<span class="med_text" style="float:left">{$others[i].names}</span>
+						<div class="med_text" style="float:left; width: 120px;">{$others[i].names}</div>
 				</td><td class="selectable med_text comparable" onclick="$('#other_u_id').val('{$others[i].uid}'); $('#compare_form').submit();">
 						<a>compare</a>
 			</td></tr>
@@ -36,3 +36,13 @@
 		</table>
 	</div>
 </div>
+<script type="text/javascript">
+	{literal}
+	//<![CDATA[
+	$(document).ready(function() {
+		$(".time").prettyDate();
+		setInterval(function(){ $(".time").prettyDate(); }, 10000);
+	});
+		//]]>
+		{/literal}
+</script>
