@@ -16,7 +16,8 @@ function showNotesForClass(className) {
 // array of lecture notes
 // array of reading responses
 function postShowNotesForClass(info) {
-	var notesHtml = '';
+	var notesHtml = '<tr><td>Lecture Notes</td><td>Reading Responses</td><td>Study Guides</td><td></td></tr>';
+
 	var notes = info['notes'];
 	for(var i = 0; i < notes.length; i++) {
 		notesHtml += '<tr>' 
