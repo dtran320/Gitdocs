@@ -41,9 +41,8 @@ function fetchRecentVersions(docs) {
 		for (var index in docs[doc_id]) {
 			var update = docs[doc_id][index];
 			docHtml += "<tr onclick=window.location='" + update["link"] + "'>"
-							+ "<td style='width:500px;'><img style='padding:5px 5px 5px 10px; vertical-align:middle;' src='"+ update["iconPtr"] +"'>"
-							+ "<span class='username'>"+ update["displayName"] + "</span> -- "
-							+ update['vName']+ "</td>"
+							+ "<td style='width:500px;'><img style='padding:5px 5px 5px 10px; float: left; vertical-align:middle;' src='"+ update["iconPtr"] +"'>"
+							+ "<div style='float: left; padding-top: 10px;'>" + update['vName']+ "<br/><span class='username'>"+ update["displayName"] + "</span></div></td>"
 							+ "<td><p class='time small_text' id='" + update['timestamp'] + "'>" + update['timestamp']+"</p></td></tr>";						
 		}
 	}

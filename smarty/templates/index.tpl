@@ -61,7 +61,7 @@
 						<tr><td colspan="3" style="background-color: #EEECEF;" onclick=window.location="viewall.php?d_id={$doc[0].dId}"><span class='bold {$doc[0].type}_title'>{$doc[0].dName}</span> -- {$doc[0].course}</td></tr>
 						{foreach item=update from=$doc}
 						<tr onclick=window.location="{$update.link}">
-							<td style='width:500px;'><img style='padding:5px 5px 5px 10px;  vertical-align:middle;' src='{$update.iconPtr}'><span class='username'>{$update.displayName}</span> -- {$update.vName}</td>
+							<td style='width:500px;'><img style='padding:5px 5px 5px 10px;  float: left; vertical-align:middle;' src='{$update.iconPtr}'><div style="float: left; padding-top:10px;">{$update.vName}<br/><span class='username'>{$update.displayName}</span></div></td>
 			
 <td><p class='time small_text' id='{$update.timestamp}'> + {$update.timestamp}</p>
 </td></tr>
