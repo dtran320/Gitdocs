@@ -16,18 +16,18 @@ function showNotesForClass(className) {
 // array of lecture notes
 // array of reading responses
 function postShowNotesForClass(info) {
-	var notesHtml = '<tr><td>Lecture Notes</td><td>Reading Responses</td><td>Study Guides</td><td></td></tr>';
+	var notesHtml = '<tr><td>Lecture Notes</td><td>Reading Responses</td><td>Study Guides</td><td>Date</td></tr>';
 
 	var notes = info['notes'];
 	for(var i = 0; i < notes.length; i++) {
 		notesHtml += '<tr>' 
-							+ '<td style="width:300px;">'
+							+ '<td style="width:200px;">'
 									+'<a class="lecture_title" href="viewall.php?d_id='+notes[i]['lecture_id'] +'">' 
 									+ notes[i]['lecture']+'</a></td>'
-							+ '<td style="width:300px;">'
+							+ '<td style="width:200px;">'
 									+'<a class="reading_title" href="viewall.php?d_id='+notes[i]['reading_id'] +' ">' 
 									+ notes[i]['reading'] + '</a></td>'
-							+ '<td style="width:300px;">'
+							+ '<td style="width:200px;">'
 									+'<a class="final_title" href="viewall.php?d_id='+notes[i]['final_id'] +' ">' 
 									+ notes[i]['final'] + '</a></td>'
 							+'<td style="width:100px;">' + notes[i]['lecture_date'] + '</td>'

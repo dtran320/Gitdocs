@@ -1,17 +1,16 @@
 {include file="header.tpl"}
-<div class="box left_main">
-	<div class="box_title">Create a new note... as easy as 1, 2!
+<div style="width: 1370px;">
+<div class="box" style="float: left; width: 520px;">
+	<div class="box_title">Create a new note
 	</div>
 	<div class="box_content">
 	<form id="new_form" action="actions/createdoc.php" method="post">
 	<table class="new_document">
-			<td><img src="images/glass_numbers_1.png" height="30px"></td>
-			<td class="left">What class are these notes for?</td>
+			<td class="left">Class:</td>
 			<td><input type="text" id="class_name" name="class_name" value="" placeholder="{$class_placeholder}" /></td>
 		</tr>
 		<tr>
-			<td> </td>
-			<td class="left">What type of notes are these?</td>
+			<td class="left">Type:</td>
 			<td><input id="lecture" type="radio" name="type" value="lecture" onclick="ShowCalendar()" checked/> 	Lecture notes
 				<input id="reading" type="radio" name="type" value="reading" onclick="ShowCalendar()"  /> Reading response
 				<input id="final" type="radio" name="type" value="final" onclick="HideCalendar()" /> Final Study Guide
@@ -19,18 +18,15 @@
 				
 		</tr>
 		<tr>
-			<td> </td>
-			<td class="left"><div id="datelabel">What day are these notes for?</div></td>
+			<td class="left"><div id="datelabel">Date:</div></td>
 			<td><div id="datepicker"></div><input id="date" type="hidden" name="date" value=""/></td>
 		</tr>
 		<tr>
-			<td> </td>
 			<td class="left">Title:</td>
-			<td><input type="text" name="title" id="note_title" value=""/></td>
+			<td><input type="text" name="title" id="note_title" value="" placeholder="{$title_placeholder}"/></td>
 		</tr>
 		<tr>
-			<td><img src="images/glass_numbers_2.png" height="30px"></td>
-			<td class="left" colspan="2"><input type="submit" name="create" value="New Blank Document" /><input type="submit" name="create" value="Upload Existing Word Document"/></td>
+			<td class="left" colspan="2"><input type="submit" name="create" value="New Blank Document" /><input type="submit" name="create" value="Upload Word Document"/></td>
 		</tr>
 	</table>
 	</form>
@@ -38,18 +34,16 @@
 	</div> <!--box content-->
 </div> <!--box left_main-->
 
-<div class="box right_side">
-  <div class="box_title">
-	what should go here?
-	</div><!-- box_title-->
- 	<div class="box_content" id="otherversionspanel" style="display:block;">
-		useful navigation would be nice
-<br/><br/>
-validate radio button on submit
+<div class="box" style="width: 850px;float: right;">
+<div class="box_title" id="other_notes_header">
+</div><!-- box_title-->
+<div class="box_content">
+		<table id="notes_for_class">
+		</table>
 
-	</div>	
 </div>
-
+</div>
+</div>
 	<script type="text/javascript">
 	{literal}
 
@@ -69,10 +63,26 @@ validate radio button on submit
 	    });
 	
 		$('#class_name').placeholder({
+			}).blur(enteredClass).unbind("keypress").keypress(function(e) {
+					if (e.keyCode == 13) {
+						enteredClass();
+					}
 			});
-		
+
+		$('#note_title').placeholder({
+		});
 		});
 
+		function enteredClass() {
+			var class_name = $('#class_name').val();
+			if (class_name == '' || class_name == '{/literal}{$class_placeholder}{literal}') {
+				$('#notes_for_class').html('');
+				$('#other_notes_header').html('');
+			} else {
+					$('#other_notes_header').html('Other notes in ' + class_name);
+					showNotesForClass(class_name);
+			}		
+		}
 		function preCreateDoc() {
 			var class_name = $("#class_name").val();
 			var date = $("#date").val();
@@ -86,7 +96,7 @@ validate radio button on submit
 				error += "\nPlease specify the date.";				
 			}				
 
-			if (title == "") {
+			if (title == "" || title=="{/literal}{$title_placeholder}{literal}") {
 				error += "\nPlease specify the title.";
 			}
 			if (error != "") {
