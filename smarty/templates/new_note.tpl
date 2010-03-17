@@ -79,8 +79,8 @@
 				$('#notes_for_class').html('');
 				$('#other_notes_header').html('');
 			} else {
-					$('#other_notes_header').html('Other notes in ' + class_name);
 					showNotesForClass(class_name);
+					$('#other_notes_header').html('Other notes in ' + class_name);
 			}		
 		}
 		function preCreateDoc() {

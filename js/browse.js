@@ -16,9 +16,15 @@ function showNotesForClass(className) {
 // array of lecture notes
 // array of reading responses
 function postShowNotesForClass(info) {
+	var notes = info['notes'];
+
+	if (notes.length == 0) {
+		var first = '<tr><td>You\'re the first to take notes in this class!</td></tr>'
+		$('#notes_for_class').html(first);
+		return;
+	}
 	var notesHtml = '<tr><td>Lecture Notes</td><td>Reading Responses</td><td>Study Guides</td><td>Date</td></tr>';
 
-	var notes = info['notes'];
 	for(var i = 0; i < notes.length; i++) {
 		notesHtml += '<tr>' 
 							+ '<td style="width:200px;">'
