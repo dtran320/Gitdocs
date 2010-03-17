@@ -1,6 +1,6 @@
 {include file="header.tpl"}
 <div class="container center_container">
-<div class="left_side35">
+<div style="float: left; width: 300px;">
 
 <div class="box">
 	<div class="box_title"></div>
@@ -41,15 +41,18 @@
 </div><!-- end box -->
 </div><!-- end left side-->
 
-<div class="right_side60">
+<div style="float: right; width: 600px; padding-left: 20px;">
 	<div class="box">
 		<div class="box_title">What my classmates are doing 
 			
-		<span id="filter" style="float:right;">
-			<span class="option selected" id="All" onclick="setFilter('All')">All</span>
+		<span id="filter" style="float:right; padding-right: 8px;">
+			<select onchange="setFilter(this.options[this.selectedIndex].value)">
+			<option class="option" id="All" value="All">All</option>
 			{section name=i loop=$my_classes}
-				| <span class="option" id="{$my_classes[i]}" onclick="setFilter('{$my_classes[i]}')">{$my_classes[i]}</span>
+				<option class="option" id="{$my_classes[i]}" value="{$my_classes[i]}">{$my_classes[i]}</option>
 			{/section}
+			</select>
+		</select>
 		</span>
 		</div>
        	<div class="box_content">
@@ -70,18 +73,6 @@
 				</table>
 				</div><!-- end box content -->
 	</div>
-		<div class="box">
-				<div class="box_title">Recently saved documents</div>
-			       	<div class="box_content">
-						<table class="document_list" id="recent_global">
-							{section name=i loop=$recent_global_docs}
-								<tr onclick="window.location='{$recent_global_docs[i].link};'">
-									<td><img src="{$recent_global_docs[i].iconPtr}"></td>
-									<td><p><span class="username">{$recent_global_docs[i].displayName}</span> saved <span class="lecture_title bold">{$recent_global_docs[i].dName}</span> <span class="v_name">{$recent_global_docs[i].vName}</span></p></td><td><p class="time small_text" id="{$recent_global_docs[i].timestamp}">{$recent_global_docs[i].timestamp}</p></a></td></tr>
-							{/section}
-								</table>
-						</div><!-- end box content -->
-			</div><!-- end box -->
 </div> <!-- end right_side -->
 </div><!-- end container -->
 <script type="text/javascript">

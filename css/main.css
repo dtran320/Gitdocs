@@ -32,7 +32,7 @@ body {
 }
  
 .center_container {
-	width: 90%;
+	width: 920px;
 	margin: auto auto;
 }
 
@@ -236,6 +236,10 @@ a:hover {
 	color: #fff;
 }
 
+.new_document {
+	padding-left: 10px;
+}
+
 .new_document input[type="submit"] {
 	margin: 15px 0px 0px 10px;
 	height: 2.5em;
@@ -243,7 +247,8 @@ a:hover {
 
 .new_document td, .new_document th {
 	vertical-align: top;
-	padding-right: 5px;
+	padding-right: 20px;
+	padding-top: 10px;
 }
 
 .new_document td.left, .new_document th.left {

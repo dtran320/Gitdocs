@@ -14,8 +14,8 @@ if($user = User::getLoggedInUser()) {
 	$all_classes = Document::getAllClasses();
 	$smarty->assign('all_classes', $all_classes);
 	
-	$smarty->assign('class_placeholder', 'e.g. CS 294H, IHUM 5A');
-	$smarty->assign('title_placeholder', 'e.g. Anh article');
+	$smarty->assign('class_placeholder', 'e.g. ANTHRO 101');
+	$smarty->assign('title_placeholder', 'e.g. Lec 5 - Modernity');
 	
 	$smarty->display('new_note.tpl');
 	

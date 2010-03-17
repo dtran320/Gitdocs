@@ -17,7 +17,7 @@ function postShowAllMyDocuments(docs) {
 		for (index in docs[course_name]) {
 			var note = docs[course_name][index];
 			docHtml += '<tr onclick="window.location=\'' + note['link'] + '\'">'
-				+ '<td style="width:300px;"><span class="'+ note['type'] +'_title">' + note['dName'] + '</span> -- ' + note['vName'] + '</td><td style="width:100px; text-align: right;" class="time small_text " id="' + note['timestamp'] + '">' + note['timestamp'] + '</td></tr>';
+				+ '<td style="width:300px;"><span class="'+ note['type'] +'_title">' + note['dName'] + '</span> -- ' + ((note['vName'] == null)?'':note['vName']) + '</td><td style="width:100px; text-align: right;" class="time small_text " id="' + note['timestamp'] + '">' + note['timestamp'] + '</td></tr>';
 		}
 		docHtml += '</table>';
 	}
