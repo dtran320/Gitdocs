@@ -73,18 +73,6 @@
 				</table>
 				</div><!-- end box content -->
 	</div>
-		<div class="box">
-				<div class="box_title">Recently saved documents</div>
-			       	<div class="box_content">
-						<table class="document_list" id="recent_global">
-							{section name=i loop=$recent_global_docs}
-								<tr onclick="window.location='{$recent_global_docs[i].link};'">
-									<td><img src="{$recent_global_docs[i].iconPtr}"></td>
-									<td><p><span class="username">{$recent_global_docs[i].displayName}</span> saved <span class="lecture_title bold">{$recent_global_docs[i].dName}</span> <span class="v_name">{$recent_global_docs[i].vName}</span></p></td><td><p class="time small_text" id="{$recent_global_docs[i].timestamp}">{$recent_global_docs[i].timestamp}</p></a></td></tr>
-							{/section}
-								</table>
-						</div><!-- end box content -->
-			</div><!-- end box -->
 </div> <!-- end right_side -->
 </div><!-- end container -->
 <script type="text/javascript">
