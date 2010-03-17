@@ -1,6 +1,6 @@
 {include file="header.tpl"}
-<div style="width: 1370px;">
-<div class="box" style="float: left; width: 520px;">
+<div style="width: 1000px;">
+<div class="box" style="float: left; width: 500px;">
 	<div class="box_title">Create a new note
 	</div>
 	<div class="box_content">
@@ -34,7 +34,7 @@
 	</div> <!--box content-->
 </div> <!--box left_main-->
 
-<div class="box" style="width: 850px;float: right;">
+<div class="box" style="width: 500px;float: right;">
 <div class="box_title" id="other_notes_header">
 </div><!-- box_title-->
 <div class="box_content">
