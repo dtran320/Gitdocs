@@ -44,7 +44,7 @@ class SearchEngine {
 		$solrDoc->addField('docName', $v->getDocument()->name);
 		$userInfo = User::GetUserInfoForId($v->getUserId());	
 		$solrDoc->addField('userName',$userInfo["username"]);
-		$solrDoc->addFIeld('iconPtr', $userInfo["iconPtr"]);
+		$solrDoc->addFIeld('iconPtr',getIconPtr($v->getUserId()));
 		$solrDoc->addField('link', "viewer.php?v_id=".$v->versionId);
 
 		$updateResponse = $this->client->addDocument($solrDoc);
