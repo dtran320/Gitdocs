@@ -32,7 +32,7 @@ function addLikeDislikeLinks(view_type) {
 		var type = ($(this).hasClass("del")) ? "del" : "ins";
 	}
 
-	elem.html("<span class='like' onclick=\"makeMergeChoice" + view_type + "(" + index +  ", 'like');\">like | </span>" 
+	elem.html("<span class='like' onclick=\"makeMergeChoice" + view_type + "(" + index +  ", 'like');\">like| </span>" 
 					+ "<span class='dislike' onclick=\"makeMergeChoice" + view_type + "(" + index + ", 'dislike');\">dislike</span>" 
 					+ "<span class='orig' style='display: none;'>" + orig_txt + "</span>" 
 					+ "<span class='undo displaynone' onclick=\"makeMergeChoice" +view_type +  "(" + index + ", 'undo');\">undo</span>");
