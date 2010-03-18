@@ -23,17 +23,16 @@ function addLikeDislikeLinks(view_type) {
 	elem.offset({left: left_val, top: top_val});
 	var orig_txt = $(this).html();
 
-	if(view_type == '_inline') {
+	//if(view_type == '_inline') {
   	var type = (orig_txt.indexOf("<del>") != -1) ? "del" : "ins";
-		if (type == "del") {
+	//	if (type == "del") {
 		//type = (orig_txt.indexOf("<ins>") != -1) ? "change" : "del";
-		}
-	} else {
-		var type = ($(this).hasClass("del")) ? "del" : "ins";
-	}
-
-	elem.html("<span class='like' onclick=\"makeMergeChoice" + view_type + "(" + index +  ", 'like');\">like| </span>" 
-					+ "<span class='dislike' onclick=\"makeMergeChoice" + view_type + "(" + index + ", 'dislike');\">dislike</span>" 
+	//	}
+	//} else {
+	//	var type = ($(this).hasClass("del")) ? "del" : "ins";
+	//}
+	elem.html("<span class='like' onclick=\"makeMergeChoice" + view_type + "(" + index +  ", 'like');\">accept| </span>" 
+					+ "<span class='dislike' onclick=\"makeMergeChoice" + view_type + "(" + index + ", 'dislike');\">reject</span>" 
 					+ "<span class='orig' style='display: none;'>" + orig_txt + "</span>" 
 					+ "<span class='undo displaynone' onclick=\"makeMergeChoice" +view_type +  "(" + index + ", 'undo');\">undo</span>");
 
