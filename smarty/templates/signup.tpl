@@ -1,7 +1,7 @@
 {include file="header.tpl"}
 
 <div class="box_full">
-	<div class="left_side45" style="margin-left: 20px;">
+	<div class="left_side60" style="margin-left: 20px;">
 		{if isset($error) }
 			<div class="error">{$error}</div>
 		{/if}
@@ -9,7 +9,7 @@
 		<div class="headline">Share notes with your classmates</div>
 		{$gitdocs_description}
 	</div>
-	<div class="right_side45" style="margin-left: 20px;">
+	<div class="right_side30" style="margin-left: 20px;">
 		<div class="headline">Sign up and start sharing:</div>
 		<div class="signup_error" id="signup_error"></div>
 		<form id="signup" class="big_form" action="actions/signup.php" method="post">
@@ -64,7 +64,7 @@
 			<tr>
 			{section name=i loop=$all_classes}	
 				{if $all_classes[i]} <td onclick="window.location='browse.php?class={$all_classes[i]}'"><p>{$all_classes[i]}</p></td>{/if}
-				{if ($smarty.section.i.iteration %3 == 2)} </tr><tr>{/if}
+				{if ($smarty.section.i.iteration %5 == 4)} </tr><tr>{/if}
 			{/section}
 			</tr>
 		</table>
