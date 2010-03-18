@@ -39,14 +39,13 @@
 		</form>
 	</div>
 </div><!-- end box_full -->
-
 	<div class="left_side45" style="margin-left: 20px;">
 <div class="box">
 	<div class="headline_blue">Recently saved documents</div>               
 	<div class="box_content">
             <table class="document_list" id="recent_global">
               {section name=i loop=$recent_global_docs}
-               <tr onclick="window.location='{$recent_global_docs[i].link};'">
+               <tr onclick="window.location='{$recent_global_docs[i].link}'">
                   <td><img src="{$recent_global_docs[i].iconPtr}"></td>
                   <td><p><span class="username">{$recent_global_docs[i].displayName}</span></td><td>{$recent_global_docs[i].course}</td><td><span class="lecture_title bold">{$recent_global_docs[i].dName}</span> <span class="v_name">{$recent_global_docs[i].vName}</span></p></td><td><p class="time small_text" id="{$recent_global_docs[i].timestamp}">{$recent_global_docs[i].timestamp}</p></a></td></tr>
               {/section}
@@ -119,8 +118,8 @@
 		}
 		
 		function postSignUp(data) {
-			if(data=="1") {
-			window.location="index.php";
+			if(data!="0") {
+			window.location=data;
 			}
 			else { //should eventually capture errors and tell them what's wrong
 				$("#signup_error").html("Error with your signup. Please try again.");

@@ -35,6 +35,10 @@ function getVarClean($fieldName) {
 	return htmlEscape(getVar($fieldName));
 }
 
+function sessionVar($fieldName) {
+	return isset($_SESSION[$fieldName])? $_SESSION[$fieldName] : "";
+}
+
 function getLocalTime($time) {
 	date_default_timezone_set('America/Los_Angeles');
 	return date("M d Y h:i A", $time);
