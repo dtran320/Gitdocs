@@ -17,7 +17,7 @@ if($user = User::getLoggedInUser()) {
 	$smarty->assign('u_id', $user->userId);
 	$smarty->assign('u_name', $user->username);
 	$smarty->assign('displayName', $user->displayName);
-
+}
 	$d_id = getVarClean('d_id');
 	if($d_id) {
 		$document = new Document($d_id);
@@ -33,7 +33,7 @@ if($user = User::getLoggedInUser()) {
 			$v_name = $version->getName();
 			$versions[] = array('author_name'=> $author_name, 'v_name'=> $v_name, 'v_text' =>$v_text, 'v_id' => $v_id, 'author_id'=>$author_id, 'iconPtr'=>getIconPtr($author_id));
 
-			if($author_id == $user->userId) {
+			if($user && $author_id == $user->userId) {
 				$userHasDoc = true;
 				// swap so that own version is first.
 				$temp = $versions[0];
@@ -52,10 +52,6 @@ if($user = User::getLoggedInUser()) {
 		$smarty->assign('d_id', $d_id);
 		$smarty->assign('userHasDoc', $userHasDoc);
 		$smarty->display('viewall.tpl');
-	} else {
-	}
-}
-else {
-	header('Location: signup.php');
-}
+	} else {}
+
 ?>
