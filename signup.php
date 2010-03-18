@@ -9,7 +9,7 @@ require('init_smarty.php');
 $status = getVar('status');
 
 if($status=='login') {
-	$smarty->assign('error', 'You must be logged in to do that.');
+	$smarty->assign('error', 'You must be logged in to do that. Please login or sign up for an account.');
 }
 $all_classes = Document::getAllClasses();
 $all_classes = explode(",", $all_classes);
