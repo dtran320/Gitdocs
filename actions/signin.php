@@ -7,9 +7,11 @@ $username = postVar("username");
 $password = postVar("password");
 
 $user = new User($username);
-if($user && $user->checkAndDoLogin($password))
-	echo 1;
+if($user && $user->checkAndDoLogin($password)) {
+	if(isset($_SESSION['return_page'])) echo $_SESSION['return_page'];
+	else echo "index.php";
+}
 else
-	echo 0;
+	echo "0";
 
 ?>

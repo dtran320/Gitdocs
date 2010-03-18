@@ -16,8 +16,7 @@ if($user = User::getLoggedInUser()) {
 	$smarty->assign('u_name', $user->username);
 	$smarty->assign('displayName', $user->displayName);
 	$smarty->assign('iconPtr', $user->iconPtr);
-	
-	$action = postVarClean("action"); //"clone", "open", otherwise "new"
+	$action = isset($_SESSION['action'])? $_SESSION['action'] : postVarClean("action");
 	$smarty->assign('action', $action);
 
 	if(($v_id = getVarClean("v_id")) || $action=="current") { //opening an existing doc
@@ -51,10 +50,16 @@ if($user = User::getLoggedInUser()) {
 	} else {
 
 		if ($action=="clone") {
-			$documentId = postVarClean("document_id");
-			$versionToClone = postVarClean("clone_id");
-			$description = postVarClean("description");
-	
+			if(isset($_SESSION['action'])) {
+				$documentId = sessionVar("document_id");
+				$versionToClone = sessionVar("clone_id");
+				$description = sessionVar("description");
+			}
+			else {
+				$documentId = postVarClean("document_id");
+				$versionToClone = postVarClean("clone_id");
+				$description = postVarClean("description");
+			}
 			$version = Version::getVersionForUser($documentId, $user->userId, $versionToClone, $description);
 
 			$versionName = $version->getName();
@@ -98,6 +103,11 @@ if($user = User::getLoggedInUser()) {
 	$smarty->display('editor.tpl');
 } // end if user logged in
 else {
+	$_SESSION['return_page'] = 'editor.php';
+	$_SESSION['action'] = "clone"; 
+	$_SESSION['document_id'] = postVarClean("document_id");
+	$_SESSION['clone_id'] = postVarClean("clone_id");
+	$_SESSION['description'] = postVarClean("description");
 	header('Location: signup.php?status=login');
 }
 ?>

@@ -93,8 +93,8 @@
 				});
 				
 				function postSignIn(data) {
-					if(data=="1") {
-				    	window.location = "index.php";
+					if(data!="0") {
+				    	window.location = data;
 					}
 					else {
 						$("#login_error").html("Incorrect email/password combination.");

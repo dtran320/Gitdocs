@@ -10,7 +10,8 @@ $displayName = postVar("first_name") . " " . postVar("last_name");
 
 if($user = User::createNewUser($username, $password, $passwordConfirm, $displayName)) {
 	$user->login();
-	echo 1;
+	if(isset($_SESSION['return_page'])) echo $_SESSION['return_page'];
+	else echo 'index.php';
 }
 else
 	echo 0;
