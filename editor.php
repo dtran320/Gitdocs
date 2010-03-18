@@ -98,6 +98,6 @@ if($user = User::getLoggedInUser()) {
 	$smarty->display('editor.tpl');
 } // end if user logged in
 else {
-	header('Location: signup.php');
+	header('Location: signup.php?status=login');
 }
 ?>

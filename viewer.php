@@ -9,11 +9,12 @@ require_once('classes/version.php');
 require_once('classes/document.php');
 require_once('sidebar.php');
 
-if($user = User::getLoggedInUser()) {
-	$smarty->assign('logged_in_user', $user->getUserInfo());
-	$smarty->assign('u_id', $user->userId);
-	$smarty->assign('displayName', $user->displayName);
-	
+	$user = User::getLoggedInUser();
+	if($user) {
+		$smarty->assign('logged_in_user', $user->getUserInfo());
+		$smarty->assign('u_id', $user->userId);
+		$smarty->assign('displayName', $user->displayName);
+	}
 	$v_id = getVarClean("v_id");
 	if($v_id) { //opening an existing doc
 		$r_id = getVarClean("r_id");
@@ -21,7 +22,7 @@ if($user = User::getLoggedInUser()) {
 		$version = new Version(0,0,0,0, $v_id, $branch);
 
 		//if this is a current version that belongs to the user, go to editor
-		if (!$r_id && $version->getUserId() == $user->userId) {	
+		if (!$r_id && $user && $version->getUserId() == $user->userId) {	
 			header('Location: editor.php?v_id='.$v_id);
 			exit(0);	
 		}
@@ -64,8 +65,4 @@ if($user = User::getLoggedInUser()) {
 		$smarty->assign('submit_text', $submit_text);
 	}
 	$smarty->display('viewer.tpl');
-}//end if user logged in
-else {
-	header('Location: signup.php');
-}
 ?>
