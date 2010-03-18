@@ -15,4 +15,15 @@
 </div><!-- end box -->
 </div><!-- end container -->
 
+{if isset($class)}
+<script type="text/javascript">
+	{literal}
+	//<![CDATA[
+	$(document).ready(function() {
+		showNotesForClass('{/literal}{$class}{literal}');
+	});
+		//]]>
+		{/literal}
+	</script>
+{/if}
 {include file="footer.tpl"}

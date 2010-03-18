@@ -78,6 +78,7 @@
 				<input type="password" id="login_password" name="password" value="" placeholder="Password"/>
 				<input type="submit" name="submit" value="Login" />
 			</form>
+			<div style="float: left;"><a href="signup.php">Don't have an account yet?</a></div>
 		</div>
 		 <script type="text/javascript">
 			{literal}

@@ -75,3 +75,16 @@ table.document_list tr:hover {
 #filter .selected {
 	font-weight:bold;
 }
+
+table#main_class_list {
+	border-spacing: 5px;
+}
+table#main_class_list td {
+	padding: 5px;
+}
+
+
+#main_class_list td:hover {
+	cursor: pointer;
+	background: #EEECEF;
+}

@@ -249,7 +249,7 @@ class Version {
 	public static function getRecentGlobalVersions($n=0) {
 		$db = new DB();
 		$versions = array();
-		$selectQuery = "SELECT doc_id as dId, name as dName, v_name as vName, v_id as vId, username, display_name as displayName, last_saved_time as timestamp, u_id as uId " .
+		$selectQuery = "SELECT doc_id as dId, CONCAT(dept_name, course_num) as course, name as dName, v_name as vName, v_id as vId, username, display_name as displayName, last_saved_time as timestamp, u_id as uId " .
 			"FROM Versions INNER JOIN Documents " . 
 			"ON Versions.doc_fk = Documents.doc_id " .
 			"INNER JOIN Users " .
