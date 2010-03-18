@@ -15,7 +15,7 @@
 	<div style="width: 600px; font-size: 13px;">
 	<div id="column_top" style="width: 300px; float: left;">your <span class="v_name">{$v_name}</span></div>
 	<div style="width: 300px; float: right;">{$other_u_name}'s <span class="v_name">{$other_v_name}</span></div>
-	<div class="likedislike" style="position: absolute;"><span class="likeall" onclick="makeAllMergeChoices_2col('like');">A</span><span class="dislikeall" onclick="makeAllMergeChoices_2col('dislike');">R</span> | <span class="undoall" onclick="makeAllMergeChoices_2col('undo');">U</span></div>
+	<div class="likedislike" style="position: absolute;"><span class="likeall" onclick="makeAllMergeChoices_2col('like');">A</span> | <span class="dislikeall" onclick="makeAllMergeChoices_2col('dislike');">R</span> | <span class="undoall" onclick="makeAllMergeChoices_2col('undo');">U</span></div>
 		{$diff}
 	</div>
 	</div> <!--box content-->
