@@ -40,38 +40,21 @@
 		</form>
 	</div>
 </div><!-- end box_full -->
-<div style="margin-left: 20px;">
-<div class="headline_blue">Explore Gitdocs</div>
-	<div class="left_side60">
-		<div class="box">
-				<div class="box_title">Recently saved documents</div>
-			       	<div class="box_content">
-						<table class="document_list" id="recent_global">
-							{section name=i loop=$recent_global_docs}
-								<tr onclick="window.location='{$recent_global_docs[i].link}'">
-									<td><img src="{$recent_global_docs[i].iconPtr}"></td>
-									<td><p><span class="username">{$recent_global_docs[i].displayName}</span> saved <span class="lecture_title bold">{$recent_global_docs[i].dName}</span> <span class="v_name">{$recent_global_docs[i].vName}</span></p></td><td><p class="time small_text" id="{$recent_global_docs[i].timestamp}">{$recent_global_docs[i].timestamp}</p></a></td></tr>
-							{/section}
-								</table>
-						</div><!-- end box content -->
-			</div><!-- end box -->
-</div><!-- end left -->
-<div class="right_side35">
-<div class="box">
-	 <div class="box_title">Recent <a href="http://twitter.com/gitdocs">@gitdocs</a> updates</div>
-       <div class="box_content">
-			<table>
-			{section name=i loop=$twitter_updates}
-			<tr><td class="time" id="{$twitter_updates[i].update_time}">{$twitter_updates[i].update_time}</td></tr>
-			<tr><td>{$twitter_updates[i].update_text}</td></tr>
-			<tr><td>&nbsp;</td></tr>
+<div class="headline_blue" style="margin-left: 20px;">Explore Gitdocs</div>	
+<div class="box" style="margin-left: 20px;">
+	<div class="box_title">Choose a class to see its notes</div>
+  <div class="box_content">
+		<table id="class_list" class="document_list" style="float: left; width:100px;">
+			{section name=i loop=$all_classes}	
+				<tr><td onclick="showNotesForClass('{$all_classes[i]}');"><p>{$all_classes[i]}</p></td></tr>
 			{/section}
-			</table>
-		</div>
-</div>
-</div>
-
-</div>
+		</table>
+		<table id="notes_for_class">
+		</table>
+		<div style="float: right;width: 280px;" id="avatars"></div>
+	</div><!-- end box_content -->
+</div><!-- end box -->
+</div><!-- end container -->
 <script type="text/javascript">
 	{literal}
 	//<![CDATA[

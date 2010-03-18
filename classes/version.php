@@ -122,9 +122,9 @@ class Version {
 	public function publish($text) {
 		$this->save($text);
 		$this->commit();
-		$s = new SearchEngine();
-		$s->updateVersion($this);
-		$s->updateIndex();
+		//$s = new SearchEngine();
+		//$s->updateVersion($this);
+		//$s->updateIndex();
 		return true; //TODO: need to update repo->commit to return error code
 	}
 	

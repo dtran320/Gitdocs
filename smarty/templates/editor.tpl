@@ -37,7 +37,7 @@
 
 	</div>
 </form>
-<form id="compare_form" action="{if $u_id % 2 == 0}compare_2col.php {else}compare_2col.php{/if}" method="post" style="display:none;">
+<form id="compare_form" action="compare_2col.php" method="post" style="display:none;">
 	<input type="hidden" name="d_id" value="{$d_id}" />
 	<input type="hidden" name="u_id" value="{$u_id}" />
 	<input type="hidden" id="other_u_id" name="other_u_id" value="" />

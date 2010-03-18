@@ -8,10 +8,9 @@ require_once(dirname(__FILE__) . '/../lib/utils.php');
 $action = postVarClean("action");
 $className = postVarClean("class_name");
 
-if($user = User::getLoggedInUser()) {
-	$info = Document::getNotesAndUsersForClass($className);
-	echo json_encode($info);
-}
+$info = Document::getNotesAndUsersForClass($className);
+if($info) echo json_encode($info);
+
 else echo "0";
 
 ?>
